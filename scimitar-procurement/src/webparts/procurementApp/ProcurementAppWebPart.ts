@@ -10,6 +10,8 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'ProcurementAppWebPartStrings';
 import ProcurementApp from './components/ProcurementApp';
 import { IProcurementAppProps } from './components/IProcurementAppProps';
+import DependencyManager from '../../DependencyManger/DependencyManger';
+import {sp} from "@pnp/sp";
 
 export interface IProcurementAppWebPartProps {
   description: string;
@@ -26,6 +28,18 @@ export default class ProcurementAppWebPart extends BaseClientSideWebPart<IProcur
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  public onInit(): Promise<any>{
+    return(
+      super.onInit().then(()=>{
+          const dependencyManager = DependencyManager.getInstance();
+          dependencyManager.configure(this.context.serviceScope);
+          sp.setup({
+            spfxContext: this.context
+          });
+        })
+      );
   }
 
   protected onDispose(): void {

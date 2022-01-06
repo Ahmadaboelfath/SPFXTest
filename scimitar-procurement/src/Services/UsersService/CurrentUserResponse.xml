@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xml:base="https://scimitareg.sharepoint.com/sites/Procurement_dev/_api/" xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:georss="http://www.georss.org/georss" xmlns:gml="http://www.opengis.net/gml">
+    <id>https://scimitareg.sharepoint.com/sites/Procurement_dev/_api/Web/GetUserById(7)</id>
+    <category term="SP.User" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <link rel="edit" href="Web/GetUserById(7)" />
+    <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Alerts" type="application/atom+xml;type=feed" title="Alerts" href="Web/GetUserById(7)/Alerts" />
+    <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Groups" type="application/atom+xml;type=feed" title="Groups" href="Web/GetUserById(7)/Groups">
+        <m:inline>
+            <feed>
+                <id>aa52a998-d0b8-47d5-92ea-33f1484f8fce</id>
+                <title />
+                <updated>2022-01-01T21:37:04Z</updated>
+                <entry>
+                    <id>https://scimitareg.sharepoint.com/sites/Procurement_dev/_api/Web/SiteGroups/GetById(4)</id>
+                    <category term="SP.Group" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+                    <link rel="edit" href="Web/SiteGroups/GetById(4)" />
+                    <title />
+                    <updated>2022-01-01T21:37:04Z</updated>
+                    <author>
+                        <name />
+                    </author>
+                    <content type="application/xml">
+                        <m:properties>
+                            <d:Title>Procurement_dev Owners</d:Title>
+                        </m:properties>
+                    </content>
+                </entry>
+                <entry>
+                    <id>https://scimitareg.sharepoint.com/sites/Procurement_dev/_api/Web/SiteGroups/GetById(11)</id>
+                    <category term="SP.Group" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+                    <link rel="edit" href="Web/SiteGroups/GetById(11)" />
+                    <title />
+                    <updated>2022-01-01T21:37:04Z</updated>
+                    <author>
+                        <name />
+                    </author>
+                    <content type="application/xml">
+                        <m:properties>
+                            <d:Title>SitesMaterialAdmin</d:Title>
+                        </m:properties>
+                    </content>
+                </entry>
+            </feed>
+        </m:inline>
+    </link>
+    <title />
+    <updated>2022-01-01T21:37:04Z</updated>
+    <author>
+        <name />
+    </author>
+    <content type="application/xml">
+        <m:properties>
+            <d:Id m:type="Edm.Int32">7</d:Id>
+            <d:IsHiddenInUI m:type="Edm.Boolean">false</d:IsHiddenInUI>
+            <d:LoginName>i:0#.f|membership|sharepointadmin@scimitaregypt.com</d:LoginName>
+            <d:Title>Sharepoint Admin</d:Title>
+            <d:PrincipalType m:type="Edm.Int32">1</d:PrincipalType>
+            <d:Email>sharepointadmin@scimitaregypt.com</d:Email>
+            <d:Expiration></d:Expiration>
+            <d:IsEmailAuthenticationGuestUser m:type="Edm.Boolean">false</d:IsEmailAuthenticationGuestUser>
+            <d:IsShareByEmailGuestUser m:type="Edm.Boolean">false</d:IsShareByEmailGuestUser>
+            <d:IsSiteAdmin m:type="Edm.Boolean">true</d:IsSiteAdmin>
+            <d:UserId m:type="SP.UserIdInfo">
+                <d:NameId>10032001c73c7662</d:NameId>
+                <d:NameIdIssuer>urn:federation:microsoftonline</d:NameIdIssuer>
+            </d:UserId>
+            <d:UserPrincipalName>sharepointadmin@scimitaregypt.com</d:UserPrincipalName>
+        </m:properties>
+    </content>
+</entry>

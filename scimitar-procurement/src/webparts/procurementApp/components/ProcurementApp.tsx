@@ -8,13 +8,18 @@ import {
   HashRouter as Router,
   Switch,
 } from "react-router-dom";
-import HomePage from "../../../pages/home/HomePage";
-import NewPurchaseRequestPage from "../../../pages/new-purchase-request/NewPurchaseRequestPage";
+import HomePage from "../../../pages/Home/HomePage";
+import NewMaterialRequestionPage from "../../../pages/NewMaterialRequestion/NewMaterialRequestion";
 import asyncComponent from "../../../HOC/asyncComponent";
+import ErrorPage from "../../../pages/Error/Error";
+import { SecurityProvider } from "../../../Context/SecurityContext/SecurityProvider";
+import NotAllowed from "../../../pages/NotAllowed/NotAllowed";
+import PrivateRoute from "../../../CoreComponents/PrivateRoute/PrivateRoute";
+import SPGroup from "../../../Models/SPGroup";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
-  return import("../../../pages/my-requests/MyRequests");
+  return import("../../../pages/MyRequests/MyRequests");
 });
 
 export default class ProcurementApp extends React.Component<
@@ -24,21 +29,31 @@ export default class ProcurementApp extends React.Component<
   public render(): React.ReactElement<IProcurementAppProps> {
     return (
       <Router>
-        <Switch>
-          <Route
-            path="/newpurchaserequest"
-            render={() => <NewPurchaseRequestPage />}
-          />
-          <Route
-            path="/myrequests"
-            render={() => (
-              <React.Suspense fallback={<div>Loading...</div>}>
-                <MyRequests />
-              </React.Suspense>
-            )}
-          />
-          <Route path="/" exact render={() => <HomePage />} />
-        </Switch>
+        <SecurityProvider>
+          <Switch>
+            <PrivateRoute
+              path="/NewMaterialRequestion"
+              allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
+            >
+              <NewMaterialRequestionPage />
+            </PrivateRoute>
+            {/* <Route
+              path="/NewMaterialRequestion"
+              render={() => <NewMaterialRequestionPage />}
+            /> */}
+            <Route
+              path="/MyRequests"
+              render={() => (
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <MyRequests />
+                </React.Suspense>
+              )}
+            />
+            <Route path="/AccessDenied" render={() => <NotAllowed />} />
+            <Route path="/" exact render={() => <HomePage />} />
+            <Route render={() => <ErrorPage />} />
+          </Switch>
+        </SecurityProvider>
       </Router>
     );
   }
