@@ -1,0 +1,405 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+
+
+.accordion{
+  border-radius: 5px;
+  margin: 10px 0;
+  padding-left: 0;
+}
+
+
+  .drawer {
+    margin-top: 0;
+    background: transparent;
+    border-top: 1px solid #e60000;
+    margin: 0;
+    position: relative;
+    padding: 0;
+    border-radius: 0;
+    display: none;
+    transition: all ease 500ms;
+
+  }
+
+
+  .tabAccordion {
+    padding: 0;
+    
+    .drawer {
+      box-shadow: none !important;
+    }
+  } 
+  .boxDrawer {
+    padding: 20px;
+  }
+
+  
+
+  .tabaccordionButtonActive {
+    border: none;
+    outline: 0;
+    width: 100%;
+    max-width: inherit;
+    min-height: inherit;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 15px 0 10px;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    padding: 10px;
+    border-radius: 5px;
+    background: #e60000;
+    &:hover {
+      background: #e60000;
+    }
+    & > div {
+    display: block;
+    text-align: left;
+    position: relative;
+    color: #fff;
+    padding-left: 30px;
+    }
+
+    div {
+      i{
+        font-size: 17px;
+        color: #fff;
+        position: absolute;
+        left: -6px;
+        height: 25px;
+        top: 1px;
+        width: 40px;
+        line-height: 21px;
+      }
+      div {
+        text-transform: capitalize;
+        font-size: 17px;
+        line-height: 22px;
+        padding-left: 4px;
+        font-weight: normal;
+        color: #fff;
+        font-family: 'vodafone_rgregular';
+      }
+    }
+  }
+    .tabaccordionButton{
+      border: none;
+      outline: 0;
+      width: 100%;
+      max-width: inherit;
+      min-height: inherit;
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 15px 0 10px;
+      -webkit-transition: all .5s ease;
+      transition: all .5s ease;
+      background: #eee;
+      border-radius: 5px;
+      padding: 10px;
+      &:hover {
+        background: #eee;
+      }
+      & > div {
+        display: block;
+        text-align: left;
+        position: relative;
+        color: #fff;
+        padding-left: 30px;
+      }
+
+      div {
+        i{
+          font-size: 17px;
+          color: #000;
+          position: absolute;
+          left: -6px;
+          height: 25px;
+          top: 1px;
+          width: 40px;
+          line-height: 21px;
+        }
+        div {
+          text-transform: capitalize;
+          font-size: 17px;
+          line-height: 22px;
+          padding-left: 4px;
+          font-weight: normal;
+          color: #000;
+          font-family: 'vodafone_rgregular';
+        }
+      }
+    }
+
+
+  .accordionButtonActive {
+    border: none;
+    outline: 0;
+    width: 100%;
+    max-width: inherit;
+    min-height: inherit;
+    padding: 10px 0;
+    display: inline-block;
+    background: none;
+    font-size: 15px;
+    font-weight: 400;
+    height: 40px;
+    margin: 15px 0 10px 0;
+    transition: all ease 500ms;
+    &:hover {
+      background: #eee;
+    }
+    & > div {
+    display: block;
+    text-align: left;
+    position: relative;
+    color: #e60000;
+    }
+
+    div {
+      i {
+        color: #e60000 !important;
+      }
+      div {
+        text-transform: capitalize;
+        font-size: 1.5rem;
+        padding-left: 4px;
+        font-weight: normal;
+        color: #e60000;
+        font-family: 'vodafone_ltregular';
+        letter-spacing: 0;
+        line-height: 1.5rem;
+      }
+    }
+  }
+    .accordionButton{
+      border: none;
+      outline: 0;
+      width: 100%;
+      max-width: inherit;
+      min-height: inherit;
+      padding: 10px 0;
+      display: inline-block;
+      background: none;
+      font-size: 15px;
+      font-weight: 400;
+      height: 40px;
+      margin: 15px 0 10px 0;
+      transition: all ease 500ms;
+      &:hover {
+        background: #eee;
+
+        & > div {
+          display: block;
+          text-align: left;
+          position: relative;
+          color: #e60000;
+          }
+      
+          div {
+            i {
+              color: #e60000 !important;
+            }
+            div {
+              text-transform: capitalize;
+              font-size: 1.5rem;
+              padding-left: 4px;
+              font-weight: normal;
+              color: #e60000;
+              font-family: 'vodafone_ltregular';
+              letter-spacing: 0;
+              line-height: 1.5rem;
+            }
+          }
+
+        
+
+      }
+      & > div {
+        display: block;
+        text-align: left;
+        position: relative;
+        color: #333;
+      }
+
+      div {
+        div {
+          text-transform: capitalize;
+          font-size: 1.5rem;
+          padding-left: 4px;
+          font-weight: normal;
+          color: #333;
+          font-family: 'vodafone_ltregular';
+          letter-spacing: 0;
+          line-height: 1.5rem;
+        }
+      }
+    }
+
+
+
+    .FilteraccordionButtonActive {
+      border: none;
+      outline: 0;
+      max-width: inherit;
+      min-height: inherit;
+      padding: 10px 0;
+      display: inline-block;
+      background: none;
+      font-size: 15px;
+      font-weight: 400;
+      height: 40px;
+      margin: 15px 0 10px 0;
+      border-bottom: 2px solid #000;
+      padding-bottom: 5px;
+      transition: all ease 500ms;
+      &:hover {
+        background: none;
+      }
+      & > div {
+      display: block;
+      text-align: left;
+      position: relative;
+      color: #333;
+      padding-left: 30px;
+      }
+  
+      div {
+        div {
+          text-transform: capitalize;
+          font-size: 20px;
+          line-height: 16px;
+          padding-left: 4px;
+          font-weight: 400;
+          color: #000;
+          font-family: 'vodafone_rgregular';
+        }
+      }
+    }
+
+    .FilteraccordionButton{
+      border: none;
+      outline: 0;
+      max-width: inherit;
+      min-height: inherit;
+      padding: 10px 0;
+      display: inline-block;
+      background: none;
+      font-size: 15px;
+      font-weight: 400;
+      height: 40px;
+      margin: 15px 0 10px 0;
+      border-bottom: 2px solid #000;
+      padding-bottom: 5px;
+      transition: all ease 500ms;
+      &:hover {
+        background: none;
+      }
+      & > div {
+        display: block;
+        text-align: left;
+        position: relative;
+        color: #333;
+        padding-left: 30px;
+      }
+
+      div {
+        div {
+          text-transform: capitalize;
+          font-size: 20px;
+          line-height: 16px;
+          padding-left: 4px;
+          font-weight: 400;
+          color: #000;
+          font-family: 'vodafone_rgregular';
+        }
+      }
+    }
+.accordionChevron {
+  font-size: 1.3rem;
+  color: #333;
+  position: absolute;
+  right: 0;
+  height: 40px;
+  top: 1px;
+  width: 40px;
+  line-height: 1.5rem;
+}
+
+
+
+.assignAccordion {
+  min-height: 4px;
+}
+
+
+.assignedUsers {
+  position: absolute!important;
+  padding: 4px 10px!important;
+  margin: 0!important;
+  min-height: inherit;
+  font-size: 13px!important;
+  font-weight: 700;
+  color: #333!important;
+  line-height: 31px;
+  border-radius: 4px;
+  border: none;
+  background: #fff !important;
+  left: 12px;
+  top: 65px;
+  div{
+    border-bottom: 1px solid #333;
+    padding-right: 7px;
+  }
+  i {
+    color: #4d4d4d;
+    font-size: 17px;
+    position: relative;
+    left: 0;
+    top: 4px;
+    width: 30px;
+    height: 21px;
+    text-align: center;
+    line-height: 25px;
+  }
+}
+.assignedBox {
+  padding: 0;
+  position: relative;
+  border-radius: 5px;
+  -webkit-transition: opacity 1s ease-out;
+  transition: opacity 1s ease-out;
+  opacity: 0;
+  height: 0;
+  left: -5px;
+  overflow: hidden;
+  width: calc(100% + 15px);
+  border-radius: 0 9px 9px 0;
+  margin-bottom: -10px;
+  ul {
+    padding: 10px;
+    margin: 0;
+    li {
+      display: inline-block;
+    background: #00BCD4;
+    padding: 4px;
+    width: 30%;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    color: #ffff;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 4px;
+    }
+  }
+}
+
+.show {
+  opacity: 1;
+  height: 100%;
+}
+
+.showBox {
+  display: block;
+}

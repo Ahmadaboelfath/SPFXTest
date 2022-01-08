@@ -866,7 +866,7 @@
     padding: 10px;
     position: relative;
     font-size: 13px;
-    
+
     small {
       font-weight: lighter;
       font-size: 10px;
@@ -877,10 +877,10 @@
     }
     img {
       width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin: 5px;
-    display: inline-block;
+      height: 30px;
+      border-radius: 50%;
+      margin: 5px;
+      display: inline-block;
     }
     label {
       color: #fff;
@@ -928,9 +928,6 @@
       background: #90a4ae;
     }
   }
-
-
-
 }
 
 .userComment {
@@ -1307,13 +1304,28 @@
 }
 
 .nodataBox {
-  background: #bdbdbd;
+  background: #b0bec5;
   text-align: center;
   padding: 5px;
   border-radius: 5px;
   width: 90%;
   margin: 10px auto;
   font-size: 13px;
+  color: #fff;
+}
+
+.nodataTable {
+  background: #b0bec5;
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px auto;
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  top: -43px;
+  width: 100%;
+  height: 50px;
 }
 
 .saveBtn {
@@ -1323,6 +1335,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1355,6 +1368,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1421,6 +1435,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1594,7 +1609,7 @@
   }
   .Modalfooter {
     position: relative;
-    padding: 0 11px ;
+    padding: 0 11px;
     border-top: 1px solid #eee;
     text-align: right;
     button {
@@ -1667,7 +1682,6 @@ button.is-disabled {
   border: none !important;
 }
 
-
 .privacyButton {
   background: transparent !important;
   color: #333 !important;
@@ -1703,31 +1717,104 @@ button.is-disabled {
   &:hover {
     box-shadow: none !important;
 
-    span{
-      color:#e60000 !important;
+    span {
+      color: #e60000 !important;
     }
     i {
-      color:#e60000 !important;
+      color: #e60000 !important;
     }
   }
 }
 
-
 .validateMsg {
   padding: 4px;
   margin: 0;
-p {
+  p {
     color: #e60000;
     font-size: 11px;
     line-height: normal;
     padding-left: 17px;
     position: relative;
-  i{
-    color:#e60000;
-    position: absolute;
-    left: 0;
-    top: 3px;
-    padding: 0;
+    i {
+      color: #e60000;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      padding: 0;
+    }
   }
 }
+
+.toogleSwitch {
+  clear: both;
+  margin: 0 0 1em;
+  > label {
+    font-family: "vodafone_ltregular";
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    line-height: 20px;
+    display: block;
+    margin: 0 0 0.28571429rem;
+    font-weight: 700;
+    text-transform: none;
+  }
+  .ms-Toggle-stateText {
+    font-family: "vodafone_ltregular";
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 700;
+  }
+}
+.toogleSwitch.is-checked {
+  .ms-Toggle-background {
+    background: #e60000;
+  }
+}
+.ms-BasePicker {
+  input {
+    border:none !important
+  }
+  .ms-BasePicker-text {
+    background: #fff;
+    border: 1px solid rgba(34,36,38,.15) !important;
+    color: rgba(0,0,0,.87);
+    border-radius: 0.28571429rem;
+    padding: 3px;
+  }
+  .ms-TagItem {
+    background: #e60000;
+    border-radius: 15px;
+    overflow: hidden;
+    color: #fff;
+    button {
+      background: #c40303;
+      &:hover {
+        background: #c40303;
+      }
+    }
+  }
+}
+.ms-Suggestions {
+  .ms-Suggestions-title {
+    color: #333;
+    font-weight: bold;
+    padding: 10px 10px 0;
+  }
+  .ms-Suggestions-container {
+    > div {
+      button {
+        margin: 2px;
+        transition: all ease 500ms;
+        div {
+          div {
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 2px 5px;
+            font-family: "vodafone_ltregular";
+          }
+        }
+      }
+    }
+  }
 }
