@@ -7,6 +7,7 @@ import styles from './Forms.module.scss';
 import { Form, Checkbox } from 'semantic-ui-react';
 import { TooltipHost, ITooltipHostStyles ,ITooltipProps } from 'office-ui-fabric-react/lib/Tooltip';
 import { useId } from '@uifabric/react-hooks';
+import IValidator from './Validations/Interfaces/IValidator';
 
 const calloutProps = { gapSpace: 0 };
 const hostStyles: Partial<ITooltipHostStyles> = { root: { display: 'inline-block' } };
@@ -25,7 +26,8 @@ interface IYesNoProps {
     tooltip?: Boolean;
     tooltipText?: any;
     disabled?: boolean;
-    yesText?:string;
+    validations?: IValidator[];
+
 }
 
 
@@ -60,7 +62,7 @@ export const YesNo: React.FC<IYesNoProps> = (props) => {
         mainDevStyle = "field error";
     }
 
-    const yesValue = props.yesText || 'Yes';
+
 
       
     return (
@@ -68,11 +70,12 @@ export const YesNo: React.FC<IYesNoProps> = (props) => {
             <label>{props.label} {requiredStr} {tooltipView}</label>
                 <Checkbox
                     radio
-                    label={yesValue}
+                    label='Yes'
                     name={props.ctrlName}
-                    value={yesValue}
-                    checked={(props.value == yesValue )} 
-                    onChange={(e) => props.handleInputChange(e,props.ctrlName,yesValue)}
+                    value='Yes'
+                    checked={(props.value == 'Yes')} 
+                    // checked={props.value} 
+                    onChange={(e) => props.handleInputChange(e,props.ctrlName,"Yes")}
                 />
                 <Checkbox
                     radio
@@ -84,10 +87,23 @@ export const YesNo: React.FC<IYesNoProps> = (props) => {
                     onChange={(e) => props.handleInputChange(e,props.ctrlName,"No")} 
                 />
 
-           
+            {/* <MDBContainer className="mt-5">
+                <MDBInput onClick={(e) => props.handleInputChange(e,"Yes")} name={props.ctrlName} 
+                checked={props.value} 
+                label="Yes" type="radio"
+                    id="radio1" containerClass='mr-5'/>
+                <MDBInput 
+                onClick={(e) => props.handleInputChange(e,"No")} 
+                name={props.ctrlName} 
+                checked={!props.value} 
+                label="No" 
+                type="radio"
+                    id="radio2"
+                    containerClass='mr-5' />
+            </MDBContainer> */}
 
             {props.showError &&
-                  <div className="validateMsg">
+                <div className={styles.validateMsg}>
                     <p><Icon iconName='info' />{props.errorMessage}
                     </p>
                 </div>

@@ -1,0 +1,168 @@
+.feedbackBox {
+	position: fixed;
+	color: #fff;
+	z-index: 9999;
+	top: 313px;
+	right: 0;
+	transition: all ease 500ms;
+}
+
+.feedbackbtn {
+	background: #9c2aa0;
+	color: #fff;
+	padding: 6px 11px;
+    border:none;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	cursor: pointer;
+	transition: all ease 500ms;
+	right: -40px;
+	width: 109px;
+	padding-left: 42px;
+	position: absolute;
+    i {
+        width: 19px;
+        position: absolute;
+        left: 14px;
+        top: 8px;
+    }
+    &:active {
+        > * {
+            position: initial;
+        }
+    }
+}
+
+
+
+.feedbackform {
+	position: absolute;
+	background: #4a4d4e;
+	right: -350px;
+	opacity: 1;
+	top: -44px;
+	width: 350px;
+	padding: 10px;
+	border-radius: 5px 0 0 5px;
+	transition: all ease 500ms;
+	p {
+		position: relative;
+		margin-bottom: 5px;
+		padding: 0px;
+		display: block;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		padding-bottom: 10px;
+	}
+	.field {
+		position: relative;
+		display: block;
+		margin-bottom: 10px;
+		width: 96%;
+		label {
+			position: relative;
+			display: block;
+			font-weight: bold;
+			font-size: 14px;
+			margin-bottom: 5px;
+		}
+		input {
+			width: 100%;
+			padding: 5px;
+			background: #fff;
+			border: none;
+			color: #000;
+			font-size: 14px;
+		}
+		textarea {
+			width: 100%;
+			padding: 5px;
+			background: #fff;
+			border: none;
+			color: #000;
+			font-size: 14px;
+			height: 82px;
+		}
+	}
+	button {
+		background: #e60000 !important;
+		border: none;
+		padding: 10px 30px;
+		float: right;
+		margin-right: 12px;
+		color: #fff;
+		font-size: 15px;
+		cursor: pointer;
+		position: relative;
+		padding-left: 33px;
+        border-radius: 5px;
+        border:none;
+		i {
+            width: 24px;
+            position: absolute;
+            left: 8px;
+            top: 6px;
+            opacity: .5;
+            transform: rotate(-45deg);
+        }
+		.disabled {
+			opacity: 0.5;
+			cursor: default;
+			pointer-events: none;
+		}
+		&:hover {
+			background: #9c2aa0 !important;
+		}
+        &:active {
+            background-color: #9c2aa0 !important;
+            color: #fff;
+
+            > * {
+                position: initial;
+            }
+        }
+
+	}
+
+}
+.activeBtn {
+    right: 311px;
+    background: #e60000 !important;
+}
+.activeBox {
+    right: 0;
+    background: rgba(77, 77, 77, 0.8);
+}
+
+.feedbackSucess {
+	color: #fff;
+	background: #4CAF50;
+	font-size: 14px;
+	padding: 5px;
+	width: 272px;
+	top: 100px;
+	right: 0;
+	position: fixed;
+	font-weight: bold;
+	z-index: 9999;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+	transition: all ease 500ms;
+}
+
+.feedbackerror {
+	color: #fff;
+	background: #e60000;
+	font-size: 14px;
+	padding: 5px;
+	width: 272px;
+	top: 100px;
+	right: 0;
+	position: fixed;
+	font-weight: bold;
+	z-index: 9999;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+	transition: all ease 500ms;
+}

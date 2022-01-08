@@ -1,6 +1,7 @@
 import * as React from 'react';
-import './Componentstyles.scss';
-import { MDBContainer, MDBRow, MDBCol, MDBNavbarBrand, MDBNavbarToggler, MDBCollapse, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from 'mdbreact';
+import { NavLink } from "react-router-dom";
+import compStyles from './Componentstyles.module.scss';
+import { MDBContainer, MDBRow, MDBCol, MDBNavbarBrand, MDBNavbarToggler, MDBCollapse, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, } from 'mdbreact';
 
 
 export interface IHeaderState {
@@ -17,11 +18,13 @@ export class HeaderPageComponent extends React.Component<{}, IHeaderState>{
       this.onClick = this.onClick.bind(this);
    }
 
-   onClick() {
+   public onClick() {
       this.setState({
          collapse: !this.state.collapse,
       });
    }
+
+
    public render(): React.ReactElement<{}> {
       return (
 
@@ -30,10 +33,10 @@ export class HeaderPageComponent extends React.Component<{}, IHeaderState>{
 
                <MDBNavbar expand="md">
                   <MDBNavbarBrand href="/">
-                     <span className="navbarbrand" >
+                     <span className={compStyles.navbarbrand} >
                         <img src={require('../Assets/images/vd-logo-red.svg')} alt="Logo" />
-                        V-DNA
-                     </span>
+                        Anti-bribery Third Party Representative Register
+                  </span>
                   </MDBNavbarBrand>
 
 
@@ -41,12 +44,10 @@ export class HeaderPageComponent extends React.Component<{}, IHeaderState>{
                   <MDBCollapse isOpen={this.state.collapse} navbar>
 
                      <MDBNavbarNav right>
+                       
                         <MDBNavItem>
-                           <MDBNavLink to="/" exact>Home</MDBNavLink>
-                        </MDBNavItem>
-                        {/* <MDBNavItem>
-                           <MDBNavLink to="/new-request/New" exact>New Request</MDBNavLink>
-                        </MDBNavItem>  */}
+                           <MDBNavLink to="/">Home</MDBNavLink>
+                     </MDBNavItem>
                      </MDBNavbarNav>
                   </MDBCollapse>
                </MDBNavbar>

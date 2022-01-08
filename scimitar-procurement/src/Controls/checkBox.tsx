@@ -2,7 +2,9 @@
 import * as React from 'react';
 import { Checkbox, ICheckboxProps } from 'office-ui-fabric-react/lib/Checkbox';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import styles from './Forms.module.scss';
 import { Popup } from 'semantic-ui-react';
+import IValidator from './Validations/Interfaces/IValidator';
 interface IVFCheckBoxProps {
     handleInputChange(event, isChecked);
     LabelText: string;
@@ -15,7 +17,8 @@ interface IVFCheckBoxProps {
     tooltipText?: string;
     checked?: boolean;
     switchBox?: boolean;
-    customClass?:string;
+    validations?: IValidator[];
+
 }
 
 
@@ -28,12 +31,10 @@ export const CheckBox: React.FC<IVFCheckBoxProps> = (props) => {
             <div className='custom-control custom-switch'>
                 <input
                     type='checkbox'
-                    data-value={props.LabelText}
-                    className={'custom-control-input' + props.customClass}
+                    className='custom-control-input'
                     id={props.ctrName}
                     checked={props.checked}
                     onChange={e => props.handleInputChange}
-                    disabled = {props.disabled}
                 />
                 <label className='custom-control-label' htmlFor={props.ctrName}>
                     {props.LabelText}
@@ -52,15 +53,11 @@ export const CheckBox: React.FC<IVFCheckBoxProps> = (props) => {
                 <Checkbox
                     onChange={props.handleInputChange}
                     name={props.ctrName}
-                    inputProps={{'data-value' :props.LabelText} as any}
                     label={props.LabelText}
                     checked={props.checked}
-                    className={props.customClass}
-                    disabled = {props.disabled}
                 />
                 {props.showError &&
-                      <div className="validateMsg">
-                      
+                    <div className={styles.validateMsg}>
                         {props.errorMessage}
                     </div>
                 }

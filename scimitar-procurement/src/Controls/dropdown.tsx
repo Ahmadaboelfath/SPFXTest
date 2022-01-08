@@ -7,7 +7,6 @@ import {
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Popup } from "semantic-ui-react";
 import styles from "./Forms.module.scss";
-import Select, { createFilter } from "react-select";
 
 interface IDropdownProps {
   options: DropdownItemProps[];
@@ -22,10 +21,8 @@ interface IDropdownProps {
   tooltipText?: string;
   disabled?: boolean;
   multiple?: boolean;
+  search?: boolean;
   placeholder?: string;
-  customDDl?: boolean;
-  mappedPropNames?: any;
-  selected?: any;
 }
 
 export const Dropdown: React.FC<IDropdownProps> = (props) => {
@@ -43,84 +40,39 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
       />
     );
 
-  const mapValue = () => {
-    if (props.selected) {
-      return {
-        label: props.selected[props.mappedPropNames.labelPropName],
-        value: props.selected[props.mappedPropNames.valuePropName],
-      };
-    } else {
-      return {
-        label: "",
-        value: "",
-      };
-    }
-  };
-
-  const mapOptions = () => {
-    if (props.options) {
-      return props.options.map((option) => {
-        return {
-          label: option[props.mappedPropNames.labelPropName],
-          value: option[props.mappedPropNames.valuePropName],
-        };
-      });
-    } else {
-      return [];
-    }
-  };
-
   const onChange = (dropDown: DropdownProps, ctrlName: string) => {
-    if (props.customDDl == true) {
-      const selectedItem = props.options.filter((option) => {
-        return option[props.mappedPropNames.valuePropName] === dropDown.value;
-      })[0];
+    const value = dropDown.value;
 
-      console.log(dropDown);
-      props.handleInputChange(selectedItem, props.ctrlName);
-    } else {
-      const value = dropDown.value;
-
-      props.handleInputChange(value, ctrlName);
-    }
-
+    props.handleInputChange(value, ctrlName);
   };
 
   let mainDevStyle = "field";
   if (props.showError) {
     mainDevStyle = "field error";
   }
+  if (props.search) {
     return (
       <div className={mainDevStyle}>
         <label>
           {props.label} {requiredStr} {tooltipView}
         </label>
+        <DDL
+          name={props.ctrlName}
+          onChange={(e, d) => onChange(d, props.ctrlName)}
+          options={props.options}
+          value={props.value}
+          disabled={props.disabled}
+          multiple={props.multiple}
+          search
+          fluid
+          selection
+          clearable
+          placeholder={props.placeholder}
+          onClose={() => console.log("close")}
+        />
 
-
-{props.customDDl == true ?  
-          <Select
-            isDisabled={props.disabled}
-            options={mapOptions()}
-            value={mapValue()}
-            onChange={(e, d) => onChange(e, props.ctrlName)}
-            multiple={props.multiple}
-          /> :  
-
-
-        <Select
-                            id={props.ctrlName}
-                            options={props.options}
-                            onChange={(e, d) => onChange(e, props.ctrlName)}
-                            value={props.value}
-                            isDisabled={props.disabled}
-                            multiple={props.multiple}
-                          />
-
-
-
-}
         {props.showError && (
-            <div className="validateMsg">
+          <div className={styles.validateMsg}>
             <p>
               <Icon iconName="info" />
               {props.errorMessage}
@@ -129,4 +81,34 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
         )}
       </div>
     );
+  } else {
+    return (
+      <div className={mainDevStyle}>
+        <label>
+          {props.label} {requiredStr} {tooltipView}
+        </label>
+        <DDL
+          name={props.ctrlName}
+          onChange={(e, d) => onChange(d, props.ctrlName)}
+          options={props.options}
+          value={props.value}
+          disabled={props.disabled}
+          multiple={props.multiple}
+          fluid
+          selection
+          clearable
+          placeholder={props.placeholder}
+        />
+
+        {props.showError && (
+          <div className={styles.validateMsg}>
+            <p>
+              <Icon iconName="info" />
+              {props.errorMessage}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
 };

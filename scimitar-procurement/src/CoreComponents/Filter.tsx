@@ -5,7 +5,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 
 interface filterstatus {
-    showside?:boolean
+    showside?:boolean;
 }
 
 interface FilterProps {

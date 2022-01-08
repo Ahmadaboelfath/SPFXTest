@@ -5,17 +5,17 @@
   border-radius: 5px;
   margin: 10px 0;
   padding-left: 0;
+  
 }
-
 
   .drawer {
     margin-top: 0;
-    background: transparent;
-    border-top: 1px solid #e60000;
+    background: #f7f7f7;
     margin: 0;
     position: relative;
-    padding: 0;
-    border-radius: 0;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #ddd;
     display: none;
     transition: all ease 500ms;
 
@@ -148,28 +148,25 @@
     margin: 15px 0 10px 0;
     transition: all ease 500ms;
     &:hover {
-      background: #eee;
+      background: none;
     }
     & > div {
     display: block;
     text-align: left;
     position: relative;
-    color: #e60000;
+    color: #333;
+    padding-left: 30px;
     }
 
     div {
-      i {
-        color: #e60000 !important;
-      }
       div {
         text-transform: capitalize;
-        font-size: 1.5rem;
+        font-size: 20px;
+        line-height: 16px;
         padding-left: 4px;
-        font-weight: normal;
-        color: #e60000;
-        font-family: 'vodafone_ltregular';
-        letter-spacing: 0;
-        line-height: 1.5rem;
+        font-weight: 400;
+        color: #000;
+        font-family: 'vodafone_rgregular';
       }
     }
   }
@@ -188,51 +185,25 @@
       margin: 15px 0 10px 0;
       transition: all ease 500ms;
       &:hover {
-        background: #eee;
-
-        & > div {
-          display: block;
-          text-align: left;
-          position: relative;
-          color: #e60000;
-          }
-      
-          div {
-            i {
-              color: #e60000 !important;
-            }
-            div {
-              text-transform: capitalize;
-              font-size: 1.5rem;
-              padding-left: 4px;
-              font-weight: normal;
-              color: #e60000;
-              font-family: 'vodafone_ltregular';
-              letter-spacing: 0;
-              line-height: 1.5rem;
-            }
-          }
-
-        
-
+        background: none;
       }
       & > div {
         display: block;
         text-align: left;
         position: relative;
         color: #333;
+        padding-left: 30px;
       }
 
       div {
         div {
           text-transform: capitalize;
-          font-size: 1.5rem;
+          font-size: 20px;
+          line-height: 16px;
           padding-left: 4px;
-          font-weight: normal;
-          color: #333;
-          font-family: 'vodafone_ltregular';
-          letter-spacing: 0;
-          line-height: 1.5rem;
+          font-weight: 400;
+          color: #000;
+          font-family: 'vodafone_rgregular';
         }
       }
     }
@@ -317,14 +288,14 @@
       }
     }
 .accordionChevron {
-  font-size: 1.3rem;
-  color: #333;
+  font-size: 20px;
+  color: #000;
   position: absolute;
-  right: 0;
+  left: -6px;
   height: 40px;
-  top: 1px;
+  top: -12px;
   width: 40px;
-  line-height: 1.5rem;
+  line-height: 40px;
 }
 
 

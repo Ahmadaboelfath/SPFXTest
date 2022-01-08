@@ -2,7 +2,7 @@ import * as React from "react";
 import ITagPickerProps from "./ITagPickerProps";
 import { Icon, TagPicker as OfficeUiTagPicker } from "office-ui-fabric-react";
 import Tag from "./Components/Tag/Tag";
-import styles from "../main.module.scss";
+import styles from "../Forms.module.scss";
 import { isEmpty } from "@microsoft/sp-lodash-subset";
 
 export default class TagPicker extends React.Component<ITagPickerProps, any> {

@@ -9,10 +9,15 @@ interface ICommentProps{
 }
 export const Comment: React.FC<ICommentProps> = (props)=>{
     return(
-        <li className={props.author == "system" ? styles.systemComment: styles.userComment}>
-            <label>{props.author == "system" ? <Icon iconName="System" /> : <Icon iconName="ChatInviteFriend" />}{props.author}</label>
-            <pre><div  dangerouslySetInnerHTML={{ __html: props.comment }}></div></pre>
-             <span>{props.date}</span>
+        <li className={props.author == "system" ? [styles.systemComment, styles.Comment].join(' '): [styles.userComment , styles.Comment].join(' ')}>
+            <div className={styles.CommentLbl}>
+            <span>{props.author == "system" ? <Icon iconName="System" /> : <Icon iconName="ChatInviteFriend" />}{props.author}</span>
+            <span>{props.date}</span>
+            </div>
+            <div className={styles.CommentContent}>
+            <span>{props.comment}</span>
+            </div>
+             
         </li>
     );
 };

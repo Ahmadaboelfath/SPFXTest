@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MDBAlert, MDBContainer } from "mdbreact";
 
-import './Componentstyles.scss';
+import compStyles from './Componentstyles.module.scss';
 
 interface NotficationProps {
     Message: string;
@@ -43,11 +43,12 @@ export class NotficationMessage extends React.Component<NotficationProps, Notfic
                 {this.timer == 1 ?
                     <></> :
                     <MDBAlert className={
-                        this.props.Type == "Success" ?  "notficationMessage  notficationMessageSuccess" :
-                            this.props.Type == "Error" ?  " notficationMessage  notficationMessageError" :"notficationMessage"} dismiss>
+                        this.props.Type == "Success" ? compStyles.notficationMessage + " " + compStyles.notficationMessageSuccess :
+                            this.props.Type == "Error" ? compStyles.notficationMessage + " " + compStyles.notficationMessageError :
+                                compStyles.notficationMessage} dismiss>
                         <strong>{
-                            this.props.Type == "Success" ? "Saved Successfully" :
-                                this.props.Type == "Error" ? "Error in save" :
+                            this.props.Type == "Success" ? "Success" :
+                                this.props.Type == "Error" ? "Error" :
                                     "Information"}</strong> <p>{this.props.Message}</p>
                     </MDBAlert>
 

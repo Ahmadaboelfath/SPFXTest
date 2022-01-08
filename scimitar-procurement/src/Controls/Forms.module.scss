@@ -1,0 +1,2087 @@
+
+.validateMsg {
+  padding: 4px;
+  margin: 0;
+p {
+    color: #e60000;
+    font-size: 11px;
+    line-height: normal;
+    padding-left: 17px;
+    position: relative;
+  i{
+    color:#e60000;
+    position: absolute;
+    left: 0;
+    top: 3px;
+    padding: 0;
+  }
+}
+}
+
+.validateMessage {
+  color: #fff;
+  font-size: 0.7rem;
+  background: #e60000;
+  display: inline-block;
+  padding: 4px;
+  margin: 2px 0;
+  border-radius: 3px;
+}
+
+.buttonBlock {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  button {
+    margin-left: 5px !important;
+    border: none;
+  }
+}
+
+.dropDownBox {
+  color: #000;
+  font-size: 0.9rem;
+  border: none;
+
+  span {
+    border-color: #eee;
+
+    &:hover {
+      border-color: #eee;
+    }
+  }
+}
+
+.labelItem {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #333;
+}
+
+.field {
+  color: #000;
+
+  label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333;
+    display: inline-block;
+    font-family: "vodafone_rgregular";
+    font-size: 15px!important;
+    span {
+      color: #e60000;
+      margin-left: 2px;
+      margin-right: 5px;
+    }
+  }
+
+  .pickerText {
+    border: 1px solid #eee;
+
+    input {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+}
+
+
+.disabledPickerStyle {
+  background: #f4f4f4;
+  padding: 4px;
+
+  div {
+    border: none;
+  }
+
+  input {
+    border: 1px solid #eee;
+
+    &:hover {
+      border: 1px solid #eee;
+    }
+  }
+}
+
+.peoplePickerStyle {
+  padding: 4px;
+
+  div {
+    border: none;
+  }
+
+  input {
+    border: 1px solid #eee;
+
+    &:hover {
+      border: 1px solid #eee;
+    }
+  }
+}
+
+.checkBox {
+    font-weight: 500;
+  margin-top: 3px;
+  color: #333;
+
+  label {
+    display: flex;
+    align-items: baseline;
+    span {
+      font-size:13px;
+      color: #333;
+      position: relative;
+      top: -2px;
+
+      span {
+        color: #e60000;
+      }
+    }
+  }
+}
+
+.fieldGroupBox {
+  border: 1px solid #eee;
+
+  &:hover {
+    border: 1px solid #eee;
+  }
+
+  input {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+.error {
+  color: #e60000;
+}
+
+
+.disabledPicker {
+  button {
+    display: none;
+  }
+}
+
+.errorMsg {
+  color: #e60000;
+}
+
+.error {
+  color: #e60000;
+}
+
+.tooltipBox {
+  color: #00bcd4;
+  position: relative;
+  top: 2px;
+  left: 3px;
+  font-size: 0.9rem;
+  ;
+}
+
+.notficationMessage {
+  position: fixed;
+  left: 0;
+  top: 200px;
+  z-index: 99999999;
+  background: #00bcd4;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 0 10px #cdd1cd;
+  border: none !important;
+  min-width: 300px !important;
+  transition: all ease 500ms;
+
+  strong {
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    padding: 8px;
+  }
+
+  p {
+    color: #fff;
+    display: block;
+    margin: 0;
+    padding: 10px 10px;
+    font-size: 0.9rem;
+    ;
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+  }
+}
+
+.notficationMessageSuccess {
+  background: #4caf50 !important;
+}
+
+.notficationMessageError {
+  background: #e60000 !important;
+}
+
+.MessageAdditional {
+  position: relative;
+  background: #f7f7f7;
+  padding: 10px;
+  margin: 0 -20px;
+  margin-bottom: 20px;
+  min-height: 83px;
+
+  h4 {
+    margin: 0;
+    padding: 5px;
+    font-weight: normal;
+    color: #333;
+  }
+
+  a {
+    display: inline-block;
+    border-bottom: 1px solid;
+    font-weight: bold;
+    background: #e60000;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin: 5px;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  span {
+    display: inline-block;
+    background: #00bcd4;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin: 5px;
+    color: #fff;
+
+    &:hover {
+      background: #e60000;
+    }
+  }
+}
+
+.validateMsg {
+  padding: 4px;
+  margin: 0;
+
+  p {
+    color: #e60000;
+    font-size: 0.7rem;
+    ;
+    line-height: normal;
+    padding-left: 17px;
+    position: relative;
+
+    i {
+      color: #e60000;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      padding: 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+.card {
+  margin: 10px 0;
+  background: #fff;
+  padding: 10px;
+  font-size: 15px;
+  position: relative;
+  border-radius: 0 9px 9px 0;
+  transition: all ease 500ms;
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd;
+  }
+
+  label {
+    font-weight: bold;
+    margin: 0 5px;
+    color: #4d4d4d;
+    font-size: 14px;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 91%;
+    padding: 5px 0;
+
+    i {
+      position: absolute;
+      top: 8px;
+      background: #d70909;
+      right: 9px;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      padding: 0;
+      line-height: 20px;
+      text-align: center;
+      z-index: 99;
+    }
+  }
+
+  p {
+    position: relative;
+    z-index: 1;
+    padding: 2px;
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+  }
+
+  ul {
+    padding: 0;
+    margin: 5px 0 0;
+    position: relative;
+    z-index: 1;
+
+    li {
+      display: inline-block;
+      width: 23%;
+      margin: 9px 0 0;
+      vertical-align: top;
+      border-left: 1px solid #ddd;
+      padding: 7px;
+
+      span {
+        font-size: 13px;
+        display: block;
+        color: #333;
+      }
+
+      b {
+        font-size: 13px;
+        display: block;
+        margin: 5px 0;
+        white-space: nowrap;
+      }
+
+      &:first-child {
+        border: none
+      }
+    }
+  }
+
+  a {
+    top: calc(60% - 23px);
+    position: absolute;
+    right: 19px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 23px;
+    color: #333;
+    z-index: 2;
+    transition: all ease 500ms;
+
+    &:hover {
+      color: #e60000;
+    }
+  }
+}
+
+.chartcard {
+  border: 1px solid #eee;
+  padding: 0;
+  position: relative;
+  margin: 10px 0;
+
+  canvas {
+    margin: 10px auto;
+    max-width: 98%;
+  }
+
+  h3 {
+    text-align: left;
+    background: #f7f7f7;
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    font-family: "vodafone_rgregular";
+
+    small {
+      color: #323232;
+      display: block;
+
+      i {
+        color: #e60000;
+      }
+    }
+  }
+}
+
+.title {
+  margin-right: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.detail {
+  margin-right: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
+
+  color: #333 !important;
+  padding-right: 1rem;
+}
+
+.riskNum {
+  font-size: 18px;
+  background: #ebebeb;
+  color: #333;
+  width: auto;
+  display: inline-block !important;
+  padding: 0 0.8rem;
+
+  margin: 0 0 0.5rem 0;
+
+  span {
+    display: inline-block !important;
+  }
+}
+
+.statusCard {
+  position: absolute;
+  left: 0;
+  height: 80%;
+  left: 15px;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  vertical-align: middle;
+  margin: auto;
+}
+
+.chartPie {
+  width: 75%;
+  height: 259px;
+  display: block;
+  margin: 0 auto;
+  padding: 20px 0;
+  position: relative;
+}
+
+.chartValue {
+  width: 90%;
+  height: 90%;
+  font-size: 40px;
+  color: #333333;
+  line-height: 178px;
+  text-align: center;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.chartSideInfo {
+  position: absolute;
+  text-align: left;
+  bottom: 0;
+  left: 0;
+  padding: 4px;
+
+  h3 {
+    font-family: "vodafone_rgbold";
+    text-align: left;
+    line-height: 28px;
+    width: 100%;
+    display: inline-block;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: block;
+      width: 100% !important;
+
+      label {
+        font-family: 'vodafone_rgregular';
+        font-size: 12px;
+        color: #333;
+        margin-left: 0;
+      }
+
+      span {
+        font-size: 12px;
+        display: inline-block;
+        text-align: center;
+        font-family: 'vodafone_rgbold';
+        height: 21px;
+        color: #fff;
+        vertical-align: top;
+        margin: 0 6px;
+        padding: 4px;
+        line-height: 17px;
+      }
+    }
+  }
+}
+
+.BoxChart {
+  display: inline-block;
+  margin: 10px 4px 10px 0;
+  width: 13.954%;
+  padding: 0;
+  position: relative;
+  height: 70px;
+  cursor: pointer;
+
+  label {
+    color: #fff;
+    position: absolute;
+    top: 18px;
+    left: 5px;
+    font-family: "vodafone_rgregular";
+    font-size: 13px;
+    width: 52%;
+    cursor: pointer;
+  }
+
+  span {
+    color: #fff;
+    position: absolute;
+    top: 24px;
+    right: 11px;
+    font-family: "vodafone_rgregular";
+    font-size: 37px;
+    text-align: center;
+  }
+
+  &:hover {
+    background: #9e9e9e;
+  }
+}
+
+.navigationContainer {
+  width: 100%;
+  position: relative;
+  padding: 2px 0;
+  z-index: 2;
+  background: #fff;
+  box-shadow: 0 0 10px #ddd;
+}
+
+.navigation {
+  float: right;
+  position: relative;
+  top: 2px;
+
+  a {
+    font-family: "vodafone_rgregular";
+    float: left;
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 21px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    border-bottom: 3px solid transparent;
+    margin: 0 3px;
+
+    &:hover {
+      border-bottom: 3px solid #e60000;
+      color: #e60000;
+    }
+  }
+}
+
+.navbarbrand {
+  font-family: "vodafone_rgbold";
+  font-size: 2.4em;
+  padding-left: 58px;
+  position: relative;
+  color: #000 !important;
+  display: block;
+  height: 57px;
+  line-height: 66px;
+
+  img {
+    height: 46px;
+    width: 46px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+  }
+}
+
+.banner {
+  width: 100%;
+  margin-top: 0;
+  position: relative;
+  background: #f7f7f7;
+  padding: 20px 0;
+  z-index: 1;
+  margin-bottom: 2%;
+}
+
+.bannerImg {
+  width: 100%;
+  height: 210px;
+  background-size: cover;
+  padding: 1.5rem 0;
+  text-align: center;
+  background-repeat: no-repeat;
+  margin-top: 0;
+  position: relative;
+  margin-bottom: 32px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    left: 0;
+    top: 0;
+    opacity: 0.4;
+  }
+}
+
+.widget {
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 32px;
+  min-height: 300px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-family: "vodafone_rgregular";
+  padding: 10px 0 0 60px;
+  color: #4d4d4d;
+  position: relative;
+  height: 40px;
+  margin-top: 20px !important;
+
+  i {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    background: #00bcd4;
+    text-align: center;
+    line-height: 40px;
+    font-size: 22px;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+}
+
+.servceCard {
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.NormalStat {
+  background: #cddc39;
+}
+
+.VerboseStat {
+  background: #9c27b0;
+}
+
+.InformationStat {
+  background: #333333;
+}
+
+.WarningStat {
+  background: #eb9700;
+}
+
+.ErrorStat {
+  background: #990000;
+}
+
+.HighStat {
+  background: #e60000;
+}
+
+.allLink {
+  background: #e60000;
+  padding: 10px 15px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  overflow: hidden;
+  color: #fff;
+  height: 35px;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    position: absolute;
+    left: 9px;
+    color: #fff;
+    height: 35px;
+    top: 0;
+    line-height: 35px;
+  }
+
+  i {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd;
+  }
+}
+
+.tagsItem {
+  width: 97% !important;
+  border: none !important;
+
+  b {
+    background: #eee;
+    display: inline-block !important;
+    margin-right: 5px !important;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 11px !important;
+    margin: 2px 0;
+  }
+}
+
+.iconCardBG {
+  overflow: hidden;
+
+  >i {
+    color: #ddd;
+    position: absolute;
+    font-size: 100px;
+    left: -20px;
+    top: 47px;
+    opacity: 0.3;
+    z-index: 1;
+    transform: rotate(-15deg);
+  }
+}
+
+.blogCard {
+  label {
+    margin: 0;
+  }
+
+  p {
+    display: inline-block;
+  }
+
+  b {
+    font-size: 10px !important;
+    max-width: 47%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  div {
+    width: 80% !important;
+    top: 7px;
+    position: relative;
+  }
+
+  a {
+    position: absolute;
+    bottom: 4px;
+    top: inherit;
+    right: 8px;
+    font-size: 12px;
+    padding: 5px;
+    background: #9c27b0;
+    color: #fff;
+    z-index: 2;
+
+    &:hover {
+      background: #e60000;
+      color: #fff;
+    }
+  }
+}
+
+.tabsNav {
+  margin-top: 20px;
+  padding: 0 10px;
+  height: 45px;
+
+  ul {
+    margin-left: -10px;
+
+    li {
+      text-align: center;
+      display: inline-block;
+      position: relative;
+
+      a {
+        display: inline-block;
+        background: #ddd;
+        font-size: 15px;
+        padding: 13px 20px;
+        position: relative;
+        margin: 0 2px;
+        border-radius: 5px 5px 0 0;
+        color: #333;
+        font-weight: bold;
+        height: 40px;
+        font-family: "vodafone_ltregular";
+        transition: all ease 600ms;
+
+        &:hover {
+          background: #e60000;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.tabsUI {
+  position: relative;
+}
+
+.tabsContent {
+  min-height: 450px;
+}
+
+.bannerTitle {
+  margin: auto;
+  font-family: 'vodafone_ltregular';
+  color: #333;
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  font-size: 1.8em;
+  display: inline-block;
+  padding: 6px 96px 7px 0;
+}
+
+.messageinfoPage {
+  >h3 {
+    font-size: 15px;
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+  }
+
+  >h4 {
+    color: #8f8f8f;
+    font-size: 15px;
+    padding: 7px;
+    border-left: 5px solid #eee;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.messageInfoSection {
+  position: relative;
+  margin: 5px 0;
+
+  li {
+    display: inline-block;
+    vertical-align: top;
+    background: #efefef;
+    margin: 4px;
+    border-radius: 5px;
+    padding: 4px;
+    width: 19%;
+    transition: all ease 500ms;
+
+    span {
+      font-weight: 400;
+      font-size: 13px;
+      color: #333;
+      display: block;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 0;
+      display: block;
+      padding: 5px 0;
+    }
+
+    &:hover {
+      background: #e60000;
+
+      span {
+        color: #fff;
+      }
+
+      label {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.MessageBody {
+  font-size: 14px;
+  border: 1px solid #eee;
+  padding: 7px;
+  margin-bottom: 18px;
+  border-radius: 5px;
+
+  label {
+    padding: 5px;
+    font-size: 14px;
+    color: #323232;
+    margin: 0;
+  }
+
+  p[class="title"] {
+    padding: 5px;
+    font-size: 14px;
+    color: #323232;
+    margin: 0;
+    font-weight: bolder;
+  }
+
+  p {
+    padding: 5px;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    line-height: 2em;
+  }
+
+  ul {
+    padding: 0;
+    margin: 5px 0 0;
+    position: relative;
+    z-index: 1;
+
+    li {
+      display: block;
+      padding: 5px;
+      font-size: 14px;
+      color: #323232;
+      margin: 0;
+    }
+  }
+
+  a {
+    padding: 5px;
+    font-size: 14px;
+    margin: 0;
+    color: #e60000;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: all ease 500ms;
+
+    &:hover {
+      color: #e60000;
+    }
+  }
+}
+
+.assignBtn {
+  background: #e60000 !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.filterBtn {
+  background: #e60000 !important;
+  color: #fff !important;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  margin: 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.commentBtn {
+  background: #e60000 !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  float: right;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.commentArea {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 4px;
+
+  textarea {
+    border: none !important;
+    border-bottom: 2px solid #eee !important;
+    border-radius: 0 !important;
+
+    &:hover {
+      border-color: #e60000 !important;
+    }
+  }
+}
+
+.commentBox {
+  padding: 15px 0;
+
+  li {
+    display: block;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    color: #fff;
+    padding: 18px 5px 10px;
+    position: relative;
+    font-size: 13px;
+
+    span {
+      font-weight: lighter;
+      font-size: 10px;
+      position: absolute;
+      right: 14px;
+      bottom: 3px;
+      color: #fff;
+    }
+
+    label {
+      color: #fff;
+      font-size: 13px;
+      position: relative;
+      top: -5px;
+      left: 9px;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 4px;
+      border-radius: 3px;
+
+      i {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 5px;
+      }
+    }
+
+    pre {
+      font-weight: normal;
+      font-size: 14px;
+      color: #fff;
+      display: block;
+      margin-left: 10px;
+      line-height: 23px;
+      font-family: "vodafone_rgregular";
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.userComment {
+  background: #00bcd4;
+}
+
+.systemComment {
+  background: #007C92;
+}
+
+.userCard {
+  width: 24%;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 170px;
+  position: relative;
+  border: 2px solid #f7f7f7;
+  margin: 5px;
+  padding: 16px 4px 4px 73px;
+  line-height: normal;
+  font-size: 13px;
+  border-radius: 0;
+  transition: all ease 400ms;
+
+  &>i {
+    position: absolute;
+    top: 7px;
+    background: #d70909;
+    left: 3px;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    padding: 0;
+    line-height: 20px;
+    text-align: center;
+    z-index: 9;
+  }
+
+  img {
+    width: 60px;
+    position: absolute;
+    left: 5px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    top: 17px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 13px;
+    color: #333;
+    position: relative;
+    top: 6px;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+    position: relative;
+    margin-top: 5px;
+    font-weight: normal;
+  }
+
+  h5 {
+    color: #fff;
+    background: #00BCD4;
+    margin: 4px 0;
+    font-size: 11px;
+    position: absolute !important;
+    top: -6px;
+    right: 0;
+    font-weight: 400;
+    padding: 4px;
+  }
+
+  &>div {
+    font-size: 12px;
+    color: #333;
+    margin: 5px 0 0;
+    background: #f7f7f7;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  span {
+    margin: 0;
+    font-size: 12px;
+    color: #333;
+    position: relative;
+    margin-top: 4px;
+    padding: 1px;
+    display: block;
+  }
+
+  small {
+    color: #333;
+  }
+
+  &:hover {
+    box-shadow: 2px 3px 11px #bebebe;
+  }
+}
+
+.notficationMessage {
+  position: fixed;
+  left: 0;
+  top: 10%;
+  z-index: 9999;
+  background: #00bcd4;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 0 10px #cdd1cd;
+  border: none !important;
+  min-width: 300px !important;
+  transition: all ease 500ms;
+
+  strong {
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    padding: 8px;
+  }
+
+  p {
+    color: #fff;
+    display: block;
+    margin: 0;
+    padding: 10px 10px;
+    font-size: 13px;
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+  }
+}
+
+.notficationMessageSuccess {
+  background: #4caf50 !important;
+}
+
+.notficationMessageError {
+  background: #e60000 !important;
+}
+
+
+.DoneBtn {
+  background: #4CAF50 !important;
+  color: #fff !important;
+  position: absolute;
+  margin: 0 !important;
+  height: 28px;
+  padding: 1px 6px !important;
+  transition: all ease 600ms;
+  bottom: 0;
+  right: 0;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 34px;
+    position: relative;
+    top: 0;
+    margin: 0 !important;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+
+.MessageAdditional {
+  position: relative;
+  background: #f7f7f7;
+  padding: 10px;
+  margin: 0 -20px;
+  margin-bottom: 20px;
+  min-height: 83px;
+
+  h4 {
+    margin: 0;
+    padding: 5px;
+    font-weight: normal;
+    color: #333;
+  }
+
+  a {
+    display: inline-block;
+    border-bottom: 1px solid;
+    font-weight: bold;
+    background: #e60000;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 5px;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  span {
+    display: inline-block;
+    background: #00bcd4;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 5px;
+    color: #fff;
+
+    &:hover {
+      background: #e60000;
+    }
+  }
+}
+
+.formFilter {
+  h4 {
+    font-weight: 400;
+    padding: 9px;
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    top: 23px;
+    padding-left: 50px;
+    height: 40px;
+    margin-bottom: 34px;
+    font-family: "vodafone_rgregular";
+
+    i {
+      position: absolute;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      top: 0;
+      text-align: center;
+      line-height: 40px;
+      font-size: 15px;
+      color: #333;
+    }
+  }
+}
+
+
+.filterBar {
+  position: relative;
+  padding-bottom: 34px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      color: #333;
+      display: inline-block;
+      border: 1px solid #9E9E9E !important;
+      border-radius: 15px;
+      margin: 2px 5px 2px 0;
+      padding: 4px 30px 4px 4px;
+      line-height: 29px;
+      position: relative;
+      font-size: 12px !important;
+      transition: all ease 500ms;
+
+      button {
+        background: #e60000;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        min-width: inherit;
+        border-radius: 50%;
+        padding: 0;
+        line-height: normal;
+        color: #fff;
+        right: 3px;
+        top: 8px;
+        font-size: 9px;
+        transition: all ease 500ms;
+
+        &:hover {
+          background: #e60000;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+}
+
+
+.cardContainer {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px #ddd;
+  margin-top: 20px;
+  position: relative;
+}
+
+.tableStyle {
+  padding: 10px;
+  margin: 14px 0;
+
+  table {
+    font-family: "vodafone_rgregular";
+  }
+
+  td {
+    font-size: 13px;
+    color: #333;
+    line-height: normal;
+    font-weight: bold;
+  }
+
+  th {
+    background: #e60000;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  tr {
+    background: #f6f6f6 !important;
+
+    &:nth-child(odd) {
+      background: #fff !important;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #e7e7e7 !important;
+    }
+  }
+
+  //   tr {
+  //
+  //   }
+}
+
+.buttonBlock {
+  position: relative;
+  text-align: right;
+  border-top: 3px solid #ddd;
+  margin-top: 17px;
+
+  button {
+    margin-left: 8px !important;
+  }
+}
+
+.involvedTeam {
+  position: relative !important;
+  margin: 0 !important;
+  top: 0px;
+  min-height: 15px;
+
+  li {
+    margin: 2px !important;
+    padding: 2px 5px !important;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 4px;
+    border: none !important;
+    width: auto !important;
+  }
+}
+
+.involvedTeamPage {
+  position: absolute !important;
+  margin: 0 !important;
+  top: -2px;
+  right: -126px;
+  width: 122px;
+
+  li {
+    margin: 2px !important;
+    padding: 2px 5px !important;
+    font-size: 12px;
+    text-align: left;
+    border-radius: 0;
+    border: none !important;
+    width: auto !important;
+  }
+}
+
+.leftUl {
+  margin-left: 20% !important;
+
+  li {
+    &:first-child {
+      border-left: 1px solid #ddd !important;
+    }
+  }
+}
+
+.nodataBox {
+  background: #eceff1;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  width: 40%;
+  margin: 10px auto;
+  font-size: 13px;
+  display: block;
+}
+
+
+.saveBtn {
+  background: #4d4d4d !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.informedBtn {
+  background: #607D8B !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.SubscribeBtn {
+  background: #333 !important;
+  color: #fff !important;
+  position: absolute;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  right: 80px;
+  top: 0px;
+  border: none !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    background: #e60000 !important;
+  }
+}
+
+
+.DeleteBtn {
+  background: #fff !important;
+  color: #e60000 !important;
+  position: absolute;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  right: 80px;
+  top: 0px;
+  border: none !important;
+  transition: all ease 600ms;
+border-color: #e60000 !important;
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #e60000;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #e60000;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    background: #e60000 !important;
+  }
+}
+
+
+.cancelBtn {
+  background: #e60000 !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+
+.draftBtn {
+  background: #607d8b !important;
+  color: #fff !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+
+
+.securityBG {
+  background: #f5d9f2;
+  color: #b467ac;
+}
+
+.adoptionBG {
+  background: #f0d3d4;
+  color: #b44a4f;
+}
+
+.privacyBG {
+  background: #c6e7c6;
+  color: #187318;
+}
+
+.relaseBG {
+  background: #f5edce;
+  color: #77620e;
+}
+
+.concilBG {
+  background: #d0e7f8;
+  color: #3b83ba;
+}
+
+.serviceEnableBG {
+  background: #e0d4ed;
+  color: #6e449d;
+}
+
+.AssignedBg {
+  background: #A8B400;
+}
+
+.NotAssignedBg {
+  background: #E60000;
+}
+
+.CompletedBg {
+  background: #00B0CA;
+}
+
+.allCompletedBg {
+  background: #03a9f4;
+}
+
+.NotCompletedBg {
+  background: #FFBF00;
+}
+
+.MessagesBg {
+  background: #4A4D4E;
+}
+
+.ManagementBg {
+  background: #007C92;
+}
+
+.ManagementAWBg {
+  background: #ff9800;
+}
+
+.MajorBg {
+  background: #9C2AA0;
+}
+
+.Modal {
+  background: rgba(51, 51, 51, 0.5);
+
+
+  .ModalHeader {
+    border-bottom: 3px solid #f7f7f7;
+    padding: 10px;
+    position: relative;
+
+    h3 {
+      color: #333;
+      margin: 0;
+      font-size: 18px;
+      padding: 5px 9px;
+      font-family: 'vodafone_rgregular', Arial, Helvetica, sans-serif;
+      font-weight: normal;
+      max-width: inherit !important;
+      width: 100%;
+    }
+
+    button {
+      font-size: 16px;
+      position: absolute;
+      right: 9px;
+      top: 5px;
+      width: 30px;
+      height: 30px;
+      background: #e60000;
+      color: #fff;
+      border-radius: 4px;
+      transition: all .3s linear;
+
+      &:hover {
+        background: #333;
+        color: #fff;
+      }
+    }
+  }
+
+  .ModalBody {
+    padding: 20px;
+    max-height: 250px;
+    overflow: auto;
+    padding-left: 1%;
+    // min-height: 100px;
+
+    .field {
+      color: #000;
+
+      label {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 10px;
+        color: #333;
+      }
+
+      textarea {
+        border: 1px solid #eee;
+      }
+    }
+
+  }
+
+  .ModalFooter {
+    border-top: 1px solid #eee;
+    padding: 10px;
+    text-align: right;
+
+    button {
+      margin-left: 5px !important;
+      border: none;
+    }
+  }
+}
+
+.exportBtn {
+  background: #e60000 !important;
+  color: #fff !important;
+  position: absolute;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 0 15px !important;
+  top: 1px;
+  right: 32px;
+  border: none;
+  z-index: 0;
+  transition: all ease 600ms;
+
+  span {
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #fff;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    top: 0;
+  }
+
+  i {
+    color: #fff;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 5px #ddd !important;
+  }
+}
+
+.confrmStyle
+{
+  max-height: 100px;
+}
+
+.fieldLabel {
+  font-size: 14px!important;
+  display: block!important;
+  background: #e60000;
+  color: #fff !important;
+  margin-top: 1% !important;
+  padding: 8px;
+  .tooltipBox {
+    // color: #00bcd4;
+    position: relative;
+    top: 2px;
+    left: 3px;
+    font-size: 13px;
+    i{
+      color: #fff !important;
+    }
+  }
+}
+form {
+  padding: 5px 0 0 10px;
+  div[class="field"] {
+    font-family: "vodafone_rgregular";
+    font-size: 15px!important;
+    color: #333 !important;
+    margin: 5px 0 -4px 0!important;
+    padding: 1px 0 !important;
+  }
+  div[class="checkbox"] {
+    label {
+      font-family: "vodafone_rgregular" !important;
+    }
+  }
+}
+.optionsContainer {
+  flex-flow: column;
+  margin: 0 !important;
+  padding: 0 10px;
+  ul {
+    li{
+      list-style: none !important;
+    }
+    label {
+      font-family: "vodafone_rgregular" !important;
+    }
+  }
+}

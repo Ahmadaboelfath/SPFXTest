@@ -839,67 +839,67 @@
   }
 }
 
-.commentsLbl {
-  font-family: "vodafone_rgregular";
-  font-size: 15px !important;
-  margin: 10px 2px 6px;
-  color: #000 !important;
-  height: 21px;
-  font-weight: 600;
+.commentsLbl{
+  font-family: 'vodafone_rgregular';
+    font-size: 15px!important;
+    margin: 10px 2px 6px;
+    color: #000!important;
+    height: 21px;
+    font-weight: 600;
 }
-.userCommentList {
+.userCommentList{
   width: 100%;
   // max-height: 400px;
   // overflow-y: auto;
   list-style: none;
-  .Comment {
-    border-radius: 4px;
-    background: #fff;
-    margin-bottom: 10px;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    min-width: 50%;
-    max-width: 97%;
-    width: fit-content;
-    border: 1px solid #f7f7f7;
-    &.userComment {
-      background: #ececec40;
-    }
-    .systemComment {
-      background: #d9d9d9 !important;
-      border-color: #dbdbdb !important;
-    }
-    .CommentLbl {
-      padding: 7px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ececec;
-      margin-bottom: 5px;
-      span {
+.Comment {
+  border-radius: 4px;
+  background: #fff;
+  margin-bottom: 10px;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  min-width: 50%;
+  max-width: 97%;
+  width: fit-content;
+  border: 1px solid #f7f7f7;
+  &.userComment{
+    background: #ececec40;
+  }
+  .systemComment {
+    background: #d9d9d9 !important;
+    border-color: #dbdbdb !important;
+  }
+  .CommentLbl{
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 5px;
+    span{
         color: #333;
-        font-family: "vodafone_rgregular";
-        font-weight: 700 !important;
+        font-family: 'vodafone_rgregular';
+        font-weight: 700!important;
         display: flex;
         align-items: center;
-        i {
+        i{
           margin-right: 5px;
           font-weight: 600;
         }
-      }
-    }
-    .CommentContent {
-      font-size: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 1% 8px;
-      span {
-        font-family: "vodafone_ltregular";
-        font-weight: 600 !important;
-      }
     }
   }
+  .CommentContent{
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 1% 8px;
+    span{
+      font-family: 'vodafone_ltregular';
+      font-weight: 600!important;
+    }
+  }
+}
 }
 .systemComment {
   background: #007c92;
@@ -1200,8 +1200,8 @@
     font-weight: bold;
   }
   th {
-    background: #e1ad01;
-    color: black;
+    background: #e60000;
+    color: #fff;
     white-space: nowrap;
   }
   tr {
@@ -1417,6 +1417,7 @@
 
   &:hover {
     box-shadow: 4px 4px 5px #ddd !important;
+
   }
 }
 

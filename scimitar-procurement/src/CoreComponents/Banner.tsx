@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
 
-import './Componentstyles.scss';
+import compStyles from './Componentstyles.module.scss';
 
 interface BannerProps {
     PageTitle?: string;
@@ -10,9 +10,9 @@ export const BannerComponent: React.FC<BannerProps> =
     (props) => {
         return (
 
-            <div className="banner">
+            <div className={compStyles.banner}>
                 <MDBContainer>
-                    <h3 className="bannerTitle">{props.PageTitle}</h3>
+                    <h3 className={compStyles.bannerTitle}>{props.PageTitle}</h3>
                 </MDBContainer>
             </div>
         );

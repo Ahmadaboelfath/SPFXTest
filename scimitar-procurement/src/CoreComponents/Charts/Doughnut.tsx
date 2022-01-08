@@ -6,8 +6,7 @@ import { MDBBtn, MDBIcon } from 'mdbreact';
 import { Doughnut } from 'react-chartjs-2';
 interface DoughnutProps {
    data?: any;
-   key?:number; 
-   onClick(elem);
+   key?:number;
 }
 const data = {
    labels: [
@@ -26,16 +25,14 @@ const data = {
    }]
 };
 
-export const DoughnutComponent: React.FC<any> =
+export const DoughnutComponent: React.FC<DoughnutProps> =
    (props) => {
 
       return (
 
          <>
                <div className={compStyles.chartPie}>
-                  <Doughnut
-                  onElementsClick={props.onClick}
-                   key={props.key} data={props.data || data} />
+                  <Doughnut key={props.key} data={props.data || data} />
 
 
                      </div>

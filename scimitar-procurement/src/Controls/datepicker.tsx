@@ -7,7 +7,7 @@ import styles from "./Forms.module.scss";
 import { consts } from "../shared/consts";
 
 interface IDatePickerProps {
-  handleDate(date, name);
+  handleDate(date, ctrlname);
   selected: any;
   label?: string;
   tooltip?: Boolean;
@@ -17,7 +17,7 @@ interface IDatePickerProps {
   Required?: boolean;
   showError?: boolean;
   errorMessage?: string;
-  minDate?: any;
+  minDate?: string;
 }
 
 export const Datepicker: React.FC<IDatePickerProps> = (props) => {
@@ -60,12 +60,12 @@ export const Datepicker: React.FC<IDatePickerProps> = (props) => {
           onChange={(d) => props.handleDate(d, props.ctrlName)}
           isClearable="true"
           maxDate={today.setUTCFullYear(today.getUTCFullYear() + 5)}
-          minDate={props.minDate ? props.minDate : null}
+          minDate={props.minDate ? new Date(props.minDate) : null}
           dateFormat={consts.DateFormat}
           disabled={props.disabled}
         />
         {props.showError && (
-          <div className="validateMsg">
+          <div className={styles.validateMsg}>
             <p>
               <Icon iconName="info" />
               {props.errorMessage}
