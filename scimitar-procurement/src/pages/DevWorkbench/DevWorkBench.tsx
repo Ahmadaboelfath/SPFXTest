@@ -10,6 +10,13 @@ import IMaterialTag from "../../Models/InterfaceModels/IMaterialTag";
 import { TableList } from "../../CoreComponents/Grid/TableList";
 import Toggle from "../../Controls/Toggle/Toggle";
 import TagPicker from "../../Controls/TagPicker/TagPicker";
+import IMaterialRequesitionService from "../../Services/MaterialRequesitionService/IMaterialRequesitionService";
+import MaterialRequesitionService from "../../Services/MaterialRequesitionService/MaterialRequesitionService";
+import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
+import MaterialRequesitionItem from "../../Models/ClassModels/MaterialRequesitionItem";
+import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
+import IApprovalService from "../../Services/ApprovalService/IApprovalService";
+import ApprovalService from "../../Services/ApprovalService/ApprovalService";
 
 class DevWorkBench extends React.Component<
   RouteComponentProps<IDevWorkBenchProps>,
@@ -23,6 +30,57 @@ class DevWorkBench extends React.Component<
     this.state = {
       serachByCode: true,
     };
+  }
+
+  componentDidMount(): void {
+    // const materialRequesition = new MaterialRequesition();
+    // materialRequesition.useFor = "Test";
+    // materialRequesition.status = "New";
+    // materialRequesition.requestedBy = "Ahmad";
+    // materialRequesition.priority = "High";
+    // materialRequesition.department = "purchasing";
+    // materialRequesition.currency = "USD";
+    // materialRequesition.requesterEmail = "sharepointadmin@scimitaregypt.com";
+    // const materialRequesitionService: IMaterialRequesitionService =
+    //   new MaterialRequesitionService();
+    // materialRequesitionService
+    //   .addRequest(materialRequesition)
+    //   .then((materialRequest) => {
+    //     console.log(materialRequest);
+    //     materialRequesitionService
+    //       .generateRequestCode(materialRequest.id)
+    //       .then((value) => {
+    //         console.log(value);
+    //         const mrItem = new MaterialRequesitionItem();
+    //         mrItem.materialId = 7;
+    //         mrItem.materialRequisitionId = 7;
+    //         mrItem.order = 1;
+    //         mrItem.quantity = 5;
+    //         mrItem.unit = "Pieces";
+    //         const itemService = new MaterialRequisitionItemService();
+    //         itemService.addMaterialRequesitionItem(mrItem).then((itemvalue) => {
+    //           console.log(itemvalue);
+    //         });
+    //       });
+    //   });
+
+    const approvalService: IApprovalService = new ApprovalService();
+
+    approvalService.getApprovalById(1).then((appro) => {
+      console.log(appro);
+      approvalService.getApprovalsByMaterialRequesitionId(16).then((appr) => {
+        console.log(appr);
+        approvalService
+          .updateApprovalStatus(
+            1,
+            "Approved",
+            "sharepointadmin@scimitaregypt.com"
+          )
+          .then((a) => {
+            console.log(a);
+          });
+      });
+    });
   }
   render(): React.ReactNode {
     return (

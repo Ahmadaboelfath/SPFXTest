@@ -1,4 +1,28 @@
 export default class MaterialRequesition {
+  /**
+   *
+   */
+  constructor(id?: number, date?: string) {
+    this.requestDate = date ? new Date(date) : new Date();
+    this.id = id ? id : 0;
+  }
+
+  private _id: number;
+  public get id(): number {
+    return this._id;
+  }
+  public set id(v: number) {
+    this._id = v;
+  }
+
+  private _requesterEmail: string;
+  public get requesterEmail(): string {
+    return this._requesterEmail;
+  }
+  public set requesterEmail(v: string) {
+    this._requesterEmail = v;
+  }
+
   private _requestDate: Date;
   public get requestDate(): Date {
     return this._requestDate;
@@ -53,5 +77,13 @@ export default class MaterialRequesition {
   }
   public set requestCode(v: string) {
     this._requestCode = v;
+  }
+
+  private _status: string;
+  public get status(): string {
+    return this._status;
+  }
+  public set status(v: string) {
+    this._status = v;
   }
 }

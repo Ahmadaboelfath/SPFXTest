@@ -38,4 +38,12 @@ export default class Material {
   public set categoryName(v: string) {
     this._categoryName = v;
   }
+
+  private _status: string;
+  public get status(): string {
+    return this._status;
+  }
+  public set status(v: string) {
+    this._status = v;
+  }
 }

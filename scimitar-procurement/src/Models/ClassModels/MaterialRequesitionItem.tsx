@@ -1,4 +1,12 @@
 export default class MaterialRequestionItem {
+  private _id: string;
+  public get id(): string {
+    return this._id;
+  }
+  public set id(v: string) {
+    this._id = v;
+  }
+
   private _description: string;
   public get description(): string {
     return this._description;
@@ -37,5 +45,21 @@ export default class MaterialRequestionItem {
   }
   public set order(v: number) {
     this._order = v;
+  }
+
+  private _materialId: number;
+  public get materialId(): number {
+    return this._materialId;
+  }
+  public set materialId(v: number) {
+    this._materialId = v;
+  }
+
+  private _materialRequisitionId: number;
+  public get materialRequisitionId(): number {
+    return this._materialRequisitionId;
+  }
+  public set materialRequisitionId(v: number) {
+    this._materialRequisitionId = v;
   }
 }
