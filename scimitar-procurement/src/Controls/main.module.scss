@@ -1,0 +1,18 @@
+.validateMsg {
+  padding: 4px;
+  margin: 0;
+  p {
+    color: #e60000;
+    font-size: 11px;
+    line-height: normal;
+    padding-left: 17px;
+    position: relative;
+    i {
+      color: #e60000;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      padding: 0;
+    }
+  }
+}

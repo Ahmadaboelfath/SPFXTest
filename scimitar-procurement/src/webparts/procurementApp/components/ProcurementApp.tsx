@@ -16,6 +16,8 @@ import { SecurityProvider } from "../../../Context/SecurityContext/SecurityProvi
 import NotAllowed from "../../../pages/NotAllowed/NotAllowed";
 import PrivateRoute from "../../../CoreComponents/PrivateRoute/PrivateRoute";
 import SPGroup from "../../../Models/SPGroup";
+import DevWorkBench from "../../../pages/DevWorkbench/DevWorkBench";
+import "semantic-ui-css/semantic.min.css";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
@@ -50,7 +52,9 @@ export default class ProcurementApp extends React.Component<
               )}
             />
             <Route path="/AccessDenied" render={() => <NotAllowed />} />
+            <Route path="/dev" exact render={() => <DevWorkBench />} />
             <Route path="/" exact render={() => <HomePage />} />
+
             <Route render={() => <ErrorPage />} />
           </Switch>
         </SecurityProvider>
