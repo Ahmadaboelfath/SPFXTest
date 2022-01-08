@@ -1,5 +1,5 @@
 import { SPHttpClient, SPHttpClientResponse,ISPHttpClientOptions,HttpClientResponse } from "@microsoft/sp-http";
-import { IPrincipal, ISPEnsureUserResponse, ISPUserSearchJSON, IUserSuggestion, ISPUserSearchResponse } from "../Models/userModels";
+import { IPrincipal, ISPEnsureUserResponse, ISPUserSearchJSON, IUserSuggestion, ISPUserSearchResponse } from "../Models/ClassModels/userModels";
 
 const LOG_SOURCE = "[SPOperation]";
 export default class SPOperations {
