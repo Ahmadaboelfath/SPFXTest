@@ -1,13 +1,17 @@
 import * as React from "react";
 import ITagPickerProps from "./ITagPickerProps";
-import { Icon, TagPicker as OfficeUiTagPicker } from "office-ui-fabric-react";
+import {
+  IBasePickerSuggestionsProps,
+  Icon,
+  TagPicker as OfficeUiTagPicker,
+} from "office-ui-fabric-react";
 import Tag from "./Components/Tag/Tag";
 import styles from "../Forms.module.scss";
 import { isEmpty } from "@microsoft/sp-lodash-subset";
 
 export default class TagPicker extends React.Component<ITagPickerProps, any> {
   onChange(selectedItems) {
-    this.props.onChange(selectedItems, this.props.controlPropName);
+    this.props.onChange(selectedItems, this.props.controlName);
   }
 
   render(): React.ReactNode {
@@ -32,6 +36,7 @@ export default class TagPicker extends React.Component<ITagPickerProps, any> {
           resolveDelay={
             this.props.resolveDelay ? this.props.resolveDelay : 1000
           }
+          pickerSuggestionsProps={this.props.pickerSuggestionsProps}
         />
 
         {this.props.errorMessage.trim() ? (

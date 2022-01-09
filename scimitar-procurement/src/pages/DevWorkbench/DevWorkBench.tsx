@@ -7,7 +7,7 @@ import IMaterialService from "../../Services/MaterialService/IMaterialService";
 import MaterialService from "../../Services/MaterialService/MaterialService";
 import Tag from "../../Controls/TagPicker/Components/Tag/Tag";
 import IMaterialTag from "../../Models/InterfaceModels/IMaterialTag";
-import { TableList } from "../../CoreComponents/Grid/TableList";
+// import { TableList } from "../../CoreComponents/Grid/TableList";
 import Toggle from "../../Controls/Toggle/Toggle";
 import TagPicker from "../../Controls/TagPicker/TagPicker";
 import IMaterialRequesitionService from "../../Services/MaterialRequesitionService/IMaterialRequesitionService";
@@ -100,7 +100,7 @@ class DevWorkBench extends React.Component<
                   controlPropName=""
                   onChange={() => this.toggleSearchPicker()}
                 />
-                <TagPicker
+                {/* <TagPicker
                   errorMessage=" "
                   label={
                     this.state.serachByCode
@@ -108,7 +108,7 @@ class DevWorkBench extends React.Component<
                       : "Material Description"
                   }
                   multiple={false}
-                  controlPropName=""
+                  controlName=""
                   onChange={(selectedItems) => console.log(selectedItems)}
                   onResolveSuggestions={
                     this.state.serachByCode
@@ -117,12 +117,12 @@ class DevWorkBench extends React.Component<
                       : (filter, selectedItem) =>
                           this.onDescriptionSearch(filter, selectedItem)
                   }
-                />
-                <TableList
+                /> */}
+                {/* <TableList
                   onDelete={() => console.log("Delete")}
                   onSubmit={() => console.log("Submit")}
                   registrations={[]}
-                />
+                /> */}
               </div>
             </form>
           </div>

@@ -15,9 +15,12 @@ import ErrorPage from "../../../pages/Error/Error";
 import { SecurityProvider } from "../../../Context/SecurityContext/SecurityProvider";
 import NotAllowed from "../../../pages/NotAllowed/NotAllowed";
 import PrivateRoute from "../../../CoreComponents/PrivateRoute/PrivateRoute";
-import SPGroup from "../../../Models/SPGroup";
+import SPGroup from "../../../Models/ClassModels/SPGroup";
 import DevWorkBench from "../../../pages/DevWorkbench/DevWorkBench";
 import "semantic-ui-css/semantic.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "../../../CoreComponents/ComponentStyles.scss";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
@@ -34,7 +37,7 @@ export default class ProcurementApp extends React.Component<
         <SecurityProvider>
           <Switch>
             <PrivateRoute
-              path="/NewMaterialRequestion"
+              path="/NewMaterialRequesition"
               allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
             >
               <NewMaterialRequestionPage />

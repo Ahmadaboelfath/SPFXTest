@@ -4,14 +4,16 @@ import MaterialRequesitionItem from "../ClassModels/MaterialRequesitionItem";
 
 export default class MaterialRequesitionFormViewModel {
   constructor(
-    id?: number,
-    requestCode?: string,
-    requestDate?: Date,
+    materialRequesition?: MaterialRequesition,
     materialRequesitionItems?: MaterialRequestionItem[]
   ) {
     this._materialItems = materialRequesitionItems
       ? materialRequesitionItems
       : [];
+
+    this._materialRequesition = materialRequesition
+      ? materialRequesition
+      : new MaterialRequesition();
   }
 
   private _materialRequesition: MaterialRequesition;

@@ -2,7 +2,8 @@ import { Spinner, SpinnerSize } from "office-ui-fabric-react";
 import * as React from "react";
 import ISecurityBusinessLogic from "../../BusinessLogic/SecurityBusinessLogic/ISecurityBusinessLogic";
 import SecurityBusinessLogic from "../../BusinessLogic/SecurityBusinessLogic/SecurityBusinessLogic";
-import User from "../../Models/User";
+import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
+import User from "../../Models/ClassModels/User";
 import SecurityProviderState from "./SecurityProviderState";
 
 const SecurityContext = React.createContext(new User());
@@ -31,7 +32,7 @@ class SecurityProvider extends React.Component<any, SecurityProviderState> {
   private renderLoader(): JSX.Element {
     return (
       <div style={{ width: "100%", height: "100vh" }}>
-        <Spinner label="Loading" size={SpinnerSize.large} />;
+        <LoadingBoxComponent />
       </div>
     );
 
@@ -41,7 +42,7 @@ class SecurityProvider extends React.Component<any, SecurityProviderState> {
   render(): React.ReactNode {
     return (
       <>
-        {this.state.user.email ? (
+        {this.state.user.userProperties ? (
           <SecurityContext.Provider value={this.state.user}>
             {this.props.children}
           </SecurityContext.Provider>

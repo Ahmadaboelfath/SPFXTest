@@ -1,93 +1,169 @@
-.card {
-  margin: 10px 0;
-  background: #fff;
-  padding: 10px;
-  font-size: 15px;
+.cardBox {
+  margin: 20px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px 15px;
+  font-size: 18px;
+
+  color: #666666;
   position: relative;
-  border-radius: 0 9px 9px 0;
-  transition: all ease 500ms;
-  &:hover {
-    box-shadow: 4px 4px 5px #ddd;
-  }
-  label {
-    font-weight: bold;
-    margin: 0 5px;
-    color: #4d4d4d;
-    font-size: 14px;
-    white-space: nowrap;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 91%;
-    padding: 5px 0;
-    i {
-      position: absolute;
-      top: 8px;
-      background: #d70909;
-      right: 9px;
-      color: #fff;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 14px;
-      padding: 0;
-      line-height: 20px;
-      text-align: center;
-      z-index: 99;
+  li {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+
+    &:first-child {
+      width: 25%;
     }
-  }
-  p {
-    position: relative;
-    z-index: 1;
-    padding: 2px;
-    font-size: 12px;
-    color: #666;
-    margin: 0;
-  }
-  ul {
-    padding: 0;
-    margin: 5px 0 0;
-    position: relative;
-    z-index: 1;
-    li {
-      display: inline-block;
-      width: 23%;
-      margin: 9px 0 0;
-      vertical-align: top;
-      border-left: 1px solid #ddd;
-      padding: 7px;
-      span {
-        font-size: 13px;
-        display: block;
-        color: #333;
-      }
-      b {
-        font-size: 13px;
-        display: block;
-        margin: 5px 0;
-        white-space: nowrap;
-      }
-      &:first-child {
-        border: none;
-      }
+    &:last-child {
+      width: 25%;
     }
-  }
-  a {
-    top: calc(60% - 23px);
-    position: absolute;
-    right: 19px;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 23px;
-    color: #333;
-    z-index: 2;
-    transition: all ease 500ms;
-    &:hover {
-      color: #e60000;
+
+    span {
+      display: block;
     }
   }
 }
 
+.requestNo {
+  border-right: 1px solid #eee;
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 4px;
+  span {
+    font-size: 1rem;
+    color: #000;
+    width: auto;
+    display: inline-block;
+    padding: 0;
+    font-family: "vodafone_rgbold";
+    margin: 0 0 0.5rem 0;
+    vertical-align: top;
+    &:last-child {
+      color: #333;
+      background: #ebebeb;
+      margin-left: 0.2rem;
+    }
+  }
+}
+.requestTitle {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+  span {
+    font-size: 1rem;
+    color: #000;
+    width: auto;
+    display: inline-block;
+    padding: 0;
+    font-family: "vodafone_rgbold";
+    margin: 0 0 0.5rem 0;
+    vertical-align: top;
+    &:last-child {
+      color: #333;
+      margin-left: 0.2rem;
+    }
+  }
+}
+
+.title {
+  margin-right: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  color: #000;
+  margin: 5px 0;
+  font-weight: bold;
+}
+.detail {
+  font-size: 0.8rem;
+  color: #333;
+  word-break: break-all;
+}
+
+.cardLnk {
+  top: 4rem;
+  position: absolute;
+  display: inline-block;
+  background-size: contain;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+
+  i {
+    color: #e60000;
+  }
+}
+.smallCard {
+  background: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px 15px;
+  font-size: 18px;
+  color: #666666;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  margin: 5px 0 !important;
+  vertical-align: top;
+  padding: 25px 10px 5px !important;
+  ul {
+    list-style: none;
+    li {
+      width: 30%;
+      display: inline-block;
+      vertical-align: top;
+      span {
+        display: block;
+      }
+    }
+  }
+}
+.reqNotop {
+  font-size: 11px;
+  font-style: normal;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #00bcd4;
+  padding: 3px;
+  color: #fff;
+}
+.reqDatetop {
+  font-size: 11px;
+  font-style: normal;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #90a4ae;
+  padding: 3px;
+  color: #fff;
+}
+
+.statusCard {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  left: 0;
+  width: 5px;
+  vertical-align: middle;
+  margin: auto;
+  top: 0;
+}
+
+.statusApproved {
+  background: #a8b400 !important;
+}
+.statusRejected {
+  background: #e60000 !important;
+}
+.statusPending {
+  background: #ff9800 !important;
+}
+.waitingApprove {
+  background: #4d4d4d !important;
+}
 .chartcard {
   border: 1px solid #eee;
   padding: 0;
@@ -113,49 +189,6 @@
       }
     }
   }
-}
-.title {
-  margin-right: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 18px;
-  color: #333;
-  margin: 5px 0;
-}
-.detail {
-  margin-right: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 18px;
-
-  color: #333 !important;
-  padding-right: 1rem;
-}
-.riskNum {
-  font-size: 18px;
-  background: #ebebeb;
-  color: #333;
-  width: auto;
-  display: inline-block !important;
-  padding: 0 0.8rem;
-
-  margin: 0 0 0.5rem 0;
-  span {
-    display: inline-block !important;
-  }
-}
-
-.statusCard {
-  position: absolute;
-  left: 0;
-  height: 80%;
-  left: 15px;
-  border-radius: 3px;
-  border: 2px solid transparent;
-  vertical-align: middle;
-  margin: auto;
 }
 
 .chartPie {
@@ -239,6 +272,7 @@
     font-size: 13px;
     width: 52%;
     cursor: pointer;
+    text-decoration: underline;
   }
   span {
     color: #fff;
@@ -259,7 +293,6 @@
   padding: 2px 0;
   z-index: 2;
   background: #fff;
-  box-shadow: 0 0 10px #ddd;
 }
 .navigation {
   float: right;
@@ -287,7 +320,6 @@
   font-size: 2.4em;
   padding-left: 58px;
   position: relative;
-  color: #000 !important;
   display: block;
   height: 57px;
   line-height: 66px;
@@ -299,36 +331,27 @@
     top: 8px;
   }
 }
-
 .banner {
+  // background: url("../Assets/images/banner.jpg") #fff;
   width: 100%;
-  margin-top: 0;
-  position: relative;
-  background: #f7f7f7;
-  padding: 20px 0;
-  z-index: 1;
-  margin-bottom: 2%;
-}
-
-.bannerImg {
-  width: 100%;
-  height: 210px;
   background-size: cover;
-  padding: 1.5rem 0;
-  text-align: center;
+  padding: 60px 0;
+  text-align: left;
+  color: #fff;
+  font-family: "vodafone_rgregular";
   background-repeat: no-repeat;
   margin-top: 0;
   position: relative;
-  margin-bottom: 32px;
+  background-position: center bottom;
   &:before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #333;
+    background: linear-gradient(to right, #e60000, #fff);
     left: 0;
     top: 0;
-    opacity: 0.4;
+    opacity: 0.8;
   }
 }
 .widget {
@@ -516,6 +539,49 @@
     }
   }
 }
+
+.HometabsNav {
+  padding: 0;
+  height: inherit;
+  position: absolute;
+  right: 19px;
+  top: 20px;
+  z-index: 3;
+  a {
+    display: inline-block;
+    border-radius: 5px;
+    color: #fff;
+    background: #0009;
+    margin: 2px;
+    position: relative;
+    padding: 5px 20px;
+    font-size: 1rem;
+    transition: all ease 300ms;
+    text-align: center;
+    &.active {
+      background: #e60000;
+      color: #fff !important;
+    }
+    &:hover {
+      background: #e60000;
+      color: #fff !important;
+    }
+    small {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ffffff54;
+      border-radius: 50%;
+      top: 3px;
+      right: 2px;
+      text-align: center;
+      font-size: 0.6rem;
+      color: #ffff;
+      line-height: 14px;
+    }
+  }
+}
+
 .tabsUI {
   position: relative;
 }
@@ -526,11 +592,11 @@
 .bannerTitle {
   margin: auto;
   font-family: "vodafone_ltregular";
-  color: #333;
+  color: #fff;
   position: relative;
   z-index: 2;
   text-align: left;
-  font-size: 1.8em;
+  font-size: 2.3rem;
   display: inline-block;
   padding: 6px 96px 7px 0;
 }
@@ -790,17 +856,41 @@
     }
   }
 }
-
 .commentBox {
   padding: 15px 0;
   li {
     display: block;
     border-radius: 7px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     color: #fff;
-    padding: 18px 5px 10px;
+    padding: 10px;
     position: relative;
     font-size: 13px;
+
+    small {
+      font-weight: lighter;
+      font-size: 10px;
+      position: absolute;
+      right: 14px;
+      top: 3px;
+      color: #fff;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 5px;
+      display: inline-block;
+    }
+    label {
+      color: #fff;
+      font-size: 11px;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      top: 11px;
+      margin: 0;
+    }
     span {
       font-weight: lighter;
       font-size: 10px;
@@ -809,25 +899,18 @@
       bottom: 3px;
       color: #fff;
     }
-    label {
+    h3 {
       color: #fff;
       font-size: 13px;
-      position: relative;
-      top: -5px;
+      top: 4px;
       left: 9px;
-      margin: 0;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 4px;
       border-radius: 3px;
-      i {
-        display: inline-block;
-        vertical-align: top;
-        margin-right: 5px;
-      }
+      position: relative;
+      margin: 5px 0;
     }
     pre {
       font-weight: normal;
-      font-size: 14px;
+      font-size: 13px;
       color: #fff;
       display: block;
       margin-left: 10px;
@@ -835,71 +918,20 @@
       font-family: "vodafone_rgregular";
       word-break: break-word;
       white-space: pre-wrap;
+      margin-bottom: 0;
+    }
+    &:nth-child(even) {
+      background: #607d8b;
+    }
+
+    &:nth-child(odd) {
+      background: #90a4ae;
     }
   }
 }
 
-.commentsLbl{
-  font-family: 'vodafone_rgregular';
-    font-size: 15px!important;
-    margin: 10px 2px 6px;
-    color: #000!important;
-    height: 21px;
-    font-weight: 600;
-}
-.userCommentList{
-  width: 100%;
-  // max-height: 400px;
-  // overflow-y: auto;
-  list-style: none;
-.Comment {
-  border-radius: 4px;
-  background: #fff;
-  margin-bottom: 10px;
-  -webkit-transition: all .5s;
-  transition: all .5s;
-  min-width: 50%;
-  max-width: 97%;
-  width: fit-content;
-  border: 1px solid #f7f7f7;
-  &.userComment{
-    background: #ececec40;
-  }
-  .systemComment {
-    background: #d9d9d9 !important;
-    border-color: #dbdbdb !important;
-  }
-  .CommentLbl{
-    padding: 7px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ececec;
-    margin-bottom: 5px;
-    span{
-        color: #333;
-        font-family: 'vodafone_rgregular';
-        font-weight: 700!important;
-        display: flex;
-        align-items: center;
-        i{
-          margin-right: 5px;
-          font-weight: 600;
-        }
-    }
-  }
-  .CommentContent{
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 1% 8px;
-    span{
-      font-family: 'vodafone_ltregular';
-      font-weight: 600!important;
-    }
-  }
-}
+.userComment {
+  background: #00bcd4;
 }
 .systemComment {
   background: #007c92;
@@ -1144,7 +1176,7 @@
   padding-bottom: 34px;
   ul {
     padding: 0;
-    margin: 0;
+    margin: 0 0 20px;
     li {
       color: #333;
       display: inline-block;
@@ -1206,7 +1238,6 @@
   }
   tr {
     background: #f6f6f6 !important;
-    cursor: auto !important;
     &:nth-child(odd) {
       background: #fff !important;
     }
@@ -1218,10 +1249,6 @@
   //   tr {
   //
   //   }
-}
-.commentTblIcon {
-  margin: 0 6px;
-  color: #e60000;
 }
 
 .buttonBlock {
@@ -1277,13 +1304,28 @@
 }
 
 .nodataBox {
-  background: #eceff1;
+  background: #b0bec5;
   text-align: center;
   padding: 5px;
   border-radius: 5px;
   width: 90%;
   margin: 10px auto;
   font-size: 13px;
+  color: #fff;
+}
+
+.nodataTable {
+  background: #b0bec5;
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px auto;
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  top: -43px;
+  width: 100%;
+  height: 50px;
 }
 
 .saveBtn {
@@ -1293,6 +1335,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1325,6 +1368,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1384,43 +1428,6 @@
     background: #e60000 !important ;
   }
 }
-
-.DeleteBtn {
-  background: #fff !important;
-  color: #e60000 !important;
-  position: relative;
-  margin: 10px 0 !important;
-  height: 35px;
-  padding: 10px 15px !important;
-  transition: all ease 600ms;
-  border: 1px solid #e60000;
-  span {
-    font-size: 14px;
-    transition: all ease 500ms;
-    color: #e60000;
-    font-family: "vodafone_rgregular";
-    height: 35px;
-    line-height: 39px;
-    position: relative;
-    top: 0;
-  }
-
-  i {
-    color: #e60000;
-    position: relative;
-    right: -5px;
-    top: 1px;
-    width: 25px;
-    height: 35px;
-    line-height: 35px;
-  }
-
-  &:hover {
-    box-shadow: 4px 4px 5px #ddd !important;
-
-  }
-}
-
 .cancelBtn {
   background: #e60000 !important;
   color: #fff !important;
@@ -1428,6 +1435,7 @@
   margin: 10px 0 !important;
   height: 35px;
   padding: 10px 15px !important;
+  border: none;
   transition: all ease 600ms;
   span {
     font-size: 14px;
@@ -1599,9 +1607,18 @@
       }
     }
   }
+  .Modalfooter {
+    position: relative;
+    padding: 0 11px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    button {
+      margin-left: 6px !important;
+      border: none;
+    }
+  }
   .Modalbody {
     padding: 20px;
-    border-bottom: 2px solid #eee;
     max-height: 500px;
     overflow: auto;
 
@@ -1615,7 +1632,6 @@
     }
   }
 }
-
 .exportBtn {
   background: #e60000 !important;
   color: #fff !important;
@@ -1652,37 +1668,188 @@
   }
 }
 
-.tableAction {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+@media (min-width: 320px) and (max-width: 850px) {
+  .exportBtn {
+    display: none;
+  }
+}
+button.is-disabled {
+  opacity: 0.2;
+}
+
+.nobgbox input {
+  background: #ddd !important;
+  border: none !important;
+}
+
+.privacyButton {
+  background: transparent !important;
+  color: #333 !important;
+  position: relative;
+  margin: 10px 0 !important;
+  height: 35px;
+  padding: 10px 15px !important;
+  position: absolute;
+  left: 0;
+  border: none;
+  transition: all ease 600ms;
   span {
-    width: 26px;
-    height: 26px;
-    display: inline-flex;
-    background: #e1e1e1;
-    margin-right: 5px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    padding: 0 !important;
-    cursor: pointer !important;
-    transition: all 0.5s;
-    a {
-      width: 26px;
-      height: 26px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    font-size: 14px;
+    transition: all ease 500ms;
+    color: #333;
+    font-family: "vodafone_rgregular";
+    height: 35px;
+    line-height: 39px;
+    position: relative;
+    text-decoration: underline;
+    top: 0;
+  }
+  i {
+    color: #333;
+    position: relative;
+    right: -5px;
+    top: 1px;
+    width: 25px;
+    height: 35px;
+    line-height: 35px;
+    transition: all ease 500ms;
+  }
+  &:hover {
+    box-shadow: none !important;
+
+    span {
+      color: #e60000 !important;
     }
     i {
-      color: #333 !important;
-      font-size: 13px !important;
+      color: #e60000 !important;
     }
-    &:hover {
-      background: #e60000 !important;
+  }
+}
+
+.validateMsg {
+  padding: 4px;
+  margin: 0;
+  p {
+    color: #e60000;
+    font-size: 11px;
+    line-height: normal;
+    padding-left: 17px;
+    position: relative;
+    i {
+      color: #e60000;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      padding: 0;
+    }
+  }
+}
+
+.toogleSwitch {
+  clear: both;
+  margin: 0 0 1em;
+  > label {
+    font-family: "vodafone_ltregular";
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    line-height: 20px;
+    display: block;
+    margin: 0 0 0.28571429rem;
+    font-weight: 700;
+    text-transform: none;
+  }
+  .ms-Toggle-stateText {
+    font-family: "vodafone_ltregular";
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 700;
+  }
+}
+.toogleSwitch.is-checked {
+  .ms-Toggle-background {
+    background: #e60000;
+  }
+}
+.ms-BasePicker {
+  input {
+    border: none !important;
+  }
+  .ms-BasePicker-text {
+    background: #fff;
+    border: 1px solid rgba(34, 36, 38, 0.15) !important;
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 0.28571429rem;
+    padding: 3px;
+  }
+  .ms-TagItem {
+    background: #e60000;
+    border-radius: 15px;
+    overflow: hidden;
+    color: #fff;
+    button {
+      background: #c40303;
+      &:hover {
+        background: #c40303;
+      }
+    }
+  }
+}
+.ms-Suggestions {
+  .ms-Suggestions-title {
+    color: #333;
+    font-weight: bold;
+    padding: 10px 10px 0;
+  }
+  .ms-Suggestions-container {
+    > div {
+      button {
+        margin: 2px;
+        transition: all ease 500ms;
+        div {
+          div {
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 2px 5px;
+            font-family: "vodafone_ltregular";
+          }
+        }
+      }
+    }
+  }
+
+  .tableAction {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      background: #e1e1e1;
+      margin-right: 5px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      padding: 0 !important;
+      cursor: pointer !important;
+      transition: all 0.5s;
+      a {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       i {
-        color: #fff !important;
+        color: #333 !important;
+        font-size: 13px !important;
+      }
+      &:hover {
+        background: #e60000 !important;
+        i {
+          color: #fff !important;
+        }
       }
     }
   }

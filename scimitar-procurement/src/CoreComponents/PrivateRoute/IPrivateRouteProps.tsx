@@ -1,4 +1,4 @@
-import SPGroup from "../../Models/SPGroup";
+import SPGroup from "../../Models/ClassModels/SPGroup";
 
 export default interface IPrivateRouteProps {
   allowedGroups: SPGroup[];

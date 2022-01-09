@@ -16,6 +16,13 @@ export default class MaterialRequestionItemMapper
     materialRequisitionItem.order = SPMaterialRequisitionItem.ItemOrder;
     materialRequisitionItem.quantity = SPMaterialRequisitionItem.Quantity;
     materialRequisitionItem.unit = SPMaterialRequisitionItem.Unit;
+    materialRequisitionItem.materialTag = [
+      {
+        name: SPMaterialRequisitionItem.Material.Title,
+        key: SPMaterialRequisitionItem.Material.Code,
+        materialId: SPMaterialRequisitionItem.MaterialId,
+      },
+    ];
 
     return materialRequisitionItem;
   }

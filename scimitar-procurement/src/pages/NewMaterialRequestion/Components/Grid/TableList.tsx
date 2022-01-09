@@ -9,59 +9,51 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
+import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
 
 export interface ITableListProps {
   activeSites?: any[];
   activeTab?: string;
-  registrations: any[];
-  onSubmit: (itemId) => void;
-  onDelete: (item: any) => void;
+  items: MaterialRequestionItem[];
+  onDelete: (item: any, index: number) => void;
+  onItemClick: (item: any, index: number) => void;
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
-  function onDeleteHandler(item: any): void {
-    props.onDelete(item);
+  function onDeleteHandler(item: any, index: number): void {
+    props.onDelete(item, index);
   }
-
-  const onSubmitHandler = (itemId) => {
-    props.onSubmit(itemId);
-  };
 
   SPComponentLoader.loadCss(
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
   );
   const generateTableRows = (): any[] => {
-    const rows = props.registrations.map((registration) => {
+    const rows = props.items.map((item, index) => {
       return {
-        requestCode: registration.requestCode,
-        title: registration.thirdPartyCompanyName,
-        representativeType: registration.representativeType,
-        representativeName: registration.representativeName,
-        dateOfRecording: registration.dateOfRecording.toDateString(),
-        marketReviewDate:
-          registration.marketReviewDate &&
-          registration.marketReviewDate.getFullYear() > 2020
-            ? registration.marketReviewDate.toDateString()
-            : "",
-        localMarket: registration.localMarket,
+        order: item.order,
+        code: item.code,
+        description: item.description,
+        unit: item.unit,
+        quantity: item.quantity,
+
         actions: (
           <div className={styles.tableAction}>
             <span>
               {" "}
-              <Link to={`/registration/edit/${registration.id}`}>
+              <span onClick={() => props.onItemClick(item, index)}>
                 <Icon iconName="Edit" />
-              </Link>
+              </span>
             </span>
-            <span onClick={() => onDeleteHandler(registration)}>
+            <span onClick={() => onDeleteHandler(item, index)}>
               {" "}
               <Icon iconName="Delete" />
             </span>
-            <span>
+            {/* <span>
               {" "}
-              <Link to={`/registration/view/${registration.id}`}>
+              <Link to={`/registration/view/${item.order}`}>
                 <Icon iconName="View" />
               </Link>
-            </span>
+            </span> */}
           </div>
         ),
       };
@@ -73,14 +65,32 @@ export const TableList: React.FC<ITableListProps> = (props) => {
   const dataTableList = {
     columns: [
       {
-        label: "Request Code",
-        field: "requestCode",
+        label: "#",
+        field: "order",
         sort: "asc",
         width: 150,
       },
       {
-        label: "Third party company name",
-        field: "title",
+        label: "Material Code",
+        field: "code",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Description",
+        field: "description",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Unit",
+        field: "unit",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Quantity",
+        field: "quantity",
         sort: "asc",
         width: 150,
       },

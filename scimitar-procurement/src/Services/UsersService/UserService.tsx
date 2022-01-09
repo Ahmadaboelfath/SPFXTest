@@ -1,10 +1,14 @@
 import { ServiceKey, ServiceScope } from "@microsoft/sp-core-library";
-import User from "../../Models/User";
+import User from "../../Models/ClassModels/User";
 import IUserService from "./IUserService";
 import { SPHttpClient } from "@microsoft/sp-http";
 import { PageContext } from "@microsoft/sp-page-context";
 import IUserMapper from "../../Mappers/UserMapper/IUserMapper";
 import UserMapper from "../../Mappers/UserMapper/UserMapper";
+import { sp } from "@pnp/sp";
+import "@pnp/sp/profiles";
+import "@pnp/sp/webs";
+import "@pnp/sp/site-users/web";
 
 export default class UserService implements IUserService {
   public static readonly userServiceKey: ServiceKey<IUserService> =
@@ -29,9 +33,15 @@ export default class UserService implements IUserService {
         requestUrl,
         SPHttpClient.configurations.v1
       );
+
       if (response.status === 200) {
         const jsonResponse = await response.json();
-        return this._mapper.mapFromSpUserToUser(jsonResponse);
+        const profile = await sp.profiles.myProperties.get();
+        console.log(profile);
+        return this._mapper.mapFromSpUserToUser(
+          profile.UserProfileProperties,
+          jsonResponse
+        );
       } else {
         throw new Error("failed to retrieve the current user data");
       }

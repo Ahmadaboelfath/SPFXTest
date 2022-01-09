@@ -1,10 +1,11 @@
-import { ITag } from "office-ui-fabric-react";
+import { IBasePickerSuggestionsProps, ITag } from "office-ui-fabric-react";
 
 export default interface ITagPickerProps {
-  controlPropName: string;
+  controlName: string;
   multiple: boolean;
   label: string;
   errorMessage: string;
+  pickerSuggestionsProps: IBasePickerSuggestionsProps;
   onResolveSuggestions: (filter, selectedItem) => ITag[] | PromiseLike<ITag[]>;
   onChange: (selectedItem: ITag[], controlPropName: string) => void;
   selectedValue?: ITag[];

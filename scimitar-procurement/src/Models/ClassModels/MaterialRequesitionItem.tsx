@@ -1,4 +1,25 @@
+import IMaterialTag from "../InterfaceModels/IMaterialTag";
+
 export default class MaterialRequestionItem {
+  constructor(item?: MaterialRequestionItem) {
+    this.quantity = 0;
+    this.materialTag = [];
+    this.description = "";
+    this.materialId = 0;
+    this.code = "";
+
+    if (item) {
+      this._code = item.code;
+      this._description = item.description;
+      this._id = item.id;
+      this._materialId = item._materialId;
+      this._materialRequisitionId = item.materialRequisitionId;
+      this._order = item.order;
+      this._quantity = item.quantity;
+      this._unit = item.unit;
+      this._materialTag = item.materialTag;
+    }
+  }
   private _id: string;
   public get id(): string {
     return this._id;
@@ -61,5 +82,13 @@ export default class MaterialRequestionItem {
   }
   public set materialRequisitionId(v: number) {
     this._materialRequisitionId = v;
+  }
+
+  private _materialTag: IMaterialTag[];
+  public get materialTag(): IMaterialTag[] {
+    return this._materialTag;
+  }
+  public set materialTag(v: IMaterialTag[]) {
+    this._materialTag = v;
   }
 }

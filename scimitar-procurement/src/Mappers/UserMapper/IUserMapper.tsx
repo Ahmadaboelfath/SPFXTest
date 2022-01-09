@@ -1,5 +1,5 @@
-import User from "../../Models/User";
+import User from "../../Models/ClassModels/User";
 
 export default interface IUserMapper {
-  mapFromSpUserToUser(SPUser: any): User;
+  mapFromSpUserToUser(SPUserProperties: any[], SPUser: any): User;
 }

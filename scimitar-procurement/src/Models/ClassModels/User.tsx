@@ -5,36 +5,12 @@ export default class User {
     this._groups = userGroups && userGroups.length > 0 ? userGroups : [];
   }
 
-  private _userName: string;
-  public get userName(): string {
-    return this._userName;
+  private _userProperties: any;
+  public get userProperties(): any {
+    return this._userProperties;
   }
-  public set userName(v: string) {
-    this._userName = v;
-  }
-
-  private _displayName: string;
-  public get displayName(): string {
-    return this._displayName;
-  }
-  public set displayName(v: string) {
-    this._displayName = v;
-  }
-
-  private _email: string;
-  public get email(): string {
-    return this._email;
-  }
-  public set email(v: string) {
-    this._email = v;
-  }
-
-  private _department: string;
-  public get department(): string {
-    return this._department;
-  }
-  public set department(v: string) {
-    this._department = v;
+  public set userProperties(v: any) {
+    this._userProperties = v;
   }
 
   private _groups: SPGroup[];

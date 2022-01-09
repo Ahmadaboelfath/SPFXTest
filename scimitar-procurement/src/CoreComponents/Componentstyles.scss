@@ -332,7 +332,7 @@
   }
 }
 .banner {
-  background: url("../Assets/images/banner.jpg") #fff;
+  // background: url("../Assets/images/banner.jpg") #fff;
   width: 100%;
   background-size: cover;
   padding: 60px 0;
@@ -1772,12 +1772,12 @@ button.is-disabled {
 }
 .ms-BasePicker {
   input {
-    border:none !important
+    border: none !important;
   }
   .ms-BasePicker-text {
     background: #fff;
-    border: 1px solid rgba(34,36,38,.15) !important;
-    color: rgba(0,0,0,.87);
+    border: 1px solid rgba(34, 36, 38, 0.15) !important;
+    color: rgba(0, 0, 0, 0.87);
     border-radius: 0.28571429rem;
     padding: 3px;
   }

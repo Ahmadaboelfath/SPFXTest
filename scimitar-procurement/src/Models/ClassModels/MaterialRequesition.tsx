@@ -2,9 +2,26 @@ export default class MaterialRequesition {
   /**
    *
    */
-  constructor(id?: number, date?: string) {
+  constructor(
+    id?: number,
+    date?: string,
+    materialRequesition?: MaterialRequesition
+  ) {
     this.requestDate = date ? new Date(date) : new Date();
     this.id = id ? id : 0;
+    this._department = "Admin";
+    if (materialRequesition) {
+      this._currency = materialRequesition.currency;
+      this._department = materialRequesition.department;
+      this._id = materialRequesition.id;
+      this._priority = materialRequesition.priority;
+      this._requestCode = materialRequesition.requestCode;
+      this._requestDate = materialRequesition.requestDate;
+      this._requestedBy = materialRequesition.requestedBy;
+      this._requesterEmail = materialRequesition.requesterEmail;
+      this._status = materialRequesition.status;
+      this._useFor = materialRequesition.useFor;
+    }
   }
 
   private _id: number;
