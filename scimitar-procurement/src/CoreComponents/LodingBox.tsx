@@ -6,9 +6,15 @@ interface loadingProps {
 
 export const LoadingBoxComponent: React.FC<loadingProps> = (props) => {
   return (
-    <div className="ui segment">
-      <div className="ui active loader"></div>
-      <p></p>
+    <div
+      className={
+        props.childLoader == true
+          ? "loadingBox loadingBoxcontainer"
+          : "loadingBox"
+      }
+    >
+      <div></div>
+      <div></div>
     </div>
   );
 };

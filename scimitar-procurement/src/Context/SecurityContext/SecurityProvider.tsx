@@ -21,6 +21,7 @@ class SecurityProvider extends React.Component<any, SecurityProviderState> {
 
   componentDidMount(): void {
     this._securityBusinessLogic.getCurrentUserDetails().then((user) => {
+      console.log(user);
       this.setState((prevState) => {
         const newState = { ...prevState };
         newState.user = user;

@@ -19,7 +19,7 @@ export default class MaterialRequisitionMapper
     materialRequisition.priority = SPMaterialRequisitionItem.Priority;
     materialRequisition.requestedBy = SPMaterialRequisitionItem.RequestedBy;
     materialRequisition.useFor = SPMaterialRequisitionItem.UseFor;
-    materialRequisition.requestCode = SPMaterialRequisitionItem.RequestCode;
+    materialRequisition.requestCode = SPMaterialRequisitionItem.Title;
     materialRequisition.status = SPMaterialRequisitionItem.Status;
     materialRequisition.requesterEmail =
       SPMaterialRequisitionItem.RequesterEmail;

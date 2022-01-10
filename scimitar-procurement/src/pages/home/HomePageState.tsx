@@ -1,1 +1,4 @@
-export default interface HomePageState {}
+export default interface HomePageState {
+  welcomeMessage: string;
+  Fullheight: number;
+}

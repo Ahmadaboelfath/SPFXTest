@@ -18,9 +18,13 @@ import PrivateRoute from "../../../CoreComponents/PrivateRoute/PrivateRoute";
 import SPGroup from "../../../Models/ClassModels/SPGroup";
 import DevWorkBench from "../../../pages/DevWorkbench/DevWorkBench";
 import "semantic-ui-css/semantic.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "../../../CoreComponents/ComponentStyles.scss";
+import MaterialRequistionApproval from "../../../pages/MaterialRequistionApproval/MaterialRequistionApproval";
+import IProcurementAppState from "./IProcurementAppState";
+import "./custom.scss";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
@@ -29,39 +33,60 @@ const MyRequests = React.lazy(() => {
 
 export default class ProcurementApp extends React.Component<
   IProcurementAppProps,
-  {}
+  IProcurementAppState
 > {
+  constructor(props) {
+    super(props);
+  }
+
+  public componentWillMount() {
+    const PageDiv = document.querySelector(".ms-SPLegacyFabricBlock");
+    const PageDivHeight = (PageDiv as HTMLElement).offsetParent;
+    this.setState({ fullheight: (PageDivHeight as HTMLElement).offsetHeight });
+  }
   public render(): React.ReactElement<IProcurementAppProps> {
     return (
-      <Router>
-        <SecurityProvider>
-          <Switch>
-            <PrivateRoute
-              path="/NewMaterialRequesition"
-              allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
-            >
-              <NewMaterialRequestionPage />
-            </PrivateRoute>
-            {/* <Route
+      <div className={styles.app} id="appMaster">
+        <div className="wrapper">
+          <Router>
+            <SecurityProvider>
+              <div style={{ minHeight: this.state.fullheight - 50 }}>
+                <Switch>
+                  <PrivateRoute
+                    path="/NewMaterialRequesition"
+                    allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
+                  >
+                    <NewMaterialRequestionPage />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/MaterialRequestApproval/:id"
+                    allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
+                  >
+                    <MaterialRequistionApproval />
+                  </PrivateRoute>
+                  {/* <Route
               path="/NewMaterialRequestion"
               render={() => <NewMaterialRequestionPage />}
             /> */}
-            <Route
-              path="/MyRequests"
-              render={() => (
-                <React.Suspense fallback={<div>Loading...</div>}>
-                  <MyRequests />
-                </React.Suspense>
-              )}
-            />
-            <Route path="/AccessDenied" render={() => <NotAllowed />} />
-            <Route path="/dev" exact render={() => <DevWorkBench />} />
-            <Route path="/" exact render={() => <HomePage />} />
+                  <Route
+                    path="/MyRequests"
+                    render={() => (
+                      <React.Suspense fallback={<div>Loading...</div>}>
+                        <MyRequests />
+                      </React.Suspense>
+                    )}
+                  />
+                  <Route path="/AccessDenied" render={() => <NotAllowed />} />
+                  <Route path="/dev" exact render={() => <DevWorkBench />} />
+                  <Route path="/" exact render={() => <HomePage />} />
 
-            <Route render={() => <ErrorPage />} />
-          </Switch>
-        </SecurityProvider>
-      </Router>
+                  <Route render={() => <ErrorPage />} />
+                </Switch>
+              </div>
+            </SecurityProvider>
+          </Router>
+        </div>
+      </div>
     );
   }
 }
