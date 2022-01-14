@@ -25,10 +25,15 @@ import "../../../CoreComponents/ComponentStyles.scss";
 import MaterialRequistionApproval from "../../../pages/MaterialRequistionApproval/MaterialRequistionApproval";
 import IProcurementAppState from "./IProcurementAppState";
 import "./custom.scss";
+import { LoadingBoxComponent } from "../../../CoreComponents/LodingBox";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
   return import("../../../pages/MyRequests/MyRequests");
+});
+
+const MyApprovals = React.lazy(() => {
+  return import("../../../pages/MyApprovals/MyApprovals");
 });
 
 export default class ProcurementApp extends React.Component<
@@ -71,8 +76,16 @@ export default class ProcurementApp extends React.Component<
                   <Route
                     path="/MyRequests"
                     render={() => (
-                      <React.Suspense fallback={<div>Loading...</div>}>
+                      <React.Suspense fallback={<LoadingBoxComponent />}>
                         <MyRequests />
+                      </React.Suspense>
+                    )}
+                  />
+                  <Route
+                    path="/MyApprovals"
+                    render={() => (
+                      <React.Suspense fallback={<LoadingBoxComponent />}>
+                        <MyApprovals />
                       </React.Suspense>
                     )}
                   />

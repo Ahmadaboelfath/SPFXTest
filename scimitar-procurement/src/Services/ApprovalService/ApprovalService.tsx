@@ -16,6 +16,29 @@ export default class ApprovalService implements IApprovalService {
     this._listName = "Approvals";
     this._mapper = new ApprovalMapper();
   }
+  async getApprovalsForCurrentLoggedInUser(
+    userEmail: string
+  ): Promise<Approval[]> {
+    try {
+      const approvalItems = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.filter(`Title eq '${userEmail}' and Status eq 'Pending'`)
+        .expand(
+          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        )
+        .select(
+          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        )
+        .get();
+
+      return approvalItems.map((approval) =>
+        this._mapper.mapFromSPApprovalToApproval(approval)
+      );
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
 
   async getApprovalsByMaterialRequesitionId(
     requisitionId: number
@@ -24,6 +47,12 @@ export default class ApprovalService implements IApprovalService {
       const items = await sp.web.lists
         .getByTitle(this._listName)
         .items.filter(`MaterialRequisitionId eq ${requisitionId}`)
+        .expand(
+          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        )
+        .select(
+          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        )
         .get();
 
       if (items.length > 0) {
@@ -43,6 +72,12 @@ export default class ApprovalService implements IApprovalService {
     const approvalItem = await sp.web.lists
       .getByTitle(this._listName)
       .items.getById(id)
+      .expand(
+        "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+      )
+      .select(
+        "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+      )
       .get();
 
     return this._mapper.mapFromSPApprovalToApproval(approvalItem);
@@ -62,11 +97,6 @@ export default class ApprovalService implements IApprovalService {
         ApprovalActionExecutor: userEmail,
       });
 
-    const approvalItem = await sp.web.lists
-      .getByTitle(this._listName)
-      .items.getById(id)
-      .get();
-
-    return this._mapper.mapFromSPApprovalToApproval(approvalItem);
+    return await this.getApprovalById(id);
   }
 }

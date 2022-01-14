@@ -11,6 +11,10 @@ export default class ApprovalMapper implements IApprovalMapper {
       : null;
     approval.approvalActionExecutor = SPApproval.ApprovalActionExecutor;
     approval.materialRequesitionId = SPApproval.MaterialRequisitionId;
+    approval.materialRequistionCode = SPApproval.MaterialRequisition.Title;
+    approval.priority = SPApproval.MaterialRequisition.PriorityValue;
+    approval.department = SPApproval.MaterialRequisition.Department;
+    approval.requester = SPApproval.MaterialRequisition.RequesterEmail;
 
     return approval;
   }

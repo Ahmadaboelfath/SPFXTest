@@ -72,8 +72,8 @@ class HomePage extends React.Component<
                       <Icon iconName="NewFolder" />
                     </Link>
 
-                    <Link to="/MaterialRequestApproval/11">
-                      <span>Approve Request</span>
+                    <Link to="/MyApprovals">
+                      <span>My Approval</span>
                       <Icon iconName="ComplianceAudit" />
                     </Link>
                   </div>

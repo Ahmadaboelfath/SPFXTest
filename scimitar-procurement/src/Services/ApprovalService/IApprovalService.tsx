@@ -10,4 +10,6 @@ export default interface IApprovalService {
     status: string,
     userEmail: string
   ): Promise<Approval>;
+
+  getApprovalsForCurrentLoggedInUser(userEmail: string): Promise<Approval[]>;
 }

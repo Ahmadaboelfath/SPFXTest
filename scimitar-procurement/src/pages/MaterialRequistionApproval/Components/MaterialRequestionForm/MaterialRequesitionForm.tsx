@@ -47,52 +47,72 @@ export default class MaterialRequesitionForm extends React.Component<
             this.props.errors && this.props.errors["requestedBy"] ? true : false
           }
         />
-
-        <Dropdown
-          Required={true}
-          ctrlName="priority"
-          disabled={this.props.disabled}
-          handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
-          }
-          label="Priority"
-          options={[
-            { text: "Standard", value: "Standard" },
-            { text: "Urgent", value: "Urgent" },
-          ]}
-          errorMessage={
-            this.props.errors && this.props.errors["priority"]
-              ? this.props.errors["priority"]
-              : ""
-          }
-          showError={
-            this.props.errors && this.props.errors["priority"] ? true : false
-          }
-          value={this.props.viewModel.priority}
-        />
-
-        <Dropdown
-          Required={true}
-          ctrlName="currency"
-          disabled={this.props.disabled}
-          handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
-          }
-          label="Currency"
-          options={[
-            { text: "USD", value: "USD" },
-            { text: "EGP", value: "EGP" },
-          ]}
-          errorMessage={
-            this.props.errors && this.props.errors["currency"]
-              ? this.props.errors["currency"]
-              : ""
-          }
-          showError={
-            this.props.errors && this.props.errors["currency"] ? true : false
-          }
-          value={this.props.viewModel.currency}
-        />
+        {this.props.disabled ? (
+          <Textbox
+            Required={true}
+            ctrlName="priority"
+            handleInputChange={() => null}
+            label="priority"
+            value={this.props.viewModel.priority}
+            disabled={this.props.disabled}
+          />
+        ) : (
+          <Dropdown
+            Required={true}
+            ctrlName="priority"
+            disabled={this.props.disabled}
+            handleInputChange={(value, ctrlName) =>
+              this.props.onChange(value, ctrlName)
+            }
+            label="Priority"
+            options={[
+              { text: "Standard", value: "Standard" },
+              { text: "Urgent", value: "Urgent" },
+            ]}
+            errorMessage={
+              this.props.errors && this.props.errors["priority"]
+                ? this.props.errors["priority"]
+                : ""
+            }
+            showError={
+              this.props.errors && this.props.errors["priority"] ? true : false
+            }
+            value={this.props.viewModel.priority}
+          />
+        )}
+        {this.props.disabled ? (
+          <Textbox
+            Required={true}
+            ctrlName="currency"
+            handleInputChange={() => null}
+            label="Currency"
+            value={this.props.viewModel.currency}
+            disabled={this.props.disabled}
+          />
+        ) : (
+          <Dropdown
+            Required={true}
+            ctrlName="currency"
+            disabled={this.props.disabled}
+            handleInputChange={(value, ctrlName) =>
+              this.props.onChange(value, ctrlName)
+            }
+            label="Currency"
+            options={[
+              { text: "USD", value: "USD" },
+              { text: "EGP", value: "EGP" },
+            ]}
+            errorMessage={
+              this.props.errors && this.props.errors["currency"]
+                ? this.props.errors["currency"]
+                : ""
+            }
+            showError={
+              this.props.errors && this.props.errors["currency"] ? true : false
+            }
+            value={this.props.viewModel.currency}
+          />
+        )}
 
         <Textbox
           label="Use For"
