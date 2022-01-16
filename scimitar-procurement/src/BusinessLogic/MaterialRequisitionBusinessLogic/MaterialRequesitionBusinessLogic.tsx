@@ -19,26 +19,12 @@ export default class MaterialRequesitionBusinessLogic
     this._materialRequesitionItemService = new MaterialRequisitionItemService();
     this._materialRequesitionService = new MaterialRequesitionService();
   }
-  async getMaterialRequisitionById(
-    id: number
-  ): Promise<MaterialRequesitionFormViewModel> {
-    const materialRequesition =
-      await this._materialRequesitionService.getMaterialRequesitionById(id);
-    const materialItems =
-      await this._materialRequesitionItemService.getMaterialRequesitionItemsByRequesitionId(
-        id
-      );
-    const viewModel = new MaterialRequesitionFormViewModel();
-    viewModel.materialItems = materialItems;
-    viewModel.materialRequesition = materialRequesition;
-    return viewModel;
-  }
-
-  async addMaterialRequisition(
+  async addMR(
     materialRequesitionFormViewModel: MaterialRequesitionFormViewModel
   ): Promise<MaterialRequesitionFormViewModel> {
     const addedRequisition = await this._materialRequesitionService.addRequest(
-      materialRequesitionFormViewModel.materialRequesition
+      materialRequesitionFormViewModel.materialRequesition,
+      "MR"
     );
 
     const generatedRequestCode =
@@ -64,5 +50,51 @@ export default class MaterialRequesitionBusinessLogic
     updatedModel.materialRequesition = addedRequisition;
 
     return updatedModel;
+  }
+  async addSR(
+    materialRequesitionFormViewModel: MaterialRequesitionFormViewModel
+  ): Promise<MaterialRequesitionFormViewModel> {
+    const addedRequisition = await this._materialRequesitionService.addRequest(
+      materialRequesitionFormViewModel.materialRequesition,
+      "SR"
+    );
+
+    const generatedRequestCode =
+      await this._materialRequesitionService.generateRequestCode(
+        addedRequisition.id
+      );
+
+    const itemsAdded = await Promise.all(
+      materialRequesitionFormViewModel.materialItems.map(async (item) => {
+        item.materialRequisitionId = addedRequisition.id;
+        const addedItem =
+          await this._materialRequesitionItemService.addMaterialRequesitionItem(
+            item
+          );
+
+        return addedItem;
+      })
+    );
+
+    const updatedModel = new MaterialRequesitionFormViewModel();
+    addedRequisition.requestCode = generatedRequestCode;
+    updatedModel.materialItems = itemsAdded;
+    updatedModel.materialRequesition = addedRequisition;
+
+    return updatedModel;
+  }
+  async getMaterialRequisitionById(
+    id: number
+  ): Promise<MaterialRequesitionFormViewModel> {
+    const materialRequesition =
+      await this._materialRequesitionService.getMaterialRequesitionById(id);
+    const materialItems =
+      await this._materialRequesitionItemService.getMaterialRequesitionItemsByRequesitionId(
+        id
+      );
+    const viewModel = new MaterialRequesitionFormViewModel();
+    viewModel.materialItems = materialItems;
+    viewModel.materialRequesition = materialRequesition;
+    return viewModel;
   }
 }

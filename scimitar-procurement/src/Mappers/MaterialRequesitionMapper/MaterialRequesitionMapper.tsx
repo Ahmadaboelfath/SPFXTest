@@ -27,7 +27,8 @@ export default class MaterialRequisitionMapper
     return materialRequisition;
   }
   mapFromMaterialRequesitionToSPMaterialRequisition(
-    materialRequsition: MaterialRequesition
+    materialRequsition: MaterialRequesition,
+    requestType: string
   ) {
     return {
       Title: materialRequsition.requestCode,
@@ -39,6 +40,7 @@ export default class MaterialRequisitionMapper
       Currency: materialRequsition.currency,
       Status: materialRequsition.status,
       RequesterEmail: materialRequsition.requesterEmail,
+      RequestType: requestType,
     };
   }
 }

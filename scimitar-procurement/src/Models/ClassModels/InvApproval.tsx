@@ -8,6 +8,14 @@ export default class InvApproval {
     return this._id;
   }
 
+  private _requestType: string;
+  public get requestType(): string {
+    return this._requestType;
+  }
+  public set requestType(v: string) {
+    this._requestType = v;
+  }
+
   private _materialRequesitionId: number;
   public get materialRequesitionId(): number {
     return this._materialRequesitionId;

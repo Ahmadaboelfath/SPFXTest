@@ -46,11 +46,13 @@ export default class MaterialRequesitionService
   }
 
   async addRequest(
-    materialRequesition: MaterialRequesition
+    materialRequesition: MaterialRequesition,
+    requestType: string
   ): Promise<MaterialRequesition> {
     const toBeAdded =
       this._mapper.mapFromMaterialRequesitionToSPMaterialRequisition(
-        materialRequesition
+        materialRequesition,
+        requestType
       );
     const materialRequesitionItem: IItemAddResult = await sp.web.lists
       .getByTitle(this._listName)

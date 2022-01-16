@@ -8,6 +8,7 @@ export default interface IMaterialRequisitionMapper {
   ): MaterialRequesition;
 
   mapFromMaterialRequesitionToSPMaterialRequisition(
-    materialRequsitionFormViewModel: MaterialRequesition
+    materialRequsitionFormViewModel: MaterialRequesition,
+    requestType: string
   );
 }

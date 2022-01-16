@@ -21,7 +21,16 @@ export default class MaterialRequesition {
       this._requesterEmail = materialRequesition.requesterEmail;
       this._status = materialRequesition.status;
       this._useFor = materialRequesition.useFor;
+      this._requestType = materialRequesition.requestType;
     }
+  }
+
+  private _requestType: string;
+  public get requestType(): string {
+    return this._requestType;
+  }
+  public set requestType(v: string) {
+    this._requestType = v;
   }
 
   private _id: number;

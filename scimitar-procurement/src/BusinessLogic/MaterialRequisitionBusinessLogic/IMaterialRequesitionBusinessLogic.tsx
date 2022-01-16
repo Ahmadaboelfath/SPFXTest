@@ -1,7 +1,11 @@
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 
 export default interface IMaterialRequesitionBusinessLogic {
-  addMaterialRequisition(
+  addMR(
+    materialRequesitionFormViewModel: MaterialRequesitionFormViewModel
+  ): Promise<MaterialRequesitionFormViewModel>;
+
+  addSR(
     materialRequesitionFormViewModel: MaterialRequesitionFormViewModel
   ): Promise<MaterialRequesitionFormViewModel>;
 

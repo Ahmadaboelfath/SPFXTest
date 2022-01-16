@@ -9,10 +9,12 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
-import InvApproval from "../../../../Models/ClassModels/InvApproval";
+import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
 
 export interface ITableListProps {
-  materialRequesitionsApprovals: InvApproval[];
+  activeSites?: any[];
+  activeTab?: string;
+  items: MaterialRequestionItem[];
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
@@ -20,20 +22,14 @@ export const TableList: React.FC<ITableListProps> = (props) => {
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
   );
   const generateTableRows = (): any[] => {
-    const rows = props.materialRequesitionsApprovals.map((approval) => {
+    const sortedRows = props.items.sort((a, b) => a.order - b.order);
+    const rows = sortedRows.map((item, index) => {
       return {
-        title: (
-          <Link
-            to={`MaterialRequestInvApproval/${approval.id}`}
-            style={{ textDecoration: "Underline" }}
-          >
-            {approval.materialRequistionCode}
-          </Link>
-        ),
-        department: approval.department,
-        requester: approval.requester,
-        priority: approval.priority,
-        requestType: approval.requestType,
+        order: item.order,
+        code: item.code,
+        description: item.description,
+        unit: item.unit,
+        quantity: item.quantity,
       };
     });
 
@@ -43,34 +39,33 @@ export const TableList: React.FC<ITableListProps> = (props) => {
   const dataTableList = {
     columns: [
       {
-        label: "Request Code",
-        field: "title",
+        label: "#",
+        field: "order",
         sort: "asc",
         width: 150,
       },
       {
-        label: "Requester",
-        field: "requester",
+        label: "Material Code",
+        field: "code",
         sort: "asc",
         width: 150,
       },
-
       {
-        label: "Department",
-        field: "department",
-        sort: "disabled",
+        label: "Description",
+        field: "description",
+        sort: "asc",
         width: 150,
       },
       {
-        label: "Request Type",
-        field: "requestType",
-        sort: "disabled",
+        label: "Unit",
+        field: "unit",
+        sort: "asc",
         width: 150,
       },
       {
-        label: "Priority",
-        field: "priority",
-        sort: "disabled",
+        label: "Quantity",
+        field: "quantity",
+        sort: "asc",
         width: 150,
       },
     ],

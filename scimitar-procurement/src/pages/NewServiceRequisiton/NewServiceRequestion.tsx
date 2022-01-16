@@ -19,8 +19,8 @@ import MaterialService from "../../Services/MaterialService/MaterialService";
 import { TableList } from "./Components/Grid/TableList";
 import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
-import NewMaterialRequestionProps from "./NewMaterialRequestionProps";
-import NewMaterialRequestionState from "./NewMaterialRequestionState";
+import NewServiceRequestionProps from "./NewServiceRequestionProps";
+import NewServiceRequestionState from "./NewServiceRequestionState";
 import styles from "../../CoreComponents/Componentstyles.module.scss";
 import { matrialItemsData } from "./DummyData/DummyMaterialRequisitionItemData";
 import IMaterialTag from "../../Models/InterfaceModels/IMaterialTag";
@@ -29,9 +29,9 @@ import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequi
 import MaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/MaterialRequesitionBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 
-class NewMaterialRequestion extends React.Component<
-  RouteComponentProps<NewMaterialRequestionProps>,
-  NewMaterialRequestionState
+class NewServiceRequestion extends React.Component<
+  RouteComponentProps<NewServiceRequestionProps>,
+  NewServiceRequestionState
 > {
   private readonly _materialService: IMaterialService;
   private readonly _materialRequistionBusinessLogic: IMaterialRequesitionBusinessLogic;
@@ -52,7 +52,6 @@ class NewMaterialRequestion extends React.Component<
       dialogMessage: "Are you sure you want to submit this request ?",
       dialogTitle: "Submit MR-Request",
       subFormModel: new MaterialRequestionItem(),
-      searchAction: (filter, item) => this.onCodeSearch(filter, item),
       subFormInEditMode: false,
       currentlyEditingIndex: null,
     };
@@ -108,32 +107,6 @@ class NewMaterialRequestion extends React.Component<
     });
   }
 
-  toggleSearchPicker(): void {
-    const searchByCode = !this.state.searchByCode;
-
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.searchByCode = searchByCode;
-      newState.subFormModel = new MaterialRequestionItem();
-      if (searchByCode) {
-        newState.searchAction = (filter, item) =>
-          this.onCodeSearch(filter, item);
-      } else {
-        newState.searchAction = (filter, item) =>
-          this.onDescriptionSearch(filter, item);
-      }
-      newState.subFormModel.order =
-        prevState.viewModel.materialItems.length + 1;
-      return newState;
-    });
-  }
-  onCodeSearch(
-    filter: string,
-    selectedItem: ITag[]
-  ): ITag[] | PromiseLike<ITag[]> {
-    return this._materialService.searchMaterialByCode(filter);
-  }
-
   onDescriptionSearch(
     filter: string,
     selectedItem: ITag[]
@@ -151,7 +124,9 @@ class NewMaterialRequestion extends React.Component<
           prevState.subFormModel
         );
         if (controlValue.length > 0) {
-          newSubFormModel.code = controlValue[0].key.toString();
+          newSubFormModel.code = controlValue[0].key
+            ? controlValue[0].key.toString()
+            : "";
           newSubFormModel.description = controlValue[0].name;
           newSubFormModel.materialId = controlValue[0].materialId;
           newState.subFormModel = newSubFormModel;
@@ -256,9 +231,9 @@ class NewMaterialRequestion extends React.Component<
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.showConfrimationDialog = true;
-      newState.dialogTitle = "Submitting Material Requeisition";
+      newState.dialogTitle = "Submitting Service Requeisition";
       newState.dialogMessage =
-        "Are you sure you want to submit this material requesition";
+        "Are you sure you want to submit this Service requesition";
       newState.dialogConfirmationAction = () => this.submitForm();
       return newState;
     });
@@ -271,7 +246,7 @@ class NewMaterialRequestion extends React.Component<
       return newState;
     });
     this._materialRequistionBusinessLogic
-      .addMR(this.state.viewModel)
+      .addSR(this.state.viewModel)
       .then((value) => {
         this.setState((prevState) => {
           const newState = { ...prevState };
@@ -359,7 +334,7 @@ class NewMaterialRequestion extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="New Material Requistion" />
+            <BannerComponent PageTitle="New Service Requistion" />
             <MDBContainer className="pageContent">
               <Accordion title="Request Details" collapsed={false}>
                 <MDBRow>
@@ -376,7 +351,7 @@ class NewMaterialRequestion extends React.Component<
                   </MDBCol>
                 </MDBRow>
               </Accordion>
-              <Accordion title="Material Requesition Items" collapsed={false}>
+              <Accordion title="Service Requesition Items" collapsed={false}>
                 <MDBRow>
                   <MDBCol>
                     <DefaultButton
@@ -407,14 +382,9 @@ class NewMaterialRequestion extends React.Component<
                           count={(
                             this.state.viewModel.materialItems.length + 1
                           ).toString()}
-                          onSearch={
-                            this.state.searchByCode
-                              ? (filter, selectedItem) =>
-                                  this.onCodeSearch(filter, selectedItem)
-                              : (filter, selectedItem) =>
-                                  this.onDescriptionSearch(filter, selectedItem)
+                          onSearch={(filter, selectedItem) =>
+                            this.onDescriptionSearch(filter, selectedItem)
                           }
-                          toggleSearchPicker={() => this.toggleSearchPicker()}
                           viewModel={this.state.subFormModel}
                           searchByCode={this.state.searchByCode}
                           onChange={(value, controlName) =>
@@ -484,4 +454,4 @@ class NewMaterialRequestion extends React.Component<
   }
 }
 
-export default withRouter(NewMaterialRequestion);
+export default withRouter(NewServiceRequestion);

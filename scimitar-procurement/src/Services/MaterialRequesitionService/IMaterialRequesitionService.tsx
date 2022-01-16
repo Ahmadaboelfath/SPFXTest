@@ -2,7 +2,8 @@ import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
 
 export default interface IMaterialRequesitionService {
   addRequest(
-    materialRequesition: MaterialRequesition
+    materialRequesition: MaterialRequesition,
+    requestType: string
   ): Promise<MaterialRequesition>;
 
   generateRequestCode(materialRequesitionId: number): Promise<string>;

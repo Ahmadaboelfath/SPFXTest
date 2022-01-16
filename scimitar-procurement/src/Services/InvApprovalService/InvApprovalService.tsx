@@ -4,8 +4,8 @@ import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
-import IApprovalMapper from "../../Mappers/InvApprovalMapper/IApprovalMapper";
-import ApprovalMapper from "../../Mappers/InvApprovalMapper/IInvApprovalMapper";
+import IApprovalMapper from "../../Mappers/InvApprovalMapper/IInvApprovalMapper";
+import ApprovalMapper from "../../Mappers/InvApprovalMapper/InvApprovalMapper";
 import { IItemUpdateResult } from "@pnp/sp/items";
 
 export default class InvApprovalService implements IApprovalService {
@@ -24,10 +24,10 @@ export default class InvApprovalService implements IApprovalService {
         .getByTitle(this._listName)
         .items.filter(`Title eq '${userEmail}' and Status eq 'Pending'`)
         .expand(
-          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
         .select(
-          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
         .get();
 
@@ -48,10 +48,10 @@ export default class InvApprovalService implements IApprovalService {
         .getByTitle(this._listName)
         .items.filter(`MaterialRequisitionId eq ${requisitionId}`)
         .expand(
-          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+          "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
         .select(
-          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+          "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
         .get();
 
@@ -73,10 +73,10 @@ export default class InvApprovalService implements IApprovalService {
       .getByTitle(this._listName)
       .items.getById(id)
       .expand(
-        "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
       )
       .select(
-        "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail"
+        "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
       )
       .get();
 

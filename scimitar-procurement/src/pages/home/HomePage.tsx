@@ -72,6 +72,11 @@ class HomePage extends React.Component<
                       <Icon iconName="NewFolder" />
                     </Link>
 
+                    <Link to="/NewServiceRequesition">
+                      <span>Create New Service Requesition</span>
+                      <Icon iconName="NewFolder" />
+                    </Link>
+
                     <Link to="/InvApproval">
                       <span>Inv Approval</span>
                       <Icon iconName="ComplianceAudit" />

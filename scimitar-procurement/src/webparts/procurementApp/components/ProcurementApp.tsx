@@ -28,6 +28,7 @@ import "./custom.scss";
 import { LoadingBoxComponent } from "../../../CoreComponents/LodingBox";
 import { HeaderPageComponent } from "../../../CoreComponents/Header";
 import { FooterPageComponent } from "../../../CoreComponents/Footer";
+import NewServiceRequestion from "../../../pages/NewServiceRequisiton/NewServiceRequestion";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
@@ -65,6 +66,12 @@ export default class ProcurementApp extends React.Component<
                     allowedGroups={[new SPGroup("Employees")]}
                   >
                     <NewMaterialRequestionPage />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/NewServiceRequesition"
+                    allowedGroups={[new SPGroup("Employees")]}
+                  >
+                    <NewServiceRequestion />
                   </PrivateRoute>
                   <PrivateRoute
                     path="/MaterialRequestInvApproval/:id"
