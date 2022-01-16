@@ -3,23 +3,23 @@ import { DefaultButton, IconButton, Modal } from "office-ui-fabric-react";
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Accordion } from "semantic-ui-react";
-import ApprovalBusinessLogic from "../../BusinessLogic/ApprovalBusinessLogic/ApprovalBusinessLogic";
-import IApprovalBusinessLogic from "../../BusinessLogic/ApprovalBusinessLogic/IApprovalBusinessLogic";
+import ApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/InvApprovalBusinessLogic";
+import IApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/IInvApprovalBusinessLogic";
 import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/IMaterialRequesitionBusinessLogic";
 import MaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/MaterialRequesitionBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import { BannerComponent } from "../../CoreComponents/Banner";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
-import Approval from "../../Models/ClassModels/Approval";
+import Approval from "../../Models/ClassModels/InvApproval";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 import { TableList } from "./Components/Grid/TableList";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
-import IMaterialRequistionApprovalProps from "./IMaterialRequistionApprovalProps";
-import IMaterialRequistionApprovalState from "./IMaterialRequistionApprovalState";
+import IMaterialRequistionInvApprovalProps from "./IMaterialRequistionInvApprovalProps";
+import IMaterialRequistionInvApprovalState from "./IMaterialRequistionInvApprovalState";
 
 class MaterialRequistionApproval extends React.Component<
-  RouteComponentProps<IMaterialRequistionApprovalProps>,
-  IMaterialRequistionApprovalState
+  RouteComponentProps<IMaterialRequistionInvApprovalProps>,
+  IMaterialRequistionInvApprovalState
 > {
   private _approvalBusinessLogic: IApprovalBusinessLogic;
   private _materialRequistionBusinessLogic: IMaterialRequesitionBusinessLogic;
@@ -104,7 +104,7 @@ class MaterialRequistionApproval extends React.Component<
           this.state.showConfirmationDialog ||
           this.state.showFinalConfirmationDialog
         }
-        onDismiss={() => this.onDialogDismiss("showConfrimationDialog")}
+        onDismiss={() => this.onDialogDismiss("showConfirmationDialog")}
         isBlocking={false}
         className="Modal"
       >
@@ -113,7 +113,7 @@ class MaterialRequistionApproval extends React.Component<
           <IconButton
             iconProps={{ iconName: "Cancel" }}
             ariaLabel="Close popup modal"
-            onClick={() => this.onDialogDismiss("showConfrimationDialog")}
+            onClick={() => this.onDialogDismiss("showConfirmationDialog")}
           />
         </div>
 
@@ -130,7 +130,7 @@ class MaterialRequistionApproval extends React.Component<
               </DefaultButton>
               <DefaultButton
                 // className="cancelBtn"
-                onClick={() => this.onDialogDismiss("showConfrimationDialog")}
+                onClick={() => this.onDialogDismiss("showConfirmationDialog")}
               >
                 Cancel
               </DefaultButton>
@@ -151,28 +151,28 @@ class MaterialRequistionApproval extends React.Component<
   }
 
   showConfirmationDialog(status: string): void {
-    if (status.toLowerCase() === "approve") {
+    if (status.toLowerCase() === "instock") {
       this.setState((prevState) => {
         const newState = { ...prevState };
         newState.showConfirmationDialog = true;
-        newState.dialogTitle = `Approve Request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to approve this request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.submissionAction = () => this.onApprove();
+        newState.dialogTitle = `In-Stock Request: ${prevState.viewModel.materialRequesition.requestCode}`;
+        newState.dialogMessage = `Are you sure you want to set this MR: ${prevState.viewModel.materialRequesition.requestCode} to be in stock`;
+        newState.submissionAction = () => this.onInStock();
         return newState;
       });
     } else {
       this.setState((prevState) => {
         const newState = { ...prevState };
         newState.showConfirmationDialog = true;
-        newState.dialogTitle = `Reject Request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to reject this request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.submissionAction = () => this.onReject();
+        newState.dialogTitle = `Out of stock Request: ${prevState.viewModel.materialRequesition.requestCode}`;
+        newState.dialogMessage = `Are you sure you want to set this MR: ${prevState.viewModel.materialRequesition.requestCode} to be out of stock`;
+        newState.submissionAction = () => this.onOutOfStock();
         return newState;
       });
     }
   }
 
-  onApprove(): void {
+  onInStock(): void {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.showSpinner = true;
@@ -181,7 +181,7 @@ class MaterialRequistionApproval extends React.Component<
     });
 
     this._approvalBusinessLogic
-      .approveRequest(
+      .InStock(
         this.state.approvalItem.id,
         this.context.userProperties["WorkEmail"]
       )
@@ -211,7 +211,7 @@ class MaterialRequistionApproval extends React.Component<
         });
       });
   }
-  onReject(): void {
+  onOutOfStock(): void {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.showSpinner = true;
@@ -219,7 +219,7 @@ class MaterialRequistionApproval extends React.Component<
       return newState;
     });
     this._approvalBusinessLogic
-      .rejectRequest(
+      .OutOfStock(
         this.state.approvalItem.id,
         this.context.userProperties["WorkEmail"]
       )
@@ -260,7 +260,7 @@ class MaterialRequistionApproval extends React.Component<
         ) : (
           <div>
             <BannerComponent
-              PageTitle={`Approval: ${this.state.viewModel.materialRequesition.requestCode}`}
+              PageTitle={`Inventory approval: ${this.state.viewModel.materialRequesition.requestCode}`}
             />
             <MDBContainer className="pageContent">
               <Accordion title="Request Details" collapsed={false}>
@@ -290,16 +290,18 @@ class MaterialRequistionApproval extends React.Component<
                       <DefaultButton
                         // className="cancelBtn"
                         type="submit"
-                        onClick={() => this.showConfirmationDialog("Approve")}
+                        onClick={() => this.showConfirmationDialog("instock")}
                       >
-                        Approve
+                        In-Stock
                       </DefaultButton>
                       <DefaultButton
                         // className="cancelBtn"
                         type="submit"
-                        onClick={() => this.showConfirmationDialog("Reject")}
+                        onClick={() =>
+                          this.showConfirmationDialog("outofstock")
+                        }
                       >
-                        Reject
+                        Out-of-stock
                       </DefaultButton>
                       <DefaultButton
                         // className="cancelBtn"

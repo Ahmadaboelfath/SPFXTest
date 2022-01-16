@@ -9,10 +9,10 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
-import Approval from "../../../../Models/ClassModels/Approval";
+import InvApproval from "../../../../Models/ClassModels/InvApproval";
 
 export interface ITableListProps {
-  materialRequesitionsApprovals: Approval[];
+  materialRequesitionsApprovals: InvApproval[];
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
@@ -24,7 +24,7 @@ export const TableList: React.FC<ITableListProps> = (props) => {
       return {
         title: (
           <Link
-            to={`MaterialRequestApproval/${approval.id}`}
+            to={`MaterialRequestInvApproval/${approval.id}`}
             style={{ textDecoration: "Underline" }}
           >
             {approval.materialRequistionCode}

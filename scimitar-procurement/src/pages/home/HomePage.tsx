@@ -72,8 +72,8 @@ class HomePage extends React.Component<
                       <Icon iconName="NewFolder" />
                     </Link>
 
-                    <Link to="/MyApprovals">
-                      <span>My Approval</span>
+                    <Link to="/InvApproval">
+                      <span>Inv Approval</span>
                       <Icon iconName="ComplianceAudit" />
                     </Link>
                   </div>
@@ -82,7 +82,7 @@ class HomePage extends React.Component<
             </MDBContainer>
           </div>
         ) : (
-          <LoadingBoxComponent childLoader={true} />
+          <LoadingBoxComponent />
         )}
       </>
     );

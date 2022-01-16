@@ -15,8 +15,8 @@ import MaterialRequesitionService from "../../Services/MaterialRequesitionServic
 import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
 import MaterialRequesitionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
-import IApprovalService from "../../Services/ApprovalService/IApprovalService";
-import ApprovalService from "../../Services/ApprovalService/ApprovalService";
+import IApprovalService from "../../Services/InvApprovalService/IInvApprovalService";
+import ApprovalService from "../../Services/InvApprovalService/InvApprovalService";
 
 class DevWorkBench extends React.Component<
   RouteComponentProps<IDevWorkBenchProps>,

@@ -1,4 +1,4 @@
-export default class Approval {
+export default class InvApproval {
   constructor(id?: number) {
     this._id = id ? id : 0;
   }

@@ -1,18 +1,18 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import ApprovalBusinessLogic from "../../BusinessLogic/ApprovalBusinessLogic/ApprovalBusinessLogic";
-import IApprovalBusinessLogic from "../../BusinessLogic/ApprovalBusinessLogic/IApprovalBusinessLogic";
+import ApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/InvApprovalBusinessLogic";
+import IApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/IInvApprovalBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import { BannerComponent } from "../../CoreComponents/Banner";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
 import { TableList } from "./Components/Grid/TableList";
-import IMyApprovalsProps from "./IMyApprovalsProps";
-import IMyApprovalsState from "./IMyApprovalsState";
+import IInvApprovalsProps from "./InvApprovalsProps";
+import IInvApprovalsState from "./InvApprovalsState";
 
-class MyApprovals extends React.Component<
-  RouteComponentProps<IMyApprovalsProps>,
-  IMyApprovalsState
+class InvApprovals extends React.Component<
+  RouteComponentProps<IInvApprovalsProps>,
+  IInvApprovalsState
 > {
   private readonly _approvalBusinessLogic: IApprovalBusinessLogic;
 
@@ -47,7 +47,7 @@ class MyApprovals extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="My Approvals" />
+            <BannerComponent PageTitle="Inv Approval" />
             <MDBContainer>
               <MDBRow>
                 <MDBCol>
@@ -64,4 +64,4 @@ class MyApprovals extends React.Component<
   }
 }
 
-export default withRouter(MyApprovals);
+export default withRouter(InvApprovals);

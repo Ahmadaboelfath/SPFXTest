@@ -1,19 +1,19 @@
-import Approval from "../../Models/ClassModels/Approval";
-import IApprovalService from "./IApprovalService";
+import Approval from "../../Models/ClassModels/InvApproval";
+import IApprovalService from "./IInvApprovalService";
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
-import IApprovalMapper from "../../Mappers/ApprovalMapper/IApprovalMapper";
-import ApprovalMapper from "../../Mappers/ApprovalMapper/ApprovalMapper";
+import IApprovalMapper from "../../Mappers/InvApprovalMapper/IApprovalMapper";
+import ApprovalMapper from "../../Mappers/InvApprovalMapper/IInvApprovalMapper";
 import { IItemUpdateResult } from "@pnp/sp/items";
 
-export default class ApprovalService implements IApprovalService {
+export default class InvApprovalService implements IApprovalService {
   private readonly _listName: string;
   private readonly _mapper: IApprovalMapper;
 
   constructor() {
-    this._listName = "Approvals";
+    this._listName = "InvApprovals";
     this._mapper = new ApprovalMapper();
   }
   async getApprovalsForCurrentLoggedInUser(

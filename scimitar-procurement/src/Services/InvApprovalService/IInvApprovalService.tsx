@@ -1,6 +1,6 @@
-import Approval from "../../Models/ClassModels/Approval";
+import Approval from "../../Models/ClassModels/InvApproval";
 
-export default interface IApprovalService {
+export default interface IInvApprovalService {
   getApprovalsByMaterialRequesitionId(
     requisitionId: number
   ): Promise<Approval[]>;

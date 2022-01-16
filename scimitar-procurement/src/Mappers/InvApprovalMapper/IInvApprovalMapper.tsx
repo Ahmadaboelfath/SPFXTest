@@ -1,7 +1,7 @@
-import Approval from "../../Models/ClassModels/Approval";
-import IApprovalMapper from "./IApprovalMapper";
+import Approval from "../../Models/ClassModels/InvApproval";
+import IInvApprovalMapper from "./IApprovalMapper";
 
-export default class ApprovalMapper implements IApprovalMapper {
+export default class InvApprovalMapper implements IInvApprovalMapper {
   mapFromSPApprovalToApproval(SPApproval: any): Approval {
     const approval: Approval = new Approval(SPApproval.Id);
     approval.status = SPApproval.Status;

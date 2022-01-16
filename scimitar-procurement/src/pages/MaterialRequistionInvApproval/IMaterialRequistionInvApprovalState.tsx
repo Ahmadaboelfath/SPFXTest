@@ -1,7 +1,7 @@
-import Approval from "../../Models/ClassModels/Approval";
+import Approval from "../../Models/ClassModels/InvApproval";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 
-export default interface IMaterialRequistionApprovalState {
+export default interface IMaterialRequistionInvApprovalState {
   viewModel: MaterialRequesitionFormViewModel;
   approvalItem: Approval;
   showSpinner: boolean;

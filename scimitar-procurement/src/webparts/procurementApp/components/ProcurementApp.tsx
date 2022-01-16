@@ -22,18 +22,20 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "../../../CoreComponents/ComponentStyles.scss";
-import MaterialRequistionApproval from "../../../pages/MaterialRequistionApproval/MaterialRequistionApproval";
+import MaterialRequistionInvApproval from "../../../pages/MaterialRequistionInvApproval/MaterialRequistionInvApproval";
 import IProcurementAppState from "./IProcurementAppState";
 import "./custom.scss";
 import { LoadingBoxComponent } from "../../../CoreComponents/LodingBox";
+import { HeaderPageComponent } from "../../../CoreComponents/Header";
+import { FooterPageComponent } from "../../../CoreComponents/Footer";
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
   return import("../../../pages/MyRequests/MyRequests");
 });
 
-const MyApprovals = React.lazy(() => {
-  return import("../../../pages/MyApprovals/MyApprovals");
+const InvApprovals = React.lazy(() => {
+  return import("../../../pages/InvApprovals/InvApprovals");
 });
 
 export default class ProcurementApp extends React.Component<
@@ -55,19 +57,20 @@ export default class ProcurementApp extends React.Component<
         <div className="wrapper">
           <Router>
             <SecurityProvider>
+              <HeaderPageComponent />
               <div style={{ minHeight: this.state.fullheight - 50 }}>
                 <Switch>
                   <PrivateRoute
                     path="/NewMaterialRequesition"
-                    allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
+                    allowedGroups={[new SPGroup("Employees")]}
                   >
                     <NewMaterialRequestionPage />
                   </PrivateRoute>
                   <PrivateRoute
-                    path="/MaterialRequestApproval/:id"
-                    allowedGroups={[new SPGroup("SitesMaterialAdmin")]}
+                    path="/MaterialRequestInvApproval/:id"
+                    allowedGroups={[new SPGroup("Inventory")]}
                   >
-                    <MaterialRequistionApproval />
+                    <MaterialRequistionInvApproval />
                   </PrivateRoute>
                   {/* <Route
               path="/NewMaterialRequestion"
@@ -82,20 +85,21 @@ export default class ProcurementApp extends React.Component<
                     )}
                   />
                   <Route
-                    path="/MyApprovals"
+                    path="/InvApproval"
                     render={() => (
                       <React.Suspense fallback={<LoadingBoxComponent />}>
-                        <MyApprovals />
+                        <InvApprovals />
                       </React.Suspense>
                     )}
                   />
                   <Route path="/AccessDenied" render={() => <NotAllowed />} />
-                  <Route path="/dev" exact render={() => <DevWorkBench />} />
+                  <Route path="/dev" render={() => <DevWorkBench />} />
                   <Route path="/" exact render={() => <HomePage />} />
 
                   <Route render={() => <ErrorPage />} />
                 </Switch>
               </div>
+              <FooterPageComponent />
             </SecurityProvider>
           </Router>
         </div>
