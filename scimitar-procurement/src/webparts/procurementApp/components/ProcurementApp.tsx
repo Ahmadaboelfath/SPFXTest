@@ -29,6 +29,9 @@ import { LoadingBoxComponent } from "../../../CoreComponents/LodingBox";
 import { HeaderPageComponent } from "../../../CoreComponents/Header";
 import { FooterPageComponent } from "../../../CoreComponents/Footer";
 import NewServiceRequestion from "../../../pages/NewServiceRequisiton/NewServiceRequestion";
+import PRAssigning from "../../../pages/PRAssigning/PRAssigning";
+import PurchasingRequestApprovalPage from "../../../pages/PurchaseRequestApproval/PurchasingRequestApproval";
+
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
 const MyRequests = React.lazy(() => {
@@ -37,6 +40,14 @@ const MyRequests = React.lazy(() => {
 
 const InvApprovals = React.lazy(() => {
   return import("../../../pages/InvApprovals/InvApprovals");
+});
+
+const PRPendingApprovals = React.lazy(() => {
+  return import("../../../pages/PRPendingApproval/PRPendingApprovals");
+});
+
+const ApprovedPR = React.lazy(() => {
+  return import("../../../pages/PRPendingAssigning/PRPendingAssigning");
 });
 
 export default class ProcurementApp extends React.Component<
@@ -79,6 +90,18 @@ export default class ProcurementApp extends React.Component<
                   >
                     <MaterialRequistionInvApproval />
                   </PrivateRoute>
+                  <PrivateRoute
+                    path="/PRApproval/:id"
+                    allowedGroups={[new SPGroup("FieldManager")]}
+                  >
+                    <PurchasingRequestApprovalPage />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/PRAssigning/:id"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <PRAssigning />
+                  </PrivateRoute>
                   {/* <Route
               path="/NewMaterialRequestion"
               render={() => <NewMaterialRequestionPage />}
@@ -96,6 +119,22 @@ export default class ProcurementApp extends React.Component<
                     render={() => (
                       <React.Suspense fallback={<LoadingBoxComponent />}>
                         <InvApprovals />
+                      </React.Suspense>
+                    )}
+                  />
+                  <Route
+                    path="/PRPendingApprovals"
+                    render={() => (
+                      <React.Suspense fallback={<LoadingBoxComponent />}>
+                        <PRPendingApprovals />
+                      </React.Suspense>
+                    )}
+                  />
+                  <Route
+                    path="/ApprovedPR"
+                    render={() => (
+                      <React.Suspense fallback={<LoadingBoxComponent />}>
+                        <ApprovedPR />
                       </React.Suspense>
                     )}
                   />

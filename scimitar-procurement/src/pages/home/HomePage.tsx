@@ -81,6 +81,15 @@ class HomePage extends React.Component<
                       <span>Inv Approval</span>
                       <Icon iconName="ComplianceAudit" />
                     </Link>
+
+                    <Link to="/PRPendingApprovals">
+                      <span>PR Approval</span>
+                      <Icon iconName="ComplianceAudit" />
+                    </Link>
+                    <Link to="/ApprovedPR">
+                      <span>Approved PR</span>
+                      <Icon iconName="ComplianceAudit" />
+                    </Link>
                   </div>
                 </MDBCol>
               </MDBRow>

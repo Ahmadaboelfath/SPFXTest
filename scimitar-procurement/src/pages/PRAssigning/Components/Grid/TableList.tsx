@@ -9,11 +9,12 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
-import InvApproval from "../../../../Models/ClassModels/InvApproval";
-import PurchasingRequestApproval from "../../../../Models/ClassModels/PurchasingRequestApproval";
+import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
 
 export interface ITableListProps {
-  purchasingRequestApprovals: PurchasingRequestApproval[];
+  activeSites?: any[];
+  activeTab?: string;
+  items: MaterialRequestionItem[];
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
@@ -21,16 +22,14 @@ export const TableList: React.FC<ITableListProps> = (props) => {
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
   );
   const generateTableRows = (): any[] => {
-    const rows = props.purchasingRequestApprovals.map((approval) => {
+    const sortedRows = props.items.sort((a, b) => a.order - b.order);
+    const rows = sortedRows.map((item, index) => {
       return {
-        title: (
-          <Link
-            to={`PRApproval/${approval.id}`}
-            style={{ textDecoration: "Underline" }}
-          >
-            {approval.requestCode}
-          </Link>
-        ),
+        order: item.order,
+        code: item.code,
+        description: item.description,
+        unit: item.unit,
+        quantity: item.quantity,
       };
     });
 
@@ -40,8 +39,32 @@ export const TableList: React.FC<ITableListProps> = (props) => {
   const dataTableList = {
     columns: [
       {
-        label: "Request Code",
-        field: "title",
+        label: "#",
+        field: "order",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Material Code",
+        field: "code",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Description",
+        field: "description",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Unit",
+        field: "unit",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Quantity",
+        field: "quantity",
         sort: "asc",
         width: 150,
       },

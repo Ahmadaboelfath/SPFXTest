@@ -14,12 +14,12 @@ import Approval from "../../Models/ClassModels/InvApproval";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 import { TableList } from "./Components/Grid/TableList";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
-import IMaterialRequistionInvApprovalProps from "./IMaterialRequistionInvApprovalProps";
-import IMaterialRequistionInvApprovalState from "./IMaterialRequistionInvApprovalState";
+import IPRAssigningProps from "./IPRAssigningProps";
+import IPRAssigningState from "./IPRAssigningState";
 
-class MaterialRequistionApproval extends React.Component<
-  RouteComponentProps<IMaterialRequistionInvApprovalProps>,
-  IMaterialRequistionInvApprovalState
+class PRAssigning extends React.Component<
+  RouteComponentProps<IPRAssigningProps>,
+  IPRAssigningState
 > {
   private _approvalBusinessLogic: IApprovalBusinessLogic;
   private _materialRequistionBusinessLogic: IMaterialRequesitionBusinessLogic;
@@ -321,4 +321,4 @@ class MaterialRequistionApproval extends React.Component<
   }
 }
 
-export default withRouter(MaterialRequistionApproval);
+export default withRouter(PRAssigning);

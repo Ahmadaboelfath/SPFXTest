@@ -7,23 +7,24 @@ import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider"
 import { BannerComponent } from "../../CoreComponents/Banner";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
 import { TableList } from "./Components/Grid/TableList";
-import IPRPendingApprovalsProps from "./IPRPendingApprovalsProps";
-import IPRPendingApprovalsState from "./IPRPendingApprovalsState";
-import IPurchasingRequestApprovalBusinessLogic from "../../BusinessLogic/PurchasingRequestApprovalBusinessLogic/IPurchasingRequestApprovalBusinessLogic";
+import IPRPendingAssigningProps from "./IPRPendingAssigningProps";
+import IPRPendingAssigningState from "./IPRPendingAssigningState";
 import PurchasingRequestApprovalBusinessLogic from "../../BusinessLogic/PurchasingRequestApprovalBusinessLogic/PurchasingRequestApprovalBusinessLogic";
+import IPurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/IPurchasingRequestBusinessLogic";
+import PurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/PurchasingRequestBusinessLogic";
 
-class PRPendingApprovals extends React.Component<
-  RouteComponentProps<IPRPendingApprovalsProps>,
-  IPRPendingApprovalsState
+class PRPendingAssigning extends React.Component<
+  RouteComponentProps<IPRPendingAssigningProps>,
+  IPRPendingAssigningState
 > {
-  private readonly _approvalBusinessLogic: IPurchasingRequestApprovalBusinessLogic;
+  private readonly _approvalBusinessLogic: IPurchasingRequestBusinessLogic;
 
   constructor(props) {
     super(props);
-    this._approvalBusinessLogic = new PurchasingRequestApprovalBusinessLogic();
+    this._approvalBusinessLogic = new PurchasingRequestBusinessLogic();
     this.state = {
       showSpinner: true,
-      approvalItems: [],
+      purchasingRequests: [],
     };
   }
 
@@ -31,11 +32,11 @@ class PRPendingApprovals extends React.Component<
 
   componentDidMount(): void {
     this._approvalBusinessLogic
-      .getApprovalsByEmail(this.context.userProperties["WorkEmail"])
-      .then((approvals) => {
+      .getAllApprovedPurchasingRequests()
+      .then((PRs) => {
         this.setState((prevState) => {
           const newState = { ...prevState };
-          newState.approvalItems = approvals;
+          newState.purchasingRequests = PRs;
           newState.showSpinner = false;
           return newState;
         });
@@ -54,7 +55,7 @@ class PRPendingApprovals extends React.Component<
               <MDBRow>
                 <MDBCol>
                   <TableList
-                    purchasingRequestApprovals={this.state.approvalItems}
+                    purchasingRequest={this.state.purchasingRequests}
                   />
                 </MDBCol>
               </MDBRow>
@@ -66,4 +67,4 @@ class PRPendingApprovals extends React.Component<
   }
 }
 
-export default withRouter(PRPendingApprovals);
+export default withRouter(PRPendingAssigning);

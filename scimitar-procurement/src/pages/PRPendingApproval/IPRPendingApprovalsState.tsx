@@ -1,6 +1,6 @@
-import Approval from "../../Models/ClassModels/InvApproval";
+import PurchasingRequestApproval from "../../Models/ClassModels/PurchasingRequestApproval";
 
 export default interface IPRPendingApprovalsState {
   showSpinner: boolean;
-  approvalItems: Approval[];
+  approvalItems: PurchasingRequestApproval[];
 }

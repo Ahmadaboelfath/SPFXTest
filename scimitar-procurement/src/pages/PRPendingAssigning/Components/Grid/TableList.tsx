@@ -9,11 +9,10 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
-import InvApproval from "../../../../Models/ClassModels/InvApproval";
-import PurchasingRequestApproval from "../../../../Models/ClassModels/PurchasingRequestApproval";
+import PurchasingRequest from "../../../../Models/ClassModels/PurchasingRequest";
 
 export interface ITableListProps {
-  purchasingRequestApprovals: PurchasingRequestApproval[];
+  purchasingRequest: PurchasingRequest[];
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
@@ -21,16 +20,17 @@ export const TableList: React.FC<ITableListProps> = (props) => {
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
   );
   const generateTableRows = (): any[] => {
-    const rows = props.purchasingRequestApprovals.map((approval) => {
+    const rows = props.purchasingRequest.map((pr) => {
       return {
         title: (
           <Link
-            to={`PRApproval/${approval.id}`}
+            to={`PRApproval/${pr.id}`}
             style={{ textDecoration: "Underline" }}
           >
-            {approval.requestCode}
+            {pr.requestCode}
           </Link>
         ),
+        assignedTo: pr.assignedTo,
       };
     });
 
@@ -42,6 +42,12 @@ export const TableList: React.FC<ITableListProps> = (props) => {
       {
         label: "Request Code",
         field: "title",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Assigned To",
+        field: "assignedTo",
         sort: "asc",
         width: 150,
       },
