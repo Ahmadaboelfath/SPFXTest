@@ -246,7 +246,7 @@ class NewServiceRequestion extends React.Component<
         this.state.viewModel.materialRequesition.requestDate.toString(),
         this.state.viewModel.materialRequesition
       );
-      newMaterialRequesition[controlName] = value.text;
+      newMaterialRequesition[controlName] = value;
       newState.viewModel.materialRequesition = newMaterialRequesition;
       return newState;
     });
