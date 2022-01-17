@@ -229,7 +229,8 @@ class MaterialRequistionApproval extends React.Component<
           newState.approvalItem = approval;
           newState.showSpinner = false;
           newState.showFinalConfirmationDialog = true;
-          newState.dialogMessage = "Request Rejected Successfully";
+          newState.dialogMessage =
+            "The request have been flagged as out of stock successfully";
           newState.dialogTitle = "Success";
           newState.submissionAction = () => this.props.history.push("/");
           return newState;
