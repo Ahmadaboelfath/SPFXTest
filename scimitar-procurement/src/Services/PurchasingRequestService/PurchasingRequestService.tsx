@@ -22,6 +22,9 @@ export default class PurchasingRequestService
       const items = await sp.web.lists
         .getByTitle(this._listName)
         .items.filter("FieldManagerApproval eq 'Approved'")
+        .expand("AssignedTo/EMail, AssignedTo/Title")
+        .select("*,AssignedTo/EMail, AssignedTo/Title")
+        .orderBy("Id", false)
         .get();
 
       return items.map((pr) =>

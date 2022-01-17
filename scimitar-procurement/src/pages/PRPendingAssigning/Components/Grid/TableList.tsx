@@ -24,7 +24,7 @@ export const TableList: React.FC<ITableListProps> = (props) => {
       return {
         title: (
           <Link
-            to={`PRApproval/${pr.id}`}
+            to={`PRAssigning/${pr.id}`}
             style={{ textDecoration: "Underline" }}
           >
             {pr.requestCode}

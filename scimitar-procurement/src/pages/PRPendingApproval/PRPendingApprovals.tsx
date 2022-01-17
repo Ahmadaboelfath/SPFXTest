@@ -49,7 +49,7 @@ class PRPendingApprovals extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="Inv Approval" />
+            <BannerComponent PageTitle="Purchasing request pending approvals" />
             <MDBContainer>
               <MDBRow>
                 <MDBCol>

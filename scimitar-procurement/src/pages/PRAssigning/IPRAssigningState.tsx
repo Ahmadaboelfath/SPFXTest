@@ -1,9 +1,12 @@
 import Approval from "../../Models/ClassModels/InvApproval";
+import PurchasingRequest from "../../Models/ClassModels/PurchasingRequest";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
+import PurchasingRequestViewModel from "../../Models/ViewModels/PurchasingRequestViewModel";
+import { IUserLookup } from "../../Models/ClassModels/userModels";
 
 export default interface IPRAssigningState {
-  viewModel: MaterialRequesitionFormViewModel;
-  approvalItem: Approval;
+  viewModel: PurchasingRequestViewModel;
+  purchasingRequest: PurchasingRequest;
   showSpinner: boolean;
   showConfirmationDialog: boolean;
   showFinalConfirmationDialog: boolean;
@@ -11,4 +14,8 @@ export default interface IPRAssigningState {
   dialogTitle: string;
   showError: boolean;
   submissionAction: () => void;
+  userLookup: IUserLookup[];
+  assigneePickerErrorMessage: string;
+  assigneePickerError: boolean;
+  formIsValid: boolean;
 }

@@ -50,7 +50,7 @@ class PRPendingAssigning extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="Inv Approval" />
+            <BannerComponent PageTitle="PR Pending Procurement Team Assignments" />
             <MDBContainer>
               <MDBRow>
                 <MDBCol>

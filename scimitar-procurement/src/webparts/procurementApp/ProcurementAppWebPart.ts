@@ -12,6 +12,7 @@ import ProcurementApp from './components/ProcurementApp';
 import { IProcurementAppProps } from './components/IProcurementAppProps';
 import DependencyManager from '../../DependencyManger/DependencyManger';
 import {sp} from "@pnp/sp";
+import SPOperations from '../../shared/SPOperations';
 
 export interface IProcurementAppWebPartProps {
   description: string;
@@ -34,6 +35,7 @@ export default class ProcurementAppWebPart extends BaseClientSideWebPart<IProcur
     return(
       super.onInit().then(()=>{
           const dependencyManager = DependencyManager.getInstance();
+          SPOperations.initalizeContext(this.context);
           dependencyManager.configure(this.context.serviceScope);
           sp.setup({
             spfxContext: this.context

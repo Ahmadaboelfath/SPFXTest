@@ -153,7 +153,7 @@ class PurchasingRequestApprovalPage extends React.Component<
         const newState = { ...prevState };
         newState.showConfirmationDialog = true;
         newState.dialogTitle = `Out of stock Request: ${prevState.viewModel.purchasingApproval.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to reject this MR: ${prevState.viewModel.purchasingApproval.requestCode} `;
+        newState.dialogMessage = `Are you sure you want to reject this PR: ${prevState.viewModel.purchasingApproval.requestCode} `;
         newState.submissionAction = () => this.onOutOfStock();
         return newState;
       });
@@ -249,7 +249,7 @@ class PurchasingRequestApprovalPage extends React.Component<
         ) : (
           <div>
             <BannerComponent
-              PageTitle={`Inventory approval: ${this.state.viewModel.purchasingApproval.requestCode}`}
+              PageTitle={`Purchase Request approval: ${this.state.viewModel.purchasingApproval.requestCode}`}
             />
             <MDBContainer className="pageContent">
               <Accordion title="Request Details" collapsed={false}>

@@ -16,66 +16,59 @@ import { TableList } from "./Components/Grid/TableList";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
 import IPRAssigningProps from "./IPRAssigningProps";
 import IPRAssigningState from "./IPRAssigningState";
+import PurchasingRequest from "../../Models/ClassModels/PurchasingRequest";
+import IPurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/IPurchasingRequestBusinessLogic";
+import PurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/PurchasingRequestBusinessLogic";
+import PurchasingRequestViewModel from "../../Models/ViewModels/PurchasingRequestViewModel";
+import UserPicker from "../../Controls/userPicker";
+import { IUserLookup } from "../../Models/ClassModels/userModels";
 
 class PRAssigning extends React.Component<
   RouteComponentProps<IPRAssigningProps>,
   IPRAssigningState
 > {
-  private _approvalBusinessLogic: IApprovalBusinessLogic;
-  private _materialRequistionBusinessLogic: IMaterialRequesitionBusinessLogic;
-  private _approvalId = this.props.match.params["id"];
+  private _purchasingRequestBusinessLogic: IPurchasingRequestBusinessLogic;
+  private _PRId = this.props.match.params["id"];
 
   constructor(props) {
     super(props);
-    this._approvalBusinessLogic = new ApprovalBusinessLogic();
-    this._materialRequistionBusinessLogic =
-      new MaterialRequesitionBusinessLogic();
+    this._purchasingRequestBusinessLogic = new PurchasingRequestBusinessLogic();
     this.state = {
-      approvalItem: new Approval(),
+      purchasingRequest: new PurchasingRequest(),
       dialogMessage: "",
       dialogTitle: "",
       showConfirmationDialog: false,
       showFinalConfirmationDialog: false,
       showSpinner: true,
       submissionAction: null,
-      viewModel: new MaterialRequesitionFormViewModel(),
+      viewModel: new PurchasingRequestViewModel(),
       showError: false,
+      userLookup: [],
+      assigneePickerErrorMessage: "",
+      assigneePickerError: false,
+      formIsValid: false,
     };
   }
   static contextType = SecurityContext;
   componentDidMount(): void {
-    this._approvalBusinessLogic
-      .getApprovalById(this._approvalId)
-      .then((approval) => {
-        if (
-          approval.status === "Pending" &&
-          approval.approver.toLowerCase() ===
-            this.context.userProperties["WorkEmail"].toLowerCase()
-        ) {
-          this._materialRequistionBusinessLogic
-            .getMaterialRequisitionById(approval.materialRequesitionId)
-            .then((materialRequesitionViewModel) => {
-              this.setState((prevState) => {
-                const newState = { ...prevState };
-                newState.showSpinner = false;
-                newState.approvalItem = approval;
-                newState.viewModel = materialRequesitionViewModel;
-                return newState;
-              });
-            })
-            .catch((e) => {
-              console.error(e);
+    this._purchasingRequestBusinessLogic
+      .getPurchasingRequestDetailsById(this._PRId)
+      .then((PR) => {
+        const userLookup: IUserLookup = {
+          id: PR.purchaseRequest.assignedToId
+            ? parseInt(PR.purchaseRequest.assignedToId)
+            : null,
+          title: PR.purchaseRequest.assignedTo,
+        };
 
-              this.setState((prevState) => {
-                const newState = { ...prevState };
-                newState.showError = true;
-                newState.showSpinner = false;
-                return newState;
-              });
-            });
-        } else {
-          this.props.history.push("/");
-        }
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.purchasingRequest = PR.purchaseRequest;
+          newState.userLookup = userLookup.id ? [userLookup] : [];
+          newState.viewModel = PR;
+          return newState;
+        });
       })
       .catch((e) => {
         console.error(e);
@@ -94,6 +87,79 @@ class PRAssigning extends React.Component<
       newState[statePropName] = false;
       return newState;
     });
+  }
+
+  onAssignedChange(selectedUsers: IUserLookup[]) {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.userLookup = selectedUsers;
+      newState.purchasingRequest.assignedTo =
+        selectedUsers.length > 0 ? selectedUsers[0].title : "";
+      newState.purchasingRequest.assignedToId =
+        selectedUsers.length > 0 ? selectedUsers[0].id.toString() : "";
+      newState.assigneePickerError = false;
+      newState.assigneePickerErrorMessage = "";
+      return newState;
+    });
+  }
+  onSubmitAssignee(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      return newState;
+    });
+
+    this._purchasingRequestBusinessLogic
+      .assignUserForPurchasingRequest(null, this.state.purchasingRequest)
+      .then((PR) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogTitle = "Assigned Successfully";
+          newState.dialogMessage = "User assigned sucessfully";
+          newState.submissionAction = () => {
+            this.props.history.push("/");
+          };
+          newState.purchasingRequest = PR;
+          return newState;
+        });
+      })
+      .catch((e) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogTitle = "Error Ocuured";
+          newState.dialogMessage =
+            "An Unexpected error ocurred while assigning the user to the PR please try again";
+          newState.submissionAction = () => {
+            this.onDialogDismiss("showFinalConfirmationDialog");
+          };
+          return newState;
+        });
+      });
+  }
+  showConfirmationDialog(): void {
+    if (this.state.userLookup.length === 0) {
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        newState.assigneePickerError = true;
+        newState.assigneePickerErrorMessage = "Must choose assignee";
+        return newState;
+      });
+    } else {
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        newState.showConfirmationDialog = true;
+        newState.assigneePickerError = false;
+        newState.assigneePickerErrorMessage = "";
+        newState.dialogTitle = `Assign User`;
+        newState.dialogMessage = `Are you sure you want to assign ${prevState.userLookup[0].title} to this request`;
+        newState.submissionAction = () => this.onSubmitAssignee();
+        return newState;
+      });
+    }
   }
 
   renderDialog(): JSX.Element {
@@ -150,106 +216,6 @@ class PRAssigning extends React.Component<
     );
   }
 
-  showConfirmationDialog(status: string): void {
-    if (status.toLowerCase() === "instock") {
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-        newState.showConfirmationDialog = true;
-        newState.dialogTitle = `In-Stock Request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to set this MR: ${prevState.viewModel.materialRequesition.requestCode} to be in stock`;
-        newState.submissionAction = () => this.onInStock();
-        return newState;
-      });
-    } else {
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-        newState.showConfirmationDialog = true;
-        newState.dialogTitle = `Out of stock Request: ${prevState.viewModel.materialRequesition.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to set this MR: ${prevState.viewModel.materialRequesition.requestCode} to be out of stock`;
-        newState.submissionAction = () => this.onOutOfStock();
-        return newState;
-      });
-    }
-  }
-
-  onInStock(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.showSpinner = true;
-      newState.showConfirmationDialog = false;
-      return newState;
-    });
-
-    this._approvalBusinessLogic
-      .InStock(
-        this.state.approvalItem.id,
-        this.context.userProperties["WorkEmail"]
-      )
-      .then((approval) => {
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.approvalItem = approval;
-          newState.showSpinner = false;
-          newState.dialogMessage = "Request Approved Successfully";
-          newState.dialogTitle = "Success";
-          newState.showFinalConfirmationDialog = true;
-          newState.submissionAction = () => this.props.history.push("/");
-          return newState;
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.showSpinner = false;
-          newState.showFinalConfirmationDialog = true;
-          newState.dialogTitle = "Error Ocurred";
-          newState.dialogMessage = `An unexpected error ocurred, please try again and if error persist please contact your administrator`;
-          newState.submissionAction = () =>
-            this.onDialogDismiss("showFinalConfirmationDialog");
-          return newState;
-        });
-      });
-  }
-  onOutOfStock(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.showSpinner = true;
-      newState.showConfirmationDialog = false;
-      return newState;
-    });
-    this._approvalBusinessLogic
-      .OutOfStock(
-        this.state.approvalItem.id,
-        this.context.userProperties["WorkEmail"]
-      )
-      .then((approval) => {
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.approvalItem = approval;
-          newState.showSpinner = false;
-          newState.showFinalConfirmationDialog = true;
-          newState.dialogMessage = "Request Rejected Successfully";
-          newState.dialogTitle = "Success";
-          newState.submissionAction = () => this.props.history.push("/");
-          return newState;
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.showSpinner = false;
-          newState.showFinalConfirmationDialog = true;
-          newState.dialogTitle = "Error Ocurred";
-          newState.dialogMessage = `An unexpected error ocurred, please try again and if error persist please contact your administrator`;
-          newState.submissionAction = () =>
-            this.onDialogDismiss("showFinalConfirmationDialog");
-          return newState;
-        });
-      });
-  }
-
   render(): React.ReactNode {
     return (
       <>
@@ -260,7 +226,7 @@ class PRAssigning extends React.Component<
         ) : (
           <div>
             <BannerComponent
-              PageTitle={`Inventory approval: ${this.state.viewModel.materialRequesition.requestCode}`}
+              PageTitle={`Assigning Procurement Team Member: ${this.state.viewModel.materialRequisition.requestCode}`}
             />
             <MDBContainer className="pageContent">
               <Accordion title="Request Details" collapsed={false}>
@@ -273,7 +239,7 @@ class PRAssigning extends React.Component<
                         console.log(value)
                       }
                       onSubmit={() => console.log("Submit")}
-                      viewModel={this.state.viewModel.materialRequesition}
+                      viewModel={this.state.viewModel.materialRequisition}
                     />
                   </MDBCol>
                 </MDBRow>
@@ -281,20 +247,42 @@ class PRAssigning extends React.Component<
               <Accordion title="Material Requesition Items" collapsed={false}>
                 <MDBRow>
                   <MDBCol>
-                    <TableList items={this.state.viewModel.materialItems} />
-                    {this.state.showConfirmationDialog ||
-                    this.state.showFinalConfirmationDialog
-                      ? this.renderDialog()
-                      : null}
-                    <div className="buttonBlock">
-                      <DefaultButton
-                        // className="cancelBtn"
-                        type="submit"
-                        onClick={() => this.showConfirmationDialog("instock")}
-                      >
-                        In-Stock
-                      </DefaultButton>
-                      <DefaultButton
+                    <TableList
+                      items={this.state.viewModel.materialRequeisitionItems}
+                    />
+                  </MDBCol>
+                </MDBRow>
+              </Accordion>
+              <Accordion title="Assigned User" collapsed={false}>
+                <MDBRow>
+                  <MDBCol>
+                    <UserPicker
+                      ctrlName="picker"
+                      onChange={(selectedUsers) => {
+                        this.onAssignedChange(selectedUsers);
+                      }}
+                      selected={this.state.userLookup}
+                      required={true}
+                      showError={this.state.assigneePickerError}
+                      errorMessage={this.state.assigneePickerErrorMessage}
+                      label="Assignee"
+                    />
+                  </MDBCol>
+                </MDBRow>
+              </Accordion>
+              {this.state.showConfirmationDialog ||
+              this.state.showFinalConfirmationDialog
+                ? this.renderDialog()
+                : null}
+              <div className="buttonBlock">
+                <DefaultButton
+                  // className="cancelBtn"
+                  type="submit"
+                  onClick={() => this.showConfirmationDialog()}
+                >
+                  Submit
+                </DefaultButton>
+                {/* <DefaultButton
                         // className="cancelBtn"
                         type="submit"
                         onClick={() =>
@@ -302,17 +290,14 @@ class PRAssigning extends React.Component<
                         }
                       >
                         Out-of-stock
-                      </DefaultButton>
-                      <DefaultButton
-                        // className="cancelBtn"
-                        onClick={() => this.props.history.push("/")}
-                      >
-                        Cancel
-                      </DefaultButton>
-                    </div>
-                  </MDBCol>
-                </MDBRow>
-              </Accordion>
+                      </DefaultButton> */}
+                <DefaultButton
+                  // className="cancelBtn"
+                  onClick={() => this.props.history.push("/")}
+                >
+                  Cancel
+                </DefaultButton>
+              </div>
             </MDBContainer>
           </div>
         )}
