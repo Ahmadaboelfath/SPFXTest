@@ -289,7 +289,7 @@ class PurchasingRequestApprovalPage extends React.Component<
                         type="submit"
                         onClick={() => this.showConfirmationDialog("approved")}
                       >
-                        Approved
+                        Approve
                       </DefaultButton>
                       <DefaultButton
                         // className="cancelBtn"

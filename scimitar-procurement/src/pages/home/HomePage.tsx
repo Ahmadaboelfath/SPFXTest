@@ -68,12 +68,12 @@ class HomePage extends React.Component<
                 <MDBCol size="6" sm="12" lg="6" className="center">
                   <div className="ButtonsHome ">
                     <Link to="/NewMaterialRequesition">
-                      <span>Create New Material Requesition</span>
+                      <span>New Material Requesition</span>
                       <Icon iconName="NewFolder" />
                     </Link>
 
                     <Link to="/NewServiceRequesition">
-                      <span>Create New Service Requesition</span>
+                      <span>New Service Requesition</span>
                       <Icon iconName="NewFolder" />
                     </Link>
 
