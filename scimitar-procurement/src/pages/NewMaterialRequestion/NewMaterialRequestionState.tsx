@@ -1,4 +1,5 @@
 import { ITag } from "office-ui-fabric-react";
+import { DropdownItemProps } from "semantic-ui-react";
 import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 
@@ -14,6 +15,10 @@ export default interface NewMaterialRequestionState {
   showFinalConfirmationDialog: boolean;
   subFormInEditMode: boolean;
   currentlyEditingIndex: number;
+  departments: DropdownItemProps[];
+  selectedDepartment: DropdownItemProps;
+  errors: any;
+  formIsValid: boolean;
 
   dialogConfirmationAction: () => void;
   searchAction: (filter, item) => ITag[] | PromiseLike<ITag[]>;

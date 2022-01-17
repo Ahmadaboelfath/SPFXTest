@@ -19,15 +19,38 @@ export default class MaterialRequesitionForm extends React.Component<
           disabled={true}
           label="Request Date"
         />
-
-        <Textbox
-          label="Department"
-          ctrlName="department"
-          Required={false}
-          disabled={true}
-          handleInputChange={() => null}
-          value={this.props.viewModel.department}
-        />
+        {!this.props.disabled ? (
+          <Dropdown
+            Required={true}
+            ctrlName="department"
+            disabled={this.props.disabled}
+            handleInputChange={(value, ctrlName) =>
+              this.props.onChange(value, ctrlName)
+            }
+            label="Department"
+            options={this.props.departments ? this.props.departments : []}
+            errorMessage={
+              this.props.errors && this.props.errors["department"]
+                ? this.props.errors["department"]
+                : ""
+            }
+            showError={
+              this.props.errors && this.props.errors["department"]
+                ? true
+                : false
+            }
+            value={this.props.viewModel.department}
+          />
+        ) : (
+          <Textbox
+            label="Department"
+            ctrlName="department"
+            Required={false}
+            disabled={true}
+            handleInputChange={() => null}
+            value={this.props.viewModel.department}
+          />
+        )}
 
         <Textbox
           label="Requester"
@@ -49,7 +72,7 @@ export default class MaterialRequesitionForm extends React.Component<
         />
 
         <Dropdown
-          Required={true}
+          Required={false}
           ctrlName="priority"
           disabled={this.props.disabled}
           handleInputChange={(value, ctrlName) =>
@@ -72,7 +95,7 @@ export default class MaterialRequesitionForm extends React.Component<
         />
 
         <Dropdown
-          Required={true}
+          Required={false}
           ctrlName="currency"
           disabled={this.props.disabled}
           handleInputChange={(value, ctrlName) =>
@@ -97,7 +120,7 @@ export default class MaterialRequesitionForm extends React.Component<
         <Textbox
           label="Use For"
           ctrlName="useFor"
-          Required={true}
+          Required={false}
           disabled={this.props.disabled}
           handleInputChange={(value, controlname) =>
             this.props.onChange(value, controlname)

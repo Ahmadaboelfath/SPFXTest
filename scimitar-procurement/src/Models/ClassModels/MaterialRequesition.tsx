@@ -9,7 +9,7 @@ export default class MaterialRequesition {
   ) {
     this.requestDate = date ? new Date(date) : new Date();
     this.id = id ? id : 0;
-    this._department = "Admin";
+    // this._department = "Admin";
     if (materialRequesition) {
       this._currency = materialRequesition.currency;
       this._department = materialRequesition.department;

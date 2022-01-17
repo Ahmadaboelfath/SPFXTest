@@ -3,6 +3,7 @@ import {
   Button,
   DefaultButton,
   IBasePickerSuggestionsProps,
+  Icon,
   IconButton,
   ITag,
   Modal,
@@ -28,6 +29,7 @@ import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
 import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/IMaterialRequesitionBusinessLogic";
 import MaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/MaterialRequesitionBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
+import DepartmentService from "../../Services/DepartmentService/DepartmentService";
 
 class NewServiceRequestion extends React.Component<
   RouteComponentProps<NewServiceRequestionProps>,
@@ -54,6 +56,10 @@ class NewServiceRequestion extends React.Component<
       subFormModel: new MaterialRequestionItem(),
       subFormInEditMode: false,
       currentlyEditingIndex: null,
+      departments: [],
+      selectedDepartment: null,
+      errors: {},
+      formIsValid: true,
     };
   }
   private tagPickerSuggestionProps: IBasePickerSuggestionsProps = {
@@ -65,26 +71,45 @@ class NewServiceRequestion extends React.Component<
   static contextType = SecurityContext;
 
   componentDidMount(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      const newMaterialRequesitionObj = new MaterialRequesition(
-        null,
-        null,
-        prevState.viewModel.materialRequesition
-      );
-      newMaterialRequesitionObj.requestDate = new Date();
-      newMaterialRequesitionObj.department = this.context.userProperties[
-        "Department"
-      ]
-        ? this.context.userProperties["Department"]
-        : "Admin";
-      newMaterialRequesitionObj.requesterEmail =
-        this.context.userProperties["WorkEmail"];
+    const depService = new DepartmentService();
+    depService
+      .getDepartmentsLookup()
+      .then((deps) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.departments = deps;
+          const newMaterialRequesitionObj = new MaterialRequesition(
+            null,
+            null,
+            prevState.viewModel.materialRequesition
+          );
+          newMaterialRequesitionObj.requestDate = new Date();
+          newMaterialRequesitionObj.requesterEmail =
+            this.context.userProperties["WorkEmail"];
 
-      newState.viewModel.materialRequesition = newMaterialRequesitionObj;
-      newState.showSpinner = false;
-      return newState;
-    });
+          newState.viewModel.materialRequesition = newMaterialRequesitionObj;
+          newState.showSpinner = false;
+          return newState;
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          const newMaterialRequesitionObj = new MaterialRequesition(
+            null,
+            null,
+            prevState.viewModel.materialRequesition
+          );
+          newMaterialRequesitionObj.requestDate = new Date();
+          newMaterialRequesitionObj.requesterEmail =
+            this.context.userProperties["WorkEmail"];
+
+          newState.viewModel.materialRequesition = newMaterialRequesitionObj;
+          newState.showSpinner = false;
+          return newState;
+        });
+      });
   }
 
   onDialogDismiss(statePropName: string): any {
@@ -221,22 +246,57 @@ class NewServiceRequestion extends React.Component<
         this.state.viewModel.materialRequesition.requestDate.toString(),
         this.state.viewModel.materialRequesition
       );
-      newMaterialRequesition[controlName] = value;
+      newMaterialRequesition[controlName] = value.text;
       newState.viewModel.materialRequesition = newMaterialRequesition;
       return newState;
     });
   }
 
+  validate() {
+    let formIsValid = true;
+    let errors = {};
+    if (!this.state.viewModel.materialRequesition.department) {
+      formIsValid = false;
+      errors["department"] = "Must choose department";
+    }
+    if (!this.state.viewModel.materialRequesition.requestedBy) {
+      formIsValid = false;
+      errors["requestedBy"] = "Required";
+    }
+    if (this.state.viewModel.materialItems.length === 0) {
+      formIsValid = false;
+      errors["items"] = "Must add one item at least";
+    }
+
+    return {
+      formIsValid: formIsValid,
+      errors: errors,
+    };
+  }
+
   showConfirmationDialog(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.showConfrimationDialog = true;
-      newState.dialogTitle = "Submitting Service Requeisition";
-      newState.dialogMessage =
-        "Are you sure you want to submit this Service requesition";
-      newState.dialogConfirmationAction = () => this.submitForm();
-      return newState;
-    });
+    const validation = this.validate();
+
+    if (validation.formIsValid) {
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        newState.showConfrimationDialog = true;
+        newState.dialogTitle = "Submitting Material Requeisition";
+        newState.dialogMessage =
+          "Are you sure you want to submit this material requesition";
+        newState.dialogConfirmationAction = () => this.submitForm();
+        newState.formIsValid = true;
+        newState.errors = {};
+        return newState;
+      });
+    } else {
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        newState.formIsValid = validation.formIsValid;
+        newState.errors = validation.errors;
+        return newState;
+      });
+    }
   }
   submitForm(): void {
     this.setState((prevstate) => {
@@ -340,8 +400,9 @@ class NewServiceRequestion extends React.Component<
                 <MDBRow>
                   <MDBCol size="12" sm="12" lg="12">
                     <MaterialRequesitionForm
+                      departments={this.state.departments}
                       disabled={false}
-                      errors={{}}
+                      errors={this.state.errors}
                       onChange={(value: any, controlName: string) =>
                         this.onMaterialFormChange(value, controlName)
                       }
@@ -424,6 +485,14 @@ class NewServiceRequestion extends React.Component<
                       }
                       items={this.state.viewModel.materialItems}
                     />
+                    {this.state.errors && this.state.errors["items"] ? (
+                      <div className={styles.validateMsg}>
+                        <p>
+                          <Icon iconName="info" />
+                          {this.state.errors["items"]}
+                        </p>
+                      </div>
+                    ) : null}
                     {this.state.showConfrimationDialog ||
                     this.state.showFinalConfirmationDialog
                       ? this.renderDialog()
