@@ -11,6 +11,16 @@ export default class InvApprovalBusinessLogic
   constructor() {
     this._approvalService = new ApprovalService();
   }
+  async CancelRequest(
+    approval: InvApproval,
+    userEmail: string
+  ): Promise<InvApproval> {
+    return await this._approvalService.updateApprovalStatus(
+      approval.id,
+      "Cancelled",
+      userEmail
+    );
+  }
 
   async getApprovalById(id: number): Promise<InvApproval> {
     return await this._approvalService.getApprovalById(id);

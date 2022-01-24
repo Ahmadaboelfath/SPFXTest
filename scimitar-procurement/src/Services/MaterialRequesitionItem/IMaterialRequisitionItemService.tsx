@@ -8,4 +8,8 @@ export default interface IMaterialRequisitionItemService {
   getMaterialRequesitionItemsByRequesitionId(
     id: number
   ): Promise<MaterialRequestionItem[]>;
+
+  deleteItem(item: MaterialRequestionItem): Promise<boolean>;
+
+  updateItem(item: MaterialRequestionItem): Promise<MaterialRequestionItem>;
 }

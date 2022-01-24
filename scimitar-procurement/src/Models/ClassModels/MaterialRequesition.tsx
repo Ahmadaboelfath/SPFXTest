@@ -112,4 +112,12 @@ export default class MaterialRequesition {
   public set status(v: string) {
     this._status = v;
   }
+
+  private _leadTime: Date;
+  public get leadTime(): Date {
+    return this._leadTime;
+  }
+  public set leadTime(v: Date) {
+    this._leadTime = v;
+  }
 }

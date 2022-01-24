@@ -11,4 +11,9 @@ export default interface IPurchasingRequestBusinessLogic {
   ): Promise<PurchasingRequest>;
 
   getAllApprovedPurchasingRequests(): Promise<PurchasingRequest[]>;
+  getAllApprovedOrPendingPurchasingRequests(): Promise<PurchasingRequest[]>;
+
+  cancelPurchasingRequesition(
+    purchaseRequest: PurchasingRequest
+  ): Promise<PurchasingRequest>;
 }

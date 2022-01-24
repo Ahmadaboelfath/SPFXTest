@@ -17,6 +17,61 @@ export default class MaterialRequisitionItemService
     this._listName = "MaterialRequisitionItems";
     this._mapper = new MaterialRequestionItemMapper();
   }
+
+  private async getById(id: number): Promise<MaterialRequesitionItem> {
+    try {
+      const item = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.getById(id)
+        .expand("Material/Code, Material/Title, Material/UnitValue")
+        .select("*,Material/Code, Material/Title, Material/UnitValue")
+        .get();
+      return this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
+        item
+      );
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  async deleteItem(item: MaterialRequesitionItem): Promise<boolean> {
+    try {
+      const deleteResult = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.getById(parseInt(item.id))
+        .delete();
+
+      return true;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  async updateItem(
+    item: MaterialRequesitionItem
+  ): Promise<MaterialRequesitionItem> {
+    const mappedItem =
+      this._mapper.mapFromMaterialRequesitionItemToSPMaterialRequesitionItem(
+        item
+      );
+    try {
+      const updatedItem = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.getById(parseInt(item.id))
+        .update(mappedItem);
+      // const itemAterUpdate = updatedItem.item
+      //   .expand("Material/Code, Material/Title, Material/UnitValue")
+      //   .select("*,Material/Code, Material/Title, Material/UnitValue")
+      //   .get();
+      return item;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   async getMaterialRequesitionItemsByRequesitionId(
     id: number
   ): Promise<MaterialRequesitionItem[]> {
@@ -24,8 +79,8 @@ export default class MaterialRequisitionItemService
       const items = await sp.web.lists
         .getByTitle(this._listName)
         .items.filter(`MaterialRequesition eq ${id}`)
-        .expand("Material/Code, Material/Title")
-        .select("*,Material/Code, Material/Title")
+        .expand("Material/Code, Material/Title, Material/UnitValue")
+        .select("*,Material/Code, Material/Title, Material/UnitValue")
         .get();
 
       if (items.length > 0) {
@@ -57,8 +112,8 @@ export default class MaterialRequisitionItemService
     const item = await sp.web.lists
       .getByTitle(this._listName)
       .items.getById(addedItem.data.Id)
-      .expand("Material/Code, Material/Title")
-      .select("*,Material/Code, Material/Title")
+      .expand("Material/Code, Material/Title, Material/UnitValue")
+      .select("*,Material/Code, Material/Title, Material/UnitValue")
       .get();
 
     return this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(

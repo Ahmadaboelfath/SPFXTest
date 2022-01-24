@@ -18,6 +18,20 @@ export default class PurchasingRequestBusinessModel
 
     this._purchasingRequestService = new PurchasingRequestService();
   }
+  async getAllApprovedOrPendingPurchasingRequests(): Promise<
+    PurchasingRequest[]
+  > {
+    return await this._purchasingRequestService.getAllApprovedOrPendingPurchasingRequests();
+  }
+  async cancelPurchasingRequesition(
+    purchaseRequest: PurchasingRequest
+  ): Promise<PurchasingRequest> {
+    purchaseRequest.fieldManagerApproval = "Cancelled";
+    return this._purchasingRequestService.updatePurchaseRequest(
+      purchaseRequest
+    );
+  }
+
   async getAllApprovedPurchasingRequests(): Promise<PurchasingRequest[]> {
     return await this._purchasingRequestService.getApprovedPurchasingRequests();
   }

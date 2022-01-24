@@ -23,6 +23,7 @@ export default class MaterialRequisitionMapper
     materialRequisition.status = SPMaterialRequisitionItem.Status;
     materialRequisition.requesterEmail =
       SPMaterialRequisitionItem.RequesterEmail;
+    materialRequisition.leadTime = new Date(SPMaterialRequisitionItem.LeadTime);
 
     return materialRequisition;
   }
@@ -41,6 +42,7 @@ export default class MaterialRequisitionMapper
       Status: materialRequsition.status,
       RequesterEmail: materialRequsition.requesterEmail,
       RequestType: requestType,
+      LeadTime: materialRequsition.leadTime,
     };
   }
 }

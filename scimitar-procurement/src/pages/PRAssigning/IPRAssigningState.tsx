@@ -3,6 +3,7 @@ import PurchasingRequest from "../../Models/ClassModels/PurchasingRequest";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 import PurchasingRequestViewModel from "../../Models/ViewModels/PurchasingRequestViewModel";
 import { IUserLookup } from "../../Models/ClassModels/userModels";
+import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 
 export default interface IPRAssigningState {
   viewModel: PurchasingRequestViewModel;
@@ -18,4 +19,9 @@ export default interface IPRAssigningState {
   assigneePickerErrorMessage: string;
   assigneePickerError: boolean;
   formIsValid: boolean;
+  currentUserRole: string;
+  isAdmin: boolean;
+  showMaterialItemForm: boolean;
+  currentlyEditingIndex: number;
+  currentlyEditingItem: MaterialRequestionItem;
 }

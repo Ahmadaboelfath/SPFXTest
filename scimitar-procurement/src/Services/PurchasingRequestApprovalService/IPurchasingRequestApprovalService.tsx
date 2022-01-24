@@ -10,4 +10,5 @@ export default interface IPurchasingRequestApprovalService {
   ): Promise<PurchasingRequestApproval>;
 
   getApprovalById(id: number): Promise<PurchasingRequestApproval>;
+  getNonRejectedOrCancelledApprovals(): Promise<PurchasingRequestApproval[]>;
 }

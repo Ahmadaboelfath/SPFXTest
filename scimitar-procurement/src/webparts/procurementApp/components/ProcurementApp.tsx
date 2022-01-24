@@ -49,6 +49,9 @@ const PRPendingApprovals = React.lazy(() => {
 const ApprovedPR = React.lazy(() => {
   return import("../../../pages/PRPendingAssigning/PRPendingAssigning");
 });
+const NonRejectedOrCancelled = React.lazy(() => {
+  return import("../../../pages/PurchasingRequests/PurchasingRequests");
+});
 
 export default class ProcurementApp extends React.Component<
   IProcurementAppProps,
@@ -72,21 +75,15 @@ export default class ProcurementApp extends React.Component<
               <HeaderPageComponent />
               <div style={{ minHeight: this.state.fullheight - 50 }}>
                 <Switch>
-                  <PrivateRoute
-                    path="/NewMaterialRequesition"
-                    allowedGroups={[new SPGroup("Employees")]}
-                  >
+                  <Route path="/NewMaterialRequesition">
                     <NewMaterialRequestionPage />
-                  </PrivateRoute>
-                  <PrivateRoute
-                    path="/NewServiceRequesition"
-                    allowedGroups={[new SPGroup("Employees")]}
-                  >
+                  </Route>
+                  <Route path="/NewServiceRequesition">
                     <NewServiceRequestion />
-                  </PrivateRoute>
+                  </Route>
                   <PrivateRoute
                     path="/MaterialRequestInvApproval/:id"
-                    allowedGroups={[new SPGroup("Inventory")]}
+                    allowedGroups={[new SPGroup("Warehouse")]}
                   >
                     <MaterialRequistionInvApproval />
                   </PrivateRoute>
@@ -98,14 +95,14 @@ export default class ProcurementApp extends React.Component<
                   </PrivateRoute>
                   <PrivateRoute
                     path="/PRAssigning/:id"
-                    allowedGroups={[new SPGroup("Procurement")]}
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
                   >
                     <PRAssigning />
                   </PrivateRoute>
-                  {/* <Route
-              path="/NewMaterialRequestion"
-              render={() => <NewMaterialRequestionPage />}
-            /> */}
+
                   <Route
                     path="/MyRequests"
                     render={() => (
@@ -122,22 +119,32 @@ export default class ProcurementApp extends React.Component<
                       </React.Suspense>
                     )}
                   />
-                  <Route
+                  <PrivateRoute
                     path="/PRPendingApprovals"
-                    render={() => (
-                      <React.Suspense fallback={<LoadingBoxComponent />}>
-                        <PRPendingApprovals />
-                      </React.Suspense>
-                    )}
-                  />
-                  <Route
+                    allowedGroups={[new SPGroup("FieldManager")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <PRPendingApprovals />
+                    </React.Suspense>
+                  </PrivateRoute>
+
+                  <PrivateRoute
                     path="/ApprovedPR"
-                    render={() => (
-                      <React.Suspense fallback={<LoadingBoxComponent />}>
-                        <ApprovedPR />
-                      </React.Suspense>
-                    )}
-                  />
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <ApprovedPR />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/PurchasingRequests"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <NonRejectedOrCancelled />
+                    </React.Suspense>
+                  </PrivateRoute>
+
                   <Route path="/AccessDenied" render={() => <NotAllowed />} />
                   <Route path="/dev" render={() => <DevWorkBench />} />
                   <Route path="/" exact render={() => <HomePage />} />

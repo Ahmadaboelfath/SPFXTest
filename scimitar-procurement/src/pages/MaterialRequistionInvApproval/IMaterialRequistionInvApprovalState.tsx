@@ -1,4 +1,5 @@
 import Approval from "../../Models/ClassModels/InvApproval";
+import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 
 export default interface IMaterialRequistionInvApprovalState {
@@ -11,4 +12,9 @@ export default interface IMaterialRequistionInvApprovalState {
   dialogTitle: string;
   showError: boolean;
   submissionAction: () => void;
+  currentUserRole: string;
+  isAdmin: boolean;
+  showMaterialItemForm: boolean;
+  currentlyEditingIndex: number;
+  currentlyEditingItem: MaterialRequestionItem;
 }

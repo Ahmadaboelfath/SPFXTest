@@ -18,4 +18,11 @@ export default interface IPurchasingRequestApprovalBusinessLogic {
     request: PurchasingRequestApproval,
     logeedInUser: string
   ): Promise<PurchasingRequestApproval>;
+
+  cancelRequest(
+    request: PurchasingRequestApprovalViewModel,
+    logeedInUser: string
+  ): Promise<PurchasingRequestApprovalViewModel>;
+
+  getNonCancelledOrRejectedItems(): Promise<PurchasingRequestApproval[]>;
 }

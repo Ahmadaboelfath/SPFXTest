@@ -6,4 +6,5 @@ export default interface IInvApprovalBusinessLogic {
 
   InStock(id: number, userEmail: string): Promise<InvApproval>;
   OutOfStock(id: number, userEmail: string): Promise<InvApproval>;
+  CancelRequest(approval: InvApproval, userEmail: string): Promise<InvApproval>;
 }

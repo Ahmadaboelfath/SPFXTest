@@ -2,7 +2,7 @@ import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import { DefaultButton, IconButton, Modal } from "office-ui-fabric-react";
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Accordion } from "semantic-ui-react";
+import { Accordion } from "../../CoreComponents/accordion/Accordion";
 import ApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/InvApprovalBusinessLogic";
 import IApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/IInvApprovalBusinessLogic";
 import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/IMaterialRequesitionBusinessLogic";
@@ -22,17 +22,27 @@ import PurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingReques
 import PurchasingRequestViewModel from "../../Models/ViewModels/PurchasingRequestViewModel";
 import UserPicker from "../../Controls/userPicker";
 import { IUserLookup } from "../../Models/ClassModels/userModels";
+import styles from "../../CoreComponents/Componentstyles.module.scss";
+import IMaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/IMaterialRequisitionItemService";
+import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
+import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
+import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
+import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
 
 class PRAssigning extends React.Component<
   RouteComponentProps<IPRAssigningProps>,
   IPRAssigningState
 > {
   private _purchasingRequestBusinessLogic: IPurchasingRequestBusinessLogic;
+
   private _PRId = this.props.match.params["id"];
+  static contextType = SecurityContext;
+  private _materialRequisitionItemService: IMaterialRequisitionItemService;
 
   constructor(props) {
     super(props);
     this._purchasingRequestBusinessLogic = new PurchasingRequestBusinessLogic();
+    this._materialRequisitionItemService = new MaterialRequisitionItemService();
     this.state = {
       purchasingRequest: new PurchasingRequest(),
       dialogMessage: "",
@@ -47,9 +57,13 @@ class PRAssigning extends React.Component<
       assigneePickerErrorMessage: "",
       assigneePickerError: false,
       formIsValid: false,
+      currentUserRole: "",
+      isAdmin: false,
+      currentlyEditingIndex: null,
+      currentlyEditingItem: new MaterialRequestionItem(),
+      showMaterialItemForm: false,
     };
   }
-  static contextType = SecurityContext;
   componentDidMount(): void {
     this._purchasingRequestBusinessLogic
       .getPurchasingRequestDetailsById(this._PRId)
@@ -66,6 +80,8 @@ class PRAssigning extends React.Component<
           newState.showSpinner = false;
           newState.purchasingRequest = PR.purchaseRequest;
           newState.userLookup = userLookup.id ? [userLookup] : [];
+          newState.currentUserRole = this.context.groups[0].groupName;
+          newState.isAdmin = this.context.isAdmin;
           newState.viewModel = PR;
           return newState;
         });
@@ -249,27 +265,39 @@ class PRAssigning extends React.Component<
                   <MDBCol>
                     <TableList
                       items={this.state.viewModel.materialRequeisitionItems}
+                      userRole={this.state.currentUserRole}
+                      isAdmin={this.state.isAdmin}
+                      onDelete={(item, index) =>
+                        this.deleteMaterialItem(item, index)
+                      }
+                      onItemClick={(item, index) =>
+                        this.onItemClick(item, index)
+                      }
                     />
                   </MDBCol>
                 </MDBRow>
               </Accordion>
-              <Accordion title="Assigned User" collapsed={false}>
-                <MDBRow>
-                  <MDBCol>
-                    <UserPicker
-                      ctrlName="picker"
-                      onChange={(selectedUsers) => {
-                        this.onAssignedChange(selectedUsers);
-                      }}
-                      selected={this.state.userLookup}
-                      required={true}
-                      showError={this.state.assigneePickerError}
-                      errorMessage={this.state.assigneePickerErrorMessage}
-                      label="Assignee"
-                    />
-                  </MDBCol>
-                </MDBRow>
-              </Accordion>
+              {this.state.currentUserRole === "Procurement" ||
+              this.state.isAdmin ? (
+                <Accordion title="Assigned User" collapsed={false}>
+                  <MDBRow>
+                    <MDBCol>
+                      <UserPicker
+                        ctrlName="picker"
+                        onChange={(selectedUsers) => {
+                          this.onAssignedChange(selectedUsers);
+                        }}
+                        selected={this.state.userLookup}
+                        required={true}
+                        showError={this.state.assigneePickerError}
+                        errorMessage={this.state.assigneePickerErrorMessage}
+                        label="Assignee"
+                      />
+                    </MDBCol>
+                  </MDBRow>
+                </Accordion>
+              ) : null}
+
               {this.state.showConfirmationDialog ||
               this.state.showFinalConfirmationDialog
                 ? this.renderDialog()
@@ -297,12 +325,204 @@ class PRAssigning extends React.Component<
                 >
                   Cancel
                 </DefaultButton>
+                {this.state.isAdmin ||
+                this.state.currentUserRole === "Warehouse" ? (
+                  <DefaultButton onClick={() => this.onCancelRequest()}>
+                    Cancel Request
+                  </DefaultButton>
+                ) : null}
               </div>
+
+              <Modal
+                titleAriaId="AddItems"
+                isOpen={this.state.showMaterialItemForm}
+                onDismiss={() => this.onDialogDismiss("showMaterialItemForm")}
+                isBlocking={false}
+                className={styles.Modal}
+              >
+                <div className={styles.Modalheader}>
+                  <h3>Add Material Item</h3>
+                  <IconButton
+                    iconProps={{ iconName: "Cancel" }}
+                    ariaLabel="Close popup modal"
+                    onClick={() => this.onDialogDismiss("showMaterialItemForm")}
+                  />
+                </div>
+
+                <div className={styles.Modalbody}>
+                  <MaterialItemForm
+                    count={(
+                      this.state.viewModel.materialRequeisitionItems.length + 1
+                    ).toString()}
+                    onSearch={() => null}
+                    toggleSearchPicker={() => null}
+                    viewModel={this.state.currentlyEditingItem}
+                    searchByCode={true}
+                    onChange={(value, controlName) =>
+                      this.onMaterialItemFormChange(value, controlName)
+                    }
+                    onSubmit={() => this.onMaterialItemFormSubmit()}
+                    isInEditForm={true}
+                    tagPickerSuggesstionProps={null}
+                  />
+                </div>
+                <div className="Modalfooter">
+                  <div className="buttonBlock">
+                    {this.state.currentUserRole === "Procurement" ||
+                    this.state.isAdmin ? (
+                      <DefaultButton
+                        onClick={() => this.onMaterialItemFormSubmit()}
+                        // className="saveBtn"
+                      >
+                        <span>Submit</span>
+                      </DefaultButton>
+                    ) : null}
+                    <DefaultButton
+                      onClick={() =>
+                        this.onDialogDismiss("showMaterialItemForm")
+                      }
+                      // className="cancelBtn"
+                    >
+                      <span>Cancel</span>
+                    </DefaultButton>
+                  </div>
+                </div>
+              </Modal>
             </MDBContainer>
           </div>
         )}
       </>
     );
+  }
+  onCancelRequest(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.dialogMessage = `Are you sure you want to cancel this request?`;
+      newState.dialogTitle = "Cancel Request";
+      newState.submissionAction = () => this.cancelRequest();
+      return newState;
+    });
+  }
+
+  cancelRequest(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showConfirmationDialog = false;
+      return newState;
+    });
+
+    this._purchasingRequestBusinessLogic
+      .cancelPurchasingRequesition(this.state.viewModel.purchaseRequest)
+      .then((PR) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage =
+            "The Purchasing request have been cancelled successfully";
+          newState.dialogTitle = "Cancelled successfully";
+          newState.submissionAction = () => this.props.history.push("/");
+          return newState;
+        });
+      });
+  }
+
+  onMaterialItemFormSubmit(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showMaterialItemForm = false;
+      return newState;
+    });
+
+    this._materialRequisitionItemService
+      .updateItem(this.state.currentlyEditingItem)
+      .then((item) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          const newItemsArr = [
+            ...prevState.viewModel.materialRequeisitionItems,
+          ];
+          newItemsArr[prevState.currentlyEditingIndex] = item;
+          newState.viewModel.materialRequeisitionItems = newItemsArr;
+          newState.currentlyEditingItem = new MaterialRequestionItem();
+          newState.showSpinner = false;
+
+          return newState;
+        });
+      });
+  }
+  onMaterialItemFormChange(value: any, controlName: any): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      const newItem = new MaterialRequestionItem(
+        prevState.currentlyEditingItem
+      );
+      newItem[controlName] = value;
+      newState.currentlyEditingItem = newItem;
+      return newState;
+    });
+  }
+  onItemClick(item: any, index: number): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showMaterialItemForm = true;
+      newState.currentlyEditingIndex = index;
+      newState.currentlyEditingItem = new MaterialRequestionItem(item);
+      return newState;
+    });
+  }
+  deleteMaterialItem(item: MaterialRequestionItem, index: number): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.dialogTitle = "Delete Item";
+      newState.dialogMessage = `Are You sure you want to delete this item ${item.description}? `;
+      newState.submissionAction = () => this.deleteItem(item);
+      return newState;
+    });
+  }
+  deleteItem(item: MaterialRequestionItem): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showConfirmationDialog = false;
+      return newState;
+    });
+
+    this._materialRequisitionItemService
+      .deleteItem(item)
+      .then((value) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.viewModel.materialRequeisitionItems =
+            newState.viewModel.materialRequeisitionItems.filter(
+              (curItem) => curItem.id !== item.id
+            );
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage = "Item was removed successfully";
+          newState.dialogTitle = "Success";
+          newState.submissionAction = () =>
+            this.onDialogDismiss("showFinalConfirmationDialog");
+          return newState;
+        });
+      })
+      .catch((e) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage =
+            "An Unexpected error ocuured please try again later";
+          newState.dialogTitle = "Error";
+          newState.submissionAction = () =>
+            this.onDialogDismiss("showFinalConfirmationDialog");
+          return newState;
+        });
+      });
   }
 }
 

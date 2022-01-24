@@ -26,14 +26,14 @@ export default class MaterialItemForm extends React.Component<
               }
               disabled={true}
             />
-            <Toggle
+            {/* <Toggle
               activeText="Description"
               inactiveText="Code"
               label="Search Type"
               disabled={false}
               controlPropName=""
               onChange={() => this.props.toggleSearchPicker()}
-            />
+            /> */}
             <TagPicker
               errorMessage=" "
               label={
@@ -51,6 +51,7 @@ export default class MaterialItemForm extends React.Component<
               }
               selectedValue={this.props.viewModel.materialTag}
               pickerSuggestionsProps={this.props.tagPickerSuggesstionProps}
+              disabled={true}
             />
             <Textbox
               Required={false}
@@ -78,6 +79,16 @@ export default class MaterialItemForm extends React.Component<
               }
               label="Quantity"
               value={this.props.viewModel.quantity.toString()}
+              disabled={false}
+            />
+            <Textbox
+              Required={false}
+              ctrlName="balance"
+              handleInputChange={(value, controlName) =>
+                this.props.onChange(value, controlName)
+              }
+              label="Balance"
+              value={this.props.viewModel.balance.toString()}
               disabled={false}
             />
           </MDBCol>

@@ -135,6 +135,24 @@ export default class MaterialRequesitionForm extends React.Component<
             this.props.errors && this.props.errors["useFor"] ? true : false
           }
         />
+        <Datepicker
+          label="Lead Time"
+          ctrlName="leadTime"
+          Required={true}
+          disabled={this.props.disabled}
+          handleDate={(value, controlname) =>
+            this.props.onChange(value, controlname)
+          }
+          selected={this.props.viewModel.leadTime}
+          errorMessage={
+            this.props.errors && this.props.errors["leadTime"]
+              ? this.props.errors["leadTime"]
+              : ""
+          }
+          showError={
+            this.props.errors && this.props.errors["leadTime"] ? true : false
+          }
+        />
       </div>
     );
   }

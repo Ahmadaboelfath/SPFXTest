@@ -179,12 +179,14 @@ class NewMaterialRequestion extends React.Component<
           newSubFormModel.code = controlValue[0].key.toString();
           newSubFormModel.description = controlValue[0].name;
           newSubFormModel.materialId = controlValue[0].materialId;
+          newSubFormModel.unit = controlValue[0].unit;
           newState.subFormModel = newSubFormModel;
           newState.subFormModel.materialTag = value;
         } else {
           newSubFormModel.code = "";
           newSubFormModel.description = "";
           newSubFormModel.materialId = 0;
+          newSubFormModel.unit = "";
           newState.subFormModel = newSubFormModel;
           newState.subFormModel.materialTag = value;
         }
@@ -293,6 +295,11 @@ class NewMaterialRequestion extends React.Component<
     if (this.state.viewModel.materialItems.length === 0) {
       formIsValid = false;
       errors["items"] = "Must add one item at least";
+    }
+
+    if (!this.state.viewModel.materialRequesition.leadTime) {
+      formIsValid = false;
+      errors["leadTime"] = "Required";
     }
 
     return {

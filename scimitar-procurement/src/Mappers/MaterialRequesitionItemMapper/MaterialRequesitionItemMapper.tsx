@@ -15,14 +15,21 @@ export default class MaterialRequestionItemMapper
     materialRequisitionItem.id = SPMaterialRequisitionItem.Id;
     materialRequisitionItem.order = SPMaterialRequisitionItem.ItemOrder;
     materialRequisitionItem.quantity = SPMaterialRequisitionItem.Quantity;
-    materialRequisitionItem.unit = SPMaterialRequisitionItem.Unit;
+    materialRequisitionItem.unit = SPMaterialRequisitionItem.Material.UnitValue;
+    materialRequisitionItem.materialId = SPMaterialRequisitionItem.MaterialId;
+    materialRequisitionItem.materialRequisitionId =
+      SPMaterialRequisitionItem.MaterialRequesitionId;
     materialRequisitionItem.materialTag = [
       {
         name: SPMaterialRequisitionItem.Material.Title,
         key: SPMaterialRequisitionItem.Material.Code,
         materialId: SPMaterialRequisitionItem.MaterialId,
+        unit: SPMaterialRequisitionItem.Material.UnitValue,
       },
     ];
+    materialRequisitionItem.balance = SPMaterialRequisitionItem.Balance
+      ? SPMaterialRequisitionItem.Balance
+      : 0;
 
     return materialRequisitionItem;
   }
@@ -33,9 +40,9 @@ export default class MaterialRequestionItemMapper
       MaterialId: materialRequisitionItem.materialId,
       Title: materialRequisitionItem.description,
       Quantity: materialRequisitionItem.quantity,
-      Unit: materialRequisitionItem.unit,
       ItemOrder: materialRequisitionItem.order,
       MaterialRequesitionId: materialRequisitionItem.materialRequisitionId,
+      Balance: materialRequisitionItem.balance,
     };
   }
 }

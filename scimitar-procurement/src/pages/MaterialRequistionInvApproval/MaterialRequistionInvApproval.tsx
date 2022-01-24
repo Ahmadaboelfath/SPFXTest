@@ -2,7 +2,7 @@ import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import { DefaultButton, IconButton, Modal } from "office-ui-fabric-react";
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Accordion } from "semantic-ui-react";
+import { Accordion } from "../../CoreComponents/accordion/Accordion";
 import ApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/InvApprovalBusinessLogic";
 import IApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/IInvApprovalBusinessLogic";
 import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/IMaterialRequesitionBusinessLogic";
@@ -16,6 +16,13 @@ import { TableList } from "./Components/Grid/TableList";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
 import IMaterialRequistionInvApprovalProps from "./IMaterialRequistionInvApprovalProps";
 import IMaterialRequistionInvApprovalState from "./IMaterialRequistionInvApprovalState";
+import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
+import styles from "../../CoreComponents/Componentstyles.module.scss";
+import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
+import IMaterialRequesitionService from "../../Services/MaterialRequesitionService/IMaterialRequesitionService";
+import MaterialRequesitionService from "../../Services/MaterialRequesitionService/MaterialRequesitionService";
+import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
+import IMaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/IMaterialRequisitionItemService";
 
 class MaterialRequistionApproval extends React.Component<
   RouteComponentProps<IMaterialRequistionInvApprovalProps>,
@@ -24,12 +31,14 @@ class MaterialRequistionApproval extends React.Component<
   private _approvalBusinessLogic: IApprovalBusinessLogic;
   private _materialRequistionBusinessLogic: IMaterialRequesitionBusinessLogic;
   private _approvalId = this.props.match.params["id"];
+  private _materialRequisitionItemService: IMaterialRequisitionItemService;
 
   constructor(props) {
     super(props);
     this._approvalBusinessLogic = new ApprovalBusinessLogic();
     this._materialRequistionBusinessLogic =
       new MaterialRequesitionBusinessLogic();
+    this._materialRequisitionItemService = new MaterialRequisitionItemService();
     this.state = {
       approvalItem: new Approval(),
       dialogMessage: "",
@@ -40,6 +49,11 @@ class MaterialRequistionApproval extends React.Component<
       submissionAction: null,
       viewModel: new MaterialRequesitionFormViewModel(),
       showError: false,
+      currentUserRole: "",
+      isAdmin: false,
+      showMaterialItemForm: false,
+      currentlyEditingIndex: null,
+      currentlyEditingItem: new MaterialRequestionItem(),
     };
   }
   static contextType = SecurityContext;
@@ -60,6 +74,8 @@ class MaterialRequistionApproval extends React.Component<
                 newState.showSpinner = false;
                 newState.approvalItem = approval;
                 newState.viewModel = materialRequesitionViewModel;
+                newState.currentUserRole = this.context.groups[0].groupName;
+                newState.isAdmin = this.context.isAdmin;
                 return newState;
               });
             })
@@ -70,6 +86,8 @@ class MaterialRequistionApproval extends React.Component<
                 const newState = { ...prevState };
                 newState.showError = true;
                 newState.showSpinner = false;
+                newState.currentUserRole = this.context.groups[0].groupName;
+                newState.isAdmin = this.context.isAdmin;
                 return newState;
               });
             });
@@ -83,6 +101,8 @@ class MaterialRequistionApproval extends React.Component<
           const newState = { ...prevState };
           newState.showError = true;
           newState.showSpinner = false;
+          newState.currentUserRole = this.context.groups[0].groupName;
+          newState.isAdmin = this.context.isAdmin;
           return newState;
         });
       });
@@ -282,7 +302,17 @@ class MaterialRequistionApproval extends React.Component<
               <Accordion title="Material Requesition Items" collapsed={false}>
                 <MDBRow>
                   <MDBCol>
-                    <TableList items={this.state.viewModel.materialItems} />
+                    <TableList
+                      items={this.state.viewModel.materialItems}
+                      isAdmin={this.state.isAdmin}
+                      userRole={this.state.currentUserRole}
+                      onDelete={(item, index) =>
+                        this.deleteMaterialItem(item, index)
+                      }
+                      onItemClick={(item, index) =>
+                        this.onItemClick(item, index)
+                      }
+                    />
                     {this.state.showConfirmationDialog ||
                     this.state.showFinalConfirmationDialog
                       ? this.renderDialog()
@@ -304,6 +334,9 @@ class MaterialRequistionApproval extends React.Component<
                       >
                         Out-of-stock
                       </DefaultButton>
+                      <DefaultButton onClick={() => this.onCancelRequest()}>
+                        Cancel Request
+                      </DefaultButton>
                       <DefaultButton
                         // className="cancelBtn"
                         onClick={() => this.props.history.push("/")}
@@ -314,11 +347,197 @@ class MaterialRequistionApproval extends React.Component<
                   </MDBCol>
                 </MDBRow>
               </Accordion>
+              <Modal
+                titleAriaId="AddItems"
+                isOpen={this.state.showMaterialItemForm}
+                onDismiss={() => this.onDialogDismiss("showMaterialItemForm")}
+                isBlocking={false}
+                className={styles.Modal}
+              >
+                <div className={styles.Modalheader}>
+                  <h3>Add Material Item</h3>
+                  <IconButton
+                    iconProps={{ iconName: "Cancel" }}
+                    ariaLabel="Close popup modal"
+                    onClick={() => this.onDialogDismiss("showMaterialItemForm")}
+                  />
+                </div>
+
+                <div className={styles.Modalbody}>
+                  <MaterialItemForm
+                    count={(
+                      this.state.viewModel.materialItems.length + 1
+                    ).toString()}
+                    onSearch={() => null}
+                    toggleSearchPicker={() => null}
+                    viewModel={this.state.currentlyEditingItem}
+                    searchByCode={true}
+                    onChange={(value, controlName) =>
+                      this.onMaterialItemFormChange(value, controlName)
+                    }
+                    onSubmit={() => this.onMaterialItemFormSubmit()}
+                    isInEditForm={true}
+                    tagPickerSuggesstionProps={null}
+                  />
+                </div>
+                <div className="Modalfooter">
+                  <div className="buttonBlock">
+                    {this.state.currentUserRole === "Procurement" ||
+                    this.state.isAdmin ? (
+                      <DefaultButton
+                        onClick={() => this.onMaterialItemFormSubmit()}
+                        // className="saveBtn"
+                      >
+                        <span>Submit</span>
+                      </DefaultButton>
+                    ) : null}
+                    <DefaultButton
+                      onClick={() =>
+                        this.onDialogDismiss("showMaterialItemForm")
+                      }
+                      // className="cancelBtn"
+                    >
+                      <span>Cancel</span>
+                    </DefaultButton>
+                  </div>
+                </div>
+              </Modal>
             </MDBContainer>
           </div>
         )}
       </>
     );
+  }
+  onCancelRequest(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.dialogMessage = `Are you sure you want to cancel this request?`;
+      newState.dialogTitle = "Cancel Request";
+      newState.submissionAction = () => this.cancelRequest();
+      return newState;
+    });
+  }
+
+  cancelRequest(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showConfirmationDialog = false;
+      return newState;
+    });
+
+    this._approvalBusinessLogic
+      .CancelRequest(
+        this.state.approvalItem,
+        this.context.userProperties["WorkEmail"]
+      )
+      .then((PR) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage =
+            "The Purchasing request have been cancelled successfully";
+          newState.dialogTitle = "Cancelled successfully";
+          newState.submissionAction = () => this.props.history.push("/");
+          return newState;
+        });
+      });
+  }
+
+  onMaterialItemFormSubmit(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showMaterialItemForm = false;
+      return newState;
+    });
+
+    this._materialRequisitionItemService
+      .updateItem(this.state.currentlyEditingItem)
+      .then((item) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          const newItemsArr = [...prevState.viewModel.materialItems];
+          newItemsArr[prevState.currentlyEditingIndex] = item;
+          newState.viewModel.materialItems = newItemsArr;
+          newState.currentlyEditingItem = new MaterialRequestionItem();
+          newState.showSpinner = false;
+
+          return newState;
+        });
+      });
+  }
+  onMaterialItemFormChange(value: any, controlName: any): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      const newItem = new MaterialRequestionItem(
+        prevState.currentlyEditingItem
+      );
+      newItem[controlName] = value;
+      newState.currentlyEditingItem = newItem;
+      return newState;
+    });
+  }
+  onItemClick(item: any, index: number): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showMaterialItemForm = true;
+      newState.currentlyEditingIndex = index;
+      newState.currentlyEditingItem = new MaterialRequestionItem(item);
+      return newState;
+    });
+  }
+  deleteMaterialItem(item: MaterialRequestionItem, index: number): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.dialogTitle = "Delete Item";
+      newState.dialogMessage = `Are You sure you want to delete this item ${item.description}? `;
+      newState.submissionAction = () => this.deleteItem(item);
+      return newState;
+    });
+  }
+  deleteItem(item: MaterialRequestionItem): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showSpinner = true;
+      newState.showConfirmationDialog = false;
+      return newState;
+    });
+
+    this._materialRequisitionItemService
+      .deleteItem(item)
+      .then((value) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.viewModel.materialItems =
+            newState.viewModel.materialItems.filter(
+              (curItem) => curItem.id !== item.id
+            );
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage = "Item was removed successfully";
+          newState.dialogTitle = "Success";
+          newState.submissionAction = () =>
+            this.onDialogDismiss("showFinalConfirmationDialog");
+          return newState;
+        });
+      })
+      .catch((e) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showSpinner = false;
+          newState.showFinalConfirmationDialog = true;
+          newState.dialogMessage =
+            "An Unexpected error ocuured please try again later";
+          newState.dialogTitle = "Error";
+          newState.submissionAction = () =>
+            this.onDialogDismiss("showFinalConfirmationDialog");
+          return newState;
+        });
+      });
   }
 }
 

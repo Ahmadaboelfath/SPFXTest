@@ -268,6 +268,11 @@ class NewServiceRequestion extends React.Component<
       errors["items"] = "Must add one item at least";
     }
 
+    if (!this.state.viewModel.materialRequesition.leadTime) {
+      formIsValid = false;
+      errors["leadTime"] = "Must add one item at least";
+    }
+
     return {
       formIsValid: formIsValid,
       errors: errors,

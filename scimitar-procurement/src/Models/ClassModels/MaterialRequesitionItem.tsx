@@ -12,12 +12,13 @@ export default class MaterialRequestionItem {
       this._code = item.code;
       this._description = item.description;
       this._id = item.id;
-      this._materialId = item._materialId;
+      this._materialId = item.materialId;
       this._materialRequisitionId = item.materialRequisitionId;
       this._order = item.order;
       this._quantity = item.quantity;
       this._unit = item.unit;
       this._materialTag = item.materialTag;
+      this._balance = item.balance;
     }
   }
   private _id: string;
@@ -26,6 +27,14 @@ export default class MaterialRequestionItem {
   }
   public set id(v: string) {
     this._id = v;
+  }
+
+  private _balance: number;
+  public get balance(): number {
+    return this._balance;
+  }
+  public set balance(v: number) {
+    this._balance = v;
   }
 
   private _description: string;

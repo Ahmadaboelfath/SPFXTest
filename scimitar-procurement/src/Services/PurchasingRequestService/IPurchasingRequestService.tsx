@@ -6,4 +6,5 @@ export default interface IPurchasingRequestService {
     purchasingRequest: PurchasingRequest
   ): Promise<PurchasingRequest>;
   getApprovedPurchasingRequests(): Promise<PurchasingRequest[]>;
+  getAllApprovedOrPendingPurchasingRequests(): Promise<PurchasingRequest[]>;
 }

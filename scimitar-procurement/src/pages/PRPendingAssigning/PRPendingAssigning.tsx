@@ -17,11 +17,11 @@ class PRPendingAssigning extends React.Component<
   RouteComponentProps<IPRPendingAssigningProps>,
   IPRPendingAssigningState
 > {
-  private readonly _approvalBusinessLogic: IPurchasingRequestBusinessLogic;
+  private readonly _purchasingRequestBusinessLogic: IPurchasingRequestBusinessLogic;
 
   constructor(props) {
     super(props);
-    this._approvalBusinessLogic = new PurchasingRequestBusinessLogic();
+    this._purchasingRequestBusinessLogic = new PurchasingRequestBusinessLogic();
     this.state = {
       showSpinner: true,
       purchasingRequests: [],
@@ -31,7 +31,7 @@ class PRPendingAssigning extends React.Component<
   static contextType = SecurityContext;
 
   componentDidMount(): void {
-    this._approvalBusinessLogic
+    this._purchasingRequestBusinessLogic
       .getAllApprovedPurchasingRequests()
       .then((PRs) => {
         this.setState((prevState) => {

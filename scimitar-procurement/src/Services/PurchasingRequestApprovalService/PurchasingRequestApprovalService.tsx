@@ -17,6 +17,29 @@ export default class PurchasingRequestApprovalService
     this._mapper = new PurchasingRequestApprovalMapper();
     this._listName = "PurchasingRequestsApprovals";
   }
+  async getNonRejectedOrCancelledApprovals(): Promise<
+    PurchasingRequestApproval[]
+  > {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.expand("PurchasingRequest/FIeldManagerApprovalCalc")
+        .select("*,PurchasingRequest/FIeldManagerApprovalCalc")
+        .filter(
+          "PurchasingRequest/FIeldManagerApprovalCalc ne 'Rejected' and PurchasingRequest/FIeldManagerApprovalCalc ne 'Cancelled'"
+        )
+        .get();
+
+      return items.map((item) =>
+        this._mapper.mapFromSPPurchaseRequestApprovalToPurchasingRequestApproval(
+          item
+        )
+      );
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
   async getApprovalById(id: number): Promise<PurchasingRequestApproval> {
     try {
       const item = await sp.web.lists

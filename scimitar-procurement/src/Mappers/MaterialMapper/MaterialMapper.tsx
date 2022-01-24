@@ -19,6 +19,7 @@ export default class MaterialMapper implements IMaterialMapper {
       name: SPMaterialItem.Title,
       key: SPMaterialItem.Code,
       materialId: SPMaterialItem.Id,
+      unit: SPMaterialItem.UnitValue,
     };
   }
 
