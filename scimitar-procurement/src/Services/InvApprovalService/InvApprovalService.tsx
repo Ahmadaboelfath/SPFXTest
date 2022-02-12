@@ -13,7 +13,7 @@ export default class InvApprovalService implements IApprovalService {
   private readonly _mapper: IApprovalMapper;
 
   constructor() {
-    this._listName = "InvApprovals";
+    this._listName = "WarehouseApprovals";
     this._mapper = new ApprovalMapper();
   }
   async getApprovalsForCurrentLoggedInUser(
@@ -22,13 +22,16 @@ export default class InvApprovalService implements IApprovalService {
     try {
       const approvalItems = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`Title eq '${userEmail}' and Status eq 'Pending'`)
+        .items.filter(
+          `substringof('${userEmail}', Title) and Status eq 'Pending'`
+        )
         .expand(
           "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
         .select(
           "*,MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
+        .orderBy("Id", false)
         .get();
 
       return approvalItems.map((approval) =>

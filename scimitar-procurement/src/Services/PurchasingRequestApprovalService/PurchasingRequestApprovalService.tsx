@@ -62,7 +62,9 @@ export default class PurchasingRequestApprovalService
     try {
       const approvals = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`(Title eq '${email}') and (Status eq 'Pending')`)
+        .items.filter(
+          `substringof('${email}', Title) and (Status eq 'Pending')`
+        )
         .get();
 
       return approvals.map((approval) =>

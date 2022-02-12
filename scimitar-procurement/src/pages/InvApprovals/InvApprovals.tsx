@@ -47,7 +47,7 @@ class InvApprovals extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="Inv Approval" />
+            <BannerComponent PageTitle="Warehouse Approval" />
             <MDBContainer>
               <MDBRow>
                 <MDBCol>

@@ -23,7 +23,7 @@ export default class MaterialRequesitionForm extends React.Component<
         <Textbox
           label="Department"
           ctrlName="department"
-          Required={false}
+          Required={true}
           disabled={true}
           handleInputChange={() => null}
           value={this.props.viewModel.department}
@@ -49,7 +49,7 @@ export default class MaterialRequesitionForm extends React.Component<
         />
         {this.props.disabled ? (
           <Textbox
-            Required={true}
+            Required={false}
             ctrlName="priority"
             handleInputChange={() => null}
             label="priority"
@@ -58,7 +58,7 @@ export default class MaterialRequesitionForm extends React.Component<
           />
         ) : (
           <Dropdown
-            Required={true}
+            Required={false}
             ctrlName="priority"
             disabled={this.props.disabled}
             handleInputChange={(value, ctrlName) =>
@@ -82,7 +82,7 @@ export default class MaterialRequesitionForm extends React.Component<
         )}
         {this.props.disabled ? (
           <Textbox
-            Required={true}
+            Required={false}
             ctrlName="currency"
             handleInputChange={() => null}
             label="Currency"
@@ -91,7 +91,7 @@ export default class MaterialRequesitionForm extends React.Component<
           />
         ) : (
           <Dropdown
-            Required={true}
+            Required={false}
             ctrlName="currency"
             disabled={this.props.disabled}
             handleInputChange={(value, ctrlName) =>
@@ -117,7 +117,7 @@ export default class MaterialRequesitionForm extends React.Component<
         <Textbox
           label="Use For"
           ctrlName="useFor"
-          Required={true}
+          Required={false}
           disabled={this.props.disabled}
           handleInputChange={(value, controlname) =>
             this.props.onChange(value, controlname)
@@ -133,7 +133,7 @@ export default class MaterialRequesitionForm extends React.Component<
           }
         />
         <Datepicker
-          label="Lead Time"
+          label="Needed by"
           ctrlName="leadTime"
           Required={true}
           disabled={this.props.disabled}

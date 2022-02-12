@@ -156,14 +156,22 @@ class NewMaterialRequestion extends React.Component<
     filter: string,
     selectedItem: ITag[]
   ): ITag[] | PromiseLike<ITag[]> {
-    return this._materialService.searchMaterialByCode(filter);
+    if (filter && filter.trim()) {
+      return this._materialService.searchMaterialByCode(filter);
+    } else {
+      return [];
+    }
   }
 
   onDescriptionSearch(
     filter: string,
     selectedItem: ITag[]
   ): ITag[] | PromiseLike<ITag[]> {
-    return this._materialService.searchMaterialByDescription(filter);
+    if (filter && filter.trim()) {
+      return this._materialService.searchMaterialByDescription(filter);
+    } else {
+      return [];
+    }
   }
 
   onMaterialItemFormChange(value, controlName) {

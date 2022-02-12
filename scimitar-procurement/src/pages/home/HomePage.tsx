@@ -83,7 +83,7 @@ class HomePage extends React.Component<
                     {this.state.currentUserRole === "Warehouse" ||
                     this.state.isAdmin ? (
                       <Link to="/InvApproval">
-                        <span>Inv Approval</span>
+                        <span>Warehouse Approval</span>
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}

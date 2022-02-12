@@ -33,9 +33,7 @@ export default class TagPicker extends React.Component<ITagPickerProps, any> {
           selectedItems={this.props.selectedValue}
           disabled={this.props.disabled ? true : false}
           onRenderSuggestionsItem={(props) => <Tag tag={props} />}
-          resolveDelay={
-            this.props.resolveDelay ? this.props.resolveDelay : 1000
-          }
+          resolveDelay={2000}
           pickerSuggestionsProps={this.props.pickerSuggestionsProps}
         />
 
