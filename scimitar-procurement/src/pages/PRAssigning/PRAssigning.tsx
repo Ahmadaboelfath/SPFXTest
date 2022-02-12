@@ -277,8 +277,7 @@ class PRAssigning extends React.Component<
                   </MDBCol>
                 </MDBRow>
               </Accordion>
-              {this.state.currentUserRole === "Procurement" ||
-              this.state.isAdmin ? (
+              {this.context.userRole === "Procurement" || this.state.isAdmin ? (
                 <Accordion title="Assigned User" collapsed={false}>
                   <MDBRow>
                     <MDBCol>
@@ -302,14 +301,19 @@ class PRAssigning extends React.Component<
               this.state.showFinalConfirmationDialog
                 ? this.renderDialog()
                 : null}
+
               <div className="buttonBlock">
-                <DefaultButton
-                  // className="cancelBtn"
-                  type="submit"
-                  onClick={() => this.showConfirmationDialog()}
-                >
-                  Submit
-                </DefaultButton>
+                {this.context.userRole === "Procurement" ||
+                this.state.isAdmin ? (
+                  <DefaultButton
+                    // className="cancelBtn"
+                    type="submit"
+                    onClick={() => this.showConfirmationDialog()}
+                  >
+                    Submit
+                  </DefaultButton>
+                ) : null}
+
                 {/* <DefaultButton
                         // className="cancelBtn"
                         type="submit"
@@ -325,8 +329,7 @@ class PRAssigning extends React.Component<
                 >
                   Cancel
                 </DefaultButton>
-                {this.state.isAdmin ||
-                this.state.currentUserRole === "Warehouse" ? (
+                {this.state.isAdmin || this.context.userRole === "Warehouse" ? (
                   <DefaultButton onClick={() => this.onCancelRequest()}>
                     Cancel Request
                   </DefaultButton>

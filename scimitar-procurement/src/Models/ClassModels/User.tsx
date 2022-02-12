@@ -29,6 +29,14 @@ export default class User {
     this._isAdmin = v;
   }
 
+  private _userRole: string;
+  public get userRole(): string {
+    return this._userRole;
+  }
+  public set userRole(v: string) {
+    this._userRole = v;
+  }
+
   public getGroup(group: SPGroup): SPGroup {
     const filteredGroup = this._groups.filter(
       (crrgroup: SPGroup) => crrgroup.groupName === group.groupName

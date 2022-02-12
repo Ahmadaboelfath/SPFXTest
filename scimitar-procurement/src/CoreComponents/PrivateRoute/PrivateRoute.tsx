@@ -12,7 +12,7 @@ export default class PrivateRoute extends React.Component<
   renderRouteOrRedirection() {
     let isAllowed = [];
     this.props.allowedGroups.forEach((allowedGroup) => {
-      if (this.context.getGroup(allowedGroup.groupName)) {
+      if (this.context.getGroup(allowedGroup)) {
         isAllowed = [...isAllowed, allowedGroup];
       }
     });

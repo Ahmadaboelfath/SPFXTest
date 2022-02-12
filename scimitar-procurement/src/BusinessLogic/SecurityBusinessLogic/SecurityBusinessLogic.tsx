@@ -13,7 +13,19 @@ export default class SecurityBusinessLogic implements ISecurityBusinessLogic {
     );
   }
 
-  getCurrentUserDetails(): Promise<User> {
-    return this._userService.getCurrentUserDetails();
+  async getCurrentUserDetails(): Promise<User> {
+    const user = await this._userService.getCurrentUserDetails();
+    user.userRole = this.getUserRole(user);
+    return user;
+  }
+  getUserRole(user: User): string {
+    const rolesGroups = user.groups.filter(
+      (group) => group.groupName !== "Employees"
+    );
+    if (rolesGroups.length > 0) {
+      return rolesGroups[0].groupName;
+    } else {
+      return "Employees";
+    }
   }
 }

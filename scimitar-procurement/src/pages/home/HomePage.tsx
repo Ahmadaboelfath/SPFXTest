@@ -34,7 +34,7 @@ class HomePage extends React.Component<
     messageService.getWelcomeMessageContent().then((message) => {
       const newState = { ...this.state };
       newState.isAdmin = this.context.isAdmin;
-      newState.currentUserRole = this.context.groups[0].groupName;
+      // newState.currentUserRole = this.context.groups[0].groupName;
       newState.welcomeMessage = message;
       this.setState(newState);
     });
@@ -80,29 +80,29 @@ class HomePage extends React.Component<
                       <span>New Service Requesition</span>
                       <Icon iconName="NewFolder" />
                     </Link>
-                    {this.state.currentUserRole === "Warehouse" ||
+                    {this.context.userRole === "Warehouse" ||
                     this.state.isAdmin ? (
                       <Link to="/InvApproval">
                         <span>Warehouse Approval</span>
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
-                    {this.state.currentUserRole === "Warehouse" ||
+                    {this.context.userRole === "Warehouse" ||
                     this.state.isAdmin ? (
                       <Link to="/PurchasingRequests">
                         <span>Purchasing Requests</span>
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
-                    {this.state.currentUserRole === "Warehouse" ||
+                    {this.context.userRole === "Warehouse" ||
                     this.state.isAdmin ||
-                    this.state.currentUserRole === "Procurement" ? (
+                    this.context.userRole === "Procurement" ? (
                       <Link to="/ApprovedPR">
                         <span>Approved PR</span>
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
-                    {this.state.currentUserRole === "FieldManager" ||
+                    {this.context.userRole === "FieldManager" ||
                     this.state.isAdmin ? (
                       <Link to="/PRPendingApprovals">
                         <span>PR Approval</span>
