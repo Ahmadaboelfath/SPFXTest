@@ -327,7 +327,7 @@ class PRAssigning extends React.Component<
                   // className="cancelBtn"
                   onClick={() => this.props.history.push("/")}
                 >
-                  Cancel
+                  Back To Home
                 </DefaultButton>
                 {this.state.isAdmin || this.context.userRole === "Warehouse" ? (
                   <DefaultButton onClick={() => this.onCancelRequest()}>

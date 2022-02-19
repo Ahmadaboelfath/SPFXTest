@@ -332,7 +332,7 @@ class MaterialRequistionApproval extends React.Component<
                           this.showConfirmationDialog("outofstock")
                         }
                       >
-                        Out-of-stock
+                        Approved
                       </DefaultButton>
                       <DefaultButton onClick={() => this.onCancelRequest()}>
                         Cancel Request
@@ -341,7 +341,7 @@ class MaterialRequistionApproval extends React.Component<
                         // className="cancelBtn"
                         onClick={() => this.props.history.push("/")}
                       >
-                        Cancel
+                        Back To Home
                       </DefaultButton>
                     </div>
                   </MDBCol>
