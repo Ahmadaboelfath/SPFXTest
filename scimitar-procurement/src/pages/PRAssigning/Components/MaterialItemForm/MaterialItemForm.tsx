@@ -3,6 +3,7 @@ import * as React from "react";
 import TagPicker from "../../../../Controls/TagPicker/TagPicker";
 import { Textbox } from "../../../../Controls/Textbox";
 import Toggle from "../../../../Controls/Toggle/Toggle";
+import UserPicker from "../../../../Controls/userPicker";
 import IMaterialItemFormProps from "./IMaterialItemFormProps";
 
 export default class MaterialItemForm extends React.Component<
@@ -90,6 +91,13 @@ export default class MaterialItemForm extends React.Component<
               label="Balance"
               value={this.props.viewModel.balance.toString()}
               disabled={false}
+            />
+
+            <UserPicker
+              ctrlName="assignee"
+              onChange={(data, ctrlName) => this.props.onChange(data, ctrlName)}
+              selected={this.props.viewModel.assignee}
+              label="Assignee"
             />
           </MDBCol>
         </MDBRow>

@@ -125,57 +125,57 @@ class PRAssigning extends React.Component<
       return newState;
     });
 
-    this._purchasingRequestBusinessLogic
-      .assignUserForPurchasingRequest(null, this.state.purchasingRequest)
-      .then((PR) => {
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.showSpinner = false;
-          newState.showFinalConfirmationDialog = true;
-          newState.dialogTitle = "Assigned Successfully";
-          newState.dialogMessage = "User assigned sucessfully";
-          newState.submissionAction = () => {
-            this.props.history.push("/");
-          };
-          newState.purchasingRequest = PR;
-          return newState;
-        });
-      })
-      .catch((e) => {
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.showSpinner = false;
-          newState.showFinalConfirmationDialog = true;
-          newState.dialogTitle = "Error Ocuured";
-          newState.dialogMessage =
-            "An Unexpected error ocurred while assigning the user to the PR please try again";
-          newState.submissionAction = () => {
-            this.onDialogDismiss("showFinalConfirmationDialog");
-          };
-          return newState;
-        });
-      });
+    // this._purchasingRequestBusinessLogic
+    //   .assignUserForPurchasingRequest(null, this.state.purchasingRequest)
+    //   .then((PR) => {
+    //     this.setState((prevState) => {
+    //       const newState = { ...prevState };
+    //       newState.showSpinner = false;
+    //       newState.showFinalConfirmationDialog = true;
+    //       newState.dialogTitle = "Assigned Successfully";
+    //       newState.dialogMessage = "User assigned sucessfully";
+    //       newState.submissionAction = () => {
+    //         this.props.history.push("/");
+    //       };
+    //       newState.purchasingRequest = PR;
+    //       return newState;
+    //     });
+    //   })
+    //   .catch((e) => {
+    //     this.setState((prevState) => {
+    //       const newState = { ...prevState };
+    //       newState.showSpinner = false;
+    //       newState.showFinalConfirmationDialog = true;
+    //       newState.dialogTitle = "Error Ocuured";
+    //       newState.dialogMessage =
+    //         "An Unexpected error ocurred while assigning the user to the PR please try again";
+    //       newState.submissionAction = () => {
+    //         this.onDialogDismiss("showFinalConfirmationDialog");
+    //       };
+    //       return newState;
+    //     });
+    //   });
   }
   showConfirmationDialog(): void {
-    if (this.state.userLookup.length === 0) {
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-        newState.assigneePickerError = true;
-        newState.assigneePickerErrorMessage = "Must choose assignee";
-        return newState;
-      });
-    } else {
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-        newState.showConfirmationDialog = true;
-        newState.assigneePickerError = false;
-        newState.assigneePickerErrorMessage = "";
-        newState.dialogTitle = `Assign User`;
-        newState.dialogMessage = `Are you sure you want to assign ${prevState.userLookup[0].title} to this request`;
-        newState.submissionAction = () => this.onSubmitAssignee();
-        return newState;
-      });
-    }
+    // if (this.state.userLookup.length === 0) {
+    //   this.setState((prevState) => {
+    //     const newState = { ...prevState };
+    //     newState.assigneePickerError = true;
+    //     newState.assigneePickerErrorMessage = "Must choose assignee";
+    //     return newState;
+    //   });
+    // } else {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.assigneePickerError = false;
+      newState.assigneePickerErrorMessage = "";
+      newState.dialogTitle = `Save`;
+      newState.dialogMessage = `Are you sure you want to save the data for this request?`;
+      newState.submissionAction = () => this.props.history.push("/");
+      return newState;
+    });
+    // }
   }
 
   renderDialog(): JSX.Element {
@@ -277,7 +277,7 @@ class PRAssigning extends React.Component<
                   </MDBCol>
                 </MDBRow>
               </Accordion>
-              {this.context.userRole === "Procurement" || this.state.isAdmin ? (
+              {/* {this.context.userRole === "Procurement" || this.state.isAdmin ? (
                 <Accordion title="Assigned User" collapsed={false}>
                   <MDBRow>
                     <MDBCol>
@@ -295,7 +295,7 @@ class PRAssigning extends React.Component<
                     </MDBCol>
                   </MDBRow>
                 </Accordion>
-              ) : null}
+              ) : null} */}
 
               {this.state.showConfirmationDialog ||
               this.state.showFinalConfirmationDialog

@@ -1,4 +1,5 @@
 import IMaterialTag from "../InterfaceModels/IMaterialTag";
+import { IUserLookup } from "./userModels";
 
 export default class MaterialRequestionItem {
   constructor(item?: MaterialRequestionItem) {
@@ -7,6 +8,7 @@ export default class MaterialRequestionItem {
     this.description = "";
     this.materialId = 0;
     this.code = "";
+    this.assignee = [];
 
     if (item) {
       this._code = item.code;
@@ -19,6 +21,12 @@ export default class MaterialRequestionItem {
       this._unit = item.unit;
       this._materialTag = item.materialTag;
       this._balance = item.balance;
+      this._POCode = item.POCode;
+      this._POId = item.POId;
+      this._PRCode = item.PRCode;
+      this._PRID = item.PRID;
+      this._status = item.status;
+      this._assignee = item.assignee;
     }
   }
   private _id: string;
@@ -99,5 +107,53 @@ export default class MaterialRequestionItem {
   }
   public set materialTag(v: IMaterialTag[]) {
     this._materialTag = v;
+  }
+
+  private _assignee: IUserLookup[];
+  public get assignee(): IUserLookup[] {
+    return this._assignee;
+  }
+  public set assignee(v: IUserLookup[]) {
+    this._assignee = v;
+  }
+
+  private _status: string;
+  public get status(): string {
+    return this._status;
+  }
+  public set status(v: string) {
+    this._status = v;
+  }
+
+  private _POId: string;
+  public get POId(): string {
+    return this._POId;
+  }
+  public set POId(v: string) {
+    this._POId = v;
+  }
+
+  private _PRID: string;
+  public get PRID(): string {
+    return this._PRID;
+  }
+  public set PRID(v: string) {
+    this._PRID = v;
+  }
+
+  private _POCode: string;
+  public get POCode(): string {
+    return this._POCode;
+  }
+  public set POCode(v: string) {
+    this._POCode = v;
+  }
+
+  private _PRCode: string;
+  public get PRCode(): string {
+    return this._PRCode;
+  }
+  public set PRCode(v: string) {
+    this._PRCode = v;
   }
 }
