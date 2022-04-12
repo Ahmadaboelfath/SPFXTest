@@ -17,6 +17,11 @@ import MaterialRequesitionItem from "../../Models/ClassModels/MaterialRequesitio
 import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
 import IApprovalService from "../../Services/InvApprovalService/IInvApprovalService";
 import ApprovalService from "../../Services/InvApprovalService/InvApprovalService";
+import { sp } from "@pnp/sp";
+import { Textbox } from "../../Controls/Textbox";
+import { Button } from "office-ui-fabric-react";
+// import { Button } from "@mui/material";
+// import { Textbox } from "../../Controls/Textbox";
 
 class DevWorkBench extends React.Component<
   RouteComponentProps<IDevWorkBenchProps>,
@@ -29,126 +34,59 @@ class DevWorkBench extends React.Component<
     this._materialService = new MaterialService();
     this.state = {
       serachByCode: true,
+      price: 0,
+      id: 1,
     };
   }
 
   componentDidMount(): void {
-    // const materialRequesition = new MaterialRequesition();
-    // materialRequesition.useFor = "Test";
-    // materialRequesition.status = "New";
-    // materialRequesition.requestedBy = "Ahmad";
-    // materialRequesition.priority = "High";
-    // materialRequesition.department = "purchasing";
-    // materialRequesition.currency = "USD";
-    // materialRequesition.requesterEmail = "sharepointadmin@scimitaregypt.com";
-    // const materialRequesitionService: IMaterialRequesitionService =
-    //   new MaterialRequesitionService();
-    // materialRequesitionService
-    //   .addRequest(materialRequesition)
-    //   .then((materialRequest) => {
-    //     console.log(materialRequest);
-    //     materialRequesitionService
-    //       .generateRequestCode(materialRequest.id)
-    //       .then((value) => {
-    //         console.log(value);
-    //         const mrItem = new MaterialRequesitionItem();
-    //         mrItem.materialId = 7;
-    //         mrItem.materialRequisitionId = 7;
-    //         mrItem.order = 1;
-    //         mrItem.quantity = 5;
-    //         mrItem.unit = "Pieces";
-    //         const itemService = new MaterialRequisitionItemService();
-    //         itemService.addMaterialRequesitionItem(mrItem).then((itemvalue) => {
-    //           console.log(itemvalue);
-    //         });
-    //       });
-    //   });
-
-    const approvalService: IApprovalService = new ApprovalService();
-
-    approvalService.getApprovalById(1).then((appro) => {
-      console.log(appro);
-      approvalService.getApprovalsByMaterialRequesitionId(16).then((appr) => {
-        console.log(appr);
-        approvalService
-          .updateApprovalStatus(
-            1,
-            "Approved",
-            "sharepointadmin@scimitaregypt.com"
-          )
-          .then((a) => {
-            console.log(a);
-          });
+    sp.web.lists
+      .getByTitle("MaterialRequisitionItems")
+      .items.getById(this.state.id)
+      .get()
+      .then((item) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.price = item["TotalPriceCalculated"];
+          return newState;
+        });
       });
-    });
   }
   render(): React.ReactNode {
     return (
-      <div className="ui container">
-        <div className="ui middle aligned grid">
-          <div className="column">
-            <h2 className="ui teal header aligned center">
-              <div className="content">Material Requestion</div>
-            </h2>
-            <form className="ui large form">
-              <div className="ui stacked segment">
-                <Toggle
-                  activeText="Description"
-                  inactiveText="Code"
-                  label="Search Type"
-                  disabled={false}
-                  controlPropName=""
-                  onChange={() => this.toggleSearchPicker()}
-                />
-                {/* <TagPicker
-                  errorMessage=" "
-                  label={
-                    this.state.serachByCode
-                      ? "Material Code"
-                      : "Material Description"
-                  }
-                  multiple={false}
-                  controlName=""
-                  onChange={(selectedItems) => console.log(selectedItems)}
-                  onResolveSuggestions={
-                    this.state.serachByCode
-                      ? (filter, selectedItem) =>
-                          this.onCodeSearch(filter, selectedItem)
-                      : (filter, selectedItem) =>
-                          this.onDescriptionSearch(filter, selectedItem)
-                  }
-                /> */}
-                {/* <TableList
-                  onDelete={() => console.log("Delete")}
-                  onSubmit={() => console.log("Submit")}
-                  registrations={[]}
-                /> */}
-              </div>
-            </form>
-          </div>
-        </div>
+      <div>
+        <Textbox
+          Required={false}
+          ctrlName={""}
+          handleInputChange={(value) => {
+            this.setState((prevState) => {
+              const newState = { ...prevState };
+              newState.id = value;
+              return newState;
+            });
+          }}
+          label={" Item Id"}
+          value={this.state.id.toLocaleString()}
+        />
+        <Button onClick={() => this.handleClick()}>Get Price</Button>
+
+        <h1>{this.state.price}</h1>
       </div>
     );
   }
-  toggleSearchPicker(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.serachByCode = !prevState.serachByCode;
-      return newState;
-    });
-  }
-  onCodeSearch(
-    filter: string,
-    selectedItem: ITag[]
-  ): ITag[] | PromiseLike<ITag[]> {
-    return this._materialService.searchMaterialByCode(filter);
-  }
-
-  onDescriptionSearch(
-    filter: string,
-    selectedItem: ITag[]
-  ): ITag[] | PromiseLike<ITag[]> {
-    return this._materialService.searchMaterialByDescription(filter);
+  handleClick(): void {
+    sp.web.lists
+      .getByTitle("MaterialRequisitionItems")
+      .items.getById(this.state.id)
+      .get()
+      .then((item) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          const number = parseFloat(item["TotalPriceCalculated"]);
+          newState.price = Math.round(number * 100) / 100;
+          return newState;
+        });
+      });
   }
 }
 
