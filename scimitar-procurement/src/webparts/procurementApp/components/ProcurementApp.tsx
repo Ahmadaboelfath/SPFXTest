@@ -31,6 +31,9 @@ import { FooterPageComponent } from "../../../CoreComponents/Footer";
 import NewServiceRequestion from "../../../pages/NewServiceRequisiton/NewServiceRequestion";
 import PRAssigning from "../../../pages/PRAssigning/PRAssigning";
 import PurchasingRequestApprovalPage from "../../../pages/PurchaseRequestApproval/PurchasingRequestApproval";
+import MyDocument from "../../../pages/DevWorkbench/Component/Document";
+import { PDFViewer } from "@react-pdf/renderer";
+import PrintPO from "../../../pages/PrintPo/PrintPO";
 
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
@@ -147,6 +150,8 @@ export default class ProcurementApp extends React.Component<
 
                   <Route path="/AccessDenied" render={() => <NotAllowed />} />
                   <Route path="/dev" render={() => <DevWorkBench />} />
+                  <Route path="/printPO" render={() => <PrintPO />} />
+
                   <Route path="/" exact render={() => <HomePage />} />
 
                   <Route render={() => <ErrorPage />} />

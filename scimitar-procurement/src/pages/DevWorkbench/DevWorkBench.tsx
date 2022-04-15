@@ -1,8 +1,8 @@
 import * as React from "react";
 import IDevWorkBenchProps from "./IDevWorkBenchProps";
 import IDevWorkBenchState from "./IDevWorkBenchState";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import { ITag } from "office-ui-fabric-react";
+import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { Button, ITag } from "office-ui-fabric-react";
 import IMaterialService from "../../Services/MaterialService/IMaterialService";
 import MaterialService from "../../Services/MaterialService/MaterialService";
 import Tag from "../../Controls/TagPicker/Components/Tag/Tag";
@@ -17,118 +17,51 @@ import MaterialRequesitionItem from "../../Models/ClassModels/MaterialRequesitio
 import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
 import IApprovalService from "../../Services/InvApprovalService/IInvApprovalService";
 import ApprovalService from "../../Services/InvApprovalService/InvApprovalService";
+import MyDocument from "./Component/Document";
+import * as ReactDOM from "react-dom";
+import { PDFViewer } from "@react-pdf/renderer";
+import ReactToPrint from "react-to-print";
+import ComponentToPrint from "./Component/ComponentToPrint";
 
-class DevWorkBench extends React.Component<
+class DevWorkBench extends React.PureComponent<
   RouteComponentProps<IDevWorkBenchProps>,
   IDevWorkBenchState
 > {
   private readonly _materialService: IMaterialService;
-
+  componentRef;
   constructor(props) {
     super(props);
     this._materialService = new MaterialService();
     this.state = {
       serachByCode: true,
     };
+    this.componentRef = React.createRef();
   }
 
-  componentDidMount(): void {
-    // const materialRequesition = new MaterialRequesition();
-    // materialRequesition.useFor = "Test";
-    // materialRequesition.status = "New";
-    // materialRequesition.requestedBy = "Ahmad";
-    // materialRequesition.priority = "High";
-    // materialRequesition.department = "purchasing";
-    // materialRequesition.currency = "USD";
-    // materialRequesition.requesterEmail = "sharepointadmin@scimitaregypt.com";
-    // const materialRequesitionService: IMaterialRequesitionService =
-    //   new MaterialRequesitionService();
-    // materialRequesitionService
-    //   .addRequest(materialRequesition)
-    //   .then((materialRequest) => {
-    //     console.log(materialRequest);
-    //     materialRequesitionService
-    //       .generateRequestCode(materialRequest.id)
-    //       .then((value) => {
-    //         console.log(value);
-    //         const mrItem = new MaterialRequesitionItem();
-    //         mrItem.materialId = 7;
-    //         mrItem.materialRequisitionId = 7;
-    //         mrItem.order = 1;
-    //         mrItem.quantity = 5;
-    //         mrItem.unit = "Pieces";
-    //         const itemService = new MaterialRequisitionItemService();
-    //         itemService.addMaterialRequesitionItem(mrItem).then((itemvalue) => {
-    //           console.log(itemvalue);
-    //         });
-    //       });
-    //   });
-
-    const approvalService: IApprovalService = new ApprovalService();
-
-    approvalService.getApprovalById(1).then((appro) => {
-      console.log(appro);
-      approvalService.getApprovalsByMaterialRequesitionId(16).then((appr) => {
-        console.log(appr);
-        approvalService
-          .updateApprovalStatus(
-            1,
-            "Approved",
-            "sharepointadmin@scimitaregypt.com"
-          )
-          .then((a) => {
-            console.log(a);
-          });
-      });
-    });
-  }
+  componentDidMount(): void {}
   render(): React.ReactNode {
     return (
-      <div className="ui container">
-        <div className="ui middle aligned grid">
-          <div className="column">
-            <h2 className="ui teal header aligned center">
-              <div className="content">Material Requestion</div>
-            </h2>
-            <form className="ui large form">
-              <div className="ui stacked segment">
-                <Toggle
-                  activeText="Description"
-                  inactiveText="Code"
-                  label="Search Type"
-                  disabled={false}
-                  controlPropName=""
-                  onChange={() => this.toggleSearchPicker()}
-                />
-                {/* <TagPicker
-                  errorMessage=" "
-                  label={
-                    this.state.serachByCode
-                      ? "Material Code"
-                      : "Material Description"
-                  }
-                  multiple={false}
-                  controlName=""
-                  onChange={(selectedItems) => console.log(selectedItems)}
-                  onResolveSuggestions={
-                    this.state.serachByCode
-                      ? (filter, selectedItem) =>
-                          this.onCodeSearch(filter, selectedItem)
-                      : (filter, selectedItem) =>
-                          this.onDescriptionSearch(filter, selectedItem)
-                  }
-                /> */}
-                {/* <TableList
-                  onDelete={() => console.log("Delete")}
-                  onSubmit={() => console.log("Submit")}
-                  registrations={[]}
-                /> */}
-              </div>
-            </form>
-          </div>
-        </div>
+      <div>
+        <Link to={"/printPO"} target={"_blank"}>
+          PrintPO
+        </Link>
       </div>
     );
+  }
+
+  // App = () => (
+  //   <PDFViewer>
+  //     <MyDocument />
+  //   </PDFViewer>
+  // );
+
+  handleCLick(): void {
+    // const newWindow = window.open("", "_blank");
+    // const div = newWindow.document.createElement("div");
+    // div.id = "root";
+    // ReactDOM.render(<this.App />, newWindow.document.getElementById("root"));
+    // newWindow.open();
+    // newWindow.print();
   }
   toggleSearchPicker(): void {
     this.setState((prevState) => {
