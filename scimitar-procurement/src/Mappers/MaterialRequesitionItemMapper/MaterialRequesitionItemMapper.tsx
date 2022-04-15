@@ -31,6 +31,17 @@ export default class MaterialRequestionItemMapper
       ? SPMaterialRequisitionItem.Balance
       : 0;
 
+    materialRequisitionItem.POId = SPMaterialRequisitionItem.POId;
+    materialRequisitionItem.POCode = SPMaterialRequisitionItem.PO
+      ? SPMaterialRequisitionItem.PO.Title
+      : "";
+    materialRequisitionItem.PRID = SPMaterialRequisitionItem.PRId;
+    materialRequisitionItem.PRCode = SPMaterialRequisitionItem.PR
+      ? SPMaterialRequisitionItem.PR.Title
+      : "";
+    materialRequisitionItem.status = SPMaterialRequisitionItem.Status;
+    materialRequisitionItem.totalPrice = SPMaterialRequisitionItem.TotalPrice;
+
     return materialRequisitionItem;
   }
   mapFromMaterialRequesitionItemToSPMaterialRequesitionItem(
@@ -43,6 +54,11 @@ export default class MaterialRequestionItemMapper
       ItemOrder: materialRequisitionItem.order,
       MaterialRequesitionId: materialRequisitionItem.materialRequisitionId,
       Balance: materialRequisitionItem.balance,
+      UnitPrice: materialRequisitionItem.unitPrice,
+      PRId: materialRequisitionItem.PRID,
+      POId: materialRequisitionItem.POId,
+      Status: materialRequisitionItem.status,
+      AssigneeId: materialRequisitionItem.assignee[0].id,
     };
   }
 }

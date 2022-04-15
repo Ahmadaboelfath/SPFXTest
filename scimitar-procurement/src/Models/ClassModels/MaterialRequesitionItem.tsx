@@ -9,6 +9,9 @@ export default class MaterialRequestionItem {
     this.materialId = 0;
     this.code = "";
     this.assignee = [];
+    this.totalPrice = 0;
+    this.unitPrice = 0;
+    this.status = "";
 
     if (item) {
       this._code = item.code;
@@ -27,6 +30,8 @@ export default class MaterialRequestionItem {
       this._PRID = item.PRID;
       this._status = item.status;
       this._assignee = item.assignee;
+      this._unitPrice = item.unitPrice;
+      this._totalPrice = item.totalPrice;
     }
   }
   private _id: string;
@@ -155,5 +160,21 @@ export default class MaterialRequestionItem {
   }
   public set PRCode(v: string) {
     this._PRCode = v;
+  }
+
+  private _unitPrice: number;
+  public get unitPrice(): number {
+    return this._unitPrice;
+  }
+  public set unitPrice(v: number) {
+    this._unitPrice = v;
+  }
+
+  private _totalPrice: number;
+  public get totalPrice(): number {
+    return this._totalPrice;
+  }
+  public set totalPrice(v: number) {
+    this._totalPrice = v;
   }
 }

@@ -23,8 +23,12 @@ export default class MaterialRequisitionItemService
       const item = await sp.web.lists
         .getByTitle(this._listName)
         .items.getById(id)
-        .expand("Material/Code, Material/Title, Material/UnitValue")
-        .select("*,Material/Code, Material/Title, Material/UnitValue")
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        )
         .get();
       return this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
         item
@@ -79,8 +83,12 @@ export default class MaterialRequisitionItemService
       const items = await sp.web.lists
         .getByTitle(this._listName)
         .items.filter(`MaterialRequesition eq ${id}`)
-        .expand("Material/Code, Material/Title, Material/UnitValue")
-        .select("*,Material/Code, Material/Title, Material/UnitValue")
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        )
         .get();
 
       if (items.length > 0) {
@@ -112,8 +120,12 @@ export default class MaterialRequisitionItemService
     const item = await sp.web.lists
       .getByTitle(this._listName)
       .items.getById(addedItem.data.Id)
-      .expand("Material/Code, Material/Title, Material/UnitValue")
-      .select("*,Material/Code, Material/Title, Material/UnitValue")
+      .expand(
+        "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+      )
+      .select(
+        "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+      )
       .get();
 
     return this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
