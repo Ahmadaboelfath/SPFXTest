@@ -1,4 +1,5 @@
 import * as React from "react";
+import styles from "./style.module.scss";
 
 export default class ComponentToPrint extends React.Component<any, any> {
   arr = ["Ahmad", "Mohamed", "Mostafa"];
@@ -6,21 +7,21 @@ export default class ComponentToPrint extends React.Component<any, any> {
   renderData() {
     return this.arr.map((item) => (
       <tr>
-        <td style={{ fontSize: 20 }}>{item}</td>
-        <td style={{ fontSize: 20 }}>{item}</td>
-        <td style={{ fontSize: 20 }}>{item}</td>
+        <td className={styles.cell}>{item}</td>
+        <td className={styles.cell}>{item}</td>
+        <td className={styles.cell}>{item}</td>
       </tr>
     ));
   }
 
   render() {
     return (
-      <div style={{ marginLeft: 100 }}>
+      <div className={styles.table}>
         <table>
           <thead>
-            <th>column 1</th>
-            <th>column 2</th>
-            <th>column 3</th>
+            <th className={styles.cellBold}>column 1</th>
+            <th className={styles.cellBold}>column 2</th>
+            <th className={styles.cellBold}>column 3</th>
           </thead>
           <tbody>{this.renderData()}</tbody>
         </table>
