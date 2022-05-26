@@ -1,0 +1,80 @@
+.hideFileUploader {
+  display: none;
+}
+
+.dropzone {
+  height: 90px !important;
+  min-height: 90px !important;
+  border: 1px solid #e2e2e2 !important;
+  border-radius: 2px !important;
+  background: #e1e1e130 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 98% !important;
+  margin: 1% auto;
+  div[class="MuiDropzoneArea-textContainer"] {
+    padding: 1% !important;
+    p {
+      font-size: 15px;
+      // font-family: "vodafone_ltregular";
+      font-weight: 600;
+      color: #666 !important;
+      margin-bottom: 10%;
+    }
+    svg {
+      color: #666 !important;
+      height: 40px !important;
+      width: 40px !important;
+    }
+  }
+}
+.filesList {
+  width: 98%;
+  margin: 1% auto;
+  margin-top: 20px;
+  div {
+    margin-right: 8px;
+    padding: 1%;
+    display: inline-flex;
+    align-items: center;
+    width: "-moz-fit-content";
+    margin-bottom: 10px;
+    background-color: #e1e1e173;
+    i {
+      font-size: 16px;
+      color: #333 !important;
+    }
+    span {
+      font-size: 14px;
+      // font-family: "vodafone_ltregular";
+      font-weight: 600;
+    }
+    svg {
+      color: #e60000;
+      margin-left: 5px;
+    }
+    &:hover{
+        margin-right: 8px;
+        padding: 1%;
+        display: inline-flex;
+        align-items: center;
+        width: "-moz-fit-content";
+        margin-bottom: 10px;
+        background-color: #e1e1e17e;
+        i {
+          font-size: 16px;
+          color: #333 !important;
+        }
+        span {
+          font-size: 14px;
+          font-family: "vodafone_ltregular";
+          font-weight: 600;
+        }
+        svg {
+          color: #cc0202;
+          margin-left: 5px;
+        }
+    }
+  }
+}
