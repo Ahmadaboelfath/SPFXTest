@@ -2,6 +2,7 @@ import * as React from "react";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Popup } from "semantic-ui-react";
 import styles from "./Forms.module.scss";
+import { TextField } from "office-ui-fabric-react";
 
 interface textboxProps {
   value: string;
@@ -16,6 +17,7 @@ interface textboxProps {
   disabled?: boolean;
   showPlaceholder?: boolean;
   placeholder?: string;
+  isNumber?: boolean;
 }
 
 export const Textbox: React.FC<textboxProps> = (props) => {

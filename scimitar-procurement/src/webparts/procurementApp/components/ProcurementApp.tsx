@@ -31,6 +31,9 @@ import { FooterPageComponent } from "../../../CoreComponents/Footer";
 import NewServiceRequestion from "../../../pages/NewServiceRequisiton/NewServiceRequestion";
 import PRAssigning from "../../../pages/PRAssigning/PRAssigning";
 import PurchasingRequestApprovalPage from "../../../pages/PurchaseRequestApproval/PurchasingRequestApproval";
+import MaterialRequistionItem from "../../../pages/MaterialRequsitionItem/MaterialRequistionItem";
+import { ViewMode } from "../../../pages/MaterialRequsitionItem/ViewMode";
+import PurchasingOrder from "../../../pages/PurchasingOrder/PurchasingOrder";
 
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
@@ -53,6 +56,10 @@ const NonRejectedOrCancelled = React.lazy(() => {
   return import("../../../pages/PurchasingRequests/PurchasingRequests");
 });
 
+const MyAssignedItems = React.lazy(
+  () => import("../../../pages/MyAssignedItems/MyAssignedItems")
+);
+
 export default class ProcurementApp extends React.Component<
   IProcurementAppProps,
   IProcurementAppState
@@ -65,7 +72,9 @@ export default class ProcurementApp extends React.Component<
     const PageDiv = document.querySelector(".ms-SPLegacyFabricBlock");
     const PageDivHeight = (PageDiv as HTMLElement).offsetParent;
     this.setState({ fullheight: (PageDivHeight as HTMLElement).offsetHeight });
+    document.title = "Procurement";
   }
+
   public render(): React.ReactElement<IProcurementAppProps> {
     return (
       <div className={styles.app} id="appMaster">
@@ -101,6 +110,18 @@ export default class ProcurementApp extends React.Component<
                     ]}
                   >
                     <PRAssigning />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/MaterialItem/view/:id"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <MaterialRequistionItem viewMode={ViewMode.View} />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/MaterialItem/edit/:id"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <MaterialRequistionItem viewMode={ViewMode.Edit} />
                   </PrivateRoute>
 
                   <Route
@@ -143,6 +164,32 @@ export default class ProcurementApp extends React.Component<
                     <React.Suspense fallback={<LoadingBoxComponent />}>
                       <NonRejectedOrCancelled />
                     </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/AssignedItems"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <MyAssignedItems />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/PurchasingOrder/new"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <PurchasingOrder viewMode={ViewMode.New} />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/PurchasingOrder/edit/:id"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <PurchasingOrder viewMode={ViewMode.Edit} />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/PurchasingOrder/view/:id"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <PurchasingOrder viewMode={ViewMode.View} />
                   </PrivateRoute>
 
                   <Route path="/AccessDenied" render={() => <NotAllowed />} />

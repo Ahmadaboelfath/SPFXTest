@@ -6,6 +6,7 @@ import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
+import IUserService from "../UsersService/IUserService";
 
 export default class MaterialRequisitionItemService
   implements IMaterialRequisitionItemService
@@ -17,6 +18,80 @@ export default class MaterialRequisitionItemService
     this._listName = "MaterialRequisitionItems";
     this._mapper = new MaterialRequestionItemMapper();
   }
+  async updateItemsPO(
+    itemId: number,
+    POId: number
+  ): Promise<MaterialRequesitionItem> {
+    const item = await sp.web.lists
+      .getByTitle(this._listName)
+      .items.getById(itemId)
+      .update({
+        POId: POId,
+      });
+
+    return this.getMaterialRequistionById(itemId);
+  }
+  async getMaterialItemsAssignedThatIsNotInPO(
+    assigneeId: number
+  ): Promise<MaterialRequesitionItem[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.filter(`(AssigneeId eq ${assigneeId}) and (POId eq null)`)
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .get();
+
+      if (items.length > 0) {
+        return items.map((item) =>
+          this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
+            item
+          )
+        );
+      } else {
+        return [];
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+  getMaterialRequistionById(id: number): Promise<MaterialRequesitionItem> {
+    return this.getById(id);
+  }
+  async getMaterialRequisitionItemsByAssignee(
+    assigneeId: number
+  ): Promise<MaterialRequesitionItem[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.filter(`AssigneeId eq ${assigneeId}`)
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .get();
+
+      if (items.length > 0) {
+        return items.map((item) =>
+          this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
+            item
+          )
+        );
+      } else {
+        return [];
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
 
   private async getById(id: number): Promise<MaterialRequesitionItem> {
     try {
@@ -24,10 +99,10 @@ export default class MaterialRequisitionItemService
         .getByTitle(this._listName)
         .items.getById(id)
         .expand(
-          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
         .select(
-          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
         .get();
       return this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
@@ -65,10 +140,7 @@ export default class MaterialRequisitionItemService
         .getByTitle(this._listName)
         .items.getById(parseInt(item.id))
         .update(mappedItem);
-      // const itemAterUpdate = updatedItem.item
-      //   .expand("Material/Code, Material/Title, Material/UnitValue")
-      //   .select("*,Material/Code, Material/Title, Material/UnitValue")
-      //   .get();
+
       return item;
     } catch (e) {
       console.error(e);
@@ -84,10 +156,10 @@ export default class MaterialRequisitionItemService
         .getByTitle(this._listName)
         .items.filter(`MaterialRequesition eq ${id}`)
         .expand(
-          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
         .select(
-          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
         .get();
 
@@ -121,10 +193,10 @@ export default class MaterialRequisitionItemService
       .getByTitle(this._listName)
       .items.getById(addedItem.data.Id)
       .expand(
-        "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
       )
       .select(
-        "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title"
+        "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
       )
       .get();
 

@@ -12,4 +12,14 @@ export default interface IMaterialRequisitionItemService {
   deleteItem(item: MaterialRequestionItem): Promise<boolean>;
 
   updateItem(item: MaterialRequestionItem): Promise<MaterialRequestionItem>;
+  getMaterialRequisitionItemsByAssignee(
+    assigneeId: number
+  ): Promise<MaterialRequestionItem[]>;
+
+  getMaterialRequistionById(id: number): Promise<MaterialRequestionItem>;
+  getMaterialItemsAssignedThatIsNotInPO(
+    assigneeId: number
+  ): Promise<MaterialRequestionItem[]>;
+
+  updateItemsPO(itemId: number, POId: number): Promise<MaterialRequestionItem>;
 }

@@ -9,6 +9,7 @@ export default class UserMapper implements IUserMapper {
     user.userProperties =
       this.mapUserPropertiesArrayToUserPropertiesObject(SPUserProperties);
     user.isAdmin = SPUser.IsSiteAdmin;
+    user.userID = SPUser.Id;
     return user;
   }
 

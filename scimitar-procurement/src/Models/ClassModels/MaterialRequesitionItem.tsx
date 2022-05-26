@@ -12,6 +12,7 @@ export default class MaterialRequestionItem {
     this.totalPrice = 0;
     this.unitPrice = 0;
     this.status = "";
+    this.currency = "";
 
     if (item) {
       this._code = item.code;
@@ -32,6 +33,7 @@ export default class MaterialRequestionItem {
       this._assignee = item.assignee;
       this._unitPrice = item.unitPrice;
       this._totalPrice = item.totalPrice;
+      this._currency = item.currency;
     }
   }
   private _id: string;
@@ -40,6 +42,22 @@ export default class MaterialRequestionItem {
   }
   public set id(v: string) {
     this._id = v;
+  }
+
+  private _assigneeName: string;
+  public get assigneeName(): string {
+    return this._assigneeName;
+  }
+  public set assigneeName(v: string) {
+    this._assigneeName = v;
+  }
+
+  private _assigneeEmail: string;
+  public get assigneeEmail(): string {
+    return this._assigneeEmail;
+  }
+  public set assigneeEmail(v: string) {
+    this._assigneeEmail = v;
   }
 
   private _balance: number;
@@ -176,5 +194,13 @@ export default class MaterialRequestionItem {
   }
   public set totalPrice(v: number) {
     this._totalPrice = v;
+  }
+
+  private _currency: string;
+  public get currency(): string {
+    return this._currency;
+  }
+  public set currency(v: string) {
+    this._currency = v;
   }
 }

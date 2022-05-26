@@ -37,6 +37,14 @@ export default class User {
     this._userRole = v;
   }
 
+  private _userID: number;
+  public get userID(): number {
+    return this._userID;
+  }
+  public set userID(v: number) {
+    this._userID = v;
+  }
+
   public getGroup(group: SPGroup): SPGroup {
     const filteredGroup = this._groups.filter(
       (crrgroup: SPGroup) => crrgroup.groupName === group.groupName

@@ -40,7 +40,26 @@ export default class MaterialRequestionItemMapper
       ? SPMaterialRequisitionItem.PR.Title
       : "";
     materialRequisitionItem.status = SPMaterialRequisitionItem.Status;
-    materialRequisitionItem.totalPrice = SPMaterialRequisitionItem.TotalPrice;
+    materialRequisitionItem.totalPrice = parseFloat(
+      SPMaterialRequisitionItem.TotalPrice
+    );
+    materialRequisitionItem.unitPrice = SPMaterialRequisitionItem.UnitPrice;
+    materialRequisitionItem.currency = SPMaterialRequisitionItem.Currency;
+    materialRequisitionItem.assigneeEmail = SPMaterialRequisitionItem.Assignee
+      ? SPMaterialRequisitionItem.Assignee.EMail
+      : "";
+    materialRequisitionItem.assigneeName = SPMaterialRequisitionItem.Assignee
+      ? SPMaterialRequisitionItem.Assignee.Title
+      : "";
+
+    materialRequisitionItem.assignee = SPMaterialRequisitionItem.Assignee
+      ? [
+          {
+            id: SPMaterialRequisitionItem.AssigneeId,
+            title: SPMaterialRequisitionItem.Assignee.Title,
+          },
+        ]
+      : [];
 
     return materialRequisitionItem;
   }
@@ -59,6 +78,7 @@ export default class MaterialRequestionItemMapper
       POId: materialRequisitionItem.POId,
       Status: materialRequisitionItem.status,
       AssigneeId: materialRequisitionItem.assignee[0].id,
+      Currency: materialRequisitionItem.currency,
     };
   }
 }

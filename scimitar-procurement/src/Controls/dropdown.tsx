@@ -7,11 +7,12 @@ import {
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Popup } from "semantic-ui-react";
 import styles from "./Forms.module.scss";
+import { drop } from "lodash";
 
 interface IDropdownProps {
   options: DropdownItemProps[];
   value?: any;
-  handleInputChange(value, ctrlName);
+  handleInputChange(value, ctrlName, e?);
   ctrlName: string;
   label: string;
   Required: boolean;
@@ -23,6 +24,7 @@ interface IDropdownProps {
   multiple?: boolean;
   search?: boolean;
   placeholder?: string;
+  returnFullObject?: any;
 }
 
 export const Dropdown: React.FC<IDropdownProps> = (props) => {
@@ -40,10 +42,9 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
       />
     );
 
-  const onChange = (dropDown: DropdownProps, ctrlName: string) => {
+  const onChange = (dropDown: DropdownProps, ctrlName: string, e?) => {
     const value = dropDown.value;
-
-    props.handleInputChange(value, ctrlName);
+    props.handleInputChange(value, ctrlName, e);
   };
 
   let mainDevStyle = "field";
@@ -58,7 +59,10 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
         </label>
         <DDL
           name={props.ctrlName}
-          onChange={(e, d) => onChange(d, props.ctrlName)}
+          onChange={(e, d) => {
+            console.log(d);
+            onChange(d, props.ctrlName, e);
+          }}
           options={props.options}
           value={props.value}
           disabled={props.disabled}
@@ -89,7 +93,7 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
         </label>
         <DDL
           name={props.ctrlName}
-          onChange={(e, d) => onChange(d, props.ctrlName)}
+          onChange={(e, d) => onChange(d, props.ctrlName, e)}
           options={props.options}
           value={props.value}
           disabled={props.disabled}
