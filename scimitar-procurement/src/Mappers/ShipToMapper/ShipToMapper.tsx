@@ -3,6 +3,15 @@ import IShipToMapper from "./IShipToMapper";
 
 export default class ShipToMapper implements IShipToMapper {
   mapFromSPListItemObject(spListItem: any): ShipTo {
-    throw new Error("Method not implemented.");
+    const shipToMapped: ShipTo = new ShipTo();
+    shipToMapped.address = spListItem.Address;
+    shipToMapped.id = spListItem.Id;
+    shipToMapped.attention = spListItem.Attention;
+    shipToMapped.title = spListItem.Title;
+    shipToMapped.phone = spListItem.Phone;
+    shipToMapped.fax = spListItem.Fax;
+    shipToMapped.email = spListItem.Email;
+
+    return shipToMapped;
   }
 }

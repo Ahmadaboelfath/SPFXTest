@@ -4,7 +4,7 @@ export default interface IFileUploaderProps {
   onChange: (files: IFileInfo[], ctrlName: string) => void;
   onDelete: (file: IFileInfo, ctrlName: string) => void;
   onClick: (file: IFileInfo, ctrlName: string) => void;
-  value?: IFileInfo[];
+  value: IFileInfo[];
   label?: string;
   required?: boolean;
   errorMessage?: string;

@@ -1,4 +1,12 @@
 export default class PurchasingOrder {
+  private _id: number;
+  public get id(): number {
+    return this._id;
+  }
+  public set id(v: number) {
+    this._id = v;
+  }
+
   private _title: string;
   public get title(): string {
     return this._title;
@@ -141,5 +149,21 @@ export default class PurchasingOrder {
   }
   public set requestorId(v: number) {
     this._requestorId = v;
+  }
+
+  private _status: string;
+  public get status(): string {
+    return this._status;
+  }
+  public set status(v: string) {
+    this._status = v;
+  }
+
+  private _requestorEmail: string;
+  public get requestorEmail(): string {
+    return this._requestorEmail;
+  }
+  public set requestorEmail(v: string) {
+    this._requestorEmail = v;
   }
 }

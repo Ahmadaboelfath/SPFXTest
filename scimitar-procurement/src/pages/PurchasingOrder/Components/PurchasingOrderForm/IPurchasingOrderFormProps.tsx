@@ -1,4 +1,4 @@
-import { ViewMode } from "../../MaterialRequsitionItem/ViewMode";
+import { ViewMode } from "../../../MaterialRequsitionItem/ViewMode";
 
 export default interface IPurchasingOrderFormProps {
   viewMode: ViewMode;

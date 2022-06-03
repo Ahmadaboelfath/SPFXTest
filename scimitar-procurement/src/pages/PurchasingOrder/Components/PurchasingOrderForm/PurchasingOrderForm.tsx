@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Textbox } from "../../../Controls/Textbox";
-import { ViewMode } from "../../MaterialRequsitionItem/ViewMode";
+import { Textbox } from "../../../../Controls/Textbox";
+import { ViewMode } from "../../../MaterialRequsitionItem/ViewMode";
 import IPurchasingOrderFormProps from "./IPurchasingOrderFormProps";
 import IPurchasingOrderFormState from "./IPurchasingOrderFormState";
 

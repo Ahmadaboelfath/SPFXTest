@@ -6,7 +6,6 @@ import {
 import * as React from "react";
 import IFileUploaderProps from "./IFileUploaderProps";
 import classes from "./FileUploader.module.scss";
-import Dropzone from "react-dropzone";
 import IFileInfo from "./Interfaces/IFileInfo";
 import FileItem from "./components/FileItem/FileItem";
 import { addItemToArrayImmutably } from "./arrayUtilities";
