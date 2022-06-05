@@ -548,25 +548,23 @@ class DevWorkBench extends React.Component<
     });
   }
   handleItemClick(): void {
-    const fileService: IFileService = new FileService(); //EGY-21-1
-    fileService
-      .uploadToFolder(
-        "PurchasingOrderDocuments",
-        "EGY-21-1",
-        this.state.files[0]
-      )
-      .then((file) => {
-        console.log(file);
-        console.log("Success");
-
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.files = prevState.files;
-          newState.hideDialog = false;
-
-          return newState;
-        });
-      });
+    // const fileService: IFileService = new FileService(); //EGY-21-1
+    // fileService
+    //   .uploadToFolder(
+    //     "PurchasingOrderDocuments",
+    //     "EGY-21-1",
+    //     this.state.files[0]
+    //   )
+    //   .then((file) => {
+    //     console.log(file);
+    //     console.log("Success");
+    //     this.setState((prevState) => {
+    //       const newState = { ...prevState };
+    //       newState.files = prevState.files;
+    //       newState.hideDialog = false;
+    //       return newState;
+    //     });
+    //   });
   }
   handleChange(value: any, ctrlName: any, e): any {
     this.setState((prevState) => {
@@ -636,9 +634,6 @@ class DevWorkBench extends React.Component<
   }
 
   roundNumbers(number): number {
-    // var m = Number((Math.abs(number) * 100).toPrecision(15));
-    // return (Math.round(m) / 100) * Math.sign(number);
-
     return Math.round((number + Number.EPSILON) * 100) / 100;
   }
 }

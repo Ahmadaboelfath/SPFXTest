@@ -9,16 +9,12 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import { Link } from "react-router-dom";
 
 import styles from "../../../../CoreComponents/Componentstyles.module.scss";
-import PurchasingRequest from "../../../../Models/ClassModels/PurchasingRequest";
-import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
+
 import { ViewMode } from "../../../MaterialRequsitionItem/ViewMode";
+import PurchasingOrder from "../../../../Models/ClassModels/PurchasingOrder";
 
 export interface ITableListProps {
-  materialRequsitionItems: MaterialRequestionItem[];
-  onEditClick(item, index): void;
-  onViewClick(item, index): void;
-  onDeleteClick(item, index): void;
-  viewMode: ViewMode;
+  purchasingOrders: PurchasingOrder[];
 }
 
 export const TableList: React.FC<ITableListProps> = (props) => {
@@ -26,29 +22,16 @@ export const TableList: React.FC<ITableListProps> = (props) => {
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
   );
   const generateTableRows = (): any[] => {
-    const rows = props.materialRequsitionItems.map((item, index) => {
+    const rows = props.purchasingOrders.map((item, index) => {
       return {
-        title: item.description,
-        pr: item.PRCode,
-        unitPrice: item.unitPrice,
-        quantity: item.quantity,
-
-        actions: (
-          <div className={styles.tableAction}>
-            {props.viewMode !== ViewMode.View ? (
-              <span>
-                {" "}
-                <span onClick={() => props.onDeleteClick(item, index)}>
-                  <Icon iconName="Delete" />
-                </span>
-              </span>
-            ) : null}
-            {/* <span onClick={() => props.onViewClick(item, index)}>
-              {" "}
-              <Icon iconName="View" />
-            </span> */}
-          </div>
+        title: (
+          <Link to={`/purchasingOrder/view/${item.id}`}>{item.title}</Link>
         ),
+        field: item.statusTitle,
+        shipTo: item.shipToTitle,
+        vendor: item.vendorTitle,
+        vendorAttention: item.vendorAttention,
+        shipMethod: item.shipMethodTitle,
       };
     });
 
@@ -58,32 +41,38 @@ export const TableList: React.FC<ITableListProps> = (props) => {
   const dataTableList = {
     columns: [
       {
-        label: "description",
+        label: "Code",
         field: "title",
         sort: "asc",
         width: 300,
       },
       {
-        label: "PR",
-        field: "pr",
+        label: "Ship To",
+        field: "shipTo",
         sort: "asc",
         width: 150,
       },
       {
-        label: "Quantity",
-        field: "quantity",
+        label: "Status",
+        field: "status",
         sort: "asc",
         width: 150,
       },
       {
-        label: "Unit Price",
-        field: "unitPrice",
+        label: "Vendor",
+        field: "vendor",
         sort: "asc",
         width: 150,
       },
       {
-        label: "Actions",
-        field: "actions",
+        label: "Vendor Attention",
+        field: "vendorAttention",
+        sort: "asc",
+        width: 150,
+      },
+      {
+        label: "Shipment Method",
+        field: "shipMethod",
         sort: "asc",
         width: 150,
       },

@@ -8,7 +8,7 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
     purchaseOrder.vendorId = spObject.VendorId;
     purchaseOrder.shipToId = spObject.ShipToId;
     purchaseOrder.requesitioner = spObject.Requisitioner;
-    purchaseOrder.shipMethod = spObject.ShipMethod;
+    purchaseOrder.shipMethodId = spObject.ShipMethodId;
     purchaseOrder.incoTerms = spObject.IncoTerms;
     purchaseOrder.deliveryTerms = spObject.DeliveryTerms;
     purchaseOrder.paymentTerms = spObject.PaymentTerms;
@@ -39,8 +39,15 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
     purchaseOrder.requestorEmail = spObject.Requestor
       ? spObject.Requestor.EMail
       : "";
-    purchaseOrder.status = spObject.Status;
+    purchaseOrder.statusId = spObject.StatusId;
     purchaseOrder.id = spObject.Id;
+    purchaseOrder.shipToTitle = spObject.ShipTo ? spObject.ShipTo.Title : "";
+    purchaseOrder.shipMethodTitle = spObject.ShipMethod
+      ? spObject.ShipMethod.Title
+      : "";
+    purchaseOrder.vendorTitle = spObject.Vendor ? spObject.Vendor.Title : "";
+    purchaseOrder.statusTitle = spObject.Status ? spObject.Status.Title : "";
+
     return purchaseOrder;
   }
   mapToSPListItemObject(purchaseOrder: PurchasingOrder) {
@@ -49,7 +56,7 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       VendorId: purchaseOrder.vendorId,
       ShipToId: purchaseOrder.shipToId,
       Requisitioner: purchaseOrder.requesitioner,
-      ShipMethod: purchaseOrder.shipMethod,
+      ShipMethodId: purchaseOrder.shipMethodId,
       IncoTerms: purchaseOrder.incoTerms,
       DeliveryTerms: purchaseOrder.deliveryTerms,
       PaymentTerms: purchaseOrder.paymentTerms,
@@ -63,7 +70,7 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       VendorAttention: purchaseOrder.vendorAttention,
       VendorEmail: purchaseOrder.vendorEmail,
       RequestorId: purchaseOrder.requestorId,
-      Status: purchaseOrder.status,
+      StatusId: purchaseOrder.statusId,
     };
     return spObject;
   }

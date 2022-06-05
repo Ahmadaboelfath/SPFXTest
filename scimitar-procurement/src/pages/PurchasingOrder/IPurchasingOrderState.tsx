@@ -10,4 +10,12 @@ export default interface IPurchasingOrderState {
   selectedkey: number;
   selectedItem: MaterialRequestionItem;
   itemsDropdownDisabled: boolean;
+  lookups: any;
+  disableDropDowns: boolean;
+  showConfirmationDialog: boolean;
+  showFinalConfirmationDialog: boolean;
+  dialogMessage: string;
+  dialogTitle: string;
+  submissionAction: () => void;
+  deletedItems: MaterialRequestionItem[];
 }

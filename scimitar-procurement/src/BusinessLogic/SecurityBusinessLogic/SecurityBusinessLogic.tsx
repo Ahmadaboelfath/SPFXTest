@@ -1,5 +1,5 @@
-import DependencyManager from "../../DependencyManger/DependencyManger";
 import User from "../../Models/ClassModels/User";
+import DependencyManager from "../../Services/DependencyManger";
 import IUserService from "../../Services/UsersService/IUserService";
 import UserService from "../../Services/UsersService/UserService";
 import ISecurityBusinessLogic from "./ISecurityBusinessLogic";

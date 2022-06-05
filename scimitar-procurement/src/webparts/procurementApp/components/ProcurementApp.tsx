@@ -33,7 +33,7 @@ import PRAssigning from "../../../pages/PRAssigning/PRAssigning";
 import PurchasingRequestApprovalPage from "../../../pages/PurchaseRequestApproval/PurchasingRequestApproval";
 import MaterialRequistionItem from "../../../pages/MaterialRequsitionItem/MaterialRequistionItem";
 import { ViewMode } from "../../../pages/MaterialRequsitionItem/ViewMode";
-import PurchasingOrder from "../../../pages/PurchasingOrder/PurchasingOrder";
+import PurchasingOrderPage from "../../../pages/PurchasingOrder/PurchasingOrder";
 
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
@@ -58,6 +58,10 @@ const NonRejectedOrCancelled = React.lazy(() => {
 
 const MyAssignedItems = React.lazy(
   () => import("../../../pages/MyAssignedItems/MyAssignedItems")
+);
+
+const MyPurchasingOrder = React.lazy(
+  () => import("../../../pages/MyPurchaseOrder/MyPurchaseOrder")
 );
 
 export default class ProcurementApp extends React.Component<
@@ -177,19 +181,27 @@ export default class ProcurementApp extends React.Component<
                     path="/PurchasingOrder/new"
                     allowedGroups={[new SPGroup("Procurement")]}
                   >
-                    <PurchasingOrder viewMode={ViewMode.New} />
+                    <PurchasingOrderPage viewMode={ViewMode.New} />
                   </PrivateRoute>
                   <PrivateRoute
                     path="/PurchasingOrder/edit/:id"
                     allowedGroups={[new SPGroup("Procurement")]}
                   >
-                    <PurchasingOrder viewMode={ViewMode.Edit} />
+                    <PurchasingOrderPage viewMode={ViewMode.Edit} />
                   </PrivateRoute>
                   <PrivateRoute
                     path="/PurchasingOrder/view/:id"
                     allowedGroups={[new SPGroup("Procurement")]}
                   >
-                    <PurchasingOrder viewMode={ViewMode.View} />
+                    <PurchasingOrderPage viewMode={ViewMode.View} />
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/MyPurchaseOrder"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <MyPurchasingOrder />
+                    </React.Suspense>
                   </PrivateRoute>
 
                   <Route path="/AccessDenied" render={() => <NotAllowed />} />

@@ -1,4 +1,41 @@
 export default class PurchasingOrder {
+  constructor(purchaseOrder?: PurchasingOrder) {
+    if (purchaseOrder) {
+      this._id = purchaseOrder.id;
+      this._title = purchaseOrder.title;
+      this._vendorId = purchaseOrder.vendorId;
+      this._shipToId = purchaseOrder.shipToId;
+      this._requesitioner = purchaseOrder.requesitioner;
+      this._shipMethodId = purchaseOrder.shipMethodId;
+      this._incoTerms = purchaseOrder.incoTerms;
+      this._deliveryTerms = purchaseOrder.deliveryTerms;
+      this._paymentTerms = purchaseOrder._paymentTerms;
+      this._partialShipment = purchaseOrder.partialShipment;
+      this._subTotal = purchaseOrder.subTotal;
+      this._discountPercentage = purchaseOrder.discountPercentage;
+      this._discountAmount = purchaseOrder.discountAmount;
+      this._shipAndHandling = purchaseOrder.shipAndHandling;
+      this._freightCharge = purchaseOrder.freightCharge;
+      this._grandTotal = purchaseOrder.grandTotal;
+      this._vendorAttention = purchaseOrder.vendorAttention;
+      this._vendorEmail = purchaseOrder.vendorEmail;
+      this._requestorId = purchaseOrder.requestorId;
+      this._statusId = purchaseOrder.statusId;
+      this._requestorEmail = purchaseOrder.requestorEmail;
+      this._vendorTitle = purchaseOrder.vendorTitle;
+      this._shipToTitle = purchaseOrder.shipToTitle;
+      this._shipMethodTitle = purchaseOrder.shipMethodTitle;
+    } else {
+      this._subTotal = 0;
+      this._discountAmount = 0;
+      this._discountPercentage = 0;
+      this._freightCharge = 0;
+      this._shipAndHandling = 0;
+      this._grandTotal = 0;
+      this._partialShipment = false;
+    }
+  }
+
   private _id: number;
   public get id(): number {
     return this._id;
@@ -23,12 +60,44 @@ export default class PurchasingOrder {
     this._vendorId = v;
   }
 
+  private _statusTitle: string;
+  public get statusTitle(): string {
+    return this._statusTitle;
+  }
+  public set statusTitle(v: string) {
+    this._statusTitle = v;
+  }
+
+  private _shipMethodTitle: string;
+  public get shipMethodTitle(): string {
+    return this._shipMethodTitle;
+  }
+  public set shipMethodTitle(v: string) {
+    this._shipMethodTitle = v;
+  }
+
   private _shipToId: string;
   public get shipToId(): string {
     return this._shipToId;
   }
   public set shipToId(v: string) {
     this._shipToId = v;
+  }
+
+  private _shipToTitle: string;
+  public get shipToTitle(): string {
+    return this._shipToTitle;
+  }
+  public set shipToTitle(v: string) {
+    this._shipToTitle = v;
+  }
+
+  private _vendorTitle: string;
+  public get vendorTitle(): string {
+    return this._vendorTitle;
+  }
+  public set vendorTitle(v: string) {
+    this._vendorTitle = v;
   }
 
   private _requesitioner: string;
@@ -39,12 +108,12 @@ export default class PurchasingOrder {
     this._requesitioner = v;
   }
 
-  private _shipMethod: string;
-  public get shipMethod(): string {
-    return this._shipMethod;
+  private _shipMethodId: number;
+  public get shipMethodId(): number {
+    return this._shipMethodId;
   }
-  public set shipMethod(v: string) {
-    this._shipMethod = v;
+  public set shipMethodId(v: number) {
+    this._shipMethodId = v;
   }
 
   private _incoTerms: string;
@@ -151,12 +220,12 @@ export default class PurchasingOrder {
     this._requestorId = v;
   }
 
-  private _status: string;
-  public get status(): string {
-    return this._status;
+  private _statusId: number;
+  public get statusId(): number {
+    return this._statusId;
   }
-  public set status(v: string) {
-    this._status = v;
+  public set statusId(v: number) {
+    this._statusId = v;
   }
 
   private _requestorEmail: string;

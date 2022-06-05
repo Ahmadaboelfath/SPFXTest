@@ -13,14 +13,40 @@ export default class PurchasingOrderService implements IPurchaseOrderService {
   constructor() {
     this.purchaseOrderMapper = new PurchaseOrderMapper();
   }
+  async getByStatus(status: string): Promise<PurchasingOrder[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle("PurchasingOrder")
+        .items.filter(`Status eq ${status}`)
+        .expand("Requestor/EMail")
+        .select("*,Requestor/EMail")
+        .get();
+
+      if (items.length > 0) {
+        return items.map((item) =>
+          this.purchaseOrderMapper.mapFromSPListItemObject(item)
+        );
+      } else {
+        return [];
+      }
+    } catch (e) {
+      throw new Error(
+        `the following error occurred while retrieving your assigned po:${e.message}`
+      );
+    }
+  }
 
   async getByRequesteor(requestorId: number): Promise<PurchasingOrder[]> {
     try {
       const items = await sp.web.lists
         .getByTitle("PurchasingOrder")
         .items.filter(`RequestorId eq ${requestorId}`)
-        .expand("Requestor/EMail")
-        .select("*,Requestor/EMail")
+        .expand(
+          "Requestor/EMail,ShipTo/Title,ShipMethod/Title,Vendor/Title,Status/Title"
+        )
+        .select(
+          "*,Requestor/EMail,ShipTo/Title,ShipMethod/Title,Vendor/Title,Status/Title"
+        )
         .get();
 
       if (items.length > 0) {

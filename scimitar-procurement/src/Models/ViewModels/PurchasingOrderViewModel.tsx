@@ -1,16 +1,19 @@
+import IFileInfo from "../../Controls/FileUploader/Interfaces/IFileInfo";
 import MaterialRequestionItem from "../ClassModels/MaterialRequesitionItem";
 import PurchasingOrder from "../ClassModels/PurchasingOrder";
 
 export default class PurchasingOrderViewModel {
   constructor(
     purchasingOrder?: PurchasingOrder,
-    poItems?: MaterialRequestionItem[]
+    poItems?: MaterialRequestionItem[],
+    files?: IFileInfo[]
   ) {
     this._purchaseOrder = purchasingOrder
       ? purchasingOrder
       : new PurchasingOrder();
 
     this._purchaseOrderItems = poItems ? poItems : [];
+    this._files = files ? files : [];
   }
 
   private _purchaseOrder: PurchasingOrder;
@@ -27,5 +30,13 @@ export default class PurchasingOrderViewModel {
   }
   public set purchaseOrderItems(v: MaterialRequestionItem[]) {
     this._purchaseOrderItems = v;
+  }
+
+  private _files: IFileInfo[];
+  public get files(): IFileInfo[] {
+    return this._files;
+  }
+  public set files(v: IFileInfo[]) {
+    this._files = v;
   }
 }

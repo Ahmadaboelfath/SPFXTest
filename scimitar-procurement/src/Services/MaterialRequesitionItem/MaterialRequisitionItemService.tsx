@@ -18,6 +18,33 @@ export default class MaterialRequisitionItemService
     this._listName = "MaterialRequisitionItems";
     this._mapper = new MaterialRequestionItemMapper();
   }
+  async getMaterialItemsByPO(poId: number): Promise<MaterialRequesitionItem[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.filter(`POId eq ${poId}`)
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .get();
+
+      if (items.length > 0) {
+        return items.map((item) =>
+          this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
+            item
+          )
+        );
+      } else {
+        return [];
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
   async updateItemsPO(
     itemId: number,
     POId: number

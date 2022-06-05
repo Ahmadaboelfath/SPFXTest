@@ -6,4 +6,5 @@ export default interface IPurchaseOrderService {
   add(purchaseOrder: PurchasingOrder): Promise<PurchasingOrder>;
   edit(purchaseOrder: PurchasingOrder): Promise<PurchasingOrder>;
   delete(purchaseOrder: PurchasingOrder): Promise<PurchasingOrder>;
+  getByStatus(status: string): Promise<PurchasingOrder[]>;
 }
