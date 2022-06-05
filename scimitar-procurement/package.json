@@ -36,7 +36,8 @@
     "react-router-dom": "^5.1.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.4",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "@react-pdf/renderer": "^2.1.1"
   },
   "devDependencies": {
     "@microsoft/rush-stack-compiler-3.9": "^0.4.37",
