@@ -32,10 +32,28 @@ export default class PurchaseRequestsBusinessLogic
     this._purchaseOrderService = new PurchaseOrderService();
     this._materialItemService = new MaterialRequisitionItemService();
   }
-  cancelPO(
-    viewModel: PurchasingOrderViewModel
+  async cancelPO(
+    viewModel: PurchasingOrderViewModel,
+    cancelStatusId: number
   ): Promise<PurchasingOrderViewModel> {
-    throw new Error("Method not implemented.");
+    const purchaseOrder = viewModel.purchaseOrder;
+    purchaseOrder.statusId = cancelStatusId;
+    const items = viewModel.purchaseOrderItems;
+    items.forEach((item) => (item.POId = null));
+
+    try {
+      const cancelledPo = await this._purchaseOrderService.edit(purchaseOrder);
+      const cancelledItems = await Promise.all(
+        items.map((item) => this._materialItemService.updateItem(item))
+      );
+      return new PurchasingOrderViewModel(
+        cancelledPo,
+        cancelledItems,
+        viewModel.files
+      );
+    } catch (e) {
+      throw new Error(`failed to cancel PO: ${e.message}`);
+    }
   }
 
   async uploadApprovedPurchaseOrder(

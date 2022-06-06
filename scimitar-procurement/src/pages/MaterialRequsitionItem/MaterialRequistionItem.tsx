@@ -53,12 +53,25 @@ class MaterialRequistionItem extends React.Component<
         .getMaterialRequistionById(id)
         .then((item) => {
           console.log(item);
-          this.setState((prevState) => {
-            const newState = { ...prevState };
-            // newState.showSpinner = false;
-            newState.item = item;
-            return newState;
-          });
+          if (item.POId === null) {
+            this.setState((prevState) => {
+              const newState = { ...prevState };
+              // newState.showSpinner = false;
+              newState.item = item;
+              return newState;
+            });
+          } else {
+            this.setState((prevState) => {
+              const newState = { ...prevState };
+              newState.item = item;
+              newState.showFinalConfirmationDialog = true;
+              newState.dialogMessage =
+                "Cannot edit this item because it is already in a purchase order";
+              newState.dialogConfirmationAction = () =>
+                this.props.history.push("/");
+              return newState;
+            });
+          }
         })
         .then(() => {
           this.loadChoices();
@@ -222,15 +235,18 @@ class MaterialRequistionItem extends React.Component<
       case ViewMode.View:
         return (
           <div className="button block">
-            <Button
-              text="Edit"
-              onClick={() => {
-                this.updateState([{ propName: "showSpinner", value: true }]);
-                this.props.history.push(
-                  `/MaterialItem/edit/${this.state.item.id}`
-                );
-              }}
-            />
+            {this.state.item.POId === null ? (
+              <Button
+                text="Edit"
+                onClick={() => {
+                  this.updateState([{ propName: "showSpinner", value: true }]);
+                  this.props.history.push(
+                    `/MaterialItem/edit/${this.state.item.id}`
+                  );
+                }}
+              />
+            ) : null}
+
             <Button
               text="Cancel"
               onClick={() => this.props.history.push("/AssignedItems")}
@@ -241,7 +257,9 @@ class MaterialRequistionItem extends React.Component<
       case ViewMode.Edit:
         return (
           <div className="button block">
-            <Button text="Submit" onClick={() => this.onSubmitClick()} />
+            {this.state.item.POId === null ? (
+              <Button text="Submit" onClick={() => this.onSubmitClick()} />
+            ) : null}
             <Button
               text="Cancel"
               onClick={() => this.props.history.push("/AssignedItems")}

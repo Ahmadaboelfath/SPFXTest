@@ -47,6 +47,9 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       : "";
     purchaseOrder.vendorTitle = spObject.Vendor ? spObject.Vendor.Title : "";
     purchaseOrder.statusTitle = spObject.Status ? spObject.Status.Title : "";
+    purchaseOrder.estimatedDelivery = spObject.EstimatedDelivery
+      ? new Date(spObject.EstimatedDelivery)
+      : null;
 
     return purchaseOrder;
   }
@@ -71,6 +74,7 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       VendorEmail: purchaseOrder.vendorEmail,
       RequestorId: purchaseOrder.requestorId,
       StatusId: purchaseOrder.statusId,
+      EstimatedDelivery: purchaseOrder.estimatedDelivery,
     };
     return spObject;
   }

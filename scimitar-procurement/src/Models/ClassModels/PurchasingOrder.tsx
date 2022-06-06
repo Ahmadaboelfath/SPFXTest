@@ -235,4 +235,12 @@ export default class PurchasingOrder {
   public set requestorEmail(v: string) {
     this._requestorEmail = v;
   }
+
+  private _estimatedDelivery: Date;
+  public get estimatedDelivery(): Date {
+    return this._estimatedDelivery;
+  }
+  public set estimatedDelivery(v: Date) {
+    this._estimatedDelivery = v;
+  }
 }

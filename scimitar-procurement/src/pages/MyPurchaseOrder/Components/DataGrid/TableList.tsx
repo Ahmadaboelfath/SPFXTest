@@ -32,6 +32,7 @@ export const TableList: React.FC<ITableListProps> = (props) => {
         vendor: item.vendorTitle,
         vendorAttention: item.vendorAttention,
         shipMethod: item.shipMethodTitle,
+        status: item.statusTitle,
       };
     });
 

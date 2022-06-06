@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 export default function InvoicesContainer() {
   return (
     <Document>
-      <Page style={styles.page} wrap orientation="landscape">
+      <Page>
         {/* <View>
                     <TableHeader logoTitle="Purchase Requisition" hasAFE={false}/>
                     <TableBody/>
@@ -41,9 +41,9 @@ export default function InvoicesContainer() {
                 </View>   */}
         {/* <SecondInvoice/> */}
         <View>
-          <TableHeader logoTitle="Matrials Requisition" prTable />
+          {/* <TableHeader logoTitle="Matrials Requisition" prTable />
           <TableBody prTable />
-          <TableFooter prTable />
+          <TableFooter prTable /> */}
         </View>
       </Page>
     </Document>

@@ -6,6 +6,7 @@ import { ViewMode } from "../../../MaterialRequsitionItem/ViewMode";
 import IPurchasingOrderDetailsFormProps from "./IPurchasingOrderDetailsFormProps";
 import IPurchasingOrderDetailsFormState from "./IPurchasingOrderDetailsFormState";
 import { DropdownItemProps } from "semantic-ui-react";
+import { Datepicker } from "../../../../Controls/datepicker";
 
 export default class PurchasingOrderDetailsForm extends React.Component<
   IPurchasingOrderDetailsFormProps,
@@ -17,7 +18,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
       <div className="ui form">
         <Textbox
           disabled={true}
-          Required={false}
+          Required={true}
           ctrlName="title"
           handleInputChange={(value, ctrlName) => null}
           label="Purchase Request Code"
@@ -25,7 +26,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="incoTerms"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -37,7 +38,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           disabled={
             this.props.disableDropDowns || this.props.viewMode === ViewMode.View
           }
-          Required={false}
+          Required={true}
           ctrlName="shipMethodId"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -51,7 +52,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           disabled={
             this.props.disableDropDowns || this.props.viewMode === ViewMode.View
           }
-          Required={false}
+          Required={true}
           ctrlName="vendorId"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -64,7 +65,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           disabled={
             this.props.disableDropDowns || this.props.viewMode === ViewMode.View
           }
-          Required={false}
+          Required={true}
           ctrlName="shipToId"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -75,7 +76,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="requesitioner"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -85,7 +86,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="deliveryTerms"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -95,7 +96,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="paymentTerms"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -118,7 +119,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         </div>
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="vendorAttention"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -128,7 +129,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Textbox
           disabled={this.props.viewMode === ViewMode.View}
-          Required={false}
+          Required={true}
           ctrlName="vendorEmail"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -140,7 +141,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           disabled={
             this.props.disableDropDowns || this.props.viewMode === ViewMode.View
           }
-          Required={false}
+          Required={true}
           ctrlName="statusId"
           handleInputChange={(value, ctrlName) =>
             this.props.onChange(value, ctrlName)
@@ -148,6 +149,12 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           label="Status"
           options={this.getStatusOptions()}
           value={this.props.purchaseOrder.statusId}
+        />
+        <Datepicker
+          ctrlName="estimatedDelivery"
+          handleDate={(date, ctrlName) => this.props.onChange(date, ctrlName)}
+          selected={this.props.purchaseOrder.estimatedDelivery}
+          Required={true}
         />
       </div>
     );

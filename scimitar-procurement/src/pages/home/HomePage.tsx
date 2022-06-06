@@ -109,6 +109,20 @@ class HomePage extends React.Component<
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
+                    {this.state.isAdmin ||
+                    this.context.userRole === "Procurement" ? (
+                      <Link to="/PurchasingOrder/new">
+                        <span>Create Purchase Order</span>
+                        <Icon iconName="ComplianceAudit" />
+                      </Link>
+                    ) : null}
+                    {this.state.isAdmin ||
+                    this.context.userRole === "Procurement" ? (
+                      <Link to="/MyPurchaseOrder">
+                        <span>My Purchase Order</span>
+                        <Icon iconName="ComplianceAudit" />
+                      </Link>
+                    ) : null}
                     {this.context.userRole === "FieldManager" ||
                     this.state.isAdmin ? (
                       <Link to="/PRPendingApprovals">

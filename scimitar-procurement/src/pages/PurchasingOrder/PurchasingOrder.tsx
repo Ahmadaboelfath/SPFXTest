@@ -145,7 +145,9 @@ class PurchasingOrderPage extends React.Component<
   async loadPOs() {
     try {
       const options =
-        await this._materialItemBusinessLogic.getMaterialItemsNoInPOOption(7);
+        await this._materialItemBusinessLogic.getMaterialItemsNoInPOOption(
+          this.context.userID
+        );
       this.setState((prevState) => {
         const newState = { ...prevState };
         newState.itemNotAssignedToPO = options;
@@ -328,7 +330,38 @@ class PurchasingOrderPage extends React.Component<
     }
   }
   onCancelRequest(): void {
-    throw new Error("Method not implemented.");
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showConfirmationDialog = true;
+      newState.dialogMessage = "Are you sure you want to cancel this PO?";
+      newState.dialogTitle = "Cancel PO";
+      newState.submissionAction = () => this.cancelPo();
+      return newState;
+    });
+  }
+  cancelPo(): void {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.showLoader = true;
+    });
+    const cancelStatusobject = this.state.lookups["Status"].filter(
+      (status) => status.text === "Cancelled"
+    );
+
+    this._purchasingRequestBusinessLogic
+      .cancelPO(this.state.viewModel, cancelStatusobject[0].value)
+      .then((viewModel) => {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          newState.showConfirmationDialog = false;
+          newState.dialogMessage = "PO Cancelled Successfully";
+          newState.dialogTitle = "Cancel PO";
+          newState.showFinalConfirmationDialog = true;
+          newState.viewModel = viewModel;
+          newState.submissionAction = () => this.props.history.push("/");
+          return newState;
+        });
+      });
   }
   showConfirmationDialog(): void {
     this.setState((prevState) => {
@@ -604,6 +637,12 @@ class PurchasingOrderPage extends React.Component<
                       Cancel Request
                     </DefaultButton>
                   ) : null}
+
+                  {this.props.viewMode !== ViewMode.New ? (
+                    <DefaultButton onClick={() => this.onPrint()}>
+                      Print PO
+                    </DefaultButton>
+                  ) : null}
                 </div>
                 {this.renderDialog()}
               </MDBCol>
@@ -612,6 +651,9 @@ class PurchasingOrderPage extends React.Component<
         )}
       </>
     );
+  }
+  onPrint(): void {
+    throw new Error("Method not implemented.");
   }
 }
 

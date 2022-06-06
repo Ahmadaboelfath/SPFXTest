@@ -20,6 +20,7 @@ export default interface IPurchaseRequestsBusinessLogic {
     purchaseOrderCode: string
   ): Promise<IFileInfo>;
   cancelPO(
-    viewModel: PurchasingOrderViewModel
+    viewModel: PurchasingOrderViewModel,
+    cancelStatusId: number
   ): Promise<PurchasingOrderViewModel>;
 }

@@ -13,6 +13,7 @@ export default class PurchasingOrderService implements IPurchaseOrderService {
   constructor() {
     this.purchaseOrderMapper = new PurchaseOrderMapper();
   }
+
   async getByStatus(status: string): Promise<PurchasingOrder[]> {
     try {
       const items = await sp.web.lists
