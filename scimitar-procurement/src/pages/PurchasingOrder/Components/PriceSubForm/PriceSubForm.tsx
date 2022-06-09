@@ -23,7 +23,7 @@ export default class PriceSubForm extends React.Component<
           Required={false}
           ctrlName="discountPercentage"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Discount Percentage"
           value={this.props.priceComponents.discoutPercentage.toString()}
@@ -51,7 +51,7 @@ export default class PriceSubForm extends React.Component<
           Required={false}
           ctrlName="freightCharge"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Freight"
           value={this.props.priceComponents.freight.toString()}

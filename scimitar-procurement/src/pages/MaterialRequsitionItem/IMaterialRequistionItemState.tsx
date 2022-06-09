@@ -9,5 +9,6 @@ export default interface IMaterialRequistionItemState {
   dialogMessage: string;
   dialogTitle: string;
   showFinalConfirmationDialog: boolean;
+  currencyOptions: DropdownItemProps[];
   dialogConfirmationAction: () => void;
 }

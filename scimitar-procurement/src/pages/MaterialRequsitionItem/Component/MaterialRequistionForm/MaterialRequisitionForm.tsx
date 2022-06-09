@@ -70,16 +70,31 @@ export default class MaterialRequsitionItemForm extends React.Component<
             label="Unit"
             value={this.props.item.unit}
           />
-          <Textbox
-            disabled={this.props.viewMode === ViewMode.View ? true : false}
-            Required={false}
-            ctrlName="currency"
-            handleInputChange={(value, ctrlName) =>
-              this.onChange(value, ctrlName)
-            }
-            label="Currency"
-            value={this.props.item.currency}
-          />
+
+          {this.props.viewMode === ViewMode.Edit ? (
+            <Dropdown
+              Required={false}
+              ctrlName="currency"
+              handleInputChange={(value, ctrlName) =>
+                this.onChange(value, ctrlName)
+              }
+              label="Currency"
+              options={this.props.currencyOptions}
+              value={this.props.item.currency}
+            />
+          ) : (
+            <Textbox
+              disabled={this.props.viewMode === ViewMode.View ? true : false}
+              Required={false}
+              ctrlName="currency"
+              handleInputChange={(value, ctrlName) =>
+                this.onChange(value, ctrlName)
+              }
+              label="Currency"
+              value={this.props.item.currency}
+            />
+          )}
+
           <Textbox
             disabled={this.props.viewMode === ViewMode.View ? true : false}
             Required={false}

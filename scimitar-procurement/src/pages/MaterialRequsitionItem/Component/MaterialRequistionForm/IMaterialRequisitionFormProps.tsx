@@ -7,4 +7,5 @@ export default interface IMaterialRequisitionFormProps {
   viewMode: ViewMode;
   statusOptions: DropdownItemProps[];
   onChange(value, ctrlName): void;
+  currencyOptions: DropdownItemProps[];
 }

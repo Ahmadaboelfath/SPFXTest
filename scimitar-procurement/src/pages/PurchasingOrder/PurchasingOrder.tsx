@@ -53,6 +53,7 @@ class PurchasingOrderPage extends React.Component<
       showFinalConfirmationDialog: false,
       submissionAction: () => null,
       deletedItems: [],
+      revised: false,
     };
   }
 
@@ -103,6 +104,7 @@ class PurchasingOrderPage extends React.Component<
       "ShipMethod",
       "Vendors",
       "Status",
+      "Currency",
     ]);
     const lookupValues = {};
     lookups.forEach((lookup) => {
@@ -184,7 +186,15 @@ class PurchasingOrderPage extends React.Component<
       newState.itemNotAssignedToPO = prevState.itemNotAssignedToPO.filter(
         (option) => option.key !== prevState.selectedkey
       );
-
+      if (
+        prevState.viewModel.purchaseOrderItems.length >
+          newState.viewModel.purchaseOrderItems.length ||
+        (prevState.viewModel.purchaseOrderItems.length <
+          newState.viewModel.purchaseOrderItems.length &&
+          this.props.viewMode === ViewMode.Edit)
+      ) {
+        newState.revised = true;
+      }
       newState.showItemSubForm = false;
       return newState;
     });
@@ -217,6 +227,15 @@ class PurchasingOrderPage extends React.Component<
         { item: value, key: value.id, text: value.description },
       ];
       newState.deletedItems = [...prevState.deletedItems, value];
+      if (
+        prevState.viewModel.purchaseOrderItems.length >
+          newState.viewModel.purchaseOrderItems.length ||
+        (prevState.viewModel.purchaseOrderItems.length <
+          newState.viewModel.purchaseOrderItems.length &&
+          this.props.viewMode === ViewMode.Edit)
+      ) {
+        newState.revised = true;
+      }
 
       return newState;
     });
@@ -251,6 +270,10 @@ class PurchasingOrderPage extends React.Component<
 
       viewModel.purchaseOrder = purchaseOrder;
       newState.viewModel = viewModel;
+      if (this.props.viewMode === ViewMode.Edit) {
+        newState.revised = true;
+      }
+
       return newState;
     });
   }
@@ -265,7 +288,7 @@ class PurchasingOrderPage extends React.Component<
   roundNumbers(number): number {
     return Math.round((number + Number.EPSILON) * 100) / 100;
   }
-  onItemDetailsChange(value: any, ctrlName: any): void {
+  onItemDetailsChange(value: any, ctrlName: any, revised?: boolean): void {
     this.setState((prevState) => {
       const newState = { ...prevState };
       const viewModel = new PurchasingOrderViewModel(
@@ -279,6 +302,9 @@ class PurchasingOrderPage extends React.Component<
       purchaseOrder[ctrlName] = value;
       viewModel.purchaseOrder = purchaseOrder;
       newState.viewModel = viewModel;
+      if (this.props.viewMode === ViewMode.Edit && revised) {
+        newState.revised = true;
+      }
       return newState;
     });
   }
@@ -385,7 +411,11 @@ class PurchasingOrderPage extends React.Component<
       return newState;
     });
     this._purchasingRequestBusinessLogic
-      .editPurchaseOrder(this.state.viewModel, this.state.deletedItems)
+      .editPurchaseOrder(
+        this.state.viewModel,
+        this.state.deletedItems,
+        this.state.revised
+      )
       .then((viewModel) => {
         this.setState((prevState) => {
           const newState = { ...prevState };
@@ -524,8 +554,8 @@ class PurchasingOrderPage extends React.Component<
                   <PurchasingOrderDetailsForm
                     viewMode={this.props.viewMode}
                     purchaseOrder={this.state.viewModel.purchaseOrder}
-                    onChange={(value, ctrlName) =>
-                      this.onItemDetailsChange(value, ctrlName)
+                    onChange={(value, ctrlName, revised) =>
+                      this.onItemDetailsChange(value, ctrlName, revised)
                     }
                     lookups={this.state.lookups}
                     disableDropDowns={this.state.disableDropDowns}

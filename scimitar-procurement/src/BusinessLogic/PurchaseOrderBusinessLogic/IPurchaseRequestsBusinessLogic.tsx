@@ -11,7 +11,8 @@ export default interface IPurchaseRequestsBusinessLogic {
   ): Promise<PurchasingOrderViewModel>;
   editPurchaseOrder(
     purchaseOrder: PurchasingOrderViewModel,
-    deletedMaterialItems: MaterialRequestionItem[]
+    deletedMaterialItems: MaterialRequestionItem[],
+    isRevised?: boolean
   ): Promise<PurchasingOrderViewModel>;
   getPurchaseOrderViewModelById(id: number): Promise<PurchasingOrderViewModel>;
   getPurchasngOrderByRequester(requesterId: number): Promise<PurchasingOrder[]>;

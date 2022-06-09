@@ -43,6 +43,7 @@ class MaterialRequistionItem extends React.Component<
       dialogTitle: "",
       dialogConfirmationAction: null,
       showFinalConfirmationDialog: false,
+      currencyOptions: [],
     };
   }
 
@@ -99,17 +100,29 @@ class MaterialRequistionItem extends React.Component<
     this._choiceService
       .getChoicesFromChoiceField("MaterialRequisitionItems", "Status")
       .then((data) => {
-        const options: DropdownItemProps[] = data.map((value) => ({
-          text: value,
-          value: value,
-        }));
+        this._choiceService
+          .getChoicesFromChoiceField("MaterialRequisitionItems", "Currency")
+          .then((currency) => {
+            const options: DropdownItemProps[] = data.map((value) => ({
+              text: value,
+              value: value,
+            }));
 
-        this.setState((prevState) => {
-          const newState = { ...prevState };
-          newState.statusOptions = options;
-          newState.showSpinner = false;
-          return newState;
-        });
+            const currencyOptions: DropdownItemProps[] = currency.map(
+              (value) => ({
+                text: value,
+                value: value,
+              })
+            );
+
+            this.setState((prevState) => {
+              const newState = { ...prevState };
+              newState.statusOptions = options;
+              newState.showSpinner = false;
+              newState.currencyOptions = currencyOptions;
+              return newState;
+            });
+          });
       })
       .catch((e) => console.error(e, "Failed to load choices for the Status"));
   }
@@ -385,6 +398,7 @@ class MaterialRequistionItem extends React.Component<
                   viewMode={this.props.viewMode}
                   statusOptions={this.state.statusOptions}
                   onChange={(value, ctrlName) => this.onChange(value, ctrlName)}
+                  currencyOptions={this.state.currencyOptions}
                 />
 
                 {this.renderActionButtons()}

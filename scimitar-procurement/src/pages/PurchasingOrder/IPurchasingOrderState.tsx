@@ -18,4 +18,5 @@ export default interface IPurchasingOrderState {
   dialogTitle: string;
   submissionAction: () => void;
   deletedItems: MaterialRequestionItem[];
+  revised: boolean;
 }

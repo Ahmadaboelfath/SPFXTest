@@ -25,6 +25,7 @@ export default class PurchasingOrder {
       this._vendorTitle = purchaseOrder.vendorTitle;
       this._shipToTitle = purchaseOrder.shipToTitle;
       this._shipMethodTitle = purchaseOrder.shipMethodTitle;
+      this._estimatedDelivery = purchaseOrder.estimatedDelivery;
     } else {
       this._subTotal = 0;
       this._discountAmount = 0;

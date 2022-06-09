@@ -120,7 +120,7 @@ export default class PurchaseRequestsBusinessLogic
       const addedPo = await this._purchaseOrderService.add(
         purchaseOrder.purchaseOrder
       );
-      const POCode = `EGY-${new Date().getFullYear() - 2000}-${addedPo.id}`;
+      const POCode = `SPEL-${new Date().getFullYear() - 2000}-${addedPo.id}`;
       addedPo.title = POCode;
       const updatedPo = await this._purchaseOrderService.edit(addedPo);
       const folderCreated = await this._folderService.create(
@@ -146,8 +146,22 @@ export default class PurchaseRequestsBusinessLogic
   }
   async editPurchaseOrder(
     purchaseOrder: PurchasingOrderViewModel,
-    deletedItems: MaterialRequestionItem[]
+    deletedItems: MaterialRequestionItem[],
+    isRevised?: boolean
   ): Promise<PurchasingOrderViewModel> {
+    if (isRevised) {
+      const revisionNumberFound =
+        purchaseOrder.purchaseOrder.title.indexOf("R") > -1;
+      if (revisionNumberFound) {
+        const splittedCode = purchaseOrder.purchaseOrder.title.split("-");
+        const revisionNumber =
+          parseInt(splittedCode[splittedCode.length - 1]) + 1;
+        splittedCode[splittedCode.length - 1] = revisionNumber.toString();
+        purchaseOrder.purchaseOrder.title = splittedCode.join("-");
+      } else {
+        purchaseOrder.purchaseOrder.title = `${purchaseOrder.purchaseOrder.title}-R-1`;
+      }
+    }
     const updatedPO = this._purchaseOrderService.edit(
       purchaseOrder.purchaseOrder
     );

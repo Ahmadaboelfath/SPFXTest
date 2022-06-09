@@ -21,7 +21,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="title"
           handleInputChange={(value, ctrlName) => null}
-          label="Purchase Request Code"
+          label="Purchase Order Code"
           value={this.props.purchaseOrder.title}
         />
         <Textbox
@@ -29,7 +29,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="incoTerms"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Inco Terms"
           value={this.props.purchaseOrder.incoTerms}
@@ -41,7 +41,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="shipMethodId"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Shipment Method"
           options={this.props.lookups ? this.props.lookups.ShipMethod : []}
@@ -55,7 +55,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="vendorId"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Vendor"
           options={this.props.lookups ? this.props.lookups.Vendors : []}
@@ -68,9 +68,9 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="shipToId"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
-          label="Ship To"
+          label="Bill To / Ship To"
           options={this.props.lookups ? this.props.lookups.ShipTo : []}
           value={this.props.purchaseOrder.shipToId}
         />
@@ -79,7 +79,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="requesitioner"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Requesitioner"
           value={this.props.purchaseOrder.requesitioner}
@@ -89,7 +89,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="deliveryTerms"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Delivery Terms"
           value={this.props.purchaseOrder.deliveryTerms}
@@ -99,7 +99,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="paymentTerms"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Payment Terms"
           value={this.props.purchaseOrder.paymentTerms}
@@ -111,7 +111,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
             LabelText="Partial Shipment"
             ctrName="partialShipment"
             handleInputChange={(value, ctrlName) =>
-              this.props.onChange(value, ctrlName)
+              this.props.onChange(value, ctrlName, true)
             }
             disabled={this.props.viewMode === ViewMode.View}
             checked={this.props.purchaseOrder.partialShipment}
@@ -122,7 +122,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="vendorAttention"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Vendor Attention"
           value={this.props.purchaseOrder.vendorAttention}
@@ -132,7 +132,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
           Required={true}
           ctrlName="vendorEmail"
           handleInputChange={(value, ctrlName) =>
-            this.props.onChange(value, ctrlName)
+            this.props.onChange(value, ctrlName, true)
           }
           label="Vendor Email"
           value={this.props.purchaseOrder.vendorEmail}
@@ -152,9 +152,15 @@ export default class PurchasingOrderDetailsForm extends React.Component<
         />
         <Datepicker
           ctrlName="estimatedDelivery"
-          handleDate={(date, ctrlName) => this.props.onChange(date, ctrlName)}
+          handleDate={(date, ctrlName) =>
+            this.props.onChange(date, ctrlName, true)
+          }
           selected={this.props.purchaseOrder.estimatedDelivery}
           Required={true}
+          label="Estimated Delivery Date"
+          disabled={
+            this.props.disableDropDowns || this.props.viewMode === ViewMode.View
+          }
         />
       </div>
     );

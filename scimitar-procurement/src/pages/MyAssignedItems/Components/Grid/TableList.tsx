@@ -31,11 +31,13 @@ export const TableList: React.FC<ITableListProps> = (props) => {
         actions: (
           <div className={styles.tableAction}>
             <span>
-              {" "}
-              <span onClick={() => props.onEditClick(item, index)}>
-                <Icon iconName="Edit" />
-              </span>
+              {!item.POId ? (
+                <span onClick={() => props.onEditClick(item, index)}>
+                  <Icon iconName="Edit" />
+                </span>
+              ) : null}
             </span>
+
             <span onClick={() => props.onViewClick(item, index)}>
               {" "}
               <Icon iconName="View" />
