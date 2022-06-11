@@ -51,6 +51,8 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       ? new Date(spObject.EstimatedDelivery)
       : null;
 
+    purchaseOrder.notes = spObject.Notes;
+
     return purchaseOrder;
   }
   mapToSPListItemObject(purchaseOrder: PurchasingOrder) {
@@ -75,6 +77,7 @@ export default class PurchaseOrderMapper implements IPurchaseOrderMapper {
       RequestorId: purchaseOrder.requestorId,
       StatusId: purchaseOrder.statusId,
       EstimatedDelivery: purchaseOrder.estimatedDelivery,
+      Notes: purchaseOrder.notes,
     };
     return spObject;
   }

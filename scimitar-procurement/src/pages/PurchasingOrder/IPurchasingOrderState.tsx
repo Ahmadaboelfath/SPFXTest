@@ -19,4 +19,5 @@ export default interface IPurchasingOrderState {
   submissionAction: () => void;
   deletedItems: MaterialRequestionItem[];
   revised: boolean;
+  errors: any;
 }

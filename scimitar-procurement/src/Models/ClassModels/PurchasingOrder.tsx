@@ -26,6 +26,7 @@ export default class PurchasingOrder {
       this._shipToTitle = purchaseOrder.shipToTitle;
       this._shipMethodTitle = purchaseOrder.shipMethodTitle;
       this._estimatedDelivery = purchaseOrder.estimatedDelivery;
+      this._notes = purchaseOrder.notes;
     } else {
       this._subTotal = 0;
       this._discountAmount = 0;
@@ -43,6 +44,14 @@ export default class PurchasingOrder {
   }
   public set id(v: number) {
     this._id = v;
+  }
+
+  private _notes: string;
+  public get notes(): string {
+    return this._notes;
+  }
+  public set notes(v: string) {
+    this._notes = v;
   }
 
   private _title: string;

@@ -22,9 +22,13 @@ import IPurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBus
 import PurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/PurchaseRequestsBusinessLogic";
 import FileUploader from "../../Controls/FileUploader/FileUploader";
 import IFileInfo from "../../Controls/FileUploader/Interfaces/IFileInfo";
-import { DefaultButton, IconButton, Modal } from "office-ui-fabric-react";
+import { DefaultButton, Icon, IconButton, Modal } from "office-ui-fabric-react";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
+import { requiredValidationControls } from "./Components/PurchasingOrderForm/validationFields";
+import * as _ from "lodash";
+import styles from "../../Controls/Forms.module.scss";
+
 class PurchasingOrderPage extends React.Component<
   IPurchasingOrderProps,
   IPurchasingOrderState
@@ -54,6 +58,7 @@ class PurchasingOrderPage extends React.Component<
       submissionAction: () => null,
       deletedItems: [],
       revised: false,
+      errors: {},
     };
   }
 
@@ -119,6 +124,7 @@ class PurchasingOrderPage extends React.Component<
       newState.showItemSubForm = true;
       newState.selectedItem = new MaterialRequestionItem();
       newState.selectedkey = 0;
+
       return newState;
     });
     if (this.state.itemNotAssignedToPO.length === 0) {
@@ -196,6 +202,10 @@ class PurchasingOrderPage extends React.Component<
         newState.revised = true;
       }
       newState.showItemSubForm = false;
+      const errors = prevState.errors;
+      if (errors["items"]) {
+        delete errors["items"];
+      }
       return newState;
     });
   }
@@ -235,6 +245,11 @@ class PurchasingOrderPage extends React.Component<
           this.props.viewMode === ViewMode.Edit)
       ) {
         newState.revised = true;
+      }
+
+      const errors = prevState.errors;
+      if (newState.viewModel.purchaseOrderItems.length === 0) {
+        errors["items"] = "Should Select One Item At Least";
       }
 
       return newState;
@@ -289,6 +304,7 @@ class PurchasingOrderPage extends React.Component<
     return Math.round((number + Number.EPSILON) * 100) / 100;
   }
   onItemDetailsChange(value: any, ctrlName: any, revised?: boolean): void {
+    this.validateRequiredFields(value, ctrlName);
     this.setState((prevState) => {
       const newState = { ...prevState };
       const viewModel = new PurchasingOrderViewModel(
@@ -390,19 +406,22 @@ class PurchasingOrderPage extends React.Component<
       });
   }
   showConfirmationDialog(): void {
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      (newState.showConfirmationDialog = true),
-        (newState.dialogMessage =
-          "Are you sure you want to submit this purchase order?");
-      newState.dialogTitle = "Add New PO";
-      if (this.props.viewMode === ViewMode.New) {
-        newState.submissionAction = () => this.addPO();
-      } else {
-        newState.submissionAction = () => this.updatePo();
-      }
-      return newState;
-    });
+    const isValid = this.validateForm();
+    if (isValid) {
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        (newState.showConfirmationDialog = true),
+          (newState.dialogMessage =
+            "Are you sure you want to submit this purchase order?");
+        newState.dialogTitle = "Add New PO";
+        if (this.props.viewMode === ViewMode.New) {
+          newState.submissionAction = () => this.addPO();
+        } else {
+          newState.submissionAction = () => this.updatePo();
+        }
+        return newState;
+      });
+    }
   }
   updatePo(): void {
     this.setState((prevState) => {
@@ -486,6 +505,65 @@ class PurchasingOrderPage extends React.Component<
     });
   }
 
+  validateRequiredFields(value, ctrlName) {
+    const isRequired =
+      requiredValidationControls.filter(
+        (controlName) => ctrlName === controlName
+      ).length > 0;
+
+    if (isRequired) {
+      const hasValue = value.toString().trim() ? true : false;
+      if (hasValue) {
+        if (this.state.errors[ctrlName]) {
+          this.setState((prevState) => {
+            const newState = { ...prevState };
+            const errors = { ...prevState.errors };
+            delete errors[ctrlName];
+            newState.errors = errors;
+            return newState;
+          });
+        }
+      } else {
+        this.setState((prevState) => {
+          const newState = { ...prevState };
+          const errors = { ...prevState.errors };
+          errors[ctrlName] = "Required Field";
+          newState.errors = errors;
+          return newState;
+        });
+      }
+    }
+  }
+
+  validateForm() {
+    let isFormValid = true;
+    const errors = {};
+
+    requiredValidationControls.forEach((value) => {
+      const isValid = this.state.viewModel.purchaseOrder[value] ? true : false;
+      if (!isValid) {
+        isFormValid = false;
+        errors[value] = "Required Field";
+      }
+    });
+    if (this.state.viewModel.purchaseOrderItems.length === 0) {
+      isFormValid = false;
+      errors["items"] = "Should Select One Item At Least";
+    }
+
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.errors = errors;
+      return newState;
+    });
+
+    return isFormValid;
+  }
+
+  onPrint(): void {
+    throw new Error("Method not implemented.");
+  }
+
   renderDialog(): JSX.Element {
     return (
       <Modal
@@ -559,6 +637,7 @@ class PurchasingOrderPage extends React.Component<
                     }
                     lookups={this.state.lookups}
                     disableDropDowns={this.state.disableDropDowns}
+                    errors={this.state.errors}
                   />
                 </Accordion>
                 <Accordion title="Items Details" collapsed={false}>
@@ -578,6 +657,16 @@ class PurchasingOrderPage extends React.Component<
                     }
                     viewMode={this.props.viewMode}
                   />
+
+                  {this.state.errors["items"] ? (
+                    <div className={styles.validateMsg}>
+                      <p>
+                        <Icon iconName="info" />
+                        {this.state.errors["items"]}
+                      </p>
+                    </div>
+                  ) : null}
+
                   <ItemSubFormModal
                     onCancelAction={() => console.log("canceled")}
                     onDialogDismiss={() => this.onDismissSubForm()}
@@ -681,9 +770,6 @@ class PurchasingOrderPage extends React.Component<
         )}
       </>
     );
-  }
-  onPrint(): void {
-    throw new Error("Method not implemented.");
   }
 }
 

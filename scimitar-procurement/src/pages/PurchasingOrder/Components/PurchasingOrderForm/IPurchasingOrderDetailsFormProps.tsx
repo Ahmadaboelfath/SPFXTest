@@ -7,4 +7,5 @@ export default interface IPurchasingOrderDetailsFormsProps {
   onChange: (value, ctrlName, revised?: boolean) => void;
   lookups: any;
   disableDropDowns: boolean;
+  errors?: any;
 }
