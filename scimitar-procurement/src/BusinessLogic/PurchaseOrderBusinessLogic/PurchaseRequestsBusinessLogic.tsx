@@ -60,6 +60,11 @@ export default class PurchaseRequestsBusinessLogic
     file: IFileInfo,
     purchaseOrderCode: string
   ): Promise<IFileInfo> {
+    if (purchaseOrderCode.indexOf("R") > -1) {
+      const splittedPoCode = purchaseOrderCode.split("-");
+      purchaseOrderCode = `${splittedPoCode[0]}-${splittedPoCode[1]}-${splittedPoCode[2]}`;
+    }
+
     const approvedPO = await this._fileService.getFileByMetadata(
       "PurchasingOrderDocuments",
       purchaseOrderCode,
