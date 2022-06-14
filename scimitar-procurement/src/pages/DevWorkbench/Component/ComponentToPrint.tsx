@@ -16,15 +16,17 @@ export default class ComponentToPrint extends React.Component<any, any> {
 
   render() {
     return (
-      <div className={styles.table}>
-        <table>
-          <thead>
-            <th className={styles.cellBold}>column 1</th>
-            <th className={styles.cellBold}>column 2</th>
-            <th className={styles.cellBold}>column 3</th>
-          </thead>
-          <tbody>{this.renderData()}</tbody>
-        </table>
+      <div className={styles.container}>
+        <div className={styles.table}>
+          <table>
+            <thead>
+              <th className={styles.cellBold}>column 1</th>
+              <th className={styles.cellBold}>column 2</th>
+              <th className={styles.cellBold}>column 3</th>
+            </thead>
+            <tbody>{this.renderData()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

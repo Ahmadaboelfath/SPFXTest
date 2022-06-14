@@ -1,0 +1,14 @@
+@media print{
+    @page{
+        size: A4 landscape;
+    }
+
+    td{
+        font-size: 10px;
+    }
+
+    .container{
+        
+    }
+   
+}
