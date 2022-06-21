@@ -79,6 +79,7 @@ export default class PurchasingOrderDetailsForm extends React.Component<
               ? this.props.errors["vendorId"]
               : ""
           }
+          search={true}
         />
         <Dropdown
           disabled={

@@ -109,7 +109,6 @@ class PurchasingOrderPage extends React.Component<
       "ShipMethod",
       "Vendors",
       "Status",
-      "Currency",
     ]);
     const lookupValues = {};
     lookups.forEach((lookup) => {
