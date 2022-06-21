@@ -28,6 +28,7 @@ import MaterialRequisitionItemService from "../../Services/MaterialRequesitionIt
 import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
 import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
+import { Textarea } from "../../Controls/textarea";
 
 class PRAssigning extends React.Component<
   RouteComponentProps<IPRAssigningProps>,
@@ -277,6 +278,25 @@ class PRAssigning extends React.Component<
                   </MDBCol>
                 </MDBRow>
               </Accordion>
+
+              {this.state.viewModel.purchaseRequest.fieldManagerApproval ===
+              "Rejected" ? (
+                <Accordion title="Rejection Reason">
+                  <div className="ui form">
+                    <Textarea
+                      Required={false}
+                      ctrlName=""
+                      handleInputChange={(value) => null}
+                      value={
+                        this.state.viewModel.purchaseRequest.rejectionReason
+                      }
+                      label="Rejection Reason"
+                      disabled={true}
+                    />
+                  </div>
+                </Accordion>
+              ) : null}
+
               {/* {this.context.userRole === "Procurement" || this.state.isAdmin ? (
                 <Accordion title="Assigned User" collapsed={false}>
                   <MDBRow>
@@ -332,6 +352,19 @@ class PRAssigning extends React.Component<
                 {this.state.isAdmin || this.context.userRole === "Warehouse" ? (
                   <DefaultButton onClick={() => this.onCancelRequest()}>
                     Cancel Request
+                  </DefaultButton>
+                ) : null}
+                {this.state.viewModel.purchaseRequest.fieldManagerApproval !==
+                "Rejected" ? (
+                  <DefaultButton
+                    onClick={() =>
+                      this.props.history.push(
+                        `/PrintPR/${this.state.viewModel.purchaseRequest.id}`
+                      )
+                    }
+                    // className="cancelBtn"
+                  >
+                    <span>Print PR</span>
                   </DefaultButton>
                 ) : null}
               </div>

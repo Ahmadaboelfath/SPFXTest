@@ -24,4 +24,6 @@ export default interface IMaterialRequisitionItemService {
   updateItemsPO(itemId: number, POId: number): Promise<MaterialRequestionItem>;
 
   getMaterialItemsByPO(poId: number): Promise<MaterialRequestionItem[]>;
+
+  getAll(): Promise<MaterialRequestionItem[]>;
 }

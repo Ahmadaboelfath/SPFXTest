@@ -11,6 +11,7 @@ export default class PurchasingRequestApproval {
       this._status = purchasingRequestApproval.status;
       this._executioner = purchasingRequestApproval.executioner;
       this._approvalDate = purchasingRequestApproval.approvalDate;
+      this._rejectionReason = purchasingRequestApproval.rejectionReason;
     }
   }
 
@@ -65,5 +66,13 @@ export default class PurchasingRequestApproval {
   }
   public set requestCode(v: string) {
     this._requestCode = v;
+  }
+
+  private _rejectionReason: string;
+  public get rejectionReason(): string {
+    return this._rejectionReason;
+  }
+  public set rejectionReason(v: string) {
+    this._rejectionReason = v;
   }
 }

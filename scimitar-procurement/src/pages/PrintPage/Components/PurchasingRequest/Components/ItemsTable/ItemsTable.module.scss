@@ -1,0 +1,95 @@
+@media screen {
+    .tableContainer{
+        padding: 10px;
+        width: 100%;
+    }
+
+    .table{
+        border: 1px solid black;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .col{
+        width: 4%;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .wideCol{
+        width: 8%;
+        border: 1px solid black;
+        text-align: center;
+
+    }
+
+    .ultraWideCol{
+        width: 40%;
+        border: 1px solid black;
+        text-align: center;
+
+    }
+
+    .headerRow{
+        height:3rem;
+        background-color: grey;
+    }
+
+    .dataCol{
+        border: 1px solid grey;
+        text-align: center;
+
+    }
+
+}
+
+@media print {
+
+    
+  
+    
+    .tableContainer{
+        padding: 10px;
+        width: 100%;
+
+    }
+
+    .table{
+        border: 1px solid black;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .col{
+        width: 4%;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .wideCol{
+        width: 8%;
+        border: 1px solid black;
+        text-align: center;
+
+    }
+
+    .ultraWideCol{
+        width: 40%;
+        border: 1px solid black;
+        text-align: center;
+
+    }
+
+    .headerRow{
+        height: 3rem;
+        background-color: grey;
+        page-break-before: always;
+    }
+
+    .dataCol{
+        border: 1px solid grey;
+        text-align: center;
+        
+    }
+    
+}

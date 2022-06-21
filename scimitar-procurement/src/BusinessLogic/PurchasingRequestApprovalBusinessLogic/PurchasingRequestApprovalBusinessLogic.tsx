@@ -89,12 +89,14 @@ export default class PurchasingRequestApprovalBusinessLogic
   }
   async rejectRequest(
     request: PurchasingRequestApproval,
-    loggedInUser: string
+    loggedInUser: string,
+    rejectionReason: string
   ): Promise<PurchasingRequestApproval> {
     const approvedRequest = new PurchasingRequestApproval(null, request);
     approvedRequest.status = "Rejected";
     approvedRequest.executioner = loggedInUser;
     approvedRequest.approvalDate = new Date();
+    approvedRequest.rejectionReason = rejectionReason;
     return await this._purchasingRequestApprovalService.updatePurchasingRequestApproval(
       approvedRequest
     );

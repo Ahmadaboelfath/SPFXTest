@@ -17,7 +17,8 @@ export default class VendorService implements IVendorService {
     try {
       const retrievedItems = await sp.web.lists
         .getByTitle("Vendors")
-        .items.get();
+        .items.top(5000)
+        .get();
       return retrievedItems.map((item) =>
         this._mapper.mapFromSPListItemObject(item)
       );
@@ -31,7 +32,8 @@ export default class VendorService implements IVendorService {
     try {
       const retrievedItem = await sp.web.lists
         .getByTitle("Vendors")
-        .items.getById(id);
+        .items.getById(id)
+        .get();
       return this._mapper.mapFromSPListItemObject(retrievedItem);
     } catch (e) {
       throw new Error(

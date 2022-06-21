@@ -13,4 +13,5 @@ export default interface IPurchasingRequestApprovalState {
   dialogTitle: string;
   showError: boolean;
   submissionAction: () => void;
+  showRejectionDialog: boolean;
 }

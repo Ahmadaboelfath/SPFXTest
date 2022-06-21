@@ -16,7 +16,8 @@ export default interface IPurchasingRequestApprovalBusinessLogic {
 
   rejectRequest(
     request: PurchasingRequestApproval,
-    logeedInUser: string
+    logeedInUser: string,
+    rejectionReason: string
   ): Promise<PurchasingRequestApproval>;
 
   cancelRequest(

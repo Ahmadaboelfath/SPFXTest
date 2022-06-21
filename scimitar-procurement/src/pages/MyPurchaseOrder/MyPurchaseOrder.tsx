@@ -1,8 +1,8 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import * as React from "react";
 import { withRouter } from "react-router";
-import IPurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/IPurchaseRequestsBusinessLogic";
-import PurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/PurchaseRequestsBusinessLogic";
+import IPurchaseOrderBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/IPurchaseOrderBusinessLogic";
+import PurchaseOrderBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/PurchaseOrderBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import { BannerComponent } from "../../CoreComponents/Banner";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
@@ -14,11 +14,11 @@ class MyPurchaseOrder extends React.Component<
   IMyPurchaseOrderProps,
   IMyPurchaseOrderState
 > {
-  private readonly _purchasingOrderBusinessLogic: IPurchaseRequestsBusinessLogic;
+  private readonly _purchasingOrderBusinessLogic: IPurchaseOrderBusinessLogic;
 
   constructor(props) {
     super(props);
-    this._purchasingOrderBusinessLogic = new PurchaseRequestsBusinessLogic();
+    this._purchasingOrderBusinessLogic = new PurchaseOrderBusinessLogic();
     this.state = {
       purchaseOrders: [],
       showLoader: true,

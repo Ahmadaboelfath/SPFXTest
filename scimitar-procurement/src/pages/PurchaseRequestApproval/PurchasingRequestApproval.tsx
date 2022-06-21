@@ -20,6 +20,7 @@ import IPurchasingRequestApprovalBusinessLogic from "../../BusinessLogic/Purchas
 import PurchasingRequestApprovalBusinessLogic from "../../BusinessLogic/PurchasingRequestApprovalBusinessLogic/PurchasingRequestApprovalBusinessLogic";
 import PurchasingRequestApprovalViewModel from "../../Models/ViewModels/PurchasingRequestApprovalViewModel";
 import PurchasingRequestApproval from "../../Models/ClassModels/PurchasingRequestApproval";
+import { ConfirmationMessage } from "../../Controls/ConfirmMsg";
 
 class PurchasingRequestApprovalPage extends React.Component<
   RouteComponentProps<IPurchasingRequestApprovalProps>,
@@ -42,6 +43,7 @@ class PurchasingRequestApprovalPage extends React.Component<
       submissionAction: null,
       viewModel: new PurchasingRequestApprovalViewModel(),
       showError: false,
+      showRejectionDialog: false,
     };
   }
   static contextType = SecurityContext;
@@ -143,7 +145,7 @@ class PurchasingRequestApprovalPage extends React.Component<
       this.setState((prevState) => {
         const newState = { ...prevState };
         newState.showConfirmationDialog = true;
-        newState.dialogTitle = `In-Stock Request: ${prevState.viewModel.purchasingApproval.requestCode}`;
+        newState.dialogTitle = `Approve: ${prevState.viewModel.purchasingApproval.requestCode}`;
         newState.dialogMessage = `Are you sure you want to approve this PR: ${prevState.viewModel.purchasingApproval.requestCode} `;
         newState.submissionAction = () => this.onInStock();
         return newState;
@@ -151,10 +153,11 @@ class PurchasingRequestApprovalPage extends React.Component<
     } else {
       this.setState((prevState) => {
         const newState = { ...prevState };
-        newState.showConfirmationDialog = true;
-        newState.dialogTitle = `Out of stock Request: ${prevState.viewModel.purchasingApproval.requestCode}`;
-        newState.dialogMessage = `Are you sure you want to reject this PR: ${prevState.viewModel.purchasingApproval.requestCode} `;
-        newState.submissionAction = () => this.onOutOfStock();
+        // newState.showConfirmationDialog = true;
+        newState.showRejectionDialog = true;
+        // newState.dialogTitle = `Reject: ${prevState.viewModel.purchasingApproval.requestCode}`;
+        // newState.dialogMessage = `Are you sure you want to reject this PR: ${prevState.viewModel.purchasingApproval.requestCode} `;
+        // newState.submissionAction = () => this.onOutOfStock();
         return newState;
       });
     }
@@ -200,17 +203,21 @@ class PurchasingRequestApprovalPage extends React.Component<
         });
       });
   }
-  onOutOfStock(): void {
+  onOutOfStock(content): void {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.showSpinner = true;
       newState.showConfirmationDialog = false;
+      newState.showRejectionDialog = false;
+      // newState.viewModel.purchasingApproval.rejectionReason = content;
+      // newState.approvalItem.rejectionReason = content;
       return newState;
     });
     this._approvalBusinessLogic
       .rejectRequest(
         this.state.approvalItem,
-        this.context.userProperties["WorkEmail"]
+        this.context.userProperties["WorkEmail"],
+        content
       )
       .then((approval) => {
         this.setState((prevState) => {
@@ -305,6 +312,19 @@ class PurchasingRequestApprovalPage extends React.Component<
                         Cancel
                       </DefaultButton>
                     </div>
+                    <ConfirmationMessage
+                      Message="Please Provide The Reason For Rejection"
+                      TitleMsg="Reject Request"
+                      confirmValue={(content) => {
+                        this.onOutOfStock(content);
+                      }}
+                      textAreaLabelName="Rejection Reason"
+                      textAreaErrorMessage="Required"
+                      textAreaRequired={true}
+                      hidden={!this.state.showRejectionDialog}
+                      showTextArea={true}
+                      // confirmedNeedCloseAction={() => this.onOutOfStock()}
+                    />
                   </MDBCol>
                 </MDBRow>
               </Accordion>

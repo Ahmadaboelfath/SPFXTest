@@ -13,10 +13,10 @@ import LookupService from "../../Services/LookupServices/LookupService";
 import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
 import IPurchaseOrderService from "../../Services/PurchasingOrderService/IPurchaseOrderService";
 import PurchaseOrderService from "../../Services/PurchasingOrderService/PurchaseOrderService";
-import IPurchaseRequestsBusinessLogic from "./IPurchaseRequestsBusinessLogic";
+import IPurchaseOrderBusinessLogic from "./IPurchaseOrderBusinessLogic";
 
-export default class PurchaseRequestsBusinessLogic
-  implements IPurchaseRequestsBusinessLogic
+export default class PurchaseOrderBusinessLogic
+  implements IPurchaseOrderBusinessLogic
 {
   private _lookupServices: ILookupService;
   private _folderService: IFolderService;

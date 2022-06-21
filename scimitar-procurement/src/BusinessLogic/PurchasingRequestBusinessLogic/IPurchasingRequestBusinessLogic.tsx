@@ -16,4 +16,6 @@ export default interface IPurchasingRequestBusinessLogic {
   cancelPurchasingRequesition(
     purchaseRequest: PurchasingRequest
   ): Promise<PurchasingRequest>;
+
+  getAll(): Promise<PurchasingRequest[]>;
 }

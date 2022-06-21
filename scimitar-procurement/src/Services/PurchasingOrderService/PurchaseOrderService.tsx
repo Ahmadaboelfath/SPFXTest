@@ -18,7 +18,8 @@ export default class PurchasingOrderService implements IPurchaseOrderService {
     try {
       const items = await sp.web.lists
         .getByTitle("PurchasingOrder")
-        .items.filter(`Status eq ${status}`)
+        .items.top(5000)
+        .filter(`Status eq ${status}`)
         .expand("Requestor/EMail")
         .select("*,Requestor/EMail")
         .get();
@@ -41,7 +42,8 @@ export default class PurchasingOrderService implements IPurchaseOrderService {
     try {
       const items = await sp.web.lists
         .getByTitle("PurchasingOrder")
-        .items.filter(`RequestorId eq ${requestorId}`)
+        .items.top(5000)
+        .filter(`RequestorId eq ${requestorId}`)
         .expand(
           "Requestor/EMail,ShipTo/Title,ShipMethod/Title,Vendor/Title,Status/Title"
         )
@@ -68,8 +70,8 @@ export default class PurchasingOrderService implements IPurchaseOrderService {
       const item = await sp.web.lists
         .getByTitle("PurchasingOrder")
         .items.getById(id)
-        .expand("Requestor/EMail")
-        .select("*,Requestor/EMail")
+        .expand("Requestor/EMail,ShipMethod/Title")
+        .select("*,Requestor/EMail,ShipMethod/Title")
         .get();
 
       return this.purchaseOrderMapper.mapFromSPListItemObject(item);

@@ -34,6 +34,7 @@ import PurchasingRequestApprovalPage from "../../../pages/PurchaseRequestApprova
 import MaterialRequistionItem from "../../../pages/MaterialRequsitionItem/MaterialRequistionItem";
 import { ViewMode } from "../../../pages/MaterialRequsitionItem/ViewMode";
 import PurchasingOrderPage from "../../../pages/PurchasingOrder/PurchasingOrder";
+import { documentType } from "../../../Models/InterfaceModels/documentType";
 
 // import MyRequests from "../../../pages/my-requests/MyRequests";
 
@@ -59,10 +60,18 @@ const NonRejectedOrCancelled = React.lazy(() => {
 const MyAssignedItems = React.lazy(
   () => import("../../../pages/MyAssignedItems/MyAssignedItems")
 );
+const AllMaterialItems = React.lazy(
+  () => import("../../../pages/AllMaterialItems/AllItemsRequested")
+);
 
 const MyPurchasingOrder = React.lazy(
   () => import("../../../pages/MyPurchaseOrder/MyPurchaseOrder")
 );
+
+const AllPurchasingRequests = React.lazy(
+  () => import("../../../pages/AllPurchasingRequests/PurchasingRequests")
+);
+const Print = React.lazy(() => import("../../../pages/PrintPage/PrintPage"));
 
 export default class ProcurementApp extends React.Component<
   IProcurementAppProps,
@@ -117,7 +126,10 @@ export default class ProcurementApp extends React.Component<
                   </PrivateRoute>
                   <PrivateRoute
                     path="/MaterialItem/view/:id"
-                    allowedGroups={[new SPGroup("Procurement")]}
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
                   >
                     <MaterialRequistionItem viewMode={ViewMode.View} />
                   </PrivateRoute>
@@ -155,7 +167,10 @@ export default class ProcurementApp extends React.Component<
 
                   <PrivateRoute
                     path="/ApprovedPR"
-                    allowedGroups={[new SPGroup("Procurement")]}
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
                   >
                     <React.Suspense fallback={<LoadingBoxComponent />}>
                       <ApprovedPR />
@@ -163,10 +178,35 @@ export default class ProcurementApp extends React.Component<
                   </PrivateRoute>
                   <PrivateRoute
                     path="/PurchasingRequests"
-                    allowedGroups={[new SPGroup("Procurement")]}
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
                   >
                     <React.Suspense fallback={<LoadingBoxComponent />}>
                       <NonRejectedOrCancelled />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/AllPurchasingRequests"
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <AllPurchasingRequests />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/AllItemsRequested"
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <AllMaterialItems />
                     </React.Suspense>
                   </PrivateRoute>
                   <PrivateRoute
@@ -201,6 +241,39 @@ export default class ProcurementApp extends React.Component<
                   >
                     <React.Suspense fallback={<LoadingBoxComponent />}>
                       <MyPurchasingOrder />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/printPO/:id"
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <Print documentType={documentType.PurchaseOrder} />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/printPR/:id"
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <Print documentType={documentType.PurchaseRequest} />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/printMR/:id"
+                    allowedGroups={[
+                      new SPGroup("Procurement"),
+                      new SPGroup("Warehouse"),
+                    ]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <Print documentType={documentType.MaterialRequisition} />
                     </React.Suspense>
                   </PrivateRoute>
 

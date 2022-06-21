@@ -3,7 +3,7 @@ import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesition
 import PurchasingOrder from "../../Models/ClassModels/PurchasingOrder";
 import PurchasingOrderViewModel from "../../Models/ViewModels/PurchasingOrderViewModel";
 
-export default interface IPurchaseRequestsBusinessLogic {
+export default interface IPurchaseOrderBusinessLogic {
   getLookups(listNames: string[]): Promise<any[]>;
   addPurchaseOrder(
     purchaseOrder: PurchasingOrderViewModel,

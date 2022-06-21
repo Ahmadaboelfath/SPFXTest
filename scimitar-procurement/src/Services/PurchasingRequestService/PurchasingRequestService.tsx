@@ -17,13 +17,32 @@ export default class PurchasingRequestService
     this._listName = "PurchasingRequest";
     this._mapper = new PurchasingRequestMapper();
   }
+  async getAll(): Promise<PurchasingRequest[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.top(5000)
+        .expand("AssignedTo/EMail, AssignedTo/Title")
+        .select("*,AssignedTo/EMail, AssignedTo/Title")
+        .orderBy("Id", false)
+        .get();
+
+      return items.map((pr) =>
+        this._mapper.mapFromSPPurchasingReuqestToPurchasingRequest(pr)
+      );
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
   async getAllApprovedOrPendingPurchasingRequests(): Promise<
     PurchasingRequest[]
   > {
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(
+        .items.top(5000)
+        .filter(
           "FieldManagerApproval eq 'Approved' or FieldManagerApproval eq 'Pending'"
         )
         .expand("AssignedTo/EMail, AssignedTo/Title")
@@ -43,7 +62,8 @@ export default class PurchasingRequestService
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter("FieldManagerApproval eq 'Approved'")
+        .items.top(5000)
+        .filter("FieldManagerApproval eq 'Approved'")
         .expand("AssignedTo/EMail, AssignedTo/Title")
         .select("*,AssignedTo/EMail, AssignedTo/Title")
         .orderBy("Id", false)

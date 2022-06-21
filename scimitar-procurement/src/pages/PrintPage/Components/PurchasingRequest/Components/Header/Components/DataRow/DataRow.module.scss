@@ -1,0 +1,41 @@
+@media screen {
+    .row{
+        border: 1px solid grey;
+        font-size: 12px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .emptyRow{
+        border: 1px solid grey;
+        font-size: 12px;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .emptyImage{
+        max-height: 12px;
+    }
+}
+
+@media print {
+    .row{
+        border: 1px solid grey;
+        font-size: 12px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .emptyRow{
+        border: 1px solid grey;
+        font-size: 12px;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        
+
+    }
+
+    .emptyImage{
+        max-height: 12px;
+    }
+}

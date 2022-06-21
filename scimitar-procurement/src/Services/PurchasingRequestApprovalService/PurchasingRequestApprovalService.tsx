@@ -23,7 +23,8 @@ export default class PurchasingRequestApprovalService
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.expand("PurchasingRequest/FIeldManagerApprovalCalc")
+        .items.top(5000)
+        .expand("PurchasingRequest/FIeldManagerApprovalCalc")
         .select("*,PurchasingRequest/FIeldManagerApprovalCalc")
         .filter(
           "PurchasingRequest/FIeldManagerApprovalCalc ne 'Rejected' and PurchasingRequest/FIeldManagerApprovalCalc ne 'Cancelled'"
@@ -62,9 +63,8 @@ export default class PurchasingRequestApprovalService
     try {
       const approvals = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(
-          `substringof('${email}', Title) and (Status eq 'Pending')`
-        )
+        .items.top(5000)
+        .filter(`substringof('${email}', Title) and (Status eq 'Pending')`)
         .get();
 
       return approvals.map((approval) =>

@@ -8,6 +8,7 @@ export default class PurchasingRequest {
       this._materialRequesitionId = purchasingRequest.materialRequesitionId;
       this._requestCode = purchasingRequest.requestCode;
       this._assignedToId = purchasingRequest.assignedToId;
+      this._rejectionReason = purchasingRequest.rejectionReason;
     }
   }
 
@@ -54,5 +55,13 @@ export default class PurchasingRequest {
   }
   public set fieldManagerApproval(v: string) {
     this._fieldManagerApproval = v;
+  }
+
+  private _rejectionReason: string;
+  public get rejectionReason(): string {
+    return this._rejectionReason;
+  }
+  public set rejectionReason(v: string) {
+    this._rejectionReason = v;
   }
 }

@@ -20,6 +20,7 @@ export default class PurchasingRequestMapper
       SPPurchasingRequest.MaterialRequesitionId;
     purchaseRequest.requestCode = SPPurchasingRequest.Title;
     purchaseRequest.assignedToId = SPPurchasingRequest.AssignedToId;
+    purchaseRequest.rejectionReason = SPPurchasingRequest.RejectionReason;
 
     return purchaseRequest;
   }

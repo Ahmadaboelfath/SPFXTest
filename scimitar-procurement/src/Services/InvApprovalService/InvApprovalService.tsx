@@ -22,9 +22,8 @@ export default class InvApprovalService implements IApprovalService {
     try {
       const approvalItems = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(
-          `substringof('${userEmail}', Title) and Status eq 'Pending'`
-        )
+        .items.top(5000)
+        .filter(`substringof('${userEmail}', Title) and Status eq 'Pending'`)
         .expand(
           "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )
@@ -49,7 +48,8 @@ export default class InvApprovalService implements IApprovalService {
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`MaterialRequisitionId eq ${requisitionId}`)
+        .items.top(5000)
+        .filter(`MaterialRequisitionId eq ${requisitionId}`)
         .expand(
           "MaterialRequisition/Title,MaterialRequisition/PriorityValue,MaterialRequisition/Department,MaterialRequisition/RequesterEmail,MaterialRequisition/RequestType"
         )

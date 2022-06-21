@@ -3,6 +3,12 @@ import MaterialRequesitionItem from "../ClassModels/MaterialRequesitionItem";
 import PurchasingRequest from "../ClassModels/PurchasingRequest";
 
 export default class PurchasingRequestViewModel {
+  constructor() {
+    this._purchaseRequest = new PurchasingRequest();
+    this._materialRequisition = new MaterialRequesition();
+    this._materialRequeisitionItems = [];
+  }
+
   private _purchaseRequest: PurchasingRequest;
   public get purchaseRequest(): PurchasingRequest {
     return this._purchaseRequest;

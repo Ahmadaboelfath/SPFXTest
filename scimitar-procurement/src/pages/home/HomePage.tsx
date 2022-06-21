@@ -102,6 +102,22 @@ class HomePage extends React.Component<
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
+                    {this.context.userRole === "Warehouse" ||
+                    this.state.isAdmin ||
+                    this.context.userRole === "Procurement" ? (
+                      <Link to="/AllPurchasingRequests">
+                        <span>All PR</span>
+                        <Icon iconName="ComplianceAudit" />
+                      </Link>
+                    ) : null}
+                    {this.context.userRole === "Warehouse" ||
+                    this.state.isAdmin ||
+                    this.context.userRole === "Procurement" ? (
+                      <Link to="/AllItemsRequested">
+                        <span>All Items Requested</span>
+                        <Icon iconName="ComplianceAudit" />
+                      </Link>
+                    ) : null}
                     {this.state.isAdmin ||
                     this.context.userRole === "Procurement" ? (
                       <Link to="/AssignedItems">

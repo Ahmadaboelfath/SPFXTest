@@ -1,0 +1,27 @@
+@media screen {
+    table{
+        empty-cells: show;
+    }
+ 
+    .table{
+        width: 100%;
+        border-collapse: collapse ;
+        height: 100%;
+        // empty-cells: show;
+
+    }
+}
+
+@media print{
+    table{
+        empty-cells: show;
+    }
+
+    .table{
+        width: 100%;
+        // border-collapse: collapse ;
+        height: 100%;
+        // empty-cells: show;
+
+    }
+}

@@ -18,6 +18,8 @@ export default class PurchasingRequestApprovalMapper
       SPPurchaseRequestApproval.PurchasingRequestId;
     purchaseRequestApproval.status = SPPurchaseRequestApproval.Status;
     purchaseRequestApproval.requestCode = SPPurchaseRequestApproval.RequestCode;
+    purchaseRequestApproval.rejectionReason =
+      SPPurchaseRequestApproval.RejectionReason;
 
     return purchaseRequestApproval;
   }
@@ -30,6 +32,7 @@ export default class PurchasingRequestApprovalMapper
       Executioner: PurchasingRequestApproval.executioner,
       PurchasingRequestId: PurchasingRequestApproval.purchasingRequestId,
       Status: PurchasingRequestApproval.status,
+      RejectionReason: PurchasingRequestApproval.rejectionReason,
     };
   }
 }

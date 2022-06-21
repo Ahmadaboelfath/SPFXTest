@@ -18,8 +18,8 @@ import PurchasingOrderDetailsForm from "./Components/PurchasingOrderForm/Purchas
 import IPurchasingOrderProps from "./IPurchasingOrderProps";
 import IPurchasingOrderState from "./IPurchasingOrderState";
 import PurchasingOrder from "../../Models/ClassModels/PurchasingOrder";
-import IPurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/IPurchaseRequestsBusinessLogic";
-import PurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/PurchaseRequestsBusinessLogic";
+import IPurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/IPurchaseOrderBusinessLogic";
+import PurchaseRequestsBusinessLogic from "../../BusinessLogic/PurchaseOrderBusinessLogic/PurchaseOrderBusinessLogic";
 import FileUploader from "../../Controls/FileUploader/FileUploader";
 import IFileInfo from "../../Controls/FileUploader/Interfaces/IFileInfo";
 import { DefaultButton, Icon, IconButton, Modal } from "office-ui-fabric-react";
@@ -758,7 +758,13 @@ class PurchasingOrderPage extends React.Component<
                   ) : null}
 
                   {this.props.viewMode !== ViewMode.New ? (
-                    <DefaultButton onClick={() => this.onPrint()}>
+                    <DefaultButton
+                      onClick={() =>
+                        this.props.history.push(
+                          `/PrintPO/${this.state.viewModel.purchaseOrder.id}`
+                        )
+                      }
+                    >
                       Print PO
                     </DefaultButton>
                   ) : null}

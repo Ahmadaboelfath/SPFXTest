@@ -1,0 +1,80 @@
+@media screen {
+  p {
+    font-size: 16px;
+    margin: 5px 0px;
+  }
+
+  .image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .companyName {
+    font-size: 16px;
+    margin-top: 10px;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .companyDetailsContainer {
+    width: 20%;
+    text-align: center;
+    border: 1px solid grey;
+  }
+  .headerContainer {
+    width: 100%;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    // position: fixed;
+    // padding: 10px;
+  }
+
+  .tableDetails {
+    // border: 2px solid grey;
+    width: 40%;
+    height: 100%;
+    border-collapse: collapse;
+  }
+}
+
+@media print {
+  p {
+    font-size: 16px;
+    margin: 5px 0px;
+  }
+
+  .image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .companyName {
+    font-size: 16px;
+    margin-top: 10px;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .companyDetailsContainer {
+    width: 20%;
+    text-align: center;
+    border: 1px solid grey;
+  }
+  .headerContainer {
+    width: 100%;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    // position: fixed;
+  }
+
+  .tableDetails {
+    // border: 2px solid grey;
+    width: 40%;
+    height: 100%;
+    border-collapse: collapse;
+  }
+}

@@ -18,11 +18,39 @@ export default class MaterialRequisitionItemService
     this._listName = "MaterialRequisitionItems";
     this._mapper = new MaterialRequestionItemMapper();
   }
+  async getAll(): Promise<MaterialRequesitionItem[]> {
+    try {
+      const items = await sp.web.lists
+        .getByTitle(this._listName)
+        .items.top(5000)
+        .expand(
+          "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .select(
+          "*,Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
+        )
+        .get();
+
+      if (items.length > 0) {
+        return items.map((item) =>
+          this._mapper.mapFromSPMaterialRequesitionItemToMaterialRequesitionItem(
+            item
+          )
+        );
+      } else {
+        return [];
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
   async getMaterialItemsByPO(poId: number): Promise<MaterialRequesitionItem[]> {
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`POId eq ${poId}`)
+        .items.top(5000)
+        .filter(`POId eq ${poId}`)
         .expand(
           "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
@@ -64,7 +92,8 @@ export default class MaterialRequisitionItemService
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`(AssigneeId eq ${assigneeId}) and (POId eq null)`)
+        .items.top(5000)
+        .filter(`(AssigneeId eq ${assigneeId}) and (POId eq null)`)
         .expand(
           "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
@@ -96,7 +125,8 @@ export default class MaterialRequisitionItemService
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`AssigneeId eq ${assigneeId}`)
+        .items.top(5000)
+        .filter(`AssigneeId eq ${assigneeId}`)
         .expand(
           "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )
@@ -181,7 +211,8 @@ export default class MaterialRequisitionItemService
     try {
       const items = await sp.web.lists
         .getByTitle(this._listName)
-        .items.filter(`MaterialRequesition eq ${id}`)
+        .items.top(5000)
+        .filter(`MaterialRequesition eq ${id}`)
         .expand(
           "Material/Code, Material/Title, Material/UnitValue,PO/Title,PR/Title,Assignee/EMail,Assignee/Title"
         )

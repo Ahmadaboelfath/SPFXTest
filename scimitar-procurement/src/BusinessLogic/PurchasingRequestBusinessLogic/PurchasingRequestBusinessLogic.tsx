@@ -18,6 +18,9 @@ export default class PurchasingRequestBusinessModel
 
     this._purchasingRequestService = new PurchasingRequestService();
   }
+  getAll(): Promise<PurchasingRequest[]> {
+    return this._purchasingRequestService.getAll();
+  }
   async getAllApprovedOrPendingPurchasingRequests(): Promise<
     PurchasingRequest[]
   > {
