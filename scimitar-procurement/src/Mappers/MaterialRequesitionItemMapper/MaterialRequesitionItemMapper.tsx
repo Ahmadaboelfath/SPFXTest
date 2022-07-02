@@ -77,7 +77,10 @@ export default class MaterialRequestionItemMapper
       PRId: materialRequisitionItem.PRID,
       POId: materialRequisitionItem.POId,
       Status: materialRequisitionItem.status,
-      AssigneeId: materialRequisitionItem.assignee[0].id,
+      AssigneeId:
+        materialRequisitionItem.assignee.length > 0
+          ? materialRequisitionItem.assignee[0].id
+          : null,
       Currency: materialRequisitionItem.currency,
     };
   }
