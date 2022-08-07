@@ -31,6 +31,8 @@ export default class MaterialRequisitionMapper
     materialRequisition.delayConsequences =
       SPMaterialRequisitionItem.DelayConsequences;
     materialRequisition.itemStatus = SPMaterialRequisitionItem.ItemsStatus;
+    materialRequisition.departmentLookupId =
+      SPMaterialRequisitionItem.DepartmentLookupId;
 
     return materialRequisition;
   }
@@ -55,6 +57,7 @@ export default class MaterialRequisitionMapper
       DelayConsequences: materialRequsition.delayConsequences,
       Budget: materialRequsition.budget,
       ItemsStatus: materialRequsition.itemStatus,
+      DepartmentLookupId: materialRequsition.departmentLookupId,
     };
   }
 }

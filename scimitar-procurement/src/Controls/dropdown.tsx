@@ -12,7 +12,7 @@ import { drop } from "lodash";
 interface IDropdownProps {
   options: DropdownItemProps[];
   value?: any;
-  handleInputChange(value, ctrlName, e?);
+  handleInputChange(value, ctrlName, e?, dropDown?: DropdownProps);
   ctrlName: string;
   label: string;
   Required: boolean;
@@ -44,7 +44,7 @@ export const Dropdown: React.FC<IDropdownProps> = (props) => {
 
   const onChange = (dropDown: DropdownProps, ctrlName: string, e?) => {
     const value = dropDown.value;
-    props.handleInputChange(value, ctrlName, e);
+    props.handleInputChange(value, ctrlName, e, dropDown);
   };
 
   let mainDevStyle = "field";

@@ -30,6 +30,7 @@ import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequi
 import MaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/MaterialRequesitionBusinessLogic";
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import DepartmentService from "../../Services/DepartmentService/DepartmentService";
+import { DropdownProps } from "semantic-ui-react";
 
 class NewServiceRequestion extends React.Component<
   RouteComponentProps<NewServiceRequestionProps>,
@@ -238,7 +239,7 @@ class NewServiceRequestion extends React.Component<
     return unorderedItem;
   }
 
-  onMaterialFormChange(value, controlName) {
+  onMaterialFormChange(value, controlName, dropDown?) {
     this.setState((prevState) => {
       const newState = { ...prevState };
       const newMaterialRequesition = new MaterialRequesition(
@@ -246,10 +247,28 @@ class NewServiceRequestion extends React.Component<
         this.state.viewModel.materialRequesition.requestDate.toString(),
         this.state.viewModel.materialRequesition
       );
-      newMaterialRequesition[controlName] = value;
+
+      if (controlName === "department") {
+        const selectedObj: any = this.searchValue(value, dropDown.options);
+        newMaterialRequesition.departmentLookupId =
+          selectedObj.value > 0 ? selectedObj.value : null;
+        newMaterialRequesition.department = selectedObj.text;
+      } else {
+        newMaterialRequesition[controlName] = value;
+      }
+
       newState.viewModel.materialRequesition = newMaterialRequesition;
       return newState;
     });
+  }
+
+  searchValue(value: any, collection: any[]): { text: string; value: number } {
+    const result = collection.filter((element) => element.value === value);
+    if (result.length > 0) {
+      return { text: result[0].text, value: result[0].value };
+    } else {
+      return { text: "", value: -1 };
+    }
   }
 
   validate() {
@@ -408,8 +427,12 @@ class NewServiceRequestion extends React.Component<
                       departments={this.state.departments}
                       disabled={false}
                       errors={this.state.errors}
-                      onChange={(value: any, controlName: string) =>
-                        this.onMaterialFormChange(value, controlName)
+                      onChange={(
+                        value: any,
+                        controlName: string,
+                        dropDown: DropdownProps
+                      ) =>
+                        this.onMaterialFormChange(value, controlName, dropDown)
                       }
                       onSubmit={() => console.log("Submit")}
                       viewModel={this.state.viewModel.materialRequesition}

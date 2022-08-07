@@ -14,7 +14,7 @@ export default class DepartmentService {
     return items.map((item) => {
       return {
         text: item.Title,
-        value: item.Title,
+        value: item.Id,
       };
     });
   }

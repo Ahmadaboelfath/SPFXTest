@@ -26,8 +26,8 @@ export default class MaterialRequesitionForm extends React.Component<
             Required={true}
             ctrlName="department"
             disabled={this.props.disabled}
-            handleInputChange={(value, ctrlName) =>
-              this.props.onChange(value, ctrlName)
+            handleInputChange={(value, ctrlName, e, dropDown) =>
+              this.props.onChange(value, ctrlName, dropDown)
             }
             label="Department"
             options={this.props.departments ? this.props.departments : []}
@@ -41,7 +41,7 @@ export default class MaterialRequesitionForm extends React.Component<
                 ? true
                 : false
             }
-            value={this.props.viewModel.department}
+            value={this.props.viewModel.departmentLookupId}
           />
         ) : (
           <Textbox

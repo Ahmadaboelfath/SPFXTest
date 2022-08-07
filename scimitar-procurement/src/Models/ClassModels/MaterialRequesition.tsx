@@ -27,6 +27,8 @@ export default class MaterialRequesition {
       this._delayConsequences = materialRequesition.contingencyPlan;
       this._supplier = materialRequesition.supplier;
       this._itemStatus = materialRequesition.itemStatus;
+      this._leadTime = materialRequesition.leadTime;
+      this._departmentLookupId = materialRequesition.departmentLookupId;
     }
   }
 
@@ -164,5 +166,13 @@ export default class MaterialRequesition {
   }
   public set itemStatus(v: string) {
     this._itemStatus = v;
+  }
+
+  private _departmentLookupId: string;
+  public get departmentLookupId(): string {
+    return this._departmentLookupId;
+  }
+  public set departmentLookupId(v: string) {
+    this._departmentLookupId = v;
   }
 }
