@@ -2,4 +2,5 @@ import MaterialRequestionItem from "../../../../../../Models/ClassModels/Materia
 
 export default interface IItemsTableProps {
   items: MaterialRequestionItem[];
+  supplier?: string;
 }

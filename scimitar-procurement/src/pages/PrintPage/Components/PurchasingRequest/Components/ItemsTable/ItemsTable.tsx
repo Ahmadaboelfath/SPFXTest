@@ -13,7 +13,7 @@ export default class ItemsTable extends React.Component<IItemsTableProps, any> {
           <td className={styles.dataCol}>{item.description}</td>
           <td className={styles.dataCol}>{item.code}</td>
           <td className={styles.dataCol}>{item.balance}</td>
-          <td className={styles.dataCol}>Test Supplier</td>
+          <td className={styles.dataCol}>{this.props.supplier}</td>
         </tr>
       );
     });

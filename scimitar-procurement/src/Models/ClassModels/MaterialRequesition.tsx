@@ -22,6 +22,11 @@ export default class MaterialRequesition {
       this._status = materialRequesition.status;
       this._useFor = materialRequesition.useFor;
       this._requestType = materialRequesition.requestType;
+      this._budget = materialRequesition.budget;
+      this._contingencyPlan = materialRequesition.contingencyPlan;
+      this._delayConsequences = materialRequesition.contingencyPlan;
+      this._supplier = materialRequesition.supplier;
+      this._itemStatus = materialRequesition.itemStatus;
     }
   }
 
@@ -119,5 +124,45 @@ export default class MaterialRequesition {
   }
   public set leadTime(v: Date) {
     this._leadTime = v;
+  }
+
+  private _supplier: string;
+  public get supplier(): string {
+    return this._supplier;
+  }
+  public set supplier(v: string) {
+    this._supplier = v;
+  }
+
+  private _contingencyPlan: string;
+  public get contingencyPlan(): string {
+    return this._contingencyPlan;
+  }
+  public set contingencyPlan(v: string) {
+    this._contingencyPlan = v;
+  }
+
+  private _delayConsequences: string;
+  public get delayConsequences(): string {
+    return this._delayConsequences;
+  }
+  public set delayConsequences(v: string) {
+    this._delayConsequences = v;
+  }
+
+  private _budget: boolean;
+  public get budget(): boolean {
+    return this._budget;
+  }
+  public set budget(v: boolean) {
+    this._budget = v;
+  }
+
+  private _itemStatus: string;
+  public get itemStatus(): string {
+    return this._itemStatus;
+  }
+  public set itemStatus(v: string) {
+    this._itemStatus = v;
   }
 }

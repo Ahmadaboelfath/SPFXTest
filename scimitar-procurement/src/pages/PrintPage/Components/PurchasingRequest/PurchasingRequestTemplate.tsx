@@ -27,6 +27,10 @@ export default class PurchasingRequestTemplate extends React.Component<
               items={
                 this.props.purchasignRequestViewModel.materialRequeisitionItems
               }
+              supplier={
+                this.props.purchasignRequestViewModel.materialRequisition
+                  .supplier
+              }
             />
           </div>
           <div className={styles.footer}>

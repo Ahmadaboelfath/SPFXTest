@@ -24,6 +24,13 @@ export default class MaterialRequisitionMapper
     materialRequisition.requesterEmail =
       SPMaterialRequisitionItem.RequesterEmail;
     materialRequisition.leadTime = new Date(SPMaterialRequisitionItem.LeadTime);
+    materialRequisition.budget = SPMaterialRequisitionItem.Budget;
+    materialRequisition.contingencyPlan =
+      SPMaterialRequisitionItem.ContingencyPlan;
+    materialRequisition.supplier = SPMaterialRequisitionItem.Supplier;
+    materialRequisition.delayConsequences =
+      SPMaterialRequisitionItem.DelayConsequences;
+    materialRequisition.itemStatus = SPMaterialRequisitionItem.ItemsStatus;
 
     return materialRequisition;
   }
@@ -43,6 +50,11 @@ export default class MaterialRequisitionMapper
       RequesterEmail: materialRequsition.requesterEmail,
       RequestType: requestType,
       LeadTime: materialRequsition.leadTime,
+      Supplier: materialRequsition.supplier,
+      ContingencyPlan: materialRequsition.contingencyPlan,
+      DelayConsequences: materialRequsition.delayConsequences,
+      Budget: materialRequsition.budget,
+      ItemsStatus: materialRequsition.itemStatus,
     };
   }
 }

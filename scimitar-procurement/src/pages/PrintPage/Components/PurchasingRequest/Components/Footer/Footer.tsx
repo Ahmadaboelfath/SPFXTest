@@ -19,10 +19,22 @@ export default class Footer extends React.Component<IFooterProps, any> {
                           <td>Budget</td>
                           <td>:</td>
                           <td>
-                            <Checkbox label="Yes" />
+                            <Checkbox
+                              label="Yes"
+                              checked={
+                                this.props.purchaseRequestViewModel
+                                  .materialRequisition.budget
+                              }
+                            />
                           </td>
                           <td>
-                            <Checkbox label="No" />
+                            <Checkbox
+                              label="No"
+                              checked={
+                                !this.props.purchaseRequestViewModel
+                                  .materialRequisition.budget
+                              }
+                            />
                           </td>
                         </tr>
                       </tbody>
@@ -35,13 +47,33 @@ export default class Footer extends React.Component<IFooterProps, any> {
                           <td>Status</td>
                           <td>:</td>
                           <td>
-                            <Checkbox label="DIRECT CHARGE" />
+                            <Checkbox
+                              label="DIRECT CHARGE"
+                              checked={
+                                this.props.purchaseRequestViewModel
+                                  .materialRequisition.itemStatus ===
+                                "Direct Charge"
+                              }
+                            />
                           </td>
                           <td>
-                            <Checkbox label="NON STOCK" />
+                            <Checkbox
+                              label="NON STOCK"
+                              checked={
+                                this.props.purchaseRequestViewModel
+                                  .materialRequisition.itemStatus ===
+                                "Non-Stock"
+                              }
+                            />
                           </td>
                           <td>
-                            <Checkbox label="STOCK" />
+                            <Checkbox
+                              label="STOCK"
+                              checked={
+                                this.props.purchaseRequestViewModel
+                                  .materialRequisition.itemStatus === "Stock"
+                              }
+                            />
                           </td>
                         </tr>
                       </tbody>
@@ -78,7 +110,12 @@ export default class Footer extends React.Component<IFooterProps, any> {
                         <tr>
                           <td>The Delay Delivery Consequences:</td>
                           <td></td>
-                          <td></td>
+                          <td>
+                            {
+                              this.props.purchaseRequestViewModel
+                                .materialRequisition.delayConsequences
+                            }
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -89,7 +126,12 @@ export default class Footer extends React.Component<IFooterProps, any> {
                         <tr>
                           <td>Contingency Plan:</td>
                           <td></td>
-                          <td></td>
+                          <td>
+                            {
+                              this.props.purchaseRequestViewModel
+                                .materialRequisition.contingencyPlan
+                            }
+                          </td>
                         </tr>
                       </tbody>
                     </table>
