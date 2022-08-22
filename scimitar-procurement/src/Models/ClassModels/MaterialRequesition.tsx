@@ -24,9 +24,10 @@ export default class MaterialRequesition {
       this._requestType = materialRequesition.requestType;
       this._budget = materialRequesition.budget;
       this._contingencyPlan = materialRequesition.contingencyPlan;
-      this._delayConsequences = materialRequesition.contingencyPlan;
+      this._delayConsequences = materialRequesition.delayConsequences;
       this._supplier = materialRequesition.supplier;
       this._itemStatus = materialRequesition.itemStatus;
+      this._leadTime = materialRequesition.leadTime;
     }
   }
 

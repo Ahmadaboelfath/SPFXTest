@@ -61,6 +61,8 @@ export default class MaterialRequestionItemMapper
         ]
       : [];
 
+    materialRequisitionItem.comment = SPMaterialRequisitionItem.Comment;
+
     return materialRequisitionItem;
   }
   mapFromMaterialRequesitionItemToSPMaterialRequesitionItem(
@@ -82,6 +84,7 @@ export default class MaterialRequestionItemMapper
           ? materialRequisitionItem.assignee[0].id
           : null,
       Currency: materialRequisitionItem.currency,
+      Comment: materialRequisitionItem.comment,
     };
   }
 }

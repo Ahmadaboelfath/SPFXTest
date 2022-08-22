@@ -1,6 +1,7 @@
 import { MDBCol, MDBRow } from "mdbreact";
 import * as React from "react";
 import TagPicker from "../../../../Controls/TagPicker/TagPicker";
+import { Textarea } from "../../../../Controls/textarea";
 import { Textbox } from "../../../../Controls/Textbox";
 import Toggle from "../../../../Controls/Toggle/Toggle";
 import IMaterialItemFormProps from "./IMaterialItemFormProps";
@@ -74,6 +75,17 @@ export default class MaterialItemForm extends React.Component<
               }
               label="Quantity"
               value={this.props.viewModel.quantity.toString()}
+              disabled={false}
+            />
+
+            <Textarea
+              Required={false}
+              ctrlName="comment"
+              handleInputChange={(value, controlName) =>
+                this.props.onChange(value, controlName)
+              }
+              label="Comment"
+              value={this.props.viewModel.comment}
               disabled={false}
             />
           </MDBCol>

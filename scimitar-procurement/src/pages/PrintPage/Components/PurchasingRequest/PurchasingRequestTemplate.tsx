@@ -31,6 +31,10 @@ export default class PurchasingRequestTemplate extends React.Component<
                 this.props.purchasignRequestViewModel.materialRequisition
                   .supplier
               }
+              isSr={
+                this.props.purchasignRequestViewModel.materialRequisition
+                  .requestType === "SR"
+              }
             />
           </div>
           <div className={styles.footer}>

@@ -10,7 +10,11 @@ export default class ItemsTable extends React.Component<IItemsTableProps, any> {
           <td className={styles.dataCol}>{index + 1}</td>
           <td className={styles.dataCol}>{item.quantity}</td>
           <td className={styles.dataCol}>{item.unit}</td>
-          <td className={styles.dataCol}>{item.description}</td>
+          {this.props.isSr ? (
+            <td className={styles.dataCol}>{item.comment}</td>
+          ) : (
+            <td className={styles.dataCol}>{item.description}</td>
+          )}
           <td className={styles.dataCol}>{item.code}</td>
           <td className={styles.dataCol}>{item.balance}</td>
           <td className={styles.dataCol}>{this.props.supplier}</td>

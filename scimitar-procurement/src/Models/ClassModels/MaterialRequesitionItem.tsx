@@ -13,6 +13,7 @@ export default class MaterialRequestionItem {
     this.unitPrice = 0;
     this.status = "";
     this.currency = "";
+    this.comment = "";
 
     if (item) {
       this._code = item.code;
@@ -34,6 +35,7 @@ export default class MaterialRequestionItem {
       this._unitPrice = item.unitPrice;
       this._totalPrice = item.totalPrice;
       this._currency = item.currency;
+      this._comment = item.comment;
     }
   }
   private _id: string;
@@ -42,6 +44,14 @@ export default class MaterialRequestionItem {
   }
   public set id(v: string) {
     this._id = v;
+  }
+
+  private _comment: string;
+  public get comment(): string {
+    return this._comment;
+  }
+  public set comment(v: string) {
+    this._comment = v;
   }
 
   private _assigneeName: string;

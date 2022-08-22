@@ -31,6 +31,7 @@ export default class MaterialRequisitionMapper
     materialRequisition.delayConsequences =
       SPMaterialRequisitionItem.DelayConsequences;
     materialRequisition.itemStatus = SPMaterialRequisitionItem.ItemsStatus;
+    materialRequisition.requestType = SPMaterialRequisitionItem.RequestType;
 
     return materialRequisition;
   }
