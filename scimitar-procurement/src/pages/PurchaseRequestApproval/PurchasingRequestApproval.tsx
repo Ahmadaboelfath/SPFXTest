@@ -53,8 +53,10 @@ class PurchasingRequestApprovalPage extends React.Component<
       .then((approval) => {
         if (
           approval.purchasingApproval.status === "Pending" &&
-          approval.purchasingApproval.approver.toLowerCase() ===
-            this.context.userProperties["WorkEmail"].toLowerCase()
+          this.checkIfUserIsApprover(
+            approval.purchasingApproval.approver,
+            this.context.userProperties["WorkEmail"]
+          )
         ) {
           this.setState((prevState) => {
             const newState = { ...prevState };
@@ -78,6 +80,14 @@ class PurchasingRequestApprovalPage extends React.Component<
       });
   }
 
+  checkIfUserIsApprover(approvers: string, userEmail: string) {
+    const splitedApprovers = approvers.split(";");
+    return (
+      splitedApprovers.filter(
+        (approver) => approver.toLowerCase() === userEmail.toLowerCase()
+      ).length > 0
+    );
+  }
   onDialogDismiss(statePropName: string): any {
     this.setState((prevState) => {
       const newState = { ...prevState };

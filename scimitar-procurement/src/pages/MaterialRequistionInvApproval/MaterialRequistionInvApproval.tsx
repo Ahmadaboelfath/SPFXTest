@@ -63,8 +63,10 @@ class MaterialRequistionApproval extends React.Component<
       .then((approval) => {
         if (
           approval.status === "Pending" &&
-          approval.approver.toLowerCase() ===
-            this.context.userProperties["WorkEmail"].toLowerCase()
+          this.checkIfUserIsApprover(
+            approval.approver,
+            this.context.userProperties["WorkEmail"]
+          )
         ) {
           this._materialRequistionBusinessLogic
             .getMaterialRequisitionById(approval.materialRequesitionId)
@@ -114,6 +116,15 @@ class MaterialRequistionApproval extends React.Component<
       newState[statePropName] = false;
       return newState;
     });
+  }
+
+  checkIfUserIsApprover(approvers: string, userEmail: string) {
+    const splitedApprovers = approvers.split(";");
+    return (
+      splitedApprovers.filter(
+        (approver) => approver.toLowerCase() === userEmail.toLowerCase()
+      ).length > 0
+    );
   }
 
   renderDialog(): JSX.Element {
