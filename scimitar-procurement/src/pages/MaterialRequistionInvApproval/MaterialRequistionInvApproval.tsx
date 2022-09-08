@@ -393,7 +393,7 @@ class MaterialRequistionApproval extends React.Component<
                 </div>
                 <div className="Modalfooter">
                   <div className="buttonBlock">
-                    {this.state.currentUserRole === "Procurement" ||
+                    {this.state.currentUserRole === "Warehouse" ||
                     this.state.isAdmin ? (
                       <DefaultButton
                         onClick={() => this.onMaterialItemFormSubmit()}
