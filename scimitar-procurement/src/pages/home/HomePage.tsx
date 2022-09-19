@@ -146,6 +146,13 @@ class HomePage extends React.Component<
                         <Icon iconName="ComplianceAudit" />
                       </Link>
                     ) : null}
+                    {this.state.isAdmin ||
+                    this.context.userRole === "Procurement" ? (
+                      <Link to="/Dashboard">
+                        <span>Dashboard</span>
+                        <Icon iconName="AnalyticsReport" />
+                      </Link>
+                    ) : null}
                   </div>
                 </MDBCol>
               </MDBRow>

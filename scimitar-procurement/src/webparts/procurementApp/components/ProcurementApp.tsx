@@ -73,6 +73,10 @@ const AllPurchasingRequests = React.lazy(
 );
 const Print = React.lazy(() => import("../../../pages/PrintPage/PrintPage"));
 
+const Dashboard = React.lazy(
+  () => import("../../../pages/Dashboard/Dashboard")
+);
+
 export default class ProcurementApp extends React.Component<
   IProcurementAppProps,
   IProcurementAppState
@@ -274,6 +278,14 @@ export default class ProcurementApp extends React.Component<
                   >
                     <React.Suspense fallback={<LoadingBoxComponent />}>
                       <Print documentType={documentType.MaterialRequisition} />
+                    </React.Suspense>
+                  </PrivateRoute>
+                  <PrivateRoute
+                    path="/Dashboard"
+                    allowedGroups={[new SPGroup("Procurement")]}
+                  >
+                    <React.Suspense fallback={<LoadingBoxComponent />}>
+                      <Dashboard />
                     </React.Suspense>
                   </PrivateRoute>
 
