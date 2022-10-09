@@ -498,6 +498,9 @@ class PRAssigning extends React.Component<
         prevState.currentlyEditingItem
       );
       newItem[controlName] = value;
+      if (controlName === "assignee") {
+        newItem.assigneeChanged = true;
+      }
       newState.currentlyEditingItem = newItem;
       return newState;
     });

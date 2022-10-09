@@ -14,6 +14,7 @@ export default class MaterialRequestionItem {
     this.status = "";
     this.currency = "";
     this.comment = "";
+    this.assigneeChanged = false;
 
     if (item) {
       this._code = item.code;
@@ -36,8 +37,18 @@ export default class MaterialRequestionItem {
       this._totalPrice = item.totalPrice;
       this._currency = item.currency;
       this._comment = item.comment;
+      this._assigneeChanged = item.assigneeChanged;
     }
   }
+
+  private _assigneeChanged: boolean;
+  public get assigneeChanged(): boolean {
+    return this._assigneeChanged;
+  }
+  public set assigneeChanged(v: boolean) {
+    this._assigneeChanged = v;
+  }
+
   private _id: string;
   public get id(): string {
     return this._id;

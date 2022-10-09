@@ -62,6 +62,8 @@ export default class MaterialRequestionItemMapper
       : [];
 
     materialRequisitionItem.comment = SPMaterialRequisitionItem.Comment;
+    materialRequisitionItem.assigneeChanged =
+      !SPMaterialRequisitionItem.EmailSentToAssignee;
 
     return materialRequisitionItem;
   }
@@ -85,6 +87,7 @@ export default class MaterialRequestionItemMapper
           : null,
       Currency: materialRequisitionItem.currency,
       Comment: materialRequisitionItem.comment,
+      EmailSentToAssignee: !materialRequisitionItem.assigneeChanged,
     };
   }
 }
