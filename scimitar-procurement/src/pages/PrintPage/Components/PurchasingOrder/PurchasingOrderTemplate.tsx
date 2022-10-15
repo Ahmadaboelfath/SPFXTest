@@ -625,7 +625,7 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* signatures */}
             <tr>
-              <table className={styles.table}>
+              <table className={styles.table} style={{ marginTop: 50 }}>
                 <tbody>
                   <tr>
                     <td
@@ -680,7 +680,7 @@ export default class PurchasingOrderTemplate extends React.Component<
                         styles.thirdWidth,
                       ].join(" ")}
                     >
-                      <table className={styles.table}>
+                      <table className={styles.table} style={{ width: 500 }}>
                         <tbody>
                           <tr>
                             <td className={styles.fontBold}>

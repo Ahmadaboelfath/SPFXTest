@@ -53,7 +53,7 @@ class AllItemsRequested extends React.Component<
           <LoadingBoxComponent />
         ) : (
           <>
-            <BannerComponent PageTitle="My Assigned Items" />
+            <BannerComponent PageTitle="All Items Requested" />
             <MDBContainer>
               <MDBRow>
                 <MDBCol>
