@@ -1,7 +1,8 @@
 import * as React from "react";
 import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
 import IPurchasingOrderTemplate from "./IPurchasingOrderTemplateProps";
-import styles from "./PurchasingOrderTemplate.module.scss";
+// import styles from "./PurchasingOrderTemplate.module.scss";
+import "./PurchasingOrderTemplate.css";
 export default class PurchasingOrderTemplate extends React.Component<
   IPurchasingOrderTemplate,
   any
@@ -24,39 +25,39 @@ export default class PurchasingOrderTemplate extends React.Component<
 
   render(): React.ReactNode {
     return (
-      <div className={styles.container}>
-        <table className={styles.table}>
+      <div className="container">
+        <table className="table">
           <tbody>
             {/* Title */}
             <tr>
-              <td className={styles.middleText}>
-                <p className={styles.title}>Purchase Order</p>
+              <td className="middleText">
+                <p className="title">Purchase Order</p>
               </td>
             </tr>
             {/* Date and PO */}
             <tr>
-              <table className={styles.table}>
+              <table className={"table"}>
                 <tbody>
                   <tr>
-                    <td className={styles.emptyCell}>
+                    <td className="emptyCell">
                       <img
                         src={require("../../../../assets/images/Empty.png")}
                         alt="empty"
-                        className={styles.emptyImg}
+                        className="emptyImg"
                       />
                     </td>
-                    <td className={styles.backgroundBlueCell}>Date:</td>
+                    <td className="backgroundBlueCell">Date:</td>
                     <td>{new Date().toDateString()}</td>
                   </tr>
                   <tr>
-                    <td className={styles.emptyCell}>
+                    <td className="emptyCell">
                       <img
                         src={require("../../../../assets/images/Empty.png")}
                         alt="empty"
-                        className={styles.emptyImg}
+                        className="emptyImg"
                       />
                     </td>
-                    <td className={styles.backgroundBlueCell}>P.O.#:</td>
+                    <td className="backgroundBlueCell">P.O.#:</td>
                     <td>
                       {this.props.purchaseOrderViewModel.purchaseOrder.title}
                     </td>
@@ -66,34 +67,24 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* Vendor And Ship To */}
             <tr>
-              <table className={styles.table}>
+              <table className={"table"}>
                 <thead>
                   <tr>
-                    <th
-                      className={[
-                        styles.theaderAlignment,
-                        styles.halfWidth,
-                      ].join(" ")}
-                    >
+                    <th className={["theaderAlignment", "halfWidth"].join(" ")}>
                       <p
                         className={[
-                          styles.textBackroundGrey,
-                          styles.tableHeaderText,
+                          "textBackroundGrey",
+                          "tableHeaderText",
                         ].join(" ")}
                       >
                         Vendor Name
                       </p>
                     </th>
-                    <th
-                      className={[
-                        styles.theaderAlignment,
-                        styles.halfWidth,
-                      ].join(" ")}
-                    >
+                    <th className={["theaderAlignment", "halfWidth"].join(" ")}>
                       <p
                         className={[
-                          styles.textBackroundGrey,
-                          styles.tableHeaderText,
+                          "textBackroundGrey",
+                          "tableHeaderText",
                         ].join(" ")}
                       >
                         Ship To / Bill To
@@ -104,21 +95,17 @@ export default class PurchasingOrderTemplate extends React.Component<
                 <tbody>
                   <tr>
                     <td>
-                      <table className={styles.table}>
+                      <table className="table">
                         <tbody>
                           <tr>
-                            <td>{this.props.vendor.title}</td>
+                            <td colSpan={2}>{this.props.vendor.title}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>
-                              Address:
-                            </td>
+                            <td className={"textBackroundGrey"}>Address:</td>
                             <td>{this.props.vendor.address}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>
-                              Attention:
-                            </td>
+                            <td className={"textBackroundGrey"}>Attention:</td>
                             <td>
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -127,15 +114,15 @@ export default class PurchasingOrderTemplate extends React.Component<
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Phone:</td>
+                            <td className={"textBackroundGrey"}>Phone:</td>
                             <td>{this.props.vendor.phone}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Fax:</td>
+                            <td className={"textBackroundGrey"}>Fax:</td>
                             <td>{this.props.vendor.fax}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Email:</td>
+                            <td className={"textBackroundGrey"}>Email:</td>
                             <td>
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -147,33 +134,29 @@ export default class PurchasingOrderTemplate extends React.Component<
                       </table>
                     </td>
                     <td>
-                      <table className={styles.table}>
+                      <table className="table">
                         <tbody>
                           <tr>
-                            <td>{this.props.shipTo.title}</td>
+                            <td colSpan={2}>{this.props.shipTo.title}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>
-                              Address:
-                            </td>
+                            <td className={"textBackroundGrey"}>Address:</td>
                             <td>{this.props.shipTo.address}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Phone:</td>
+                            <td className={"textBackroundGrey"}>Phone:</td>
                             <td>{this.props.shipTo.phone}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Fax:</td>
+                            <td className={"textBackroundGrey"}>Fax:</td>
                             <td>{this.props.shipTo.fax}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>
-                              Attention:
-                            </td>
+                            <td className={"textBackroundGrey"}>Attention:</td>
                             <td>{this.props.shipTo.attention}</td>
                           </tr>
                           <tr>
-                            <td className={styles.textBackroundGrey}>Email:</td>
+                            <td className={"textBackroundGrey"}>Email:</td>
                             <td>{this.props.shipTo.email}</td>
                           </tr>
                         </tbody>
@@ -185,81 +168,79 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* Details table */}
             <tr>
-              <table className={styles.table}>
+              <table className="table">
                 <thead>
                   <tr>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>PR#</p>
+                      <p className={["tableHeaderText"].join(" ")}>PR#</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         Requisitioner/ AFE#
                       </p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         SHIP METHOD
                       </p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
-                        INCOTERMS
-                      </p>
+                      <p className={["tableHeaderText"].join(" ")}>INCOTERMS</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         DELIVERY TERMS
                       </p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         PAYMENT TERMS
                       </p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         Partial Shipments
                       </p>
                     </th>
@@ -268,18 +249,16 @@ export default class PurchasingOrderTemplate extends React.Component<
                 <tbody>
                   <tr>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {this.appendPRs()}
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {
                         this.props.purchaseOrderViewModel.purchaseOrder
@@ -287,10 +266,9 @@ export default class PurchasingOrderTemplate extends React.Component<
                       }
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {
                         this.props.purchaseOrderViewModel.purchaseOrder
@@ -298,10 +276,9 @@ export default class PurchasingOrderTemplate extends React.Component<
                       }
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {
                         this.props.purchaseOrderViewModel.purchaseOrder
@@ -309,10 +286,9 @@ export default class PurchasingOrderTemplate extends React.Component<
                       }
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {
                         this.props.purchaseOrderViewModel.purchaseOrder
@@ -320,10 +296,9 @@ export default class PurchasingOrderTemplate extends React.Component<
                       }
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {
                         this.props.purchaseOrderViewModel.purchaseOrder
@@ -331,10 +306,9 @@ export default class PurchasingOrderTemplate extends React.Component<
                       }
                     </td>
                     <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                      ].join(" ")}
+                      className={["theaderAlignment", "cellsWithBorder"].join(
+                        " "
+                      )}
                     >
                       {this.props.purchaseOrderViewModel.purchaseOrder
                         .partialShipment
@@ -347,77 +321,73 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* Items  */}
             <tr>
-              <table className={styles.table}>
+              <table className="table">
                 <thead>
                   <tr>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
-                        ITEM NO
-                      </p>
+                      <p className={["tableHeaderText"].join(" ")}>ITEM NO</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
+                      <p className={["tableHeaderText"].join(" ")}>
                         DESCRIPTION
                       </p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>UNIT</p>
+                      <p className={["tableHeaderText"].join(" ")}>UNIT</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>QTY</p>
+                      <p className={["tableHeaderText"].join(" ")}>QTY</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>
-                        Currency
-                      </p>
+                      <p className={["tableHeaderText"].join(" ")}>Currency</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>U/P</p>
+                      <p className={["tableHeaderText"].join(" ")}>U/P</p>
                     </th>
                     <th
                       className={[
-                        styles.theaderAlignment,
-                        styles.cellsWithBorder,
-                        styles.textBackroundGrey,
+                        "theaderAlignment",
+                        "cellsWithBorder",
+                        "textBackroundGrey",
                       ].join(" ")}
                     >
-                      <p className={[styles.tableHeaderText].join(" ")}>T/P</p>
+                      <p className={["tableHeaderText"].join(" ")}>T/P</p>
                     </th>
                   </tr>
                 </thead>
@@ -426,27 +396,26 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* Grand Total and price */}
             <tr>
-              <table className={styles.table}>
+              <table className="table">
                 <tbody>
                   <tr>
                     <td
-                      className={[styles.halfWidth, styles.padding].join(" ")}
+                      className={[
+                        "halfWidth",
+                        "padding",
+                        "cellBackGroundGrey",
+                      ].join(" ")}
                     >
-                      <table className={styles.table}>
+                      <table className="table">
                         <tbody>
                           <tr>
                             <td>OTHER COMMENTS OR SPICIAL INSTRUCTIONS</td>
                           </tr>
-                          <tr
-                            className={[
-                              styles.cellsWithBorder,
-                              styles.cellBackGroundGrey,
-                            ].join(" ")}
-                          >
+                          <tr className={["cellBackGroundGrey"].join(" ")}>
                             <td>
                               <ul>
                                 <li>
-                                  <span className={styles.importantText}>
+                                  <span className={"importantText"}>
                                     PENALTY CLAUSE:
                                   </span>
                                   DELAY OF DELIVERY FINE TO BE APPLIED 1 % PER
@@ -461,16 +430,11 @@ export default class PurchasingOrderTemplate extends React.Component<
                               </ul>
                             </td>
                           </tr>
-                          <tr
-                            className={[
-                              styles.cellsWithBorder,
-                              styles.cellBackGroundGrey,
-                            ].join(" ")}
-                          >
+                          <tr className={["cellBackGroundGrey"].join(" ")}>
                             <td>
                               <ul>
                                 <li>
-                                  <span className={styles.importantText}>
+                                  <span className={"importantText"}>
                                     Warranty Clause (if applicable):{" "}
                                   </span>
                                   as per submitted quotation or one year from
@@ -482,16 +446,11 @@ export default class PurchasingOrderTemplate extends React.Component<
                               </ul>
                             </td>
                           </tr>
-                          <tr
-                            className={[
-                              styles.cellsWithBorder,
-                              styles.cellBackGroundGrey,
-                            ].join(" ")}
-                          >
+                          <tr className={["cellBackGroundGrey"].join(" ")}>
                             <td>
                               <ul>
                                 <li>
-                                  <span className={styles.importantText}>
+                                  <span className={"importantText"}>
                                     Software Update (If applicable):{" "}
                                   </span>
                                   provided with the System will be the latest
@@ -506,16 +465,23 @@ export default class PurchasingOrderTemplate extends React.Component<
                         </tbody>
                       </table>
                     </td>
-                    <td
-                      className={[styles.halfWidth, styles.padding].join(" ")}
-                    >
-                      <table className={styles.table}>
+                    <td className={["halfWidth", "padding"].join(" ")}>
+                      <table className="table">
                         <tbody>
                           <tr>
-                            <td className={styles.colorBlue}>TOTAL</td>
-                            <td></td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={["colorBlue", "cellsWithBorder"].join(
+                                " "
+                              )}
+                            >
+                              TOTAL
+                            </td>
+                            <td className={"cellsWithBorder"}></td>
+                            <td
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -523,7 +489,10 @@ export default class PurchasingOrderTemplate extends React.Component<
                               }
                             </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {this.props.purchaseOrderViewModel
                                 .purchaseOrderItems.length > 0
@@ -533,10 +502,17 @@ export default class PurchasingOrderTemplate extends React.Component<
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.colorBlue}>DISCOUNT</td>
-                            <td>{`${this.props.purchaseOrderViewModel.purchaseOrder.discountPercentage}%`}</td>
+                            <td className={"colorBlue cellsWithBorder"}>
+                              DISCOUNT
+                            </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={"cellsWithBorder"}
+                            >{`${this.props.purchaseOrderViewModel.purchaseOrder.discountPercentage}%`}</td>
+                            <td
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -544,7 +520,10 @@ export default class PurchasingOrderTemplate extends React.Component<
                               }
                             </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {this.props.purchaseOrderViewModel
                                 .purchaseOrderItems.length > 0
@@ -554,10 +533,15 @@ export default class PurchasingOrderTemplate extends React.Component<
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.colorBlue}>S & H</td>
-                            <td></td>
+                            <td className={"colorBlue cellsWithBorder"}>
+                              S & H
+                            </td>
+                            <td className={"cellsWithBorder"}></td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -565,7 +549,10 @@ export default class PurchasingOrderTemplate extends React.Component<
                               }
                             </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {this.props.purchaseOrderViewModel
                                 .purchaseOrderItems.length > 0
@@ -575,10 +562,15 @@ export default class PurchasingOrderTemplate extends React.Component<
                             </td>
                           </tr>
                           <tr style={{ borderBottom: "1px solid black" }}>
-                            <td className={styles.colorBlue}>Freight Charge</td>
-                            <td></td>
+                            <td className={"colorBlue cellsWithBorder"}>
+                              Freight Charge
+                            </td>
+                            <td className={"cellsWithBorder"}></td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -586,7 +578,10 @@ export default class PurchasingOrderTemplate extends React.Component<
                               }
                             </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {this.props.purchaseOrderViewModel
                                 .purchaseOrderItems.length > 0
@@ -596,10 +591,15 @@ export default class PurchasingOrderTemplate extends React.Component<
                             </td>
                           </tr>
                           <tr style={{ borderTop: "1px solid black" }}>
-                            <td className={styles.colorBlue}>GRAND TOTAL</td>
-                            <td></td>
+                            <td className={"colorBlue cellsWithBorder"}>
+                              GRAND TOTAL
+                            </td>
+                            <td className={"cellsWithBorder"}></td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {
                                 this.props.purchaseOrderViewModel.purchaseOrder
@@ -607,7 +607,10 @@ export default class PurchasingOrderTemplate extends React.Component<
                               }
                             </td>
                             <td
-                              className={[styles.backgroundBlueCell].join(" ")}
+                              className={[
+                                "backgroundBlueCell",
+                                "cellsWithBorder",
+                              ].join(" ")}
                             >
                               {this.props.purchaseOrderViewModel
                                 .purchaseOrderItems.length > 0
@@ -625,73 +628,64 @@ export default class PurchasingOrderTemplate extends React.Component<
             </tr>
             {/* signatures */}
             <tr>
-              <table className={styles.table} style={{ marginTop: 50 }}>
+              <table className="table" style={{ marginTop: 50 }}>
                 <tbody>
                   <tr>
-                    <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.thirdWidth,
-                      ].join(" ")}
-                    >
-                      <table className={styles.table}>
+                    <td className={["theaderAlignment"].join(" ")}>
+                      <table
+                        className={["table", "tablesThirdWidth"].join(" ")}
+                      >
                         <tbody>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               ----------------------
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>Mohamerd Ali</td>
+                            <td className={"fontBold"}>Mohamerd Ali</td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               Procurement Section Head
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
-                    <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.thirdWidth,
-                      ].join(" ")}
-                    >
-                      <table className={styles.table}>
+                    <td className={["theaderAlignment"].join(" ")}>
+                      <table
+                        className={["table", "tablesThirdWidth"].join(" ")}
+                      >
                         <tbody>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               ----------------------
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>Soha Mounir</td>
+                            <td className={"fontBold"}>Soha Mounir</td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>C & P Manager</td>
+                            <td className={"fontBold"}>C & P Manager</td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
-                    <td
-                      className={[
-                        styles.theaderAlignment,
-                        styles.thirdWidth,
-                      ].join(" ")}
-                    >
-                      <table className={styles.table} style={{ width: 500 }}>
+                    <td className={["theaderAlignment"].join(" ")}>
+                      <table
+                        className={["table", "tablesThirdWidth"].join(" ")}
+                      >
                         <tbody>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               ----------------------
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>Tamer Ganoub</td>
+                            <td className={"fontBold"}>Tamer Ganoub</td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               Procurement and Logistics Manager
                             </td>
                           </tr>
@@ -707,48 +701,38 @@ export default class PurchasingOrderTemplate extends React.Component<
                     />
                   </tr>
                   <tr>
-                    <td
-                      className={[
-                        styles.halfWidth,
-                        styles.theaderAlignment,
-                      ].join(" ")}
-                    >
-                      <table className={styles.table}>
+                    <td className={["halfWidth", "theaderAlignment"].join(" ")}>
+                      <table className="table">
                         <tbody>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               ----------------------
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>David van Erp</td>
+                            <td className={"fontBold"}>David van Erp</td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               V.P Finance & Commercial
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
-                    <td
-                      className={[
-                        styles.halfWidth,
-                        styles.theaderAlignment,
-                      ].join(" ")}
-                    >
-                      <table className={styles.table}>
+                    <td className={["halfWidth", "theaderAlignment"].join(" ")}>
+                      <table className="table">
                         <tbody>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               ----------------------
                             </td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>Islam Elnashar</td>
+                            <td className={"fontBold"}>Islam Elnashar</td>
                           </tr>
                           <tr>
-                            <td className={styles.fontBold}>
+                            <td className={"fontBold"}>
                               Chief Operations Officer
                             </td>
                           </tr>
@@ -769,53 +753,25 @@ export default class PurchasingOrderTemplate extends React.Component<
       (item, index) => {
         return (
           <tr>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {index + 1}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.description}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.unit}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.quantity}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.currency}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.unitPrice}
             </td>
-            <td
-              className={[styles.theaderAlignment, styles.cellsWithBorder].join(
-                " "
-              )}
-            >
+            <td className={["theaderAlignment", "cellsWithBorder"].join(" ")}>
               {item.totalPrice}
             </td>
           </tr>

@@ -3,15 +3,10 @@ import { DefaultButton, IconButton, Modal } from "office-ui-fabric-react";
 import * as React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Accordion } from "../../CoreComponents/accordion/Accordion";
-import ApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/InvApprovalBusinessLogic";
-import IApprovalBusinessLogic from "../../BusinessLogic/InvApprovalBusinessLogic/IInvApprovalBusinessLogic";
-import IMaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/IMaterialRequesitionBusinessLogic";
-import MaterialRequesitionBusinessLogic from "../../BusinessLogic/MaterialRequisitionBusinessLogic/MaterialRequesitionBusinessLogic";
+
 import { SecurityContext } from "../../Context/SecurityContext/SecurityProvider";
 import { BannerComponent } from "../../CoreComponents/Banner";
 import { LoadingBoxComponent } from "../../CoreComponents/LodingBox";
-import Approval from "../../Models/ClassModels/InvApproval";
-import MaterialRequesitionFormViewModel from "../../Models/ViewModels/MaterialRequesitionFormViewModel";
 import { TableList } from "./Components/Grid/TableList";
 import MaterialRequesitionForm from "./Components/MaterialRequestionForm/MaterialRequesitionForm";
 import IPRAssigningProps from "./IPRAssigningProps";
@@ -20,14 +15,12 @@ import PurchasingRequest from "../../Models/ClassModels/PurchasingRequest";
 import IPurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/IPurchasingRequestBusinessLogic";
 import PurchasingRequestBusinessLogic from "../../BusinessLogic/PurchasingRequestBusinessLogic/PurchasingRequestBusinessLogic";
 import PurchasingRequestViewModel from "../../Models/ViewModels/PurchasingRequestViewModel";
-import UserPicker from "../../Controls/userPicker";
 import { IUserLookup } from "../../Models/ClassModels/userModels";
 import styles from "../../CoreComponents/Componentstyles.module.scss";
 import IMaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/IMaterialRequisitionItemService";
 import MaterialRequisitionItemService from "../../Services/MaterialRequesitionItem/MaterialRequisitionItemService";
 import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
-import MaterialRequesition from "../../Models/ClassModels/MaterialRequesition";
 import { Textarea } from "../../Controls/textarea";
 
 class PRAssigning extends React.Component<
@@ -125,47 +118,8 @@ class PRAssigning extends React.Component<
       newState.showSpinner = true;
       return newState;
     });
-
-    // this._purchasingRequestBusinessLogic
-    //   .assignUserForPurchasingRequest(null, this.state.purchasingRequest)
-    //   .then((PR) => {
-    //     this.setState((prevState) => {
-    //       const newState = { ...prevState };
-    //       newState.showSpinner = false;
-    //       newState.showFinalConfirmationDialog = true;
-    //       newState.dialogTitle = "Assigned Successfully";
-    //       newState.dialogMessage = "User assigned sucessfully";
-    //       newState.submissionAction = () => {
-    //         this.props.history.push("/");
-    //       };
-    //       newState.purchasingRequest = PR;
-    //       return newState;
-    //     });
-    //   })
-    //   .catch((e) => {
-    //     this.setState((prevState) => {
-    //       const newState = { ...prevState };
-    //       newState.showSpinner = false;
-    //       newState.showFinalConfirmationDialog = true;
-    //       newState.dialogTitle = "Error Ocuured";
-    //       newState.dialogMessage =
-    //         "An Unexpected error ocurred while assigning the user to the PR please try again";
-    //       newState.submissionAction = () => {
-    //         this.onDialogDismiss("showFinalConfirmationDialog");
-    //       };
-    //       return newState;
-    //     });
-    //   });
   }
   showConfirmationDialog(): void {
-    // if (this.state.userLookup.length === 0) {
-    //   this.setState((prevState) => {
-    //     const newState = { ...prevState };
-    //     newState.assigneePickerError = true;
-    //     newState.assigneePickerErrorMessage = "Must choose assignee";
-    //     return newState;
-    //   });
-    // } else {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.showConfirmationDialog = true;
@@ -243,7 +197,7 @@ class PRAssigning extends React.Component<
         ) : (
           <div>
             <BannerComponent
-              PageTitle={`Assigning Procurement Team Member: ${this.state.viewModel.materialRequisition.requestCode}`}
+              PageTitle={`Pruchasing Request: ${this.state.viewModel.purchaseRequest.requestCode}`}
             />
             <MDBContainer className="pageContent">
               <Accordion title="Request Details" collapsed={false}>

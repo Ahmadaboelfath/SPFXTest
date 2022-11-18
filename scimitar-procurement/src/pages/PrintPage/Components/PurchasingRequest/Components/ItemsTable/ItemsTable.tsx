@@ -11,7 +11,9 @@ export default class ItemsTable extends React.Component<IItemsTableProps, any> {
           <td className={styles.dataCol}>{item.quantity}</td>
           <td className={styles.dataCol}>{item.unit}</td>
           {this.props.isSr ? (
-            <td className={styles.dataCol}>{item.comment}</td>
+            <td
+              className={styles.dataCol}
+            >{`${item.description}-${item.comment}`}</td>
           ) : (
             <td className={styles.dataCol}>{item.description}</td>
           )}

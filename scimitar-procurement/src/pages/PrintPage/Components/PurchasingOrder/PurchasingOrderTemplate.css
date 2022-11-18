@@ -71,12 +71,21 @@
   .thirdWidth {
     width: 33%;
   }
+
+  .tablesThirdWidth{
+    width: 7cm;
+  }
+
+  td{
+    border-color: white;
+  }
 }
 
 @media print {
+ 
   @page {
-    size: A4 auto portrait !important;
-    // margin: 15px;
+    size: A4 portrait !important;
+    margin: 2cm;
   }
 
   table,
@@ -154,5 +163,14 @@
   }
   .thirdWidth {
     width: 33% !important;
+  }
+  
+  .tablesThirdWidth{
+    width: 7cm !important;
+  }
+
+  
+  td{
+    border-color: white !important;
   }
 }

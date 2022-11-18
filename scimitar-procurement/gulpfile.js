@@ -32,5 +32,6 @@ build.configureWebpack.mergeConfig({
     return generatedConfiguration;
   },
 });
-
+build.lintCmd.enabled = false;
+build.tslintCmd.enabled = false;
 build.initialize(require("gulp"));
