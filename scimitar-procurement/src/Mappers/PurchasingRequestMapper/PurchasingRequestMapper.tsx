@@ -21,6 +21,7 @@ export default class PurchasingRequestMapper
     purchaseRequest.requestCode = SPPurchasingRequest.Title;
     purchaseRequest.assignedToId = SPPurchasingRequest.AssignedToId;
     purchaseRequest.rejectionReason = SPPurchasingRequest.RejectionReason;
+    purchaseRequest.creationDate = new Date(SPPurchasingRequest.Created);
 
     return purchaseRequest;
   }

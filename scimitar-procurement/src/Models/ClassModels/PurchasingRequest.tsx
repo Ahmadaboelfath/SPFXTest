@@ -9,6 +9,7 @@ export default class PurchasingRequest {
       this._requestCode = purchasingRequest.requestCode;
       this._assignedToId = purchasingRequest.assignedToId;
       this._rejectionReason = purchasingRequest.rejectionReason;
+      this._creationDate = purchasingRequest.creationDate;
     }
   }
 
@@ -63,5 +64,13 @@ export default class PurchasingRequest {
   }
   public set rejectionReason(v: string) {
     this._rejectionReason = v;
+  }
+
+  private _creationDate: Date;
+  public get creationDate(): Date {
+    return this._creationDate;
+  }
+  public set creationDate(v: Date) {
+    this._creationDate = v;
   }
 }

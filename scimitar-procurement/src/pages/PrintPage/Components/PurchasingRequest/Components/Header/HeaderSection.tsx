@@ -17,7 +17,10 @@ export default class Header extends React.Component<IHeaderProps, any> {
                 <DataRow
                   dataRows={{
                     name: "Date",
-                    value: new Date().toDateString(),
+                    value: this.formatDate(
+                      this.props.purchaseRequestViewModel.purchaseRequest
+                        .creationDate
+                    ),
                   }}
                 />
                 <DataRow
@@ -83,5 +86,18 @@ export default class Header extends React.Component<IHeaderProps, any> {
         </tbody>
       </table>
     );
+  }
+  formatDate(creationDate: Date): string {
+    let date: any = creationDate.getDate();
+    if (date < 10) {
+      date = "0" + date;
+    }
+    let month: any = creationDate.getMonth() + 1;
+    if (month < 10) {
+      month = "0" + month;
+    }
+    const year = creationDate.getFullYear();
+
+    return `${date}-${month}-${year}`;
   }
 }
