@@ -22,6 +22,8 @@ import MaterialRequisitionItemService from "../../Services/MaterialRequesitionIt
 import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import MaterialItemForm from "./Components/MaterialItemForm/MaterialItemForm";
 import { Textarea } from "../../Controls/textarea";
+import UserPicker from "../../Controls/userPicker";
+import { CheckBox } from "../../Controls/checkBox";
 
 class PRAssigning extends React.Component<
   RouteComponentProps<IPRAssigningProps>,
@@ -56,6 +58,7 @@ class PRAssigning extends React.Component<
       currentlyEditingIndex: null,
       currentlyEditingItem: new MaterialRequestionItem(),
       showMaterialItemForm: false,
+      singleAssingee: false,
     };
   }
   componentDidMount(): void {
@@ -127,10 +130,37 @@ class PRAssigning extends React.Component<
       newState.assigneePickerErrorMessage = "";
       newState.dialogTitle = `Save`;
       newState.dialogMessage = `Are you sure you want to save the data for this request?`;
-      newState.submissionAction = () => this.props.history.push("/");
+      newState.submissionAction = () => this.updateAssingee();
       return newState;
     });
     // }
+  }
+  updateAssingee(): void {
+    const items = [...this.state.viewModel.materialRequeisitionItems];
+    if (this.state.singleAssingee) {
+      const updatedMaterialItems = items.map((item: MaterialRequestionItem) => {
+        const newItem: MaterialRequestionItem = new MaterialRequestionItem(
+          item
+        );
+        newItem.assignee = this.state.userLookup;
+        return newItem;
+      });
+
+      this.setState((prevState) => {
+        const newState = { ...prevState };
+        newState.showSpinner = true;
+        return newState;
+      });
+      Promise.all(
+        updatedMaterialItems.map(async (item) => {
+          this._materialRequisitionItemService.updateItem(item);
+        })
+      ).then((data) => {
+        this.props.history.push("/");
+      });
+    } else {
+      this.props.history.push("/");
+    }
   }
 
   renderDialog(): JSX.Element {
@@ -251,25 +281,38 @@ class PRAssigning extends React.Component<
                 </Accordion>
               ) : null}
 
-              {/* {this.context.userRole === "Procurement" || this.state.isAdmin ? (
+              {this.context.userRole === "Procurement" || this.state.isAdmin ? (
                 <Accordion title="Assigned User" collapsed={false}>
                   <MDBRow>
                     <MDBCol>
-                      <UserPicker
-                        ctrlName="picker"
-                        onChange={(selectedUsers) => {
-                          this.onAssignedChange(selectedUsers);
+                      <CheckBox
+                        LabelText="Single Assignee"
+                        ctrName="singleAssingee"
+                        handleInputChange={(isChecked, ctrlName) => {
+                          this.setState((prevState) => {
+                            const newState = { ...prevState };
+                            newState.singleAssingee = isChecked;
+                            return newState;
+                          });
                         }}
-                        selected={this.state.userLookup}
-                        required={true}
-                        showError={this.state.assigneePickerError}
-                        errorMessage={this.state.assigneePickerErrorMessage}
-                        label="Assignee"
                       />
+                      {this.state.singleAssingee && (
+                        <UserPicker
+                          ctrlName="picker"
+                          onChange={(selectedUsers) => {
+                            this.onAssignedChange(selectedUsers);
+                          }}
+                          selected={this.state.userLookup}
+                          required={true}
+                          showError={this.state.assigneePickerError}
+                          errorMessage={this.state.assigneePickerErrorMessage}
+                          label="Assignee"
+                        />
+                      )}
                     </MDBCol>
                   </MDBRow>
                 </Accordion>
-              ) : null} */}
+              ) : null}
 
               {this.state.showConfirmationDialog ||
               this.state.showFinalConfirmationDialog
@@ -341,6 +384,7 @@ class PRAssigning extends React.Component<
 
                 <div className={styles.Modalbody}>
                   <MaterialItemForm
+                    singleAssignee={this.state.singleAssingee}
                     count={(
                       this.state.viewModel.materialRequeisitionItems.length + 1
                     ).toString()}

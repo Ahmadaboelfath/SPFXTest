@@ -12,4 +12,5 @@ export default interface IMaterialItemFormProps {
   searchByCode: boolean;
   isInEditForm: boolean;
   tagPickerSuggesstionProps: IBasePickerSuggestionsProps;
+  singleAssignee: boolean;
 }

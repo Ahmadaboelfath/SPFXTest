@@ -92,13 +92,16 @@ export default class MaterialItemForm extends React.Component<
               value={this.props.viewModel.balance.toString()}
               disabled={false}
             />
-
-            <UserPicker
-              ctrlName="assignee"
-              onChange={(data, ctrlName) => this.props.onChange(data, ctrlName)}
-              selected={this.props.viewModel.assignee}
-              label="Assignee"
-            />
+            {!this.props.singleAssignee && (
+              <UserPicker
+                ctrlName="assignee"
+                onChange={(data, ctrlName) =>
+                  this.props.onChange(data, ctrlName)
+                }
+                selected={this.props.viewModel.assignee}
+                label="Assignee"
+              />
+            )}
           </MDBCol>
         </MDBRow>
       </div>

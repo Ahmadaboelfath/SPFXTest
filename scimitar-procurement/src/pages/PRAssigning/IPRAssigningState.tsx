@@ -24,4 +24,5 @@ export default interface IPRAssigningState {
   showMaterialItemForm: boolean;
   currentlyEditingIndex: number;
   currentlyEditingItem: MaterialRequestionItem;
+  singleAssingee: boolean;
 }
