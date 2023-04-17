@@ -60,7 +60,7 @@ export const Datepicker: React.FC<IDatePickerProps> = (props) => {
           onChange={(d) => props.handleDate(d, props.ctrlName)}
           isClearable="true"
           maxDate={today.setUTCFullYear(today.getUTCFullYear() + 5)}
-          minDate={props.minDate ? new Date(props.minDate) : null}
+          minDate={props.minDate ? new Date(props.minDate) : new Date()}
           dateFormat={consts.DateFormat}
           disabled={props.disabled}
         />

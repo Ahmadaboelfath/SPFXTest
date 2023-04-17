@@ -1,5 +1,4 @@
 import { ServiceKey, ServiceScope } from "@microsoft/sp-core-library";
-import { reject } from "lodash";
 
 export default class DependencyManager {
   // singletone imp

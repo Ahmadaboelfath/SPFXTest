@@ -3,6 +3,8 @@ import IFileInfo from "../../Controls/FileUploader/Interfaces/IFileInfo";
 import MaterialRequestionItem from "../../Models/ClassModels/MaterialRequesitionItem";
 import PurchasingOrder from "../../Models/ClassModels/PurchasingOrder";
 import PurchasingOrderViewModel from "../../Models/ViewModels/PurchasingOrderViewModel";
+import CodingService from "../../Services/CodingService/CodingService";
+import ICodingService from "../../Services/CodingService/ICodingService";
 import DependencyManager from "../../Services/DependencyManger";
 import FileService from "../../Services/FileService/FileService";
 import IFileService from "../../Services/FileService/IFileService";
@@ -23,6 +25,8 @@ export default class PurchaseOrderBusinessLogic
   private _purchaseOrderService: IPurchaseOrderService;
   private _fileService: IFileService;
   private _materialItemService: MaterialRequisitionItemService;
+  private _codingService: ICodingService;
+
   constructor() {
     this._lookupServices = new LookupService();
     this._fileService = DependencyManager.getInstance().inject(
@@ -31,6 +35,9 @@ export default class PurchaseOrderBusinessLogic
     this._folderService = new FolderService();
     this._purchaseOrderService = new PurchaseOrderService();
     this._materialItemService = new MaterialRequisitionItemService();
+    this._codingService = DependencyManager.getInstance().inject(
+      CodingService.serviceKey
+    );
   }
   async cancelPO(
     viewModel: PurchasingOrderViewModel,
@@ -125,7 +132,9 @@ export default class PurchaseOrderBusinessLogic
       const addedPo = await this._purchaseOrderService.add(
         purchaseOrder.purchaseOrder
       );
-      const POCode = `SPEL-${new Date().getFullYear() - 2000}-${addedPo.id}`;
+
+      const code = await this._codingService.codePO();
+      const POCode = `SPEL-${code}`;
       addedPo.title = POCode;
       const updatedPo = await this._purchaseOrderService.edit(addedPo);
       const folderCreated = await this._folderService.create(

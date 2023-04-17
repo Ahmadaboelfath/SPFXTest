@@ -7,12 +7,16 @@ import "@pnp/sp/items";
 import IMaterialRequisitionMapper from "../../Mappers/MaterialRequesitionMapper/IMaterialRequesitionMapper";
 import MaterialRequisitionMapper from "../../Mappers/MaterialRequesitionMapper/MaterialRequesitionMapper";
 import { IItemAddResult } from "@pnp/sp/items";
+import ICodingService from "../CodingService/ICodingService";
+import CodingService from "../CodingService/CodingService";
+import DependencyManager from "../DependencyManger";
 
 export default class MaterialRequesitionService
   implements IMaterialRequesitionService
 {
   private readonly _listName: string;
   private readonly _mapper: IMaterialRequisitionMapper;
+  private readonly _codingService: ICodingService;
 
   /**
    *
@@ -20,6 +24,9 @@ export default class MaterialRequesitionService
   constructor() {
     this._listName = "MaterialRequestions";
     this._mapper = new MaterialRequisitionMapper();
+    this._codingService = DependencyManager.getInstance().inject(
+      CodingService.serviceKey
+    );
   }
   async getMaterialRequesitionById(id: number): Promise<MaterialRequesition> {
     const item = await sp.web.lists
@@ -31,18 +38,17 @@ export default class MaterialRequesitionService
   }
 
   async generateRequestCode(materialRequesitionId: number): Promise<string> {
-    const requestCode = `${materialRequesitionId}/${new Date().getFullYear()}`;
     try {
+      const requestCode = await this._codingService.codeMR();
       const item = await sp.web.lists
         .getByTitle(this._listName)
         .items.getById(materialRequesitionId)
         .update({ Title: requestCode });
+      return requestCode;
     } catch (e) {
       console.error(e);
       throw e;
     }
-
-    return requestCode;
   }
 
   async addRequest(

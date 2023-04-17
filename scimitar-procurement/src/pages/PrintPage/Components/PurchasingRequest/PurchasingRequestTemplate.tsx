@@ -3,7 +3,8 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/HeaderSection";
 import ItemsTable from "./Components/ItemsTable/ItemsTable";
 import IPurchasingRequestTemplateProps from "./IPurchasingRequestTemplateProps";
-import styles from "./PurchasingRequestTemplate.module.scss";
+import "./PurchasingRequestTemplate.css";
+// import styles from "./PurchasingRequestTemplate.module.scss";
 
 export default class PurchasingRequestTemplate extends React.Component<
   IPurchasingRequestTemplateProps,
@@ -12,8 +13,8 @@ export default class PurchasingRequestTemplate extends React.Component<
   render(): React.ReactNode {
     return (
       <>
-        <div className={styles.container}>
-          <div className={styles.header}>
+        <div className={"container"}>
+          <div className={"header"}>
             <Header
               PRNumber={
                 this.props.purchasignRequestViewModel.purchaseRequest
@@ -22,7 +23,7 @@ export default class PurchasingRequestTemplate extends React.Component<
               purchaseRequestViewModel={this.props.purchasignRequestViewModel}
             />
           </div>
-          <div className={styles.body}>
+          <div className={"body"}>
             <ItemsTable
               items={
                 this.props.purchasignRequestViewModel.materialRequeisitionItems
@@ -37,7 +38,7 @@ export default class PurchasingRequestTemplate extends React.Component<
               }
             />
           </div>
-          <div className={styles.footer}>
+          <div className={"footer"}>
             <Footer
               purchaseRequestViewModel={this.props.purchasignRequestViewModel}
             />

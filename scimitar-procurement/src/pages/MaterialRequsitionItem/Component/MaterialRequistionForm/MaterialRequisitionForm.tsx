@@ -127,7 +127,7 @@ export default class MaterialRequsitionItemForm extends React.Component<
             handleInputChange={(value, ctrlName) =>
               console.log(value, ctrlName)
             }
-            label="Purchasing Request Code"
+            label="Purchasing Request Number"
             value={this.props.item.PRCode}
           />
           <Textbox
@@ -137,7 +137,7 @@ export default class MaterialRequsitionItemForm extends React.Component<
             handleInputChange={(value, ctrlName) =>
               console.log(value, ctrlName)
             }
-            label="Purchasing Order Code"
+            label="Purchasing Order Number"
             value={this.props.item.POCode}
           />
           {this.props.viewMode === ViewMode.Edit ? (
