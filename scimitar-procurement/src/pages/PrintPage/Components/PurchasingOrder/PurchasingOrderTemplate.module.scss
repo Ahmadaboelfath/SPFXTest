@@ -75,18 +75,18 @@
 
 @media print {
   @page {
-    size: A4 auto portrait !important;
+    size: A4 portrait !important;
     // margin: 15px;
   }
 
-  table,
-  figure {
-    page-break-inside: avoid;
-  }
+  // table,
+  // figure {
+  //   page-break-inside: avoid;
+  // }
 
   .container {
     width: 80% !important;
-    margin: 0 auto !important;
+    // margin: 0 auto !important;
   }
   .middleText {
     text-align: center !important;

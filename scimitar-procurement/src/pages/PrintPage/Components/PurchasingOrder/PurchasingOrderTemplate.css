@@ -81,17 +81,21 @@
   }
 }
 
-@media print {
+@media print{
  
-  @page {
-    size: A4 portrait !important;
-    margin: 2cm;
+  @page wide {
+    size: A4 !important;
+    orientation: portrait !important;
+    scale: 80;
+    
+   
+    /* margin: 2cm; */
   }
 
-  table,
+  /* table,
   figure {
-    page-break-inside: avoid;
-  }
+    page-break-inside: avoid !important;
+  } */
 
   .container {
     width: 80% !important;
@@ -105,13 +109,13 @@
   }
   .title {
     color: red !important;
-    font-size: 36px !important;
+    font-size: 16px !important;
     text-decoration: underline !important;
     font-weight: bold !important;
   }
 
   .emptyImg {
-    max-height: 16px !important;
+    max-height: 8px !important;
   }
 
   .emptyCell {
@@ -126,7 +130,7 @@
   }
 
   .tableHeaderText {
-    font-size: 16px !important;
+    font-size: 10px !important;
   }
 
   .theaderAlignment {
@@ -166,7 +170,7 @@
   }
   
   .tablesThirdWidth{
-    width: 7cm !important;
+    width: 6cm !important;
   }
 
   

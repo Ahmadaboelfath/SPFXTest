@@ -1,7 +1,6 @@
 import * as React from "react";
 import MaterialRequestionItem from "../../../../Models/ClassModels/MaterialRequesitionItem";
 import IPurchasingOrderTemplate from "./IPurchasingOrderTemplateProps";
-// import styles from "./PurchasingOrderTemplate.module.scss";
 import "./PurchasingOrderTemplate.css";
 export default class PurchasingOrderTemplate extends React.Component<
   IPurchasingOrderTemplate,
